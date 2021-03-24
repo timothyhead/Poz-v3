@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "6C5FB72B-CEC7-43C2-98D7-7A5DA8164281"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/SettingsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5"
+            endingLineNumber = "5"
+            landmarkName = "SettingsView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - ebd2facd300d9101"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Poz_v3.SettingsView.settings : Poz_v3.SettingsModel"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - f911d786d5d507f7"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.settings.getter : Poz_v3.SettingsModel"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - a0ec8d2ca60c77cb"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.settings.setter : Poz_v3.SettingsModel"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "74">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - 663d1292d168db55"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.settings.modify : Poz_v3.SettingsModel"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "14">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - 6624a672bfd75cb"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.settings.modify : Poz_v3.SettingsModel with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - 93a1258447b0ebbf"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.$settings.getter : SwiftUI.ObservedObject&lt;Poz_v3.SettingsModel&gt;.Wrapper"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "98">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
