@@ -78,12 +78,12 @@
 		DE392D61260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D60260B118B00715173 /* SwiftSpeechButtonView.swift */; };
 		DE392D62260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D60260B118B00715173 /* SwiftSpeechButtonView.swift */; };
 		DE392D63260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D60260B118B00715173 /* SwiftSpeechButtonView.swift */; };
-		DE392D74260B149D00715173 /* PromptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D73260B149D00715173 /* PromptModel.swift */; };
-		DE392D75260B149D00715173 /* PromptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D73260B149D00715173 /* PromptModel.swift */; };
-		DE392D76260B149D00715173 /* PromptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D73260B149D00715173 /* PromptModel.swift */; };
 		DE392D7B260B154D00715173 /* PromptsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D7A260B154D00715173 /* PromptsView.swift */; };
 		DE392D7C260B154D00715173 /* PromptsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D7A260B154D00715173 /* PromptsView.swift */; };
 		DE392D7D260B154D00715173 /* PromptsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D7A260B154D00715173 /* PromptsView.swift */; };
+		DE392D89260BD23500715173 /* CustomizeJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D88260BD23500715173 /* CustomizeJournalView.swift */; };
+		DE392D8A260BD23500715173 /* CustomizeJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D88260BD23500715173 /* CustomizeJournalView.swift */; };
+		DE392D8B260BD23500715173 /* CustomizeJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D88260BD23500715173 /* CustomizeJournalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,8 +141,8 @@
 		DE392D4F260B0F0900715173 /* EmojiPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiPicker.swift; sourceTree = "<group>"; };
 		DE392D59260B0FDA00715173 /* NoteButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteButtonsView.swift; sourceTree = "<group>"; };
 		DE392D60260B118B00715173 /* SwiftSpeechButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSpeechButtonView.swift; sourceTree = "<group>"; };
-		DE392D73260B149D00715173 /* PromptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptModel.swift; sourceTree = "<group>"; };
 		DE392D7A260B154D00715173 /* PromptsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsView.swift; sourceTree = "<group>"; };
+		DE392D88260BD23500715173 /* CustomizeJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeJournalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,7 +255,6 @@
 				DE392D4F260B0F0900715173 /* EmojiPicker.swift */,
 				DE392C32260A8CBD00715173 /* ContentView.swift */,
 				DE392CAB260A9F2600715173 /* HomeView.swift */,
-				DE392CD7260AAB2400715173 /* SettingsView.swift */,
 				DE392CC2260AA28000715173 /* AddNoteView.swift */,
 				DE392D59260B0FDA00715173 /* NoteButtonsView.swift */,
 				DE392D29260AE6C500715173 /* ChartView.swift */,
@@ -267,6 +266,7 @@
 				DE392CC9260AA29000715173 /* PreviousNoteView.swift */,
 				DE392CD0260AA2A800715173 /* DashboardView.swift */,
 				DE392D60260B118B00715173 /* SwiftSpeechButtonView.swift */,
+				DE392D87260BD21600715173 /* SettingsViews */,
 				DE392CDE260AAB3200715173 /* Models */,
 			);
 			path = Views;
@@ -276,7 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				DE392CE9260AAB6000715173 /* SettingsModel.swift */,
-				DE392D73260B149D00715173 /* PromptModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,6 +287,15 @@
 				DE392C30260A8CBD00715173 /* SceneDelegate.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DE392D87260BD21600715173 /* SettingsViews */ = {
+			isa = PBXGroup;
+			children = (
+				DE392CD7260AAB2400715173 /* SettingsView.swift */,
+				DE392D88260BD23500715173 /* CustomizeJournalView.swift */,
+			);
+			path = SettingsViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,6 +463,7 @@
 				DE392D61260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
 				DE392D7B260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392C2F260A8CBD00715173 /* AppDelegate.swift in Sources */,
+				DE392D89260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D01260ACE1F00715173 /* NotesListView.swift in Sources */,
 				DE392D2A260AE6C500715173 /* ChartView.swift in Sources */,
 				DE392D1B260AD18300715173 /* TabsView.swift in Sources */,
@@ -462,7 +471,6 @@
 				DE392CEA260AAB6000715173 /* SettingsModel.swift in Sources */,
 				DE392C31260A8CBD00715173 /* SceneDelegate.swift in Sources */,
 				DE392CAC260A9F2600715173 /* HomeView.swift in Sources */,
-				DE392D74260B149D00715173 /* PromptModel.swift in Sources */,
 				DE392D50260B0F0900715173 /* EmojiPicker.swift in Sources */,
 				DE392C33260A8CBD00715173 /* ContentView.swift in Sources */,
 			);
@@ -480,10 +488,10 @@
 				DE392CFB260AC64300715173 /* RingView.swift in Sources */,
 				DE392CD2260AA2A800715173 /* DashboardView.swift in Sources */,
 				DE392D62260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
+				DE392D8A260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D51260B0F0900715173 /* EmojiPicker.swift in Sources */,
 				DE392D02260ACE1F00715173 /* NotesListView.swift in Sources */,
 				DE392D1C260AD18300715173 /* TabsView.swift in Sources */,
-				DE392D75260B149D00715173 /* PromptModel.swift in Sources */,
 				DE392D7C260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392CAD260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392CC4260AA28000715173 /* AddNoteView.swift in Sources */,
@@ -505,10 +513,10 @@
 				DE392CFC260AC64300715173 /* RingView.swift in Sources */,
 				DE392CD3260AA2A800715173 /* DashboardView.swift in Sources */,
 				DE392D63260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
+				DE392D8B260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D52260B0F0900715173 /* EmojiPicker.swift in Sources */,
 				DE392D03260ACE1F00715173 /* NotesListView.swift in Sources */,
 				DE392D1D260AD18300715173 /* TabsView.swift in Sources */,
-				DE392D76260B149D00715173 /* PromptModel.swift in Sources */,
 				DE392D7D260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392CAE260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392CC5260AA28000715173 /* AddNoteView.swift in Sources */,

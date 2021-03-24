@@ -12,4 +12,5 @@ struct Prompt : Hashable {
     var color : Color
     var emoji : String
     var prompt : String
+    var index : Int
 }

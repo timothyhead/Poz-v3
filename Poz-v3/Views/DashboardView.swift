@@ -9,17 +9,6 @@ struct DashboardView: View {
     var body: some View {
         ScrollView (.vertical, showsIndicators: false) {
             VStack (spacing: 20) {
-
-                
-                HStack {
-                    Spacer()
-                    Button (action:{ self.settings.showSettings.toggle() }) {
-                        Image(systemName: "gear")
-                            .font(Font.custom("Poppins-Light", size: 26))
-                            .foregroundColor(Color(UIColor(named: "PozGray")!))
-                    }
-                }.padding(.trailing, 20).padding(.bottom, -20)
-                
                 
                 //Chart Block
                 VStack {
@@ -72,10 +61,6 @@ struct DashboardView: View {
                 //previous posts button
                 Button (action:{ prevPostsShowing.toggle() }) {
                     HStack (spacing: 0) {
-                        Image(systemName: "clock.arrow.circlepath").resizable().frame(width: 28, height: 26)
-                            .foregroundColor(Color(UIColor(named: "PozGray")!))
-                            .padding(.trailing, 10)
-                        
                         Text("See all your ")
                             .font(Font.custom("Poppins-Light", size: 22))
                             .foregroundColor(Color(UIColor(named: "PozGray")!))
@@ -86,18 +71,19 @@ struct DashboardView: View {
                         Spacer()
                         Image(systemName: "chevron.right").resizable().frame(width: 10, height: 20)
                             .foregroundColor(.primary)
-                    }.padding(.leading, 20).padding(.trailing, 20)
-                }
+                    }
+                }.padding(.horizontal, 20)
                 .sheet(isPresented: $prevPostsShowing, content: {
                     NotesListView()
                 })
                 
                 Divider().padding()
                 
-                ChartView()
+//                ChartView()
             }
             .preferredColorScheme((settings.darkMode == true ? (.dark) : (.light)))
             .padding(.top, 60)
+            .padding(.horizontal, 30)
             .padding(.bottom, 80)
         }
         .background(Color(UIColor(named: "HomeBG")!))

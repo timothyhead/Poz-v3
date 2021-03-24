@@ -17,7 +17,7 @@ struct ContentView: View {
         VStack {
         
             if tabIndex == 0 {
-                HomeView(settings: self.settings)
+                HomeView(settings: self.settings, tabIndex: $tabIndex)
                 
             } else  if tabIndex == 1 {
                 addNoteView()
