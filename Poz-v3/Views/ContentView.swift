@@ -20,7 +20,7 @@ struct ContentView: View {
                 HomeView(settings: self.settings)
                 
             } else  if tabIndex == 1 {
-                AddNoteView()
+                addNoteView()
                 
             } else if tabIndex == 2 {
                 DashboardView(settings: self.settings)

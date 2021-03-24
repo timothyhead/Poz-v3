@@ -104,35 +104,7 @@ struct HomeView: View {
                 Divider().padding()
                 
                 //prompt selector
-                VStack (alignment: .leading) {
-                    HStack (spacing: 0) {
-                        Text("Start with a ")
-                            .font(Font.custom("Poppins-Light", size: 24))
-                            .foregroundColor(Color(UIColor(named: "PozGray")!))
-                        Text("prompt")
-                            .font(Font.custom("Poppins-Medium", size: 24))
-                        
-                    }.padding()
-                    
-                    
-                    ScrollView (.horizontal, showsIndicators: false) {
-                        LazyHStack(alignment: .center, spacing: 10) {
-                            ForEach(0...9, id: \.self) { index in
-                                VStack {
-                                    Text("Rant \(index)")
-                                        .font(Font.custom("Poppins-Medium", size: 22))
-                                    Text("💢")
-                                        .font(Font.custom("Blueberry Regular", size: 52))
-                                }
-                                .frame(width: (UIScreen.main.bounds.width/2 -  30), height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                                .cornerRadius(10.0)
-                                
-                            }
-                        }.padding(.leading, 20)
-                        .padding(.trailing, 20)
-                    }
-                }
+
             }
             // settings modal sheet
             .sheet(isPresented: $settings.showSettings, content: {
