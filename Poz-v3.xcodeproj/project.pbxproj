@@ -90,6 +90,9 @@
 		DE392D9D260C512A00715173 /* HomeButtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D9C260C512A00715173 /* HomeButtomView.swift */; };
 		DE392D9E260C512A00715173 /* HomeButtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D9C260C512A00715173 /* HomeButtomView.swift */; };
 		DE392D9F260C512A00715173 /* HomeButtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D9C260C512A00715173 /* HomeButtomView.swift */; };
+		DE392DAE260CE7CF00715173 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392DAD260CE7CF00715173 /* NotificationsView.swift */; };
+		DE392DAF260CE7CF00715173 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392DAD260CE7CF00715173 /* NotificationsView.swift */; };
+		DE392DB0260CE7CF00715173 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392DAD260CE7CF00715173 /* NotificationsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +154,7 @@
 		DE392D88260BD23500715173 /* CustomizeJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeJournalView.swift; sourceTree = "<group>"; };
 		DE392D92260BEC2700715173 /* PopOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverView.swift; sourceTree = "<group>"; };
 		DE392D9C260C512A00715173 /* HomeButtomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtomView.swift; sourceTree = "<group>"; };
+		DE392DAD260CE7CF00715173 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +306,7 @@
 		DE392D87260BD21600715173 /* SettingsViews */ = {
 			isa = PBXGroup;
 			children = (
+				DE392DAD260CE7CF00715173 /* NotificationsView.swift */,
 				DE392CD7260AAB2400715173 /* SettingsView.swift */,
 				DE392D88260BD23500715173 /* CustomizeJournalView.swift */,
 			);
@@ -478,6 +483,7 @@
 				DE392D89260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D01260ACE1F00715173 /* NotesListView.swift in Sources */,
 				DE392D2A260AE6C500715173 /* ChartView.swift in Sources */,
+				DE392DAE260CE7CF00715173 /* NotificationsView.swift in Sources */,
 				DE392D1B260AD18300715173 /* TabsView.swift in Sources */,
 				DE392D0E260ACE9900715173 /* SearchView.swift in Sources */,
 				DE392CEA260AAB6000715173 /* SettingsModel.swift in Sources */,
@@ -512,6 +518,7 @@
 				DE392CBB260AA22300715173 /* ContentView.swift in Sources */,
 				DE392CCB260AA29000715173 /* PreviousNoteView.swift in Sources */,
 				DE392D0F260ACE9900715173 /* SearchView.swift in Sources */,
+				DE392DAF260CE7CF00715173 /* NotificationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +546,7 @@
 				DE392CBA260AA22300715173 /* ContentView.swift in Sources */,
 				DE392CCC260AA29000715173 /* PreviousNoteView.swift in Sources */,
 				DE392D10260ACE9900715173 /* SearchView.swift in Sources */,
+				DE392DB0260CE7CF00715173 /* NotificationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

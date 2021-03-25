@@ -7,5 +7,7 @@ class SettingsModel: ObservableObject {
     @Published var showSettings = false
     
     @Published var darkMode = false
+    
+    @Published var notifications = true
 }
     

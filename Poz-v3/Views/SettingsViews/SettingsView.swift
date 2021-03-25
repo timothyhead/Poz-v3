@@ -6,6 +6,8 @@ struct SettingsView: View {
     
     @State var darkMode = false
     
+    @State var notifications = true
+    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -18,9 +20,9 @@ struct SettingsView: View {
                             Text("Your data")
                         }
                     }
-                    NavigationLink(destination: Text("hi")) {
+                    NavigationLink(destination:  NotificationsView(settings: settings).environmentObject(Reminders()) ) {
                         HStack {
-                            Text("Privacy")
+                            Text("Notifications")
                         }
                     }
                     NavigationLink(destination: Text("hi")) {
@@ -126,9 +128,3 @@ struct SettingsView: View {
         
     }
 }
-
-//struct SettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingsView()
-//    }
-//}

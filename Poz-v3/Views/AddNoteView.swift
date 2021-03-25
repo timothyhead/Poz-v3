@@ -47,6 +47,7 @@ struct addNoteView: View {
     
     var body: some View {
         
+        ZStack {
         VStack {
         //home button
             HStack {
@@ -116,9 +117,9 @@ struct addNoteView: View {
             .padding(.bottom, 3)
             
             
-            Rectangle()
-                .frame(width: UIScreen.main.bounds.width - 40, height: 1)
+            Divider()
                 .foregroundColor(Color.primary)
+                .padding(.horizontal, 20)
                 .padding(.bottom, 3)
             
             //text input
@@ -151,25 +152,19 @@ struct addNoteView: View {
                 //hide keyboard when user taps outside text field
                 hideKeyboard()
             }
+
             
-            PopOverView(menuOpen: $menuOpen)
-
-        }
-        .padding(.top, 60)
-        .padding(.bottom, 10)
-
-        
-        //submit button
-//        Button( action: {
-//            
-//            // create note item
+            //save button
+            Button( action: {
+            
+            // create note item
 //            let note = Note(context: self.moc)
-//            
-//            // get current data and format it
-//            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-//            dateString = dateFormatter.string(from: date as Date)
-//            
-//            //assign vars on click
+            
+            // get current data and format it
+            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+            dateString = dateFormatter.string(from: date as Date)
+            
+            //assign vars on click
 //            note.id = UUID() //create id
 //            note.note = "\(message)" //input message
 //            note.createdAt = date //actual date to sort
@@ -177,27 +172,36 @@ struct addNoteView: View {
 //            note.emoji = "\(selected)" // emoji
 //            note.stringLength = Double(message.count) // length of entry
 //            note.entryTag = "\(selectedTag.name)"
-//            
+            
 //            try? self.moc.save() //save inputted values
-//            
+            
 //            message = "" //reset input
-//
-////            presentationMode.wrappedValue.dismiss() //dismiss popup on click
-//
-//        }) {
-//            ZStack{
-//                Text("Save")
-//            }
-//            .disabled(message == "")
-//            .foregroundColor(message == "" ? .gray : .black)
-//            .font(Font.custom("Poppins-Regular", size: 20))
-//            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-//            .frame(width: 200, height: 50)
-//            .background(message == "" ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0.9853331447, green: 0.7925021052, blue: 0.3908675313, alpha: 1)))
-//            .cornerRadius(50)
-//            .padding(.horizontal, 20)
-//            .padding(.bottom, 20)
-//        }
+
+//            presentationMode.wrappedValue.dismiss() //dismiss popup on click
+
+        }) {
+            ZStack{
+                Text("Save")
+            }
+            .disabled(message == "")
+            .foregroundColor(message == "" ? .gray : .black)
+            .font(Font.custom("Poppins-Regular", size: 20))
+            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+            .frame(width: 150, height: 50)
+            .background(message == "" ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0.9853331447, green: 0.7925021052, blue: 0.3908675313, alpha: 1)))
+            .cornerRadius(50)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 40)
+        
+            
+
+        }
+
+            }
+            .padding(.top, 40)
+            
+            PopOverView(menuOpen: $menuOpen)
+        }
     }
     
 }

@@ -58,7 +58,7 @@ struct PopOverView: View {
     
     @Binding var menuOpen: Bool
     
-    @State var buttonSpacing: CGFloat = 0
+    @State var buttonSpacing: CGFloat = -60
     
     var body: some View {
         
@@ -72,15 +72,15 @@ struct PopOverView: View {
             HStack {
                 
                 Button (action: {
-                    withAnimation(.easeInOut(duration: 0.1)) {
+                    withAnimation(.easeInOut(duration: 0.3)) {
                         menuOpen.toggle()
                         
                     }
                     withAnimation(.easeOut(duration: 3)) {
-                        if (buttonSpacing == 0) {
+                        if (buttonSpacing == -60) {
                             buttonSpacing = 30
                         } else if (buttonSpacing == 30) {
-                            buttonSpacing = 0
+                            buttonSpacing = -60
                         }
                     }
                 }) {

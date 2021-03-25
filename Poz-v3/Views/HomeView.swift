@@ -19,9 +19,21 @@ struct HomeView: View {
     
     var body: some View {
         ScrollView (.vertical, showsIndicators: false) {
-            VStack (alignment: .leading, spacing: 20) {
+            
+            VStack (alignment: .leading, spacing: 40) {
                 
-                HStack (spacing: 10){
+                //top menu
+                HStack (alignment: .top, spacing: 10) {
+                    //Hello Text
+                    VStack (alignment: .leading, spacing: 0) {
+                        Text("Good morning,")
+                            .font(Font.custom("Poppins-Light", size: 26))
+                            .foregroundColor(Color(UIColor(named: "PozGray")!))
+                        Text("Alexandra")
+                            .font(Font.custom("Poppins-Medium", size: 26))
+                        
+                    }
+                    
                     Spacer()
                     
                     Button (action:{ prevPostsShowing.toggle() }) {
@@ -39,17 +51,11 @@ struct HomeView: View {
                     }
                     .sheet(isPresented: $settings.showSettings, content: { SettingsView(settings: self.settings) })
                 }
-                .padding(.trailing, 20).padding(.bottom, -20)
+                .padding(.horizontal, 20)
                 
-                //Hello Text
-                HStack (spacing: 0) {
-                    Text("Good morning, ")
-                        .font(Font.custom("Poppins-Light", size: 26))
-                        .foregroundColor(Color(UIColor(named: "PozGray")!))
-                    Text("Alexandra")
-                        .font(Font.custom("Poppins-Medium", size: 26))
-                    
-                }.padding(.horizontal, 20).padding(.bottom, -5).padding(.top, 20)
+                
+                
+                Spacer()
                 
                 //Book Block
                 VStack {
@@ -66,7 +72,7 @@ struct HomeView: View {
                         }) {
                             ZStack {
                                 Image("book").resizable()
-                                    .frame(width: 200, height: 280)
+                                    .frame(width: 180, height: 250)
                                     .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 5, x: 0.0, y: 10)
                                     .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 20, x: 0.0, y: 15)
                                 
@@ -81,8 +87,6 @@ struct HomeView: View {
                                     
                                 }
                                 
-                                smallGoalView()
-                                    .offset(x: -60, y: 90)
                             }
                             .padding(.bottom, 10)
                         }
@@ -105,14 +109,14 @@ struct HomeView: View {
                     }
                    
                 }
-                .frame(width: UIScreen.main.bounds.width, height: 600)
-                .background(colorScheme == .dark ? Color(#colorLiteral(red: 0.1514667571, green: 0.158391118, blue: 0.1616251171, alpha: 1)) : Color(#colorLiteral(red: 0.9254901961, green: 0.9294117647, blue: 0.9333333333, alpha: 1)))
-                .padding(.bottom, 15)
+                .frame(width: UIScreen.main.bounds.width)
+                
+                PromptsViewB()
 //
-//                //Chart Block
-//                Button( action: { tabIndex = 2 } ) {
-//                    smallGoalView()
-//                } // .padding(.top, 25)
+                //Chart Block
+                Button( action: {} ) {
+                    smallGoalView()
+                } // .padding(.top, 25)
                 
 //                Divider().padding()
                 
