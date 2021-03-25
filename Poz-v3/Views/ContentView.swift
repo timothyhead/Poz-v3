@@ -27,7 +27,7 @@ struct ContentView: View {
             }
             
             Spacer()
-            TabsView(index: $tabIndex, settings: self.settings)
+//            TabsView(index: $tabIndex, settings: self.settings)
         }
         .preferredColorScheme((settings.darkMode == true ? (.dark) : (.light)))
         .background(Color(UIColor(named: "HomeBG")!))

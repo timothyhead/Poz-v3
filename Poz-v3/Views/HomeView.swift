@@ -15,19 +15,31 @@ struct HomeView: View {
     @Binding var tabIndex: Int
     
     @State var bookOpenAnimation = false
+    @State var prevPostsShowing = false
     
     var body: some View {
         ScrollView (.vertical, showsIndicators: false) {
             VStack (alignment: .leading, spacing: 20) {
                 
-                HStack {
+                HStack (spacing: 10){
                     Spacer()
+                    
+                    Button (action:{ prevPostsShowing.toggle() }) {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .font(Font.custom("Poppins-Light", size: 26))
+                            .foregroundColor(Color(UIColor(named: "PozGray")!))
+                    }
+                    .sheet(isPresented: $prevPostsShowing, content: { NotesListView() })
+                    
+                    
                     Button (action:{ self.settings.showSettings.toggle() }) {
                         Image(systemName: "gear")
                             .font(Font.custom("Poppins-Light", size: 26))
                             .foregroundColor(Color(UIColor(named: "PozGray")!))
                     }
-                }.padding(.trailing, 20).padding(.bottom, -20)
+                    .sheet(isPresented: $settings.showSettings, content: { SettingsView(settings: self.settings) })
+                }
+                .padding(.trailing, 20).padding(.bottom, -20)
                 
                 //Hello Text
                 HStack (spacing: 0) {
@@ -66,6 +78,8 @@ struct HomeView: View {
                                     Text("🤘🏼")
                                         .font(Font.custom("Blueberry Regular", size: 52))
                                         .foregroundColor(Color(.white))
+                                    
+                                    smallGoalView()
                                 }
                             }
                             .padding(.bottom, 10)
@@ -92,22 +106,20 @@ struct HomeView: View {
                 .frame(width: UIScreen.main.bounds.width, height: 410)
                 .background(colorScheme == .dark ? Color(#colorLiteral(red: 0.1514667571, green: 0.158391118, blue: 0.1616251171, alpha: 1)) : Color(#colorLiteral(red: 0.9254901961, green: 0.9294117647, blue: 0.9333333333, alpha: 1)))
                 .padding(.bottom, 15)
-            
-                //Chart Block
-                Button( action: { tabIndex = 2 } ) {
-                    smallGoalView()
-                } // .padding(.top, 25)
+//            
+//                //Chart Block
+//                Button( action: { tabIndex = 2 } ) {
+//                    smallGoalView()
+//                } // .padding(.top, 25)
                 
                 Divider().padding()
                 
                 //prompt selector
-                PromptsView()
+//                PromptsView()
+                DashboardView(settings: self.settings)
 
             }
             // settings modal sheet
-            .sheet(isPresented: $settings.showSettings, content: {
-                SettingsView(settings: self.settings)
-            })
             .preferredColorScheme((settings.darkMode == true ? (.dark) : (.light)))
             .padding(.top, 60)
         }

@@ -84,6 +84,9 @@
 		DE392D89260BD23500715173 /* CustomizeJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D88260BD23500715173 /* CustomizeJournalView.swift */; };
 		DE392D8A260BD23500715173 /* CustomizeJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D88260BD23500715173 /* CustomizeJournalView.swift */; };
 		DE392D8B260BD23500715173 /* CustomizeJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D88260BD23500715173 /* CustomizeJournalView.swift */; };
+		DE392D93260BEC2700715173 /* PopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D92260BEC2700715173 /* PopOverView.swift */; };
+		DE392D94260BEC2700715173 /* PopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D92260BEC2700715173 /* PopOverView.swift */; };
+		DE392D95260BEC2700715173 /* PopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D92260BEC2700715173 /* PopOverView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +146,7 @@
 		DE392D60260B118B00715173 /* SwiftSpeechButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSpeechButtonView.swift; sourceTree = "<group>"; };
 		DE392D7A260B154D00715173 /* PromptsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsView.swift; sourceTree = "<group>"; };
 		DE392D88260BD23500715173 /* CustomizeJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeJournalView.swift; sourceTree = "<group>"; };
+		DE392D92260BEC2700715173 /* PopOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +264,7 @@
 				DE392D29260AE6C500715173 /* ChartView.swift */,
 				DE392CF9260AC64300715173 /* RingView.swift */,
 				DE392D00260ACE1F00715173 /* NotesListView.swift */,
+				DE392D92260BEC2700715173 /* PopOverView.swift */,
 				DE392D0D260ACE9900715173 /* SearchView.swift */,
 				DE392D1A260AD18300715173 /* TabsView.swift */,
 				DE392D7A260B154D00715173 /* PromptsView.swift */,
@@ -455,6 +460,7 @@
 			files = (
 				DE392D5A260B0FDA00715173 /* NoteButtonsView.swift in Sources */,
 				DE392CC3260AA28000715173 /* AddNoteView.swift in Sources */,
+				DE392D93260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE392CD1260AA2A800715173 /* DashboardView.swift in Sources */,
 				DE392C36260A8CBD00715173 /* Poz_v3.xcdatamodeld in Sources */,
 				DE392CD8260AAB2400715173 /* SettingsView.swift in Sources */,
@@ -491,6 +497,7 @@
 				DE392D8A260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D51260B0F0900715173 /* EmojiPicker.swift in Sources */,
 				DE392D02260ACE1F00715173 /* NotesListView.swift in Sources */,
+				DE392D94260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE392D1C260AD18300715173 /* TabsView.swift in Sources */,
 				DE392D7C260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392CAD260A9F2600715173 /* HomeView.swift in Sources */,
@@ -516,6 +523,7 @@
 				DE392D8B260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D52260B0F0900715173 /* EmojiPicker.swift in Sources */,
 				DE392D03260ACE1F00715173 /* NotesListView.swift in Sources */,
+				DE392D95260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE392D1D260AD18300715173 /* TabsView.swift in Sources */,
 				DE392D7D260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392CAE260A9F2600715173 /* HomeView.swift in Sources */,

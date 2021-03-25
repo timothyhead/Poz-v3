@@ -11,6 +11,8 @@ struct NoteButtonsView: View {
     @State private var addPhotoShowing: Bool = false;
     @State private var addSpecialShowing: Bool = false;
     
+    @Binding var buttonSpacing: CGFloat
+    
     var body: some View {
         
         //emoji picker
@@ -23,7 +25,7 @@ struct NoteButtonsView: View {
         
         
         // Special Buttons
-        HStack(spacing: 30) {
+        VStack(spacing: buttonSpacing) {
             
             
             //emoji button
@@ -88,8 +90,8 @@ struct NoteButtonsView: View {
     }
 }
 
-struct NoteButtonsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NoteButtonsView()
-    }
-}
+//struct NoteButtonsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NoteButtonsView()
+//    }
+//}
