@@ -57,10 +57,9 @@ struct HomeView: View {
                         
                         //book
                         Button( action: {
-                            print("a")
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                                 tabIndex = 1
-                            }
+//                            }
                             
                             
                             
@@ -79,8 +78,11 @@ struct HomeView: View {
                                         .font(Font.custom("Blueberry Regular", size: 52))
                                         .foregroundColor(Color(.white))
                                     
-                                    smallGoalView()
+                                    
                                 }
+                                
+                                smallGoalView()
+                                    .offset(x: -60, y: 90)
                             }
                             .padding(.bottom, 10)
                         }
@@ -103,20 +105,20 @@ struct HomeView: View {
                     }
                    
                 }
-                .frame(width: UIScreen.main.bounds.width, height: 410)
+                .frame(width: UIScreen.main.bounds.width, height: 600)
                 .background(colorScheme == .dark ? Color(#colorLiteral(red: 0.1514667571, green: 0.158391118, blue: 0.1616251171, alpha: 1)) : Color(#colorLiteral(red: 0.9254901961, green: 0.9294117647, blue: 0.9333333333, alpha: 1)))
                 .padding(.bottom, 15)
-//            
+//
 //                //Chart Block
 //                Button( action: { tabIndex = 2 } ) {
 //                    smallGoalView()
 //                } // .padding(.top, 25)
                 
-                Divider().padding()
+//                Divider().padding()
                 
                 //prompt selector
 //                PromptsView()
-                DashboardView(settings: self.settings)
+//                DashboardView(settings: self.settings)
 
             }
             // settings modal sheet

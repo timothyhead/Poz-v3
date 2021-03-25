@@ -87,6 +87,9 @@
 		DE392D93260BEC2700715173 /* PopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D92260BEC2700715173 /* PopOverView.swift */; };
 		DE392D94260BEC2700715173 /* PopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D92260BEC2700715173 /* PopOverView.swift */; };
 		DE392D95260BEC2700715173 /* PopOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D92260BEC2700715173 /* PopOverView.swift */; };
+		DE392D9D260C512A00715173 /* HomeButtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D9C260C512A00715173 /* HomeButtomView.swift */; };
+		DE392D9E260C512A00715173 /* HomeButtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D9C260C512A00715173 /* HomeButtomView.swift */; };
+		DE392D9F260C512A00715173 /* HomeButtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392D9C260C512A00715173 /* HomeButtomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +150,7 @@
 		DE392D7A260B154D00715173 /* PromptsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsView.swift; sourceTree = "<group>"; };
 		DE392D88260BD23500715173 /* CustomizeJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeJournalView.swift; sourceTree = "<group>"; };
 		DE392D92260BEC2700715173 /* PopOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverView.swift; sourceTree = "<group>"; };
+		DE392D9C260C512A00715173 /* HomeButtomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,11 +264,12 @@
 				DE392C32260A8CBD00715173 /* ContentView.swift */,
 				DE392CAB260A9F2600715173 /* HomeView.swift */,
 				DE392CC2260AA28000715173 /* AddNoteView.swift */,
-				DE392D59260B0FDA00715173 /* NoteButtonsView.swift */,
 				DE392D29260AE6C500715173 /* ChartView.swift */,
 				DE392CF9260AC64300715173 /* RingView.swift */,
 				DE392D00260ACE1F00715173 /* NotesListView.swift */,
 				DE392D92260BEC2700715173 /* PopOverView.swift */,
+				DE392D9C260C512A00715173 /* HomeButtomView.swift */,
+				DE392D59260B0FDA00715173 /* NoteButtonsView.swift */,
 				DE392D0D260ACE9900715173 /* SearchView.swift */,
 				DE392D1A260AD18300715173 /* TabsView.swift */,
 				DE392D7A260B154D00715173 /* PromptsView.swift */,
@@ -466,6 +471,7 @@
 				DE392CD8260AAB2400715173 /* SettingsView.swift in Sources */,
 				DE392CCA260AA29000715173 /* PreviousNoteView.swift in Sources */,
 				DE392CFA260AC64300715173 /* RingView.swift in Sources */,
+				DE392D9D260C512A00715173 /* HomeButtomView.swift in Sources */,
 				DE392D61260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
 				DE392D7B260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392C2F260A8CBD00715173 /* AppDelegate.swift in Sources */,
@@ -500,6 +506,7 @@
 				DE392D94260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE392D1C260AD18300715173 /* TabsView.swift in Sources */,
 				DE392D7C260B154D00715173 /* PromptsView.swift in Sources */,
+				DE392D9E260C512A00715173 /* HomeButtomView.swift in Sources */,
 				DE392CAD260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392CC4260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBB260AA22300715173 /* ContentView.swift in Sources */,
@@ -526,6 +533,7 @@
 				DE392D95260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE392D1D260AD18300715173 /* TabsView.swift in Sources */,
 				DE392D7D260B154D00715173 /* PromptsView.swift in Sources */,
+				DE392D9F260C512A00715173 /* HomeButtomView.swift in Sources */,
 				DE392CAE260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392CC5260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBA260AA22300715173 /* ContentView.swift in Sources */,

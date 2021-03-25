@@ -62,7 +62,7 @@ struct PopOverView: View {
     
     var body: some View {
         
-        VStack (alignment: .trailing) {
+        VStack (alignment: .leading) {
             Spacer()
             
                 if menuOpen {
@@ -70,7 +70,7 @@ struct PopOverView: View {
                 }
             
             HStack {
-                Spacer()
+                
                 Button (action: {
                     withAnimation(.easeInOut(duration: 0.1)) {
                         menuOpen.toggle()
@@ -93,6 +93,8 @@ struct PopOverView: View {
                             .foregroundColor(.black)
                     }
                 }
+                
+                Spacer()
             }
             
         }.padding()

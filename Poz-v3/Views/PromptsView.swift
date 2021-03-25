@@ -78,7 +78,7 @@ struct PromptsView: View {
             .padding(.bottom, -10)
             
             //hstack of two vertical columns
-            HStack (spacing: -20) {
+            HStack (spacing: -10) {
                 
                 Spacer()
                 

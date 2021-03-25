@@ -4,10 +4,10 @@ import SwiftUICharts
 struct smallGoalView : View {
     var body : some View {
         ZStack {
-            RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: 0.5, sizeScale: 0.5)
+            RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: 0.5, sizeScale: 0.4)
             
             Text("1/2")
-                .font(Font.custom("Poppins-Bold", size: 18))
+                .font(Font.custom("Poppins-Bold", size: 16))
                 .foregroundColor(Color(UIColor(named: "PozBlue")!))
         }
     }

@@ -27,6 +27,7 @@ struct NoteButtonsView: View {
         // Special Buttons
         VStack(spacing: buttonSpacing) {
             
+            Spacer()
             
             //emoji button
             Button(action: { emojiPickerShowing.toggle()}) {

@@ -39,6 +39,8 @@ struct addNoteView: View {
     
     @State var menuOpen = false
     
+    @State var tabIndex = 0
+    
 //    @EnvironmentObject var bookOpen: BookOpen
     
     let tags:[Tag] = [Tag(name: "", color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0))),  Tag(name: "✅ To do", color: Color(#colorLiteral(red: 0.6578102112, green: 0.8591415286, blue: 0.673274219, alpha: 1))), Tag(name: "💭 Idea", color: Color(#colorLiteral(red: 0.8458583951, green: 0.8536861539, blue: 0, alpha: 0.7509899013))), Tag(name: "💢 Rant", color: Color(#colorLiteral(red: 0.9069923162, green: 0.5071092248, blue: 0.4630813003, alpha: 0.4949279179))), Tag(name: "🙏🏻 Gratitude", color: Color(#colorLiteral(red: 0.873713553, green: 0.7492058873, blue: 0.5602819324, alpha: 1))), Tag(name: "📜 Story", color: Color(#colorLiteral(red: 0.6360311508, green: 0.6086863279, blue: 0.8723474145, alpha: 1))), Tag(name: "📝 Note to Self", color: Color(#colorLiteral(red: 0.5947418809, green: 0.8605783582, blue: 0.8334261179, alpha: 1)))]
@@ -139,18 +141,7 @@ struct addNoteView: View {
                             .background(Color.clear)
                             .frame(maxHeight: .infinity)
                     }
-    //                .padding(.top, 8)
                     .padding(.horizontal, 20)
-                    
-                    //image display
-    //                if (self.image.count != 0) {
-    //                    Image(uiImage: UIImage(data: self.image)!)
-    //                        .resizable()
-    //                        .renderingMode(.original)
-    //                        .aspectRatio(contentMode: .fit)
-    //                        .cornerRadius(6)
-    //                        .padding()
-    //                }
                     
                     Spacer(minLength: 50)
                 }
@@ -161,9 +152,8 @@ struct addNoteView: View {
                 hideKeyboard()
             }
             
-//            NoteButtonsView()
-            
             PopOverView(menuOpen: $menuOpen)
+
         }
         .padding(.top, 60)
         .padding(.bottom, 10)
