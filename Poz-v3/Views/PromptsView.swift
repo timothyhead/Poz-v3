@@ -139,6 +139,11 @@ struct PromptsViewB: View {
 //            .padding(.horizontal, 20)
 //            .padding(.bottom, -10)
             
+//            Text("Prompts")
+//                .font(Font.custom("Poppins-Light", size: 16))
+//                .foregroundColor(Color(UIColor(named: "PozGray")!))
+//                .padding(.horizontal, 20)
+            
 
             ScrollView (.horizontal, showsIndicators: false)  {
                 HStack (spacing: 10) {

@@ -63,11 +63,12 @@ struct PopOverView: View {
     var body: some View {
         
         VStack (alignment: .leading) {
+            
             Spacer()
             
-                if menuOpen {
-                    NoteButtonsView(buttonSpacing: $buttonSpacing)
-                }
+            if menuOpen {
+                NoteButtonsView(buttonSpacing: $buttonSpacing)
+            }
             
             HStack {
                 
@@ -94,7 +95,7 @@ struct PopOverView: View {
                     }
                 }
                 
-                Spacer()
+//                Spacer()
             }
             
         }.padding()

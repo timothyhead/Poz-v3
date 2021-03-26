@@ -9,9 +9,9 @@ struct Tag : Hashable {
 
 struct addNoteView: View {
 
-    init () {
-        UITextView.appearance().backgroundColor = .clear
-    }
+//    init () {
+        
+//    }
     
     //get data from CoreData
 //    @Environment(\.managedObjectContext) var moc
@@ -39,7 +39,7 @@ struct addNoteView: View {
     
     @State var menuOpen = false
     
-    @State var tabIndex = 0
+    @Binding var tabIndex: Int
     
 //    @EnvironmentObject var bookOpen: BookOpen
     
@@ -48,7 +48,7 @@ struct addNoteView: View {
     var body: some View {
         
         ZStack {
-        VStack {
+            VStack {
         //home button
             HStack {
                 Text("\(dateString)")
@@ -112,9 +112,7 @@ struct addNoteView: View {
                 dateFormatter.dateFormat = "MMM dd, yyyy"
                 dateString = dateFormatter.string(from: date as Date)
             }
-            .padding(.top, 16)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 3)
+            .padding(.top, 16).padding(.horizontal, 20).padding(.bottom, 3)
             
             
             Divider()
@@ -152,56 +150,67 @@ struct addNoteView: View {
                 //hide keyboard when user taps outside text field
                 hideKeyboard()
             }
-
-            
-            //save button
-            Button( action: {
-            
-            // create note item
-//            let note = Note(context: self.moc)
-            
-            // get current data and format it
-            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-            dateString = dateFormatter.string(from: date as Date)
-            
-            //assign vars on click
-//            note.id = UUID() //create id
-//            note.note = "\(message)" //input message
-//            note.createdAt = date //actual date to sort
-//            note.date = "\(dateString)" //formatted date to sort
-//            note.emoji = "\(selected)" // emoji
-//            note.stringLength = Double(message.count) // length of entry
-//            note.entryTag = "\(selectedTag.name)"
-            
-//            try? self.moc.save() //save inputted values
-            
-//            message = "" //reset input
-
-//            presentationMode.wrappedValue.dismiss() //dismiss popup on click
-
-        }) {
-            ZStack{
-                Text("Save")
+            .onAppear() {
+                //make textfield clear
+                UITextView.appearance().backgroundColor = .clear
             }
-            .disabled(message == "")
-            .foregroundColor(message == "" ? .gray : .black)
-            .font(Font.custom("Poppins-Regular", size: 20))
-            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-            .frame(width: 150, height: 50)
-            .background(message == "" ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0.9853331447, green: 0.7925021052, blue: 0.3908675313, alpha: 1)))
-            .cornerRadius(50)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 40)
-        
             
+                HStack (alignment: .bottom, spacing: -10) {
+                    
+                    //special buttons
+                    PopOverView(menuOpen: $menuOpen)
+                    
+                    //save button
+                    Button( action: {
+                
+                // create note item
+    //            let note = Note(context: self.moc)
+                
+                // get current data and format it
+                dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+                dateString = dateFormatter.string(from: date as Date)
+                
+                //assign vars on click
+    //            note.id = UUID() //create id
+    //            note.note = "\(message)" //input message
+    //            note.createdAt = date //actual date to sort
+    //            note.date = "\(dateString)" //formatted date to sort
+    //            note.emoji = "\(selected)" // emoji
+    //            note.stringLength = Double(message.count) // length of entry
+    //            note.entryTag = "\(selectedTag.name)"
+                
+    //            try? self.moc.save() //save inputted values
+                
+    //            message = "" //reset input
 
-        }
+    //            presentationMode.wrappedValue.dismiss() //dismiss popup on click
+
+            }) {
+                ZStack{
+                    Text("Save")
+                }
+                .disabled(message == "")
+                .foregroundColor(message == "" ? .gray : .black)
+                .font(Font.custom("Poppins-Regular", size: 20))
+                .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                .frame(width: 150, height: 50)
+                .background(message == "" ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0.9853331447, green: 0.7925021052, blue: 0.3908675313, alpha: 1)))
+                .cornerRadius(50)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 40)
+            
+                
 
             }
-            .padding(.top, 40)
-            
-            PopOverView(menuOpen: $menuOpen)
+                    
+                    //home button
+                    HomeButtonView(tabIndex: $tabIndex)
+                }
+            }
         }
+        .padding(.top, 60)
+        .padding(.bottom, 20)
+        .background(Color(UIColor(named: "NoteBG")!))
     }
     
 }
@@ -215,8 +224,8 @@ extension View {
 #endif
 
 
-struct addNoteView_Previews: PreviewProvider {
-    static var previews: some View {
-        addNoteView()
-    }
-}
+//struct addNoteView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        addNoteView()
+//    }
+//}

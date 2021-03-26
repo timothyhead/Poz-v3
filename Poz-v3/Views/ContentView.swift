@@ -22,12 +22,11 @@ struct ContentView: View {
                 HomeView(settings: self.settings, tabIndex: $tabIndex)
 
             } else  if tabIndex == 1 {
-                ZStack {
-                    addNoteView()
+                    addNoteView(tabIndex: $tabIndex)
 
-                    HomeButtonView(tabIndex: $tabIndex)
-                }
+                    
             }
+            
         }
         .preferredColorScheme((settings.darkMode == true ? (.dark) : (.light)))
         .background(Color(UIColor(named: "HomeBG")!))
