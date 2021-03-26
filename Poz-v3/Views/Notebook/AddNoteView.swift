@@ -8,19 +8,9 @@ struct Tag : Hashable {
 }
 
 struct addNoteView: View {
-
-//    init () {
-        
-//    }
     
-    //get data from CoreData
-//    @Environment(\.managedObjectContext) var moc
-//    @Environment(\.presentationMode) var presentationMode //check if pop up active
-    
-    //    @State var image: Data = .init(count: 0)
-    //    @State var show = false
-        //    @State var pictures = [Picture]()
-
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
     
     //vars
     @State private var message: String = ""
@@ -38,8 +28,7 @@ struct addNoteView: View {
     @State var selectedColor = ""
     
     @State var menuOpen = false
-    
-    @Binding var tabIndex: Int
+
     
 //    @EnvironmentObject var bookOpen: BookOpen
     
@@ -109,10 +98,10 @@ struct addNoteView: View {
                 
             }
             .onAppear() {
-                dateFormatter.dateFormat = "MMM dd, yyyy"
+                dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
                 dateString = dateFormatter.string(from: date as Date)
             }
-            .padding(.top, 16).padding(.horizontal, 20).padding(.bottom, 3)
+            .padding(.horizontal, 20).padding(.bottom, 3)
             
             
             Divider()
@@ -155,62 +144,58 @@ struct addNoteView: View {
                 UITextView.appearance().backgroundColor = .clear
             }
             
-                HStack (alignment: .bottom, spacing: -10) {
+            HStack (alignment: .bottom, spacing: -10) {
+                
+                //special buttons
+                PopOverView(menuOpen: $menuOpen)
+                
+                //save button
+                Button( action: {
+            
+                    // create note item
+                    let note = Note(context: self.moc)
                     
-                    //special buttons
-                    PopOverView(menuOpen: $menuOpen)
+                    // get current data and format it
+                    dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+                    dateString = dateFormatter.string(from: date as Date)
+                
+                    // assign vars on click
+                    note.id = UUID() //create id
+                    note.note = "\(message)" //input message
+                    note.createdAt = date //actual date to sort
+                    note.date = "\(dateString)" //formatted date to sort
+                    note.emoji = "\(selected)" // emoji
+    //                note.stringLength = Double(message.count) // length of entry
+                    note.tag = "\(selectedTag.name)"
                     
-                    //save button
-                    Button( action: {
-                
-                // create note item
-    //            let note = Note(context: self.moc)
-                
-                // get current data and format it
-                dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-                dateString = dateFormatter.string(from: date as Date)
-                
-                //assign vars on click
-    //            note.id = UUID() //create id
-    //            note.note = "\(message)" //input message
-    //            note.createdAt = date //actual date to sort
-    //            note.date = "\(dateString)" //formatted date to sort
-    //            note.emoji = "\(selected)" // emoji
-    //            note.stringLength = Double(message.count) // length of entry
-    //            note.entryTag = "\(selectedTag.name)"
-                
-    //            try? self.moc.save() //save inputted values
-                
-    //            message = "" //reset input
+                    try? self.moc.save() //save inputted values
+                    
+                    message = "" //reset input
 
-    //            presentationMode.wrappedValue.dismiss() //dismiss popup on click
-
-            }) {
-                ZStack{
-                    Text("Save")
-                }
-                .disabled(message == "")
-                .foregroundColor(message == "" ? .gray : .black)
-                .font(Font.custom("Poppins-Regular", size: 20))
-                .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                .frame(width: 150, height: 50)
-                .background(message == "" ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0.9853331447, green: 0.7925021052, blue: 0.3908675313, alpha: 1)))
-                .cornerRadius(50)
-                .padding(.horizontal, 20)
-                .padding(.bottom, 40)
+                }) {
+                    ZStack{
+                        Text("Save")
+                    }
+                    .disabled(message == "")
+                    .foregroundColor(message == "" ? .gray : .black)
+                    .font(Font.custom("Poppins-Regular", size: 20))
+                    .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                    .frame(width: 150, height: 50)
+                    .background(message == "" ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0.9853331447, green: 0.7925021052, blue: 0.3908675313, alpha: 1)))
+                    .cornerRadius(50)
+                    .padding(.horizontal, 20)
+    //                .padding(.bottom, 40)
             
                 
 
             }
-                    
-                    //home button
-                    HomeButtonView(tabIndex: $tabIndex)
                 }
             }
         }
         .padding(.top, 60)
         .padding(.bottom, 20)
         .background(Color(UIColor(named: "NoteBG")!))
+        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
     
 }

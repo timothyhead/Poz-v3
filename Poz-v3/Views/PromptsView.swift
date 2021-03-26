@@ -116,41 +116,23 @@ struct PromptsViewB: View {
     
     //create prompts
     let prompts:[Prompt] = [
-        Prompt(name: "Idea", color: Color(#colorLiteral(red: 0.7816649079, green: 0.9041231275, blue: 1, alpha: 1)), emoji: "💡", prompt: "What made you smile today?", index: 1),
-        Prompt(name: "Note to self", color: Color(#colorLiteral(red: 1, green: 0.8404197693, blue: 0.8131812215, alpha: 1)), emoji: "📝", prompt: "What made you smile today?", index: 2),
-        Prompt(name: "Reflection", color: Color(#colorLiteral(red: 0.8020336032, green: 0.77568084, blue: 1, alpha: 1)), emoji: "🔮", prompt: "What made you smile today?", index: 3),
-        Prompt(name: "Drawing", color: Color(#colorLiteral(red: 1, green: 0.9204289913, blue: 0.7399825454, alpha: 1)), emoji: "✒", prompt: "What made you smile today?", index: 4),
+//        Prompt(name: "Idea", color: Color(#colorLiteral(red: 0.7816649079, green: 0.9041231275, blue: 1, alpha: 1)), emoji: "💡", prompt: "What made you smile today?", index: 1),
+        Prompt(name: "Note to self", color: Color(#colorLiteral(red: 0.9835988879, green: 0.9287452102, blue: 0.8802834153, alpha: 1)), emoji: "📝", prompt: "What made you smile today?", index: 2),
+        Prompt(name: "Reflection", color: Color(#colorLiteral(red: 0.8686004281, green: 0.8755119443, blue: 0.992816627, alpha: 1)), emoji: "🔮", prompt: "What made you smile today?", index: 3),
+//        Prompt(name: "Drawing", color: Color(#colorLiteral(red: 1, green: 0.9204289913, blue: 0.7399825454, alpha: 1)), emoji: "✒", prompt: "What made you smile today?", index: 4),
         
-        Prompt(name: "Photo", color: Color(#colorLiteral(red: 0.8121860623, green: 1, blue: 0.8244165182, alpha: 1)), emoji: "🤳", prompt: "What made you smile today?", index: 5),
-        Prompt(name: "Brain Dump", color: Color(#colorLiteral(red: 0.8869524598, green: 0.9502753615, blue: 1, alpha: 1)), emoji: "💭", prompt: "What made you smile today?", index: 6),
-        Prompt(name: "Vent", color: Color(#colorLiteral(red: 1, green: 0.8935509324, blue: 0.8957810998, alpha: 1)), emoji: "💢", prompt: "What made you smile today?", index: 7),
+//        Prompt(name: "Photo", color: Color(#colorLiteral(red: 0.8121860623, green: 1, blue: 0.8244165182, alpha: 1)), emoji: "🤳", prompt: "What made you smile today?", index: 5),
+//        Prompt(name: "Brain Dump", color: Color(#colorLiteral(red: 0.8869524598, green: 0.9502753615, blue: 1, alpha: 1)), emoji: "💭", prompt: "What made you smile today?", index: 6),
+//        Prompt(name: "Vent", color: Color(#colorLiteral(red: 1, green: 0.8935509324, blue: 0.8957810998, alpha: 1)), emoji: "💢", prompt: "What made you smile today?", index: 7),
         Prompt(name: "Gratitude", color: Color(#colorLiteral(red: 1, green: 0.8794577122, blue: 1, alpha: 1)), emoji: "🙏🏾", prompt: "What made you smile today?", index: 8),
         Prompt(name: "Decompress", color: Color(#colorLiteral(red: 0.9080274105, green: 0.920806706, blue: 1, alpha: 1)), emoji: "💤", prompt: "What made you smile today?", index: 9)
     ]
     
     var body: some View {
-        VStack (alignment: .leading) {
-            
-//            //start with a prompt text
-//            HStack (spacing: 0) {
-//                Text("prompts")
-//                    .font(Font.custom("Poppins-Light", size: 16)) 
-//            }
-//            .padding(.horizontal, 20)
-//            .padding(.bottom, -10)
-            
-//            Text("Prompts")
-//                .font(Font.custom("Poppins-Light", size: 16))
-//                .foregroundColor(Color(UIColor(named: "PozGray")!))
-//                .padding(.horizontal, 20)
-            
-
-            ScrollView (.horizontal, showsIndicators: false)  {
-                HStack (spacing: 10) {
+        VStack (alignment: .center) {
+            HStack (alignment: .center, spacing: 10) {
                     ForEach(prompts, id: \.self) { prompt in
                         
-                        
-//                            PromptCard(prompt: prompt)
                         Button (action: {}) {
                             ZStack {
                                 Circle().frame(width: 50, height: 50).foregroundColor(prompt.color)
@@ -159,9 +141,12 @@ struct PromptsViewB: View {
                         }
                         
                     }
-                }.padding()
-            }
+                }
+                .padding()
         }
+        .frame(width: UIScreen.main.bounds.width)
+
+        
     }
 }
 
