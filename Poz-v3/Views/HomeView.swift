@@ -52,18 +52,14 @@ struct HomeView: View {
                     .sheet(isPresented: $settings.showSettings, content: { SettingsView(settings: self.settings) })
                 }
                 .padding(.horizontal, 20)
-
-                
+   
                 Spacer()
-                
                 
                 BookView(tabIndex: $tabIndex)
                 
-
-                
-                
                 PromptsViewB()
-                                Spacer()
+                
+                Spacer()
 
 
             }
