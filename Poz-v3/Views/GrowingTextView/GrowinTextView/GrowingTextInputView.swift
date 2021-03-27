@@ -34,9 +34,6 @@ struct GrowingTextInputView: View {
         placeholder.map {
           Text($0)
             .foregroundColor(.gray)
-            .font(.system(size: 16))
-            .padding(.vertical, 8)
-            .padding(.horizontal, 4)
         } : nil
     )
   }

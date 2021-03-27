@@ -36,9 +36,6 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    
-                    
-                    
                     Button (action:{ self.settings.showSettings.toggle() }) {
                         Image(systemName: "gear")
                             .font(Font.custom("Poppins-Light", size: 26))

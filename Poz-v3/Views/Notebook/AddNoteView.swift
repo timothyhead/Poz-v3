@@ -131,31 +131,15 @@ struct addNoteView: View {
                     
                     // text input
                     ZStack (alignment: .topLeading) {
-//                        if message!.isEmpty {
-//                            Text("What's on your mind?")
-//                                .foregroundColor(.gray)
-//                                .font(Font.custom("Poppins-Regular", size: 16))
-//                                .padding(.top, 12)
-//                                .padding(.leading, 6)
-//                        }
-                        
-//                        TextEditor(text: self.$message)
-//                            .font(Font.custom("Poppins-Regular", size: 16))
-//                            .padding(.top, 8)
-//                            .background(Color.clear)
-//                            .frame(maxHeight: .infinity)
-                        
-                        GrowingTextInputView(text: $message, placeholder: "Message")
-                            .background(Color.clear)
+                        GrowingTextInputView(text: $message, placeholder: "What's on your mind?")
+                            .font(Font.custom("Poppins-Regular", size: 16))
+                            .padding(.top, 10)
                     }
-                    
                     .padding(.horizontal, 20)
-                    .onChange(of: message) {_ in
-                        print("did Change")
+                    .onChange(of: message) { value in
+                        print("\(value ?? "")")
+                        
                         if (message != "") {
-                            
-                            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-                           dateString = dateFormatter.string(from: date as Date)
                             
                             note.id = UUID() //create id
                             note.note = "\(message ?? "")" //input message
@@ -164,7 +148,7 @@ struct addNoteView: View {
                             note.emoji = "\(selected)" // emoji
                             note.tag = "\(selectedTag.name)"
 
-                            try? self.moc.save() //save inputted values
+//                            try? self.moc.save() //save inputted values
                         }
                     }
                     
@@ -180,7 +164,13 @@ struct addNoteView: View {
                 UITextView.appearance().backgroundColor = .clear //make textfield clear
             }
             .onDisappear() {
-                message = ""
+                if message == "" {
+                    
+                }
+                else if message != "" {
+                    try? self.moc.save()
+                    message = ""
+                }
             }
             
             VStack (alignment: .leading, spacing: -10) {
@@ -192,6 +182,10 @@ struct addNoteView: View {
                     
             }
             }
+        }
+        .onAppear() {
+            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+            dateString = dateFormatter.string(from: date as Date)
         }
         .padding(.top, 60)
         .background(Color(UIColor(named: "NoteBG")!))

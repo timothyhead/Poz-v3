@@ -10,8 +10,16 @@ import SwiftUI
 struct BookView: View {
     
     @Environment(\.colorScheme) var colorScheme
-    
     @Binding var tabIndex: Int
+    
+    //to get last date
+    @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: false)]) var notes: FetchedResults<Note>
+    
+    @State var date = Date()
+    @State var dateFormatter = DateFormatter();
+    @State var dateString: String = ""
+    
+//    var note: Note
     
     var body: some View {
         VStack {
@@ -19,9 +27,9 @@ struct BookView: View {
                 
                 //book
                 Button( action: {
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         tabIndex = 1
-//                            }
+//                    }
                 }) {
                     ZStack {
                         Image("book").resizable()
@@ -51,8 +59,14 @@ struct BookView: View {
                     Text("Last updated: ")
                         .font(Font.custom("Poppins-Light", size: 16))
                         .foregroundColor(Color(UIColor(named: "PozGray")!))
-                    Text("3/3/21")
-                        .font(Font.custom("Poppins-Medium", size: 16))
+                    
+                        Text(dateString)
+                            .font(Font.custom("Poppins-Medium", size: 16))
+                            .onAppear() {
+                                dateFormatter.dateFormat = "MM/dd/yy"
+                                dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
+                            }
+                    
                     
                     Button( action: {} ) {
                         Image(systemName: "pencil")

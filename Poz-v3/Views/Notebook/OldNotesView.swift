@@ -35,6 +35,8 @@ struct OldNotesView: View {
 //    @State var inTransition: Bool = false
     @StateObject var inTransition = isInTransition()
     
+//    @State var isEditing = false
+    
     @State var tempText: String?
     
     var body: some View {
@@ -78,21 +80,21 @@ struct OldNotesView: View {
 //                        .cornerRadius(5)
                         
                     }.padding(.vertical, -30)
-                    .onAppear() {
-                        dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
-                        dateString = dateFormatter.string(from: date as Date)
-                    }
-                    
-                    
                     
                     Divider()
                         .foregroundColor(Color.primary)
-                        .padding(.horizontal, 20)
                         .padding(.bottom, 3)
                     
+                    VStack {
 
-                    Text (note.note ?? "Empty")
-//                    GrowingTextInputView(text: $tempText, placeholder: "Message")
+                        Text (note.note ?? "Empty")
+                            .font(Font.custom("Poppins-Regular", size: 16))
+                        
+                    }
+//                    .onChange(of: tempText) { value in
+//                        print("\(value ?? "a")")
+//                    }
+                    
 //
 //                    NoteText(text: $tempText).environmentObject(inTransition)
 //                        .onAppear {
