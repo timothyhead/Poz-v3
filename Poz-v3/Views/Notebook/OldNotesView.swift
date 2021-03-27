@@ -44,6 +44,7 @@ struct OldNotesView: View {
         ZStack {
             
             ModelPages (
+                
                 notes, currentPage: $index,
                 transitionStyle: .pageCurl,
                 bounce: true,
@@ -51,13 +52,14 @@ struct OldNotesView: View {
                 
             ) { pageIndex, note  in
                 
+                
                 VStack (alignment: .leading) {
                     
-                    NoteTopMenuView(tabIndex: $tabIndex)
+//                    NoteTopMenuView(tabIndex: $tabIndex)
                     
                     HStack (alignment: .center){
                         Spacer()
-                        Text(note.date ?? "1/1/1")
+                        Text(note.date ?? "–")
                             .font(Font.custom("Poppins-Bold", size: 16))
                             .foregroundColor(Color.primary)
 //
@@ -79,41 +81,30 @@ struct OldNotesView: View {
 //                        .foregroundColor(Color.primary)
 //                        .cornerRadius(5)
                         
-                    }.padding(.vertical, -30)
+                    }.padding(.top, -5)
                     
                     Divider()
                         .foregroundColor(Color.primary)
                         .padding(.bottom, 3)
                     
-                    VStack {
+                    ScrollView (.vertical){
+                        VStack {
+                            
+                            Text(note.emoji ?? "")
+                                .font(Font.custom("Poppins-Regular", size: 48))
+                                .padding(.bottom, -9)
 
-                        Text (note.note ?? "Empty")
-                            .font(Font.custom("Poppins-Regular", size: 16))
-                        
-                    }
-//                    .onChange(of: tempText) { value in
-//                        print("\(value ?? "a")")
-//                    }
-                    
-//
-//                    NoteText(text: $tempText).environmentObject(inTransition)
-//                        .onAppear {
-//                            tempText = note.note ?? "Empty"
-//
-//                            print(" appeared")
-////                            inTransition.inTransition = true
-//                        }
-//                        .onDisappear {
-//                            print(" DISappeared")
-//                            inTransition.inTransition = false
-//                        }
-
+                            Text (note.note ?? "This is an empty post. Click the clock arrow button in the top right and swipe left on a post to delete it.")
+                                .font(Font.custom("Poppins-Regular", size: 16))
+                            
+                        }
+                    }.padding(.top, -11)
                     
                     Spacer()
                     
                 }
-                .padding(.top, 60)
                 .padding(.horizontal, 20)
+                .padding(.top, 60)
                 .background(Color(UIColor(named: "NoteBG")!))
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             }
@@ -123,9 +114,11 @@ struct OldNotesView: View {
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         // set the previous entry pages index to last - 1 so its starts at the most recent entry
         .onAppear {
-           DispatchQueue.main.async {
-              self.index = notes.count - 1
-           }
+            if (notes.count > 0) {
+               DispatchQueue.main.async {
+                  self.index = notes.count - 1
+               }
+            }
         }
     }
 }
@@ -139,6 +132,7 @@ struct OldNotePageView: View {
 }
 
 
+//expirement with text field on each previous note
 struct NoteText : View {
     
     @State var TextEditorIsShowing: Bool = false

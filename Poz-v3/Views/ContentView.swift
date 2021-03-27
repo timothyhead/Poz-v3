@@ -15,6 +15,10 @@ struct ContentView: View {
 
     @State var tabIndex = 0
     
+    @State var firstTimeNotebookIndex = 0
+    
+    @Environment(\.managedObjectContext) var moc
+    
     var body: some View {
         VStack {
             
@@ -23,7 +27,7 @@ struct ContentView: View {
                 HomeView(settings: settings, tabIndex: $tabIndex)
                 
             } else if tabIndex == 1 {
-                NotebookView(tabIndex: $tabIndex)
+                NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex)
             }
            
             
@@ -31,8 +35,38 @@ struct ContentView: View {
         .preferredColorScheme((settings.darkMode == true ? (.dark) : (.light)))
         .background(Color(UIColor(named: "HomeBG")!))
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        .onAppear {
+            if (isAppAlreadyLaunchedOnce()) {
+                print("yes")
+                firstTimeNotebookIndex = 1
+            } else {
+                let note = Note(context: self.moc)
+                
+                note.id = UUID() //create id
+                note.note = "Welcome to your Poz notebook" //input message
+                note.createdAt = Date() //actual date to sort
+                
+                try? self.moc.save()
+            }
+        }
     }
-    
+
+    func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+
+        if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
+            
+            print("App already launched : \(isAppAlreadyLaunchedOnce)")
+            return true
+            
+        } else {
+            
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
+            return false
+            
+        }
+    }
     
 }
 

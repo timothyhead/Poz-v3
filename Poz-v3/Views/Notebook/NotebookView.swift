@@ -11,7 +11,7 @@ import Pages
 struct NotebookView: View {
 
     @Binding var tabIndex: Int
-    @State var indexAdd = 1
+    @Binding var indexAdd: Int
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
@@ -29,10 +29,22 @@ struct NotebookView: View {
                 
             ) {
 
+//                Text("hi")
+                
                 OldNotesView(tabIndex: $tabIndex)
+
                 addNoteView(tabIndex: $tabIndex, note: Note(context: self.moc))
 
             }
+
+            VStack {
+                NoteTopMenuView(tabIndex: $tabIndex)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 50)
+                
+                Spacer()
+            }
+            
         }
     }
 }

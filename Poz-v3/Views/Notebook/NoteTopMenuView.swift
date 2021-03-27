@@ -33,15 +33,7 @@ struct NoteTopMenuView: View {
                     .foregroundColor(colorScheme == .dark ? Color(#colorLiteral(red: 0.9254901961, green: 0.9294117647, blue: 0.9333333333, alpha: 1)) : Color(#colorLiteral(red: 0.1514667571, green: 0.158391118, blue: 0.1616251171, alpha: 1)))
             }
             .sheet(isPresented: $prevPostsShowing, content: { NotesListView() })
-            
-            
-            
-            
-            
-//            Spacer()
-            
-            
-            
+
             
         }
     }

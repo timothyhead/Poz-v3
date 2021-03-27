@@ -1,31 +1,25 @@
-import SwiftUI
-import SwiftSpeech
+//
+//  PopOverView.swift
+//  Poz-v3
+//
+//  Created by Kish Parikh on 3/24/21.
+//
 
-struct NoteButtonsView: View {
-    
-    
-    
+import SwiftUI
+
+struct SimpleButtonView: View {
     
     //audio to text
     @State private var emojiPickerShowing: Bool = false;
     @State private var addPhotoShowing: Bool = false;
     @State private var addSpecialShowing: Bool = false;
     
-    @Binding var buttonSpacing: CGFloat
+    @Binding var message: String
     
     var body: some View {
         
-        //emoji picker
-        if (emojiPickerShowing == true) {
-            Text("Scroll below to tag entry with emoji")
-                .padding(.top, 30)
-                .foregroundColor(.gray)
-//            EmojiPicker(selectedIndex: $selectedIndex, selected: self.$selected)
-        }
-        
-        
         // Special Buttons
-        VStack(spacing: buttonSpacing) {
+        HStack() {
             
             Spacer()
             
@@ -44,7 +38,7 @@ struct NoteButtonsView: View {
             
             .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.1490374432)), radius: 5)
             
-            SwiftSpeechButtonView()
+            SwiftSpeechButtonView(output: $message)
             
             // photo button
             Button(action: {
@@ -87,12 +81,56 @@ struct NoteButtonsView: View {
             
             
         }
-        .animation(.easeOut(duration: 0.2))
+        
     }
 }
+    
 
-//struct NoteButtonsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NoteButtonsView()
-//    }
-//}
+
+
+
+struct PopOverView: View {
+    
+    @Binding var menuOpen: Bool
+    
+    @State var buttonSpacing: CGFloat = -60
+    
+    var body: some View {
+        
+        VStack (alignment: .leading) {
+            
+            Spacer()
+            
+            if menuOpen {
+                NoteButtonsVerticalView(buttonSpacing: $buttonSpacing)
+            }
+            
+            HStack {
+                
+                Button (action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        menuOpen.toggle()
+                        
+                    }
+                    withAnimation(.easeOut(duration: 3)) {
+                        if (buttonSpacing == -60) {
+                            buttonSpacing = 30
+                        } else if (buttonSpacing == 30) {
+                            buttonSpacing = -60
+                        }
+                    }
+                }) {
+                    ZStack (alignment: .center) {
+                        Image(systemName: "sparkles")
+                            .font(.system(size: 25))
+                            .foregroundColor(.black)
+                    }
+                }
+                
+//                Spacer()
+            }
+            
+        }.padding()
+       
+    }
+}
