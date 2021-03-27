@@ -107,6 +107,14 @@
 		DE5A4DD6260E9BE4000FB0E9 /* Poz_v3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE392C34260A8CBD00715173 /* Poz_v3.xcdatamodeld */; };
 		DE5A4DD7260E9BE4000FB0E9 /* Poz_v3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE392C34260A8CBD00715173 /* Poz_v3.xcdatamodeld */; };
 		DE5A4DD8260E9BE5000FB0E9 /* Poz_v3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE392C34260A8CBD00715173 /* Poz_v3.xcdatamodeld */; };
+		DE5A4DDD260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */; };
+		DE5A4DDE260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */; };
+		DE5A4DDF260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */; };
+		DE982EAA260F25170087E0ED /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE982EA1260F25150087E0ED /* Color.swift */; };
+		DE982EAB260F25170087E0ED /* GrowingTextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE982EA3260F25150087E0ED /* GrowingTextInputView.swift */; };
+		DE982EAC260F25170087E0ED /* TextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE982EA4260F25150087E0ED /* TextViewWrapper.swift */; };
+		DE982EAD260F25170087E0ED /* String+OrEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE982EA0260F25150087E0ED /* String+OrEmpty.swift */; };
+		DE982EB0260F25170087E0ED /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE982EA6260F25150087E0ED /* ChatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +181,12 @@
 		DE5A4DAE260D6618000FB0E9 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
 		DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldNotesView.swift; sourceTree = "<group>"; };
+		DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTopMenuView.swift; sourceTree = "<group>"; };
+		DE982EA0260F25150087E0ED /* String+OrEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+OrEmpty.swift"; sourceTree = "<group>"; };
+		DE982EA1260F25150087E0ED /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		DE982EA3260F25150087E0ED /* GrowingTextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextInputView.swift; sourceTree = "<group>"; };
+		DE982EA4260F25150087E0ED /* TextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWrapper.swift; sourceTree = "<group>"; };
+		DE982EA6260F25150087E0ED /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +297,7 @@
 		DE392CB9260AA21E00715173 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DE982E9B260F25140087E0ED /* GrowingTextView */,
 				DE392D4F260B0F0900715173 /* EmojiPicker.swift */,
 				DE392C32260A8CBD00715173 /* ContentView.swift */,
 				DE392CAB260A9F2600715173 /* HomeView.swift */,
@@ -337,10 +352,47 @@
 			isa = PBXGroup;
 			children = (
 				DE392CC2260AA28000715173 /* AddNoteView.swift */,
+				DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */,
 				DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */,
 				DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */,
 			);
 			path = Notebook;
+			sourceTree = "<group>";
+		};
+		DE982E9B260F25140087E0ED /* GrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				DE982EA5260F25150087E0ED /* ExampleView */,
+				DE982EA2260F25150087E0ED /* GrowinTextView */,
+				DE982E9F260F25140087E0ED /* Extensions */,
+			);
+			path = GrowingTextView;
+			sourceTree = "<group>";
+		};
+		DE982E9F260F25140087E0ED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DE982EA0260F25150087E0ED /* String+OrEmpty.swift */,
+				DE982EA1260F25150087E0ED /* Color.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DE982EA2260F25150087E0ED /* GrowinTextView */ = {
+			isa = PBXGroup;
+			children = (
+				DE982EA3260F25150087E0ED /* GrowingTextInputView.swift */,
+				DE982EA4260F25150087E0ED /* TextViewWrapper.swift */,
+			);
+			path = GrowinTextView;
+			sourceTree = "<group>";
+		};
+		DE982EA5260F25150087E0ED /* ExampleView */ = {
+			isa = PBXGroup;
+			children = (
+				DE982EA6260F25150087E0ED /* ChatView.swift */,
+			);
+			path = ExampleView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE392D5A260B0FDA00715173 /* NoteButtonsView.swift in Sources */,
+				DE982EB0260F25170087E0ED /* ChatView.swift in Sources */,
 				DE392CC3260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392D93260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE392CD1260AA2A800715173 /* DashboardView.swift in Sources */,
@@ -506,21 +559,26 @@
 				DE5A4DD8260E9BE5000FB0E9 /* Poz_v3.xcdatamodeld in Sources */,
 				DE392CD8260AAB2400715173 /* SettingsView.swift in Sources */,
 				DE392CCA260AA29000715173 /* PreviousNoteView.swift in Sources */,
+				DE982EAC260F25170087E0ED /* TextViewWrapper.swift in Sources */,
 				DE392CFA260AC64300715173 /* RingView.swift in Sources */,
 				DE392D9D260C512A00715173 /* HomeButtonView.swift in Sources */,
+				DE982EAB260F25170087E0ED /* GrowingTextInputView.swift in Sources */,
 				DE392D61260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
+				DE982EAA260F25170087E0ED /* Color.swift in Sources */,
 				DE392D7B260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392C2F260A8CBD00715173 /* AppDelegate.swift in Sources */,
 				DE392D89260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D01260ACE1F00715173 /* NotesListView.swift in Sources */,
 				DE392D2A260AE6C500715173 /* ChartView.swift in Sources */,
 				DE392DAE260CE7CF00715173 /* NotificationsView.swift in Sources */,
+				DE5A4DDD260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE5A4DCA260E8153000FB0E9 /* OldNotesView.swift in Sources */,
 				DE392D1B260AD18300715173 /* TabsView.swift in Sources */,
 				DE392D0E260ACE9900715173 /* SearchView.swift in Sources */,
 				DE392CEA260AAB6000715173 /* SettingsModel.swift in Sources */,
 				DE5A4DA8260D65F0000FB0E9 /* CustomJournalView.swift in Sources */,
 				DE5A4DC3260E8146000FB0E9 /* NotebookView.swift in Sources */,
+				DE982EAD260F25170087E0ED /* String+OrEmpty.swift in Sources */,
 				DE392C31260A8CBD00715173 /* SceneDelegate.swift in Sources */,
 				DE392CAC260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392D50260B0F0900715173 /* EmojiPicker.swift in Sources */,
@@ -555,6 +613,7 @@
 				DE392CAD260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392CC4260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBB260AA22300715173 /* ContentView.swift in Sources */,
+				DE5A4DDE260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE392CCB260AA29000715173 /* PreviousNoteView.swift in Sources */,
 				DE392D0F260ACE9900715173 /* SearchView.swift in Sources */,
 				DE392DAF260CE7CF00715173 /* NotificationsView.swift in Sources */,
@@ -588,6 +647,7 @@
 				DE392CAE260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392CC5260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBA260AA22300715173 /* ContentView.swift in Sources */,
+				DE5A4DDF260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE392CCC260AA29000715173 /* PreviousNoteView.swift in Sources */,
 				DE392D10260ACE9900715173 /* SearchView.swift in Sources */,
 				DE392DB0260CE7CF00715173 /* NotificationsView.swift in Sources */,

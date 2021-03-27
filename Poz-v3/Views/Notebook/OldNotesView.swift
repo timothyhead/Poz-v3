@@ -8,6 +8,10 @@
 import SwiftUI
 import Pages
 
+class isInTransition: ObservableObject {
+    @Published var inTransition: Bool = false
+}
+
 struct OldNotesView: View {
     
     //get data from CoreData
@@ -26,6 +30,13 @@ struct OldNotesView: View {
     @State var selected = ""
     @State private var selectedIndex: Int = 0
     
+    @Binding var tabIndex: Int
+    
+//    @State var inTransition: Bool = false
+    @StateObject var inTransition = isInTransition()
+    
+    @State var tempText: String?
+    
     var body: some View {
         
         ZStack {
@@ -33,34 +44,40 @@ struct OldNotesView: View {
             ModelPages (
                 notes, currentPage: $index,
                 transitionStyle: .pageCurl,
-                bounce: true
+                bounce: true,
+                hasControl: false
+                
             ) { pageIndex, note  in
                 
                 VStack (alignment: .leading) {
                     
-                    HStack {
+                    NoteTopMenuView(tabIndex: $tabIndex)
+                    
+                    HStack (alignment: .center){
+                        Spacer()
                         Text(note.date ?? "1/1/1")
                             .font(Font.custom("Poppins-Bold", size: 16))
                             .foregroundColor(Color.primary)
-                        
+//
                         Spacer()
+//                        Spacer()
+//
+//                        //emoji putput
+//                        Text(note.emoji ?? "X")
+//                            .font(.system(size: 16))
+//                            .padding(.horizontal, 2)
+//
+//                        HStack {
+//                            Text("\(selectedTag.name)")
+//                                .padding(.horizontal, 7)
+//                                .padding(.top, 4)
+////                                .padding(.bottom, 4)
+//                                .background(selectedTag.color)
+//                        }
+//                        .foregroundColor(Color.primary)
+//                        .cornerRadius(5)
                         
-                        //emoji putput
-                        Text(note.emoji ?? "X")
-                            .font(.system(size: 16))
-                            .padding(.horizontal, 2)
-
-                        HStack {
-                            Text("\(selectedTag.name)")
-                                .padding(.horizontal, 7)
-                                .padding(.top, 4)
-                                .padding(.bottom, 4)
-                                .background(selectedTag.color)
-                        }
-                        .foregroundColor(Color.primary)
-                        .cornerRadius(5)
-                        
-                    }
+                    }.padding(.vertical, -30)
                     .onAppear() {
                         dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
                         dateString = dateFormatter.string(from: date as Date)
@@ -74,10 +91,21 @@ struct OldNotesView: View {
                         .padding(.bottom, 3)
                     
 
-                    Text (note.note ?? "Could not load note")
-                        .font(Font.custom("Poppins-Regular", size: 16))
-                        .padding(.top, 3)
-                        .background(Color.clear)
+                    Text (note.note ?? "Empty")
+//                    GrowingTextInputView(text: $tempText, placeholder: "Message")
+//
+//                    NoteText(text: $tempText).environmentObject(inTransition)
+//                        .onAppear {
+//                            tempText = note.note ?? "Empty"
+//
+//                            print(" appeared")
+////                            inTransition.inTransition = true
+//                        }
+//                        .onDisappear {
+//                            print(" DISappeared")
+//                            inTransition.inTransition = false
+//                        }
+
                     
                     Spacer()
                     
@@ -105,5 +133,59 @@ struct OldNotePageView: View {
 
     var body : some View {
         Text("hi")
+    }
+}
+
+
+struct NoteText : View {
+    
+    @State var TextEditorIsShowing: Bool = false
+    @Binding var text: String
+    
+//    @Binding var inTransition: Bool
+    @EnvironmentObject var inTransition: isInTransition
+    
+    var body : some View {
+        
+        ZStack {
+//            if inTransition.inTransition == false {
+                
+                TextEditor(text: $text)
+                    .font(Font.custom("Poppins-Regular", size: 16))
+                    .padding(.top, 20)
+//                        .background(Color.clear)
+//                        .frame(maxHeight: .infinity)
+//                    .onAppear () {
+//                        text = note.note ?? "Empty"
+//                    }
+                    .onAppear {
+                        print("textEditor appeared")
+//                                    TextEditorIsShowing = false
+                    }
+                    .onDisappear {
+                        print("textEditor DISappeared")
+                        
+                        TextEditorIsShowing = true
+                    }
+                    
+                
+//            } else if inTransition.inTransition == true {
+                
+                Text (text)
+                    .font(Font.custom("Poppins-Regular", size: 16))
+                    .padding(.top, 3)
+                    .background(Color.clear)
+                    .onAppear {
+                        print("text appeared")
+//                                    TextEditorIsShowing = false
+                    }
+                    .onDisappear {
+                        print("text DISappeared")
+                        TextEditorIsShowing = false
+                    }
+                    
+                
+//            }
+        }
     }
 }

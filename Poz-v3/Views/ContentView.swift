@@ -18,7 +18,14 @@ struct ContentView: View {
     var body: some View {
         VStack {
             
-            NotebookView(tabIndex: $tabIndex)
+            
+            if tabIndex == 0 {
+                HomeView(settings: settings, tabIndex: $tabIndex)
+                
+            } else if tabIndex == 1 {
+                NotebookView(tabIndex: $tabIndex)
+            }
+           
             
         }
         .preferredColorScheme((settings.darkMode == true ? (.dark) : (.light)))

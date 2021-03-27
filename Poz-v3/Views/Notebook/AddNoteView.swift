@@ -13,7 +13,7 @@ struct addNoteView: View {
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
     
     //vars
-    @State private var message: String = ""
+    @State private var message: String?
     @State private var emoji: String = ""
 
     @State var selected = ""
@@ -29,6 +29,13 @@ struct addNoteView: View {
     
     @State var menuOpen = false
 
+    @Environment(\.colorScheme) var colorScheme
+    
+    @Binding var tabIndex: Int
+    
+
+    let note: Note // = Note(context: moc)
+
     
 //    @EnvironmentObject var bookOpen: BookOpen
     
@@ -39,69 +46,78 @@ struct addNoteView: View {
         ZStack {
             VStack {
         //home button
-            HStack {
-                Text("\(dateString)")
-                    .font(Font.custom("Poppins-Bold", size: 16))
-                    .foregroundColor(Color.primary)
                 
-                Spacer()
+                NoteTopMenuView(tabIndex: $tabIndex)
+                    .padding(.horizontal, 20)
                 
-                //emoji putput
-                Text("\(selected)")
-                    .font(.system(size: 16))
-                    .padding(.horizontal, 2)
                 
-                // tag button
-                Button (action: {
-                    tagEntrySheetShowing.toggle()
-                }) {
-                    
-                    if (selectedTag.name == "") {
-                        HStack {
-                            Image(systemName: "tag")
-                                .resizable().frame(width: 20, height: 20)
-                            Text("Tag Entry")
-                                .font(Font.custom("Poppins-Regular", size: 16))
-                        }
+                HStack {
+                    Text("\(dateString)")
+                        .font(Font.custom("Poppins-Bold", size: 16))
                         .foregroundColor(Color.primary)
-                    } else {
-                        HStack {
-                            Text("\(selectedTag.name)")
-                                .padding(.horizontal, 7)
-                                .padding(.top, 4)
-                                .padding(.bottom, 4)
-                                .background(selectedTag.color)
-                        }
-                        .foregroundColor(Color.primary)
-                        .cornerRadius(5)
-                    }
                     
+//                    Spacer()
+                    
+                }.padding(.vertical, -30)
+                .onAppear() {
+                       dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
+                       dateString = dateFormatter.string(from: date as Date)
                 }
-                //tag popup
-                .sheet(isPresented: $tagEntrySheetShowing) {
-                    VStack {
-                        Picker("Please choose a color", selection: $selectedTag) {
-                            ForEach(tags, id: \.self) {
-                                Text($0.name)
-                                    .padding(.horizontal, 7)
-                                    .padding(.top, 4)
-                                    .padding(.bottom, 4)
-                                    .cornerRadius(5)
-                                    .background($0.color)
-                            }
-                            .cornerRadius(5)
-                            .padding()
-                        }
-                        Text("You selected: \(selectedTag.name)")
-                    }
-                }
+//                .padding(.horizontal, 20)
                 
-            }
-            .onAppear() {
-                dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
-                dateString = dateFormatter.string(from: date as Date)
-            }
-            .padding(.horizontal, 20).padding(.bottom, 3)
+//                //emoji putput
+//                Text("\(selected)")
+//                    .font(.system(size: 16))
+//                    .padding(.horizontal, 2)
+//
+//                // tag button
+//                Button (action: {
+//                    tagEntrySheetShowing.toggle()
+//                }) {
+//
+//                    if (selectedTag.name == "") {
+//                        HStack {
+//                            Image(systemName: "tag")
+//                                .resizable().frame(width: 20, height: 20)
+//                            Text("Tag Entry")
+//                                .font(Font.custom("Poppins-Regular", size: 16))
+//                        }
+//                        .foregroundColor(Color.primary)
+//                    } else {
+//                        HStack {
+//                            Text("\(selectedTag.name)")
+//                                .padding(.horizontal, 7)
+//                                .padding(.top, 4)
+//                                .padding(.bottom, 4)
+//                                .background(selectedTag.color)
+//                        }
+//                        .foregroundColor(Color.primary)
+//                        .cornerRadius(5)
+//                    }
+//
+//                }
+//                //tag popup
+//                .sheet(isPresented: $tagEntrySheetShowing) {
+//                    VStack {
+//                        Picker("Please choose a color", selection: $selectedTag) {
+//                            ForEach(tags, id: \.self) {
+//                                Text($0.name)
+//                                    .padding(.horizontal, 7)
+//                                    .padding(.top, 4)
+//                                    .padding(.bottom, 4)
+//                                    .cornerRadius(5)
+//                                    .background($0.color)
+//                            }
+//                            .cornerRadius(5)
+//                            .padding()
+//                        }
+//                        Text("You selected: \(selectedTag.name)")
+//                    }
+//                }
+//
+//            }
+//
+            
             
             
             Divider()
@@ -115,85 +131,69 @@ struct addNoteView: View {
                     
                     // text input
                     ZStack (alignment: .topLeading) {
-                        if message.isEmpty {
-                            Text("What's on your mind?")
-                                .foregroundColor(.gray)
-                                .font(Font.custom("Poppins-Regular", size: 16))
-                                .padding(.top, 8)
-                                .padding(.leading, 3)
-                        }
+//                        if message!.isEmpty {
+//                            Text("What's on your mind?")
+//                                .foregroundColor(.gray)
+//                                .font(Font.custom("Poppins-Regular", size: 16))
+//                                .padding(.top, 12)
+//                                .padding(.leading, 6)
+//                        }
                         
-                        TextEditor(text: self.$message)
-                            .font(Font.custom("Poppins-Regular", size: 16))
-                            .padding(.top, 3)
+//                        TextEditor(text: self.$message)
+//                            .font(Font.custom("Poppins-Regular", size: 16))
+//                            .padding(.top, 8)
+//                            .background(Color.clear)
+//                            .frame(maxHeight: .infinity)
+                        
+                        GrowingTextInputView(text: $message, placeholder: "Message")
                             .background(Color.clear)
-                            .frame(maxHeight: .infinity)
                     }
+                    
                     .padding(.horizontal, 20)
+                    .onChange(of: message) {_ in
+                        print("did Change")
+                        if (message != "") {
+                            
+                            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+                           dateString = dateFormatter.string(from: date as Date)
+                            
+                            note.id = UUID() //create id
+                            note.note = "\(message ?? "")" //input message
+                            note.createdAt = date //actual date to sort
+                            note.date = "\(dateString)" //formatted date to sort
+                            note.emoji = "\(selected)" // emoji
+                            note.tag = "\(selectedTag.name)"
+
+                            try? self.moc.save() //save inputted values
+                        }
+                    }
                     
                     Spacer(minLength: 50)
                 }
+                
                 .padding(.top, -11)
             }
             .onTapGesture {
-                //hide keyboard when user taps outside text field
-                hideKeyboard()
+                hideKeyboard() //hide keyboard when user taps outside text field
             }
             .onAppear() {
-                //make textfield clear
-                UITextView.appearance().backgroundColor = .clear
+                UITextView.appearance().backgroundColor = .clear //make textfield clear
+            }
+            .onDisappear() {
+                message = ""
             }
             
-            HStack (alignment: .bottom, spacing: -10) {
+            VStack (alignment: .leading, spacing: -10) {
                 
                 //special buttons
                 PopOverView(menuOpen: $menuOpen)
-                
-                //save button
-                Button( action: {
-            
-                    // create note item
-                    let note = Note(context: self.moc)
                     
-                    // get current data and format it
-                    dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-                    dateString = dateFormatter.string(from: date as Date)
-                
-                    // assign vars on click
-                    note.id = UUID() //create id
-                    note.note = "\(message)" //input message
-                    note.createdAt = date //actual date to sort
-                    note.date = "\(dateString)" //formatted date to sort
-                    note.emoji = "\(selected)" // emoji
-    //                note.stringLength = Double(message.count) // length of entry
-                    note.tag = "\(selectedTag.name)"
                     
-                    try? self.moc.save() //save inputted values
                     
-                    message = "" //reset input
-
-                }) {
-                    ZStack{
-                        Text("Save")
-                    }
-                    .disabled(message == "")
-                    .foregroundColor(message == "" ? .gray : .black)
-                    .font(Font.custom("Poppins-Regular", size: 20))
-                    .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                    .frame(width: 150, height: 50)
-                    .background(message == "" ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0.9853331447, green: 0.7925021052, blue: 0.3908675313, alpha: 1)))
-                    .cornerRadius(50)
-                    .padding(.horizontal, 20)
-    //                .padding(.bottom, 40)
-            
-                
-
             }
-                }
             }
         }
         .padding(.top, 60)
-        .padding(.bottom, 20)
         .background(Color(UIColor(named: "NoteBG")!))
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
@@ -207,10 +207,3 @@ extension View {
     }
 }
 #endif
-
-
-//struct addNoteView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        addNoteView()
-//    }
-//}

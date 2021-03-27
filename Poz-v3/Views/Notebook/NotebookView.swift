@@ -19,25 +19,20 @@ struct NotebookView: View {
     var body: some View {
         
         ZStack {
-            
-            
-            
+
             //  highest level page system to old old entry pages and add entry
             Pages (
+                
                 currentPage: $indexAdd,
-                transitionStyle: .pageCurl
+                transitionStyle: .pageCurl,
+                hasControl: false
+                
             ) {
 
-                OldNotesView()
-                addNoteView()
-
-
+                OldNotesView(tabIndex: $tabIndex)
+                addNoteView(tabIndex: $tabIndex, note: Note(context: self.moc))
 
             }
-        
-            // home button
-            HomeButtonView(tabIndex: $tabIndex)
-        
         }
     }
 }

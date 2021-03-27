@@ -36,12 +36,7 @@ struct HomeView: View {
                     
                     Spacer()
                     
-                    Button (action:{ prevPostsShowing.toggle() }) {
-                        Image(systemName: "clock.arrow.circlepath")
-                            .font(Font.custom("Poppins-Light", size: 26))
-                            .foregroundColor(Color(UIColor(named: "PozGray")!))
-                    }
-                    .sheet(isPresented: $prevPostsShowing, content: { NotesListView() })
+                    
                     
                     
                     Button (action:{ self.settings.showSettings.toggle() }) {

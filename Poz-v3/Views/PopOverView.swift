@@ -86,11 +86,8 @@ struct PopOverView: View {
                     }
                 }) {
                     ZStack (alignment: .center) {
-                        Circle().frame(width: 80, height: 80)
-                            .foregroundColor(.white)
-                            .shadow(color: Color.black.opacity(0.1), radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                         Image(systemName: "sparkles")
-                            .font(.system(size: 40))
+                            .font(.system(size: 25))
                             .foregroundColor(.black)
                     }
                 }
