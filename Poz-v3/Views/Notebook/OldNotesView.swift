@@ -37,7 +37,7 @@ struct OldNotesView: View {
     
 //    @State var isEditing = false
     
-    @State var tempText: String?
+    @State var tempText: String = "hello"
     
     var body: some View {
         
@@ -64,22 +64,7 @@ struct OldNotesView: View {
                             .foregroundColor(Color.primary)
 //
                         Spacer()
-//                        Spacer()
-//
-//                        //emoji putput
-//                        Text(note.emoji ?? "X")
-//                            .font(.system(size: 16))
-//                            .padding(.horizontal, 2)
-//
-//                        HStack {
-//                            Text("\(selectedTag.name)")
-//                                .padding(.horizontal, 7)
-//                                .padding(.top, 4)
-////                                .padding(.bottom, 4)
-//                                .background(selectedTag.color)
-//                        }
-//                        .foregroundColor(Color.primary)
-//                        .cornerRadius(5)
+
                         
                     }.padding(.top, -5)
                     
@@ -97,9 +82,19 @@ struct OldNotesView: View {
                             Text (note.note ?? "This is an empty post. Click the clock arrow button in the top right and swipe left on a post to delete it.")
                                 .font(Font.custom("Poppins-Regular", size: 16))
                             
+//                            NoteText(text: $tempText).environmentObject(inTransition)
+                            
                         }
-                    }.padding(.top, -11)
-                    
+                    }
+                    .padding(.top, -11)
+//                    .onAppear {
+//
+//                        tempText = note.note ?? "hello"
+//
+//                        inTransition.inTransition = true
+//                        print("transitioning")
+//                    }
+//
                     Spacer()
                     
                 }
@@ -144,7 +139,7 @@ struct NoteText : View {
     var body : some View {
         
         ZStack {
-//            if inTransition.inTransition == false {
+            if inTransition.inTransition == false {
                 
                 TextEditor(text: $text)
                     .font(Font.custom("Poppins-Regular", size: 16))
@@ -165,7 +160,7 @@ struct NoteText : View {
                     }
                     
                 
-//            } else if inTransition.inTransition == true {
+            } else if inTransition.inTransition == true {
                 
                 Text (text)
                     .font(Font.custom("Poppins-Regular", size: 16))
@@ -181,7 +176,7 @@ struct NoteText : View {
                     }
                     
                 
-//            }
+            }
         }
     }
 }
