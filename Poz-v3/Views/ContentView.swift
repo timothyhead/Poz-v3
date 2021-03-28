@@ -24,10 +24,10 @@ struct ContentView: View {
             
             
             if tabIndex == 0 {
-                HomeView(settings: settings, tabIndex: $tabIndex)
+                HomeView(settings: settings, tabIndex: $tabIndex).environment(\.managedObjectContext, self.moc)
                 
             } else if tabIndex == 1 {
-                NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex)
+                NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex).environment(\.managedObjectContext, self.moc)
             }
            
             

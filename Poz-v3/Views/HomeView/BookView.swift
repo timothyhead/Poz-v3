@@ -15,6 +15,7 @@ struct BookView: View {
     @Binding var tabIndex: Int
     
     //to get last date
+    @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: false)]) var notes: FetchedResults<Note>
     
     @State var date = Date()
@@ -89,7 +90,7 @@ struct BookView: View {
                                 .padding(.leading, 14)
                         }
                         .sheet(isPresented: $customizeJournal, content: {
-                            CustomizeJournalView(settings: settings)
+                            CustomizeJournalView(settings: settings).environment(\.managedObjectContext, self.moc)
                         })
                     }
                 }

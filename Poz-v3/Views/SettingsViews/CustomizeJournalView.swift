@@ -14,6 +14,8 @@ struct CustomizeJournalView: View {
     @State var hueRotateAngle: Double = 0
     @State private var isEditing = false
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @State var index = 0
     
     var body: some View {
@@ -40,6 +42,7 @@ struct CustomizeJournalView: View {
                 EmojiPicker(selectedIndex: $index, selected: $settings.journalEmoji)
                 
             }
+            
             .padding()
             .padding(.top, 60)
         }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @Environment(\.managedObjectContext) var moc
+    
     @ObservedObject var settings: SettingsModel
     @Environment(\.colorScheme) var colorScheme
     
@@ -42,17 +44,21 @@ struct HomeView: View {
                                 .font(Font.custom("Poppins-Light", size: 26))
                                 .foregroundColor(Color(UIColor(named: "PozGray")!))
                         }
-                        .sheet(isPresented: $settings.showSettings, content: { SettingsView(settings: self.settings) })
+                        .sheet(isPresented: $settings.showSettings, content: {
+                                SettingsView(settings: self.settings)
+                                    .environment(\.managedObjectContext, self.moc)
+                        })
+                        
                     }
                     .padding(.horizontal, 20)
                 }
                 
                 Spacer()
                 
-                BookView(settings: settings, tabIndex: $tabIndex, isAnimating: $bookOpenAnimation)
+                BookView(settings: settings, tabIndex: $tabIndex, isAnimating: $bookOpenAnimation).environment(\.managedObjectContext, self.moc)
                 
                 if !bookOpenAnimation {
-                    PromptsViewB()
+                    PromptsViewB().environment(\.managedObjectContext, self.moc)
                 }
                 
                 Spacer()

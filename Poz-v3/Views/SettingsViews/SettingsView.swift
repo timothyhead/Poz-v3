@@ -44,16 +44,6 @@ struct SettingsView: View {
                             Text("Customize Journal")
                         }
                     }
-                    NavigationLink(destination: Text("hi")) {
-                        HStack {
-                            Text("Accessibility")
-                        }
-                    }
-                    NavigationLink(destination: Text("hi")) {
-                        HStack {
-                            Text("App Icon")
-                        }
-                    }
                 }
                 
                 Section(header: Text("Community")) {

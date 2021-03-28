@@ -2,13 +2,42 @@ import SwiftUI
 import SwiftUICharts
 
 struct smallGoalView : View {
+    
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
+    
+    @State var date = Date()
+    @State var dateFormatter = DateFormatter();
+    @State var dateString: String = ""
+    
+    @State var entriesToday = 0
+    
     var body : some View {
         ZStack {
-            RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: 0.5, sizeScale: 0.4)
+            RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: CGFloat((entriesToday)/2), sizeScale: 0.4)
             
-            Text("1/2")
-                .font(Font.custom("Poppins-Bold", size: 16))
+            
+            Text("\(entriesToday)/2")
+                .font(Font.custom("Poppins-Bold", size: (entriesToday > 9 ? 12.5 : 16)))
                 .foregroundColor(Color(UIColor(named: "PozBlue")!))
+                .onAppear() {
+                    countEntriesToday()
+                    
+                    dateFormatter.dateFormat = "MM/dd/yy"
+                    dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
+                }
+        }
+    }
+    
+    func countEntriesToday () {
+        for note in notes {
+            
+//            let sameDay = Calendar.current.isDate(date, equalTo: note.createdAt ?? Date().addingTimeInterval(100000), toGranularity: .day)
+            let isToday = Calendar.current.isDateInToday(note.createdAt ?? Date().addingTimeInterval(100000))
+            
+            if (isToday) {
+                entriesToday += 1
+            }
         }
     }
 }

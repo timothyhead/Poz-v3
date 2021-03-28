@@ -154,16 +154,9 @@ struct addNoteView: View {
                 
                 SwiftSpeechButtonView(output: $tempText)
                     .onChange (of: tempText) { value in
-                        print(value)
                         message = tempText
                     }
                     .animation(.easeOut)
-//                    .animation(.interpolatingSpring(
-//                       mass: 1,
-//                       stiffness: 200,
-//                       damping: 10,
-//                       initialVelocity: 0
-//                    ))
 
                 PromptsButton(addPromptShowing: $addPromptShowing)
                 

@@ -16,7 +16,11 @@ struct OldNotesView: View {
     
     //get data from CoreData
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
+    @FetchRequest(
+        entity: Note.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)],
+        predicate:  NSPredicate(format: "note != %@", "")
+    ) var notes: FetchedResults<Note>
     
     // for previus entry  pages
     @State var index: Int = 0
@@ -50,8 +54,7 @@ struct OldNotesView: View {
                 bounce: true,
                 hasControl: false
                 
-            ) { pageIndex, note  in
-                
+            ) { pageIndex, note in
                 
                 VStack (alignment: .leading) {
                     
@@ -59,7 +62,7 @@ struct OldNotesView: View {
                     
                     HStack (alignment: .center){
                         Spacer()
-                        Text(note.date ?? "–")
+                        Text(note.date ?? " ")
                             .font(Font.custom("Poppins-Bold", size: 16))
                             .foregroundColor(Color.primary)
 //
@@ -75,11 +78,11 @@ struct OldNotesView: View {
                     ScrollView (.vertical){
                         VStack (alignment: .leading){
                             
-                            Text(note.emoji ?? "X")
+                            Text(note.emoji ?? "")
                                 .font(Font.custom("Poppins-Regular", size: 48))
                                 .padding(.bottom, -9)
 
-                            Text (note.note ?? "This is an empty post. Click the clock arrow button in the top right and swipe left on a post to delete it.")
+                            Text (note.note ?? "")
                                 .font(Font.custom("Poppins-Regular", size: 16))
                             
                         }

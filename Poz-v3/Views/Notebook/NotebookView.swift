@@ -29,14 +29,14 @@ struct NotebookView: View {
                 
             ) {
                 
-                OldNotesView(tabIndex: $tabIndex)
+                OldNotesView(tabIndex: $tabIndex).environment(\.managedObjectContext, self.moc)
 
-                addNoteView(tabIndex: $tabIndex, note: Note(context: self.moc))
+                addNoteView(tabIndex: $tabIndex, note: Note(context: self.moc)).environment(\.managedObjectContext, self.moc)
 
             }
 
             VStack {
-                NoteTopMenuView(tabIndex: $tabIndex)
+                NoteTopMenuView(tabIndex: $tabIndex).environment(\.managedObjectContext, self.moc)
                     .padding(.horizontal, 20)
                     .padding(.top, 50)
                 

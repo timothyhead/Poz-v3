@@ -296,7 +296,6 @@
 				DE5A4DBB260E8135000FB0E9 /* Notebook */,
 				DE392CF9260AC64300715173 /* RingView.swift */,
 				DE392D29260AE6C500715173 /* ChartView.swift */,
-				DE392D0D260ACE9900715173 /* SearchView.swift */,
 				DE392D1A260AD18300715173 /* TabsView.swift */,
 				DE392D4F260B0F0900715173 /* EmojiPicker.swift */,
 				DE392CD0260AA2A800715173 /* DashboardView.swift */,
@@ -334,12 +333,21 @@
 			path = SettingsViews;
 			sourceTree = "<group>";
 		};
+		DE49DE1E26104FA80006CB63 /* NotesList */ = {
+			isa = PBXGroup;
+			children = (
+				DE392D00260ACE1F00715173 /* NotesListView.swift */,
+				DE392D0D260ACE9900715173 /* SearchView.swift */,
+			);
+			path = NotesList;
+			sourceTree = "<group>";
+		};
 		DE5A4DBB260E8135000FB0E9 /* Notebook */ = {
 			isa = PBXGroup;
 			children = (
+				DE49DE1E26104FA80006CB63 /* NotesList */,
 				DE392CC2260AA28000715173 /* AddNoteView.swift */,
 				DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */,
-				DE392D00260ACE1F00715173 /* NotesListView.swift */,
 				DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */,
 				DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */,
 			);
