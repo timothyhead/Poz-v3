@@ -28,8 +28,6 @@ struct NotebookView: View {
                 hasControl: false
                 
             ) {
-
-//                Text("hi")
                 
                 OldNotesView(tabIndex: $tabIndex)
 

@@ -92,7 +92,20 @@ struct addNoteView: View {
                             note.emoji = "\(selected)" // emoji
                             note.tag = "\(selectedTag.name)"
 
-//                            try? self.moc.save() //save inputted values
+                            try? self.moc.save() //save inputted values
+                        }
+                    }
+                    .onChange(of: selected) { value in
+                        if (message != "") {
+                            
+                            note.id = UUID() //create id
+                            note.note = "\(message ?? "")" //input message
+                            note.createdAt = date //actual date to sort
+                            note.date = "\(dateString)" //formatted date to sort
+                            note.emoji = "\(selected)" // emoji
+                            note.tag = "\(selectedTag.name)"
+
+                            try? self.moc.save() //save inputted values
                         }
                     }
                     
@@ -114,6 +127,9 @@ struct addNoteView: View {
                 else if message != "" {
                     try? self.moc.save()
                     message = ""
+                    selected = ""
+                    emojiPickerShowing = false
+                    addPromptShowing = false
                 }
             }
                 

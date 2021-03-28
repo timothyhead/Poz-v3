@@ -3,9 +3,7 @@ import SwiftUI
 struct SettingsView: View {
     
     @ObservedObject var settings: SettingsModel
-    
     @State var darkMode = false
-    
     @State var notifications = true
     
     @Environment(\.presentationMode) var presentationMode
@@ -41,7 +39,7 @@ struct SettingsView: View {
                     Toggle(isOn: $darkMode, label: {
                         Text("Dark Mode")
                     })
-                    NavigationLink(destination: Text("hi")) {
+                    NavigationLink(destination: CustomizeJournalView(settings: settings)) {
                         HStack {
                             Text("Customize Journal")
                         }

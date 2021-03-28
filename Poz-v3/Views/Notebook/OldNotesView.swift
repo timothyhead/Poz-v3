@@ -73,16 +73,14 @@ struct OldNotesView: View {
                         .padding(.bottom, 3)
                     
                     ScrollView (.vertical){
-                        VStack {
+                        VStack (alignment: .leading){
                             
-                            Text(note.emoji ?? "")
+                            Text(note.emoji ?? "X")
                                 .font(Font.custom("Poppins-Regular", size: 48))
                                 .padding(.bottom, -9)
 
                             Text (note.note ?? "This is an empty post. Click the clock arrow button in the top right and swipe left on a post to delete it.")
                                 .font(Font.custom("Poppins-Regular", size: 16))
-                            
-//                            NoteText(text: $tempText).environmentObject(inTransition)
                             
                         }
                     }
