@@ -11,7 +11,6 @@ struct CustomizeJournalView: View {
     
     @ObservedObject var settings: SettingsModel
     
-    @State var hueRotateAngle: Double = 0
     @State private var isEditing = false
     
     @Environment(\.presentationMode) var presentationMode
@@ -30,17 +29,21 @@ struct CustomizeJournalView: View {
                     in: 0...180,
                     onEditingChanged: { editing in
                         isEditing = editing
+                        UserDefaults.standard.set(settings.journalColorAngle, forKey: "journalColorAngle")
                     }
                 )
                 
                 Text("Name")
                 TextField("\(settings.journalName)", text: $settings.journalName) { isEditing in
                     self.isEditing = isEditing
+                    UserDefaults.standard.set(settings.journalName, forKey: "journalName")
                 }
                 
                 Text("Emoji")
                 EmojiPicker(selectedIndex: $index, selected: $settings.journalEmoji)
-                
+            }
+            .onChange(of: index) { value in
+                UserDefaults.standard.set(settings.journalEmoji, forKey: "journalEmoji")
             }
             
             .padding()

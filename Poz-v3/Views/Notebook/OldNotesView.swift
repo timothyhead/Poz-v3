@@ -14,6 +14,9 @@ class isInTransition: ObservableObject {
 
 struct OldNotesView: View {
     
+    @State var hidden = false
+    
+    
     //get data from CoreData
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
@@ -30,7 +33,6 @@ struct OldNotesView: View {
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
-    @State var selectedTag: Tag = Tag(name: "sss", color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)))
     @State var selected = ""
     @State private var selectedIndex: Int = 0
     
@@ -81,7 +83,14 @@ struct OldNotesView: View {
                             Text(note.emoji ?? "")
                                 .font(Font.custom("Poppins-Regular", size: 48))
                                 .padding(.bottom, -9)
-
+                            
+                            if note.prompt != "" {
+                                Text(note.prompt ?? "")
+                                    .font(Font.custom("Poppins-Medium", size: 16))
+                                    .padding(.top, 10)
+                                    .padding(.bottom, 6)
+                            }
+                            
                             Text (note.note ?? "")
                                 .font(Font.custom("Poppins-Regular", size: 16))
                             
@@ -95,9 +104,13 @@ struct OldNotesView: View {
 //                        inTransition.inTransition = true
 //                        print("transitioning")
 //                    }
+                    
+//                    Button (action: { note.hidden = true }) {
+//                        Image(systemName: "eye")
+//                            .foregroundColor(.primary)
+//                    }
 //
                     Spacer()
-                    
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 60)

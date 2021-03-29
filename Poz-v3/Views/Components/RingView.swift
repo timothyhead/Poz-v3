@@ -17,21 +17,17 @@ struct RingView: View {
                 .opacity(0.2)
             
             Circle()
-                .trim(from: (show ? endVal : endVal), to: 1.0)
+                .trim(from: show ? (1 - endVal) : 0.99, to: 1.0)
                 .stroke(color, style: StrokeStyle(lineWidth: 15 * (sizeScale * 0.75), lineCap: .round, lineJoin: .round))
                 .frame(width: 100 * sizeScale, height: 100 * sizeScale, alignment: .center)
                 .rotationEffect(.degrees(90.0))
                 .rotation3DEffect(Angle(degrees: 180), axis: (x: 1, y: 0, z: 0))
-                .animation(.easeOut)
+                .animation(.easeOut(duration: 2))
                 
         }
         .padding(.all, 20 * (sizeScale/2))
-//        .onTapGesture { self.show.toggle() }
-    }
-}
-
-struct RingView_Previews: PreviewProvider {
-    static var previews: some View {
-        RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: 0.5, sizeScale: 3)
+        .onAppear() {
+            self.show.toggle()
+        }
     }
 }

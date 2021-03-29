@@ -3,9 +3,11 @@ import SwiftUI
 struct NotesListView: View {
     
     @Environment(\.managedObjectContext) var moc
+    @ObservedObject var settings: SettingsModel
     @FetchRequest(
         entity: Note.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: false)]
+        sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: false)],
+        predicate:  NSPredicate(format: "note != %@", "")
     ) var notes: FetchedResults<Note>
     
     //filtering
@@ -41,9 +43,9 @@ struct NotesListView: View {
             }
             
             List {
-                ForEach (notes, id: \.id) { notes in // .filter{ text == "" ? true : $0.note!.localizedCaseInsensitiveContains(text)}
+                ForEach (notes.filter{ text == "" ? true : $0.note!.localizedCaseInsensitiveContains(text)}, id: \.id) { notes in // 
                     
-                    if ((notes.note) != nil) && ((notes.note) != "") {
+                    if ((notes.note) != nil) && ((notes.note) != "") && (notes.note != settings.welcomeText) {
                         HStack (alignment: .top) {
                             Text(notes.emoji ?? "")
                                 .font(.system(size: 48))
@@ -89,11 +91,5 @@ struct NotesListView: View {
                 showingAlert = false
             }
         }
-    }
-}
-
-struct NotesListView_Previews: PreviewProvider {
-    static var previews: some View {
-        NotesListView()
     }
 }

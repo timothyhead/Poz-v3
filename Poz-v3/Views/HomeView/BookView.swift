@@ -22,7 +22,7 @@ struct BookView: View {
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
-    @Binding var isAnimating: Bool
+    @Binding var isOpening: Bool
     
     @State var customizeJournal = false
     
@@ -33,7 +33,7 @@ struct BookView: View {
                 //book
                 Button( action: {
                     withAnimation(.spring()) {
-                        isAnimating = true
+                        isOpening = true
                     
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.15) {
                             withAnimation () {
@@ -59,16 +59,16 @@ struct BookView: View {
                         }
                         
                         // Small chart
-                        smallGoalView()
+                        smallGoalView(settings: settings)
                             .offset(x: -50, y: 80)
                      
                     }
                     .padding(.bottom, 10)
-                    .scaleEffect(isAnimating ? 1.75 : 1)
+                    .scaleEffect(isOpening ? 1.75 : 1)
                     
                 }
                 
-                if !isAnimating {
+                if !isOpening {
                     //book details and edit button
                     HStack (spacing: 0) {
                         Text("Last updated: ")

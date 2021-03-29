@@ -6,26 +6,35 @@ struct smallGoalView : View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
     
+    @ObservedObject var settings: SettingsModel
+    
     @State var date = Date()
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
     @State var entriesToday = 0
     
+    @State var show = false
+    
     var body : some View {
         ZStack {
-            RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: CGFloat((entriesToday)/2), sizeScale: 0.4)
+            if show {
+                RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: ((CGFloat(entriesToday))/(CGFloat(settings.goalNumber)) == 0.0) ? 0.01 : ((CGFloat(entriesToday))/(CGFloat(settings.goalNumber))), sizeScale: 0.4)
+            }
             
-            
-            Text("\(entriesToday)/2")
+            Text("\(entriesToday)/\(settings.goalNumber)")
                 .font(Font.custom("Poppins-Bold", size: (entriesToday > 9 ? 12.5 : 16)))
                 .foregroundColor(Color(UIColor(named: "PozBlue")!))
-                .onAppear() {
-                    countEntriesToday()
-                    
-                    dateFormatter.dateFormat = "MM/dd/yy"
-                    dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
-                }
+                
+        }
+        .onAppear() {
+            countEntriesToday()
+            dateFormatter.dateFormat = "MM/dd/yy"
+            dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                show = true
+            }
         }
     }
     
@@ -35,7 +44,7 @@ struct smallGoalView : View {
 //            let sameDay = Calendar.current.isDate(date, equalTo: note.createdAt ?? Date().addingTimeInterval(100000), toGranularity: .day)
             let isToday = Calendar.current.isDateInToday(note.createdAt ?? Date().addingTimeInterval(100000))
             
-            if (isToday) {
+            if (isToday && note.note != settings.welcomeText ) {
                 entriesToday += 1
             }
         }

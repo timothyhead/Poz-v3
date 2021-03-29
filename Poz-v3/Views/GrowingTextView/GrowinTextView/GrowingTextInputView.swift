@@ -11,8 +11,8 @@ struct GrowingTextInputView: View {
   @State var contentHeight: CGFloat = 0
 
   let placeholder: String?
-  let minHeight: CGFloat = 39
-  let maxHeight: CGFloat = 150
+  let minHeight: CGFloat = 300
+  let maxHeight: CGFloat = 450
 
   var countedHeight: CGFloat {
     min(max(minHeight, contentHeight), maxHeight)
@@ -24,7 +24,8 @@ struct GrowingTextInputView: View {
       ZStack(alignment: .topLeading) {
         placeholderView
         TextViewWrapper(text: $text, focused: $focused, contentHeight: $contentHeight)
-      }.padding(.horizontal, 4)
+            .font(Font.custom("Poppins-Regular", size: 16))
+      }
     }.frame(height: countedHeight)
   }
 
@@ -34,6 +35,7 @@ struct GrowingTextInputView: View {
         placeholder.map {
           Text($0)
             .foregroundColor(.gray)
+            .font(Font.custom("Poppins-Regular", size: 16))
         } : nil
     )
   }

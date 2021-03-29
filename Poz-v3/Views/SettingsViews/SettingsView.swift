@@ -6,6 +6,8 @@ struct SettingsView: View {
     @State var darkMode = false
     @State var notifications = true
     
+    @Environment(\.colorScheme) var colorScheme
+    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -13,9 +15,9 @@ struct SettingsView: View {
             
             Form {
                 Section(header: Text("Your journal")) {
-                    NavigationLink(destination: Text("hi")) {
+                    NavigationLink(destination: UserSettingsView(settings: settings) ) {
                         HStack {
-                            Text("Your data")
+                            Text("Personalize")
                         }
                     }
                     NavigationLink(destination:  NotificationsView(settings: settings).environmentObject(Reminders()) ) {
@@ -103,16 +105,17 @@ struct SettingsView: View {
             .navigationTitle( Text("Settings"))
                 
             .navigationBarItems(trailing: Button(action: {
-                self.settings.darkMode = self.darkMode
+//                self.settings.darkMode = self.darkMode
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Save")
             }))
         }
-        .preferredColorScheme((darkMode == true ? (.dark) : (.light)))
-        .onAppear(perform: {
-            self.darkMode = self.settings.darkMode
-        })
+//        .preferredColorScheme((darkMode == true ? (.dark) : (.light)))
+        .preferredColorScheme((colorScheme == .dark ? (.dark) : (.light)))
+//        .onAppear(perform: {
+//            self.darkMode = self.settings.darkMode
+//        })
         
     }
 }

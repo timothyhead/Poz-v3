@@ -74,7 +74,7 @@ struct DashboardView: View {
                     }
                 }.padding(.horizontal, 20)
                 .sheet(isPresented: $prevPostsShowing, content: {
-                    NotesListView()
+                    NotesListView(settings: settings)
                 })
                 
                 Divider().padding()

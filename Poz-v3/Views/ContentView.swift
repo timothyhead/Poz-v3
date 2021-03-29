@@ -1,12 +1,6 @@
-//
-//  ContentView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/23/21.
-//
-
 import SwiftUI
-import UserNotifications
+
+ // https://github.com/exyte/ConcentricOnboarding
 
 struct ContentView: View {
     
@@ -27,23 +21,26 @@ struct ContentView: View {
                 HomeView(settings: settings, tabIndex: $tabIndex).environment(\.managedObjectContext, self.moc)
                 
             } else if tabIndex == 1 {
-                NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex).environment(\.managedObjectContext, self.moc)
+                NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex, settings: settings).environment(\.managedObjectContext, self.moc)
             }
            
             
         }
-        .preferredColorScheme((settings.darkMode == true ? (.dark) : (.light)))
+//        .preferredColorScheme((settings.darkMode == true ? (.dark) : (.light)))
         .background(Color(UIColor(named: "HomeBG")!))
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .onAppear {
+            
+            
             if (isAppAlreadyLaunchedOnce()) {
-                print("yes")
                 firstTimeNotebookIndex = 1
             } else {
                 let note = Note(context: self.moc)
                 
                 note.id = UUID() //create id
-                note.note = "Welcome to your Poz notebook" //input message
+                note.note = settings.welcomeText
+                //input message
+                note.hidden = false
                 note.createdAt = Date() //actual date to sort
                 
                 try? self.moc.save()

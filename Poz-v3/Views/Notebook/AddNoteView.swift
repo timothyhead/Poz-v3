@@ -1,10 +1,5 @@
 import SwiftUI
 
-struct Tag : Hashable {
-    var name : String
-    var color : Color
-}
-
 struct addNoteView: View {
     
     @Environment(\.managedObjectContext) var moc
@@ -22,10 +17,6 @@ struct addNoteView: View {
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
-    @State var tagEntrySheetShowing = false;
-    @State var selectedTag: Tag = Tag(name: "", color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)))
-    @State var selectedColor = ""
-    
     @State var menuOpen = false
 
     @Environment(\.colorScheme) var colorScheme
@@ -35,12 +26,14 @@ struct addNoteView: View {
     
     @State private var emojiPickerShowing: Bool = false;
     @State private var addPromptShowing: Bool = false;
-    
+
 
     let note: Note
+
     
-    let tags:[Tag] = [Tag(name: "", color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0))),  Tag(name: "✅ To do", color: Color(#colorLiteral(red: 0.6578102112, green: 0.8591415286, blue: 0.673274219, alpha: 1))), Tag(name: "💭 Idea", color: Color(#colorLiteral(red: 0.8458583951, green: 0.8536861539, blue: 0, alpha: 0.7509899013))), Tag(name: "💢 Rant", color: Color(#colorLiteral(red: 0.9069923162, green: 0.5071092248, blue: 0.4630813003, alpha: 0.4949279179))), Tag(name: "🙏🏻 Gratitude", color: Color(#colorLiteral(red: 0.873713553, green: 0.7492058873, blue: 0.5602819324, alpha: 1))), Tag(name: "📜 Story", color: Color(#colorLiteral(red: 0.6360311508, green: 0.6086863279, blue: 0.8723474145, alpha: 1))), Tag(name: "📝 Note to Self", color: Color(#colorLiteral(red: 0.5947418809, green: 0.8605783582, blue: 0.8334261179, alpha: 1)))]
-    
+    @State var promptSelectedIndex = 0
+    @State var selectedPrompt = Prompt(name: "", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "X", subtext: "", index: 0, prompt: "")
+
     var body: some View {
         
         ZStack {
@@ -58,9 +51,7 @@ struct addNoteView: View {
                        dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
                        dateString = dateFormatter.string(from: date as Date)
                 }
-//                .padding(.horizontal, 20)
                 
-            
             Divider()
                 .foregroundColor(Color.primary)
                 .padding(.horizontal, 20)
@@ -70,15 +61,29 @@ struct addNoteView: View {
             VStack {
                 ScrollView {
                     
-                    // text input
+                    // body content
                     VStack (alignment: .leading) {
-                        Text(selected)
+                        
+                        
+                        Text((selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji)
                             .font(Font.custom("Poppins-Regular", size: 48))
                             .padding(.bottom, -20)
                         
-                        GrowingTextInputView(text: $message, placeholder: "What's on your mind?")
+                        if (promptSelectedIndex != 0) {
+                            Text("\(selectedPrompt.prompt)")
+                                .font(Font.custom("Poppins-Medium", size: 16))
+                                .padding(.top, 10)
+                                .padding(.bottom, -8)
+                                .onChange (of: promptSelectedIndex) { value in
+                                    
+                                }
+                        }
+                        
+                        
+                        GrowingTextInputView(text: $message, placeholder: "Tap to begin typing")
                             .font(Font.custom("Poppins-Regular", size: 16))
-                            .padding(.top, 10)
+                            .padding(.top, 8)
+                        
                     }
                     .padding(.horizontal, 20)
                     .onChange(of: message) { value in
@@ -86,26 +91,28 @@ struct addNoteView: View {
                         if (message != "") {
                             
                             note.id = UUID() //create id
-                            note.note = "\(message ?? "")" //input message
+                            note.note = message ?? "" //input message
                             note.createdAt = date //actual date to sort
-                            note.date = "\(dateString)" //formatted date to sort
-                            note.emoji = "\(selected)" // emoji
-                            note.tag = "\(selectedTag.name)"
+                            note.date = dateString //formatted date to sort
+                            note.emoji = (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji  // emoji
+                            note.prompt = selectedPrompt.prompt
 
-                            try? self.moc.save() //save inputted values
+//                            try? self.moc.save() //save inputted values
+                          
                         }
                     }
                     .onChange(of: selected) { value in
                         if (message != "") {
                             
                             note.id = UUID() //create id
-                            note.note = "\(message ?? "")" //input message
+                            note.note = message ?? "" //input message
                             note.createdAt = date //actual date to sort
-                            note.date = "\(dateString)" //formatted date to sort
-                            note.emoji = "\(selected)" // emoji
-                            note.tag = "\(selectedTag.name)"
+                            note.date = dateString //formatted date to sort
+                            note.emoji = (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji  // emoji
+                            note.prompt = selectedPrompt.prompt
 
-                            try? self.moc.save() //save inputted values
+//                            try? self.moc.save() //save inputted values
+                       
                         }
                     }
                     
@@ -121,18 +128,16 @@ struct addNoteView: View {
                 UITextView.appearance().backgroundColor = .clear //make textfield clear
             }
             .onDisappear() {
-                if message == "" {
-                    
-                }
-                else if message != "" {
+                if message == "" || message != nil {
                     try? self.moc.save()
                     message = ""
                     selected = ""
                     emojiPickerShowing = false
                     addPromptShowing = false
+                    promptSelectedIndex = 0
+                    selectedPrompt = Prompt(name: "", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "X", subtext: "", index: 0, prompt: "")
                 }
             }
-                
 
             if emojiPickerShowing {
                 EmojiPicker(selectedIndex: $selectedIndex, selected: $selected)
@@ -140,16 +145,15 @@ struct addNoteView: View {
             }
                 
             if addPromptShowing {
-                PromptsViewC()
+                PromptsViewC(selectedPrompt: $selectedPrompt, promptIndex: $promptSelectedIndex)
                     .padding(.bottom, 50)
             }
             
-            
-
-                
             HStack (spacing: 0) {
                 
-                EmojiButton(emojiPickerShowing: $emojiPickerShowing)
+                if (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") {
+                    EmojiButton(emojiPickerShowing: $emojiPickerShowing)
+                }
                 
                 
                 SwiftSpeechButtonView(output: $tempText)
@@ -209,7 +213,6 @@ struct EmojiButton : View {
             Button(action: { emojiPickerShowing.toggle()}) {
                 Text("🎭")
                     .font(.system(size: 30))
-                    .rotationEffect(emojiPickerShowing ? .degrees(-25) : .degrees(0))
             }
         }
         .scaleEffect((emojiPickerShowing ? 1.76 : 1))
@@ -245,7 +248,6 @@ struct PromptsButton : View {
                     
                     Text("📝")
                         .font(.system(size: 30))
-//                        .rotationEffect(addSpecialShowing ? .degrees(25) : .degrees(0))
                 }
             }
             .scaleEffect((addPromptShowing ? 1.76 : 1))
