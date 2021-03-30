@@ -30,10 +30,27 @@ struct addNoteView: View {
 
     let note: Note
 
+    @Binding var promptSelectedIndex: Int
     
-    @State var promptSelectedIndex = 0
-    @State var selectedPrompt = Prompt(name: "", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "X", subtext: "", index: 0, prompt: "")
-
+    var selectedPrompt : Prompt {
+        switch promptSelectedIndex {
+        
+        case 0:
+            return Prompt(name: "Simple", color: Color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)), emoji: "🗒️", subtext: "Just a plain blank plage", index: 0, prompt: "")
+        case 1:
+           return Prompt(name: "Note to self", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "📪", subtext: "Gets sent to you later", index: 1, prompt: "Leave yourself a note and send it back to yourself either at a random future date time or a specified one.")
+        case 2:
+           return Prompt(name: "Reflection", color: Color(#colorLiteral(red: 1, green: 0.8737214208, blue: 1, alpha: 1)), emoji: "🔮", subtext: "Questions for introspection", index: 2, prompt: "If this were the last day of my life, would I have the same plans for today?")
+        case 3:
+           return Prompt(name: "Vent", color: Color(#colorLiteral(red: 1, green: 0.8275836706, blue: 0.8228347898, alpha: 1)), emoji: "💢", subtext: "Autodeletes at later date", index: 3, prompt: "Let it all out, don't hold back. This note will be autodeleted in exactly one week.")
+        case 4:
+           return Prompt(name: "Gratitude", color: Color(#colorLiteral(red: 1, green: 0.8277564049, blue: 0.6865769625, alpha: 1)), emoji: "🙏🏾", subtext: "Open prompts for appreciation", index: 4, prompt: "Write about 3 things you’re grateful for today.")
+            
+        default:
+            return Prompt(name: "", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "X", subtext: "", index: 0, prompt: "")
+        }
+    }
+    
     var body: some View {
         
         ZStack {
@@ -135,7 +152,7 @@ struct addNoteView: View {
                     emojiPickerShowing = false
                     addPromptShowing = false
                     promptSelectedIndex = 0
-                    selectedPrompt = Prompt(name: "", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "X", subtext: "", index: 0, prompt: "")
+//                    selectedPrompt = Prompt(name: "", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "X", subtext: "", index: 0, prompt: "")
                 }
             }
 
@@ -145,7 +162,7 @@ struct addNoteView: View {
             }
                 
             if addPromptShowing {
-                PromptsViewC(selectedPrompt: $selectedPrompt, promptIndex: $promptSelectedIndex)
+                PromptsViewC(promptIndex: $promptSelectedIndex)
                     .padding(.bottom, 50)
             }
             

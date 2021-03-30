@@ -14,6 +14,7 @@ class SettingsModel: ObservableObject {
     @Published var journalColorAngle: Double = UserDefaults.standard.double(forKey: "journalColorAngle") 
     @Published var journalName: String = UserDefaults.standard.string(forKey: "journalName") ?? "Your Journal"
     @Published var journalEmoji: String = UserDefaults.standard.string(forKey: "journalEmoji") ?? "🤘🏼"
+    @Published var journalPatternIndex: Int =  UserDefaults.standard.integer(forKey: "journalPatternIndex") 
     
     @Published var username: String = UserDefaults.standard.string(forKey: "Username") ?? "You"
     

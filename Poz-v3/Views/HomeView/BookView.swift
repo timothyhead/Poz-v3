@@ -26,6 +26,10 @@ struct BookView: View {
     
     @State var customizeJournal = false
     
+    @State var bookPatterns = bookPatternsList()
+    
+    @Binding var promptSelectedIndex: Int
+    
     var body: some View {
         VStack {
             VStack {
@@ -35,11 +39,7 @@ struct BookView: View {
                     withAnimation(.spring()) {
                         isOpening = true
                     
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.15) {
-                            withAnimation () {
-                                tabIndex = 1
-                            }
-                        }
+                        openBook()
                     }
                 }) {
                     ZStack {
@@ -48,6 +48,17 @@ struct BookView: View {
                             .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 5, x: 0.0, y: 10)
                             .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 20, x: 0.0, y: 15)
                             .hueRotation(Angle(degrees: settings.journalColorAngle))
+                        
+                        
+                     
+                            Image(bookPatterns.bookPatterns[settings.journalPatternIndex].patternImageString)
+                                .resizable(resizingMode: .tile)
+                                .frame(width: 175, height: 250)
+                                .colorInvert()
+                                .opacity(0.08)
+                                .animation(.easeOut)
+                        
+                         
                         
                         VStack {
                             Text(settings.journalName)
@@ -83,7 +94,9 @@ struct BookView: View {
                                 }
                         
                         
-                        Button( action: { customizeJournal.toggle() } ) {
+                        Button( action: {
+                            customizeJournal.toggle()
+                        } ) {
                             Image(systemName: "pencil")
                                 .font(Font.custom("Poppins-Medium", size: 20))
                                 .foregroundColor(Color(UIColor(named: "PozGray")!))
@@ -93,11 +106,24 @@ struct BookView: View {
                             CustomizeJournalView(settings: settings).environment(\.managedObjectContext, self.moc)
                         })
                     }
+                    
+                    
+                    withAnimation () {
+                        PromptsViewB(promptSelectedIndex: $promptSelectedIndex, tabIndex:$tabIndex,  isOpening: $isOpening).environment(\.managedObjectContext, self.moc)
+                    }
                 }
             }
            
         }
         .frame(width: UIScreen.main.bounds.width)
+    }
+    
+    func openBook() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.15) {
+            withAnimation () {
+                tabIndex = 1
+            }
+        }
     }
 }
 
@@ -105,6 +131,10 @@ struct BookStaticView: View {
     
     @ObservedObject var settings: SettingsModel
     @Environment(\.colorScheme) var colorScheme
+    
+    @State var bookPatterns = bookPatternsList()
+    
+    @State var tempBookPattern = "blank"
     
     //to get last date
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: false)]) var notes: FetchedResults<Note>
@@ -116,6 +146,15 @@ struct BookStaticView: View {
                 .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 5, x: 0.0, y: 10)
                 .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 20, x: 0.0, y: 15)
                 .hueRotation(Angle(degrees: settings.journalColorAngle))
+            
+            Image(tempBookPattern)
+                .resizable(resizingMode: .tile)
+                .frame(width: 175, height: 250)
+                .colorInvert()
+                .opacity(0.08)
+                .onAppear() {
+                    tempBookPattern = bookPatterns.bookPatterns[settings.journalPatternIndex].patternImageString
+                }
             
             VStack {
                 Text(settings.journalName)

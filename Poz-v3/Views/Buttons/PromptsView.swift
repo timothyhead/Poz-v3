@@ -115,18 +115,16 @@ struct PromptsView: View {
 
 struct PromptsViewB: View {
     
+    @Binding var promptSelectedIndex: Int
+    @Binding var tabIndex: Int
+    @Binding var isOpening: Bool
+    
     //create prompts
     let prompts:[Prompt] = [
-//        Prompt(name: "Idea", color: Color(#colorLiteral(red: 0.7816649079, green: 0.9041231275, blue: 1, alpha: 1)), emoji: "💡", prompt: "What made you smile today?", index: 1),
-        Prompt(name: "Note to self", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "📪", subtext: "What made you smile today?", index: 2, prompt: ""),
-        Prompt(name: "Reflection", color: Color(#colorLiteral(red: 1, green: 0.8737214208, blue: 1, alpha: 1)), emoji: "🔮", subtext: "What made you smile today?", index: 3, prompt: ""),
-//        Prompt(name: "Drawing", color: Color(#colorLiteral(red: 1, green: 0.9204289913, blue: 0.7399825454, alpha: 1)), emoji: "✒", prompt: "What made you smile today?", index: 4),
-        
-//        Prompt(name: "Photo", color: Color(#colorLiteral(red: 0.8121860623, green: 1, blue: 0.8244165182, alpha: 1)), emoji: "🤳", prompt: "What made you smile today?", index: 5),
-//        Prompt(name: "Brain Dump", color: Color(#colorLiteral(red: 0.8869524598, green: 0.9502753615, blue: 1, alpha: 1)), emoji: "💭", prompt: "What made you smile today?", index: 6),
-        Prompt(name: "Vent", color: Color(#colorLiteral(red: 1, green: 0.8275836706, blue: 0.8228347898, alpha: 1)), emoji: "💢", subtext: "What made you smile today?", index: 7, prompt: ""),
-        Prompt(name: "Gratitude", color: Color(#colorLiteral(red: 1, green: 0.8277564049, blue: 0.6865769625, alpha: 1)), emoji: "🙏🏾", subtext: "What made you smile today?", index: 8, prompt: ""),
-//        Prompt(name: "Decompress", color: Color(#colorLiteral(red: 0.9080274105, green: 0.920806706, blue: 1, alpha: 1)), emoji: "💤", prompt: "What made you smile today?", index: 9)
+        Prompt(name: "Note to self", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "📪", subtext: "Gets sent to you later", index: 1, prompt: "Leave yourself a note and send it back to yourself either at a random future date time or a specified one."),
+        Prompt(name: "Reflection", color: Color(#colorLiteral(red: 1, green: 0.8737214208, blue: 1, alpha: 1)), emoji: "🔮", subtext: "Questions for introspection", index: 2, prompt: "If this were the last day of my life, would I have the same plans for today?"),
+        Prompt(name: "Vent", color: Color(#colorLiteral(red: 1, green: 0.8275836706, blue: 0.8228347898, alpha: 1)), emoji: "💢", subtext: "Autodeletes at later date", index: 3, prompt: "Let it all out, don't hold back. This note will be autodeleted in exactly one week."),
+        Prompt(name: "Gratitude", color: Color(#colorLiteral(red: 1, green: 0.8277564049, blue: 0.6865769625, alpha: 1)), emoji: "🙏🏾", subtext: "Open prompts for appreciation", index: 4, prompt: "Write about 3 things you’re grateful for today.")
     ]
     
     var body: some View {
@@ -134,7 +132,18 @@ struct PromptsViewB: View {
             HStack (alignment: .center, spacing: 10) {
                     ForEach(prompts, id: \.self) { prompt in
                         
-                        Button (action: {}) {
+                        Button (action: {
+                            withAnimation(.easeOut) {
+                                isOpening = true
+                            }
+                            promptSelectedIndex = prompt.index
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.15) {
+                                withAnimation () {
+                                    tabIndex = 1
+                                }
+                            }
+                        }) {
                             ZStack {
                                 Circle().frame(width: 50, height: 50).foregroundColor(prompt.color)
                                 Text(prompt.emoji)
@@ -155,7 +164,7 @@ struct PromptsViewB: View {
 
 struct PromptsViewC: View {
     
-    @Binding var selectedPrompt: Prompt
+//    @Binding var selectedPrompt: Prompt
     
     let gratitudePrompts : [String] = [
         "Write about 3 things you’re grateful for today.",
@@ -169,7 +178,7 @@ struct PromptsViewC: View {
         "What’s an accomplishment you’re proud of?"
     ]
     
-    //create prompts
+    //create prompts 
     let prompts:[Prompt] = [
         Prompt(name: "Simple", color: Color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)), emoji: "🗒️", subtext: "Just a plain blank plage", index: 0, prompt: ""),
         Prompt(name: "Note to self", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "📪", subtext: "Gets sent to you later", index: 1, prompt: "Leave yourself a note and send it back to yourself either at a random future date time or a specified one."),
@@ -187,7 +196,7 @@ struct PromptsViewC: View {
                         
                         Button (action: {
                             promptIndex = prompt.index
-                            selectedPrompt = prompt
+//                            selectedPrompt = prompt
 //                            if (prompt.index == 4) {
 //                                prompt.prompt = gratitudePrompts.randomElement()!
 //                            }

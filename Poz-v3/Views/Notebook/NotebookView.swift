@@ -13,9 +13,12 @@ struct NotebookView: View {
     @Binding var tabIndex: Int
     @Binding var indexAdd: Int
     
+    
     @ObservedObject var settings: SettingsModel
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
+
+    @Binding var promptSelectedIndex: Int
     
     var body: some View {
         
@@ -34,7 +37,7 @@ struct NotebookView: View {
                 OldNotesView(tabIndex: $tabIndex).environment(\.managedObjectContext, self.moc)
 
                 //new note page, passes in new note object
-                addNoteView(tabIndex: $tabIndex, note: Note(context: self.moc)).environment(\.managedObjectContext, self.moc)
+                addNoteView(tabIndex: $tabIndex, note: Note(context: self.moc), promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
 
             }
 

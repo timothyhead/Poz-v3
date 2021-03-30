@@ -7,21 +7,25 @@ struct ContentView: View {
     @ObservedObject var settings = SettingsModel()
     @Environment(\.colorScheme) var colorScheme
 
-    @State var tabIndex = 0
+    @State var tabIndex = -1
     
     @State var firstTimeNotebookIndex = 0
     
     @Environment(\.managedObjectContext) var moc
     
+    @State var promptSelectedIndex = 0
+    
     var body: some View {
         VStack {
             
-            
-            if tabIndex == 0 {
-                HomeView(settings: settings, tabIndex: $tabIndex).environment(\.managedObjectContext, self.moc)
+            if tabIndex == -1 {
+                OnboardingView(settings: settings, tabIndex: $tabIndex)
+                
+            } else if tabIndex == 0 {
+                HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
                 
             } else if tabIndex == 1 {
-                NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex, settings: settings).environment(\.managedObjectContext, self.moc)
+                NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
             }
            
             
@@ -31,15 +35,16 @@ struct ContentView: View {
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .onAppear {
             
-            
             if (isAppAlreadyLaunchedOnce()) {
                 firstTimeNotebookIndex = 1
             } else {
+                tabIndex = -1
+                
+                //create welcome message
                 let note = Note(context: self.moc)
                 
                 note.id = UUID() //create id
                 note.note = settings.welcomeText
-                //input message
                 note.hidden = false
                 note.createdAt = Date() //actual date to sort
                 
@@ -64,7 +69,6 @@ struct ContentView: View {
             
         }
     }
-    
 }
 
 

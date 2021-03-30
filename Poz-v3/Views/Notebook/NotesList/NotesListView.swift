@@ -26,24 +26,25 @@ struct NotesListView: View {
                 .foregroundColor(.gray)
                 .padding(.bottom, 15)
         
-            VStack {
-                ZStack (alignment: .topLeading) {
-                    
-                    SearchView(searchText: $text)
-                    
-                    if text.isEmpty {
-                        Text("Search previous entries")
-                            .foregroundColor(.gray)
-                            .padding(.top, 18)
-                            .padding(.leading, 38)
-                    }
-                }
-                .padding(.top, -10)
-                .padding(.horizontal, 20)
-            }
+//            VStack {
+//                ZStack (alignment: .topLeading) {
+//
+////                    SearchView(searchText: $text)
+//
+//                    if text.isEmpty {
+//                        Text("Search previous entries")
+//                            .foregroundColor(.gray)
+//                            .padding(.top, 18)
+//                            .padding(.leading, 38)
+//                    }
+//                }
+//                .padding(.top, -10)
+//                .padding(.horizontal, 20)
+//            }
+            //.filter{ text == "" ? true : $0.note!.localizedCaseInsensitiveContains(text)}
             
             List {
-                ForEach (notes.filter{ text == "" ? true : $0.note!.localizedCaseInsensitiveContains(text)}, id: \.id) { notes in // 
+                ForEach (notes, id: \.id) { notes in //
                     
                     if ((notes.note) != nil) && ((notes.note) != "") && (notes.note != settings.welcomeText) {
                         HStack (alignment: .top) {

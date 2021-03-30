@@ -17,6 +17,8 @@ struct CustomizeJournalView: View {
     
     @State var index = 0
     
+    @State var bookPatterns = bookPatternsList()
+    
     var body: some View {
         VStack {
             BookStaticView(settings: settings)
@@ -32,6 +34,21 @@ struct CustomizeJournalView: View {
                         UserDefaults.standard.set(settings.journalColorAngle, forKey: "journalColorAngle")
                     }
                 )
+                
+                ScrollView (.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach (bookPatterns.bookPatterns, id: \.self) { bookPattern in
+                            Button (action: {
+                                UserDefaults.standard.set(bookPattern.bookPatternIndex, forKey: "journalPatternIndex")
+                                
+                            }) {
+                                Image(bookPattern.patternImageString)
+                                    .resizable().frame(width:50, height: 50).clipShape(Circle())
+                                
+                            }
+                        }
+                    }
+                }
                 
                 Text("Name")
                 TextField("\(settings.journalName)", text: $settings.journalName) { isEditing in

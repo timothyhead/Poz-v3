@@ -84,7 +84,7 @@ struct OldNotesView: View {
                                 .font(Font.custom("Poppins-Regular", size: 48))
                                 .padding(.bottom, -9)
                             
-                            if note.prompt != "" {
+                            if ((note.prompt != "") && (note.prompt != nil)) {
                                 Text(note.prompt ?? "")
                                     .font(Font.custom("Poppins-Medium", size: 16))
                                     .padding(.top, 10)

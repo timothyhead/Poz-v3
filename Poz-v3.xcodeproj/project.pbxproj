@@ -109,22 +109,21 @@
 		DE982EAD260F25170087E0ED /* String+OrEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE982EA0260F25150087E0ED /* String+OrEmpty.swift */; };
 		DE982EB0260F25170087E0ED /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE982EA6260F25150087E0ED /* ChatView.swift */; };
 		DEB1697A26123E620007505C /* Poz_v3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392C48260A8CBF00715173 /* Poz_v3Tests.swift */; };
-		DEB169AB26123F870007505C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEB1695526123DD20007505C /* WidgetKit.framework */; };
-		DEB169AC26123F870007505C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEB1695726123DD20007505C /* SwiftUI.framework */; };
-		DEB169AF26123F870007505C /* Poz.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB169AE26123F870007505C /* Poz.swift */; };
-		DEB169B226123F880007505C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEB169B126123F880007505C /* Assets.xcassets */; };
-		DEB169B426123F880007505C /* Poz.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = DEB169B026123F870007505C /* Poz.intentdefinition */; };
-		DEB169B826123F880007505C /* PozExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DEB169AA26123F870007505C /* PozExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		DEB169CF261242E40007505C /* WidgetContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB169CD261242E40007505C /* WidgetContent.swift */; };
-		DEB169D5261244A30007505C /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB169D4261244A30007505C /* EntryView.swift */; };
+		DEB16A072612F8CC0007505C /* BookPatternModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A062612F8CC0007505C /* BookPatternModel.swift */; };
+		DEB16A2026137F3E0007505C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A1F26137F3E0007505C /* OnboardingView.swift */; };
+		DEB16A2126137F3E0007505C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A1F26137F3E0007505C /* OnboardingView.swift */; };
+		DEB16A2226137F3E0007505C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A1F26137F3E0007505C /* OnboardingView.swift */; };
+		DEB16A2826137F5B0007505C /* ConcentricOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = DEB16A2726137F5B0007505C /* ConcentricOnboarding */; };
+		DEB16A2C2613813F0007505C /* BookPatternModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A062612F8CC0007505C /* BookPatternModel.swift */; };
+		DEB16A2D2613813F0007505C /* BookPatternModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A062612F8CC0007505C /* BookPatternModel.swift */; };
+		DEB16A3826138E0A0007505C /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A3726138E0A0007505C /* OnboardingPage.swift */; };
+		DEB16A3926138E0A0007505C /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A3726138E0A0007505C /* OnboardingPage.swift */; };
+		DEB16A3A26138E0A0007505C /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A3726138E0A0007505C /* OnboardingPage.swift */; };
 		DED1298F26112CA700C2DE33 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1298E26112CA700C2DE33 /* UserSettingsView.swift */; };
 		DED1299026112CA700C2DE33 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1298E26112CA700C2DE33 /* UserSettingsView.swift */; };
 		DED1299126112CA700C2DE33 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1298E26112CA700C2DE33 /* UserSettingsView.swift */; };
 		DED1299526117D6600C2DE33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE392C37260A8CBF00715173 /* Assets.xcassets */; };
 		DED1299926117D6600C2DE33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE392C37260A8CBF00715173 /* Assets.xcassets */; };
-		DED1299E2611A81600C2DE33 /* FeedbackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1299D2611A81600C2DE33 /* FeedbackButton.swift */; };
-		DED1299F2611A81600C2DE33 /* FeedbackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1299D2611A81600C2DE33 /* FeedbackButton.swift */; };
-		DED129A02611A81600C2DE33 /* FeedbackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1299D2611A81600C2DE33 /* FeedbackButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,13 +141,6 @@
 			remoteGlobalIDString = DE392C2A260A8CBD00715173;
 			remoteInfo = "Poz-v3";
 		};
-		DEB169B626123F880007505C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE392C23260A8CBD00715173 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DEB169A926123F870007505C;
-			remoteInfo = PozExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -158,7 +150,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				DEB169B826123F880007505C /* PozExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,15 +209,12 @@
 		DE982EA6260F25150087E0ED /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		DEB1695526123DD20007505C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		DEB1695726123DD20007505C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		DEB169AA26123F870007505C /* PozExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PozExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		DEB169AE26123F870007505C /* Poz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poz.swift; sourceTree = "<group>"; };
-		DEB169B026123F870007505C /* Poz.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Poz.intentdefinition; sourceTree = "<group>"; };
-		DEB169B126123F880007505C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DEB169B326123F880007505C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEB169CD261242E40007505C /* WidgetContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContent.swift; sourceTree = "<group>"; };
 		DEB169D4261244A30007505C /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
+		DEB16A062612F8CC0007505C /* BookPatternModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPatternModel.swift; sourceTree = "<group>"; };
+		DEB16A1F26137F3E0007505C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		DEB16A3726138E0A0007505C /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		DED1298E26112CA700C2DE33 /* UserSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsView.swift; sourceTree = "<group>"; };
-		DED1299D2611A81600C2DE33 /* FeedbackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +225,7 @@
 				DE392D35260AE78500715173 /* Pages in Frameworks */,
 				DE392D47260B0E0F00715173 /* SwiftSpeech in Frameworks */,
 				DE392D3B260AE79600715173 /* SwiftUICharts in Frameworks */,
+				DEB16A2826137F5B0007505C /* ConcentricOnboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,22 +243,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DEB169A726123F870007505C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DEB169AC26123F870007505C /* SwiftUI.framework in Frameworks */,
-				DEB169AB26123F870007505C /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		DE392C22260A8CBD00715173 = {
 			isa = PBXGroup;
 			children = (
-				DEB169AD26123F870007505C /* Poz */,
 				DE392C2D260A8CBD00715173 /* Poz-v3 */,
 				DE392C47260A8CBF00715173 /* Poz-v3Tests */,
 				DE392C52260A8CC000715173 /* Poz-v3UITests */,
@@ -287,7 +266,6 @@
 				DE392C2B260A8CBD00715173 /* Poz-v3.app */,
 				DE392C44260A8CBF00715173 /* Poz-v3Tests.xctest */,
 				DE392C4F260A8CC000715173 /* Poz-v3UITests.xctest */,
-				DEB169AA26123F870007505C /* PozExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,6 +328,8 @@
 			children = (
 				DE982E9B260F25140087E0ED /* GrowingTextView */,
 				DE392C32260A8CBD00715173 /* ContentView.swift */,
+				DEB16A1F26137F3E0007505C /* OnboardingView.swift */,
+				DEB16A3726138E0A0007505C /* OnboardingPage.swift */,
 				DE9C3691260FFE1F00FC2F09 /* HomeView */,
 				DE5A4DBB260E8135000FB0E9 /* Notebook */,
 				DED129A42611B64E00C2DE33 /* Components */,
@@ -453,7 +433,6 @@
 				DE392D92260BEC2700715173 /* PopOverView.swift */,
 				DE392D9C260C512A00715173 /* HomeButtonView.swift */,
 				DE392D59260B0FDA00715173 /* NoteButtonsView.swift */,
-				DED1299D2611A81600C2DE33 /* FeedbackButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -472,6 +451,7 @@
 		DE9C3691260FFE1F00FC2F09 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				DEB16A062612F8CC0007505C /* BookPatternModel.swift */,
 				DE5A4DAE260D6618000FB0E9 /* BookView.swift */,
 				DE392CAB260A9F2600715173 /* HomeView.swift */,
 			);
@@ -485,17 +465,6 @@
 				DEB1695726123DD20007505C /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DEB169AD26123F870007505C /* Poz */ = {
-			isa = PBXGroup;
-			children = (
-				DEB169AE26123F870007505C /* Poz.swift */,
-				DEB169B026123F870007505C /* Poz.intentdefinition */,
-				DEB169B126123F880007505C /* Assets.xcassets */,
-				DEB169B326123F880007505C /* Info.plist */,
-			);
-			path = Poz;
 			sourceTree = "<group>";
 		};
 		DED129A42611B64E00C2DE33 /* Components */ = {
@@ -524,13 +493,13 @@
 			buildRules = (
 			);
 			dependencies = (
-				DEB169B726123F880007505C /* PBXTargetDependency */,
 			);
 			name = "Poz-v3";
 			packageProductDependencies = (
 				DE392D34260AE78500715173 /* Pages */,
 				DE392D3A260AE79600715173 /* SwiftUICharts */,
 				DE392D46260B0E0F00715173 /* SwiftSpeech */,
+				DEB16A2726137F5B0007505C /* ConcentricOnboarding */,
 			);
 			productName = "Poz-v3";
 			productReference = DE392C2B260A8CBD00715173 /* Poz-v3.app */;
@@ -572,23 +541,6 @@
 			productReference = DE392C4F260A8CC000715173 /* Poz-v3UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		DEB169A926123F870007505C /* PozExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DEB169B926123F880007505C /* Build configuration list for PBXNativeTarget "PozExtension" */;
-			buildPhases = (
-				DEB169A626123F870007505C /* Sources */,
-				DEB169A726123F870007505C /* Frameworks */,
-				DEB169A826123F870007505C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = PozExtension;
-			productName = PozExtension;
-			productReference = DEB169AA26123F870007505C /* PozExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -609,9 +561,6 @@
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = DE392C2A260A8CBD00715173;
 					};
-					DEB169A926123F870007505C = {
-						CreatedOnToolsVersion = 12.4;
-					};
 				};
 			};
 			buildConfigurationList = DE392C26260A8CBD00715173 /* Build configuration list for PBXProject "Poz-v3" */;
@@ -627,6 +576,7 @@
 				DE392D33260AE78500715173 /* XCRemoteSwiftPackageReference "Pages" */,
 				DE392D39260AE79600715173 /* XCRemoteSwiftPackageReference "ChartView" */,
 				DE392D45260B0E0F00715173 /* XCRemoteSwiftPackageReference "SwiftSpeech" */,
+				DEB16A2626137F5B0007505C /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */,
 			);
 			productRefGroup = DE392C2C260A8CBD00715173 /* Products */;
 			projectDirPath = "";
@@ -635,7 +585,6 @@
 				DE392C2A260A8CBD00715173 /* Poz-v3 */,
 				DE392C43260A8CBF00715173 /* Poz-v3Tests */,
 				DE392C4E260A8CBF00715173 /* Poz-v3UITests */,
-				DEB169A926123F870007505C /* PozExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -682,14 +631,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DEB169A826123F870007505C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DEB169B226123F880007505C /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -697,7 +638,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DED1299E2611A81600C2DE33 /* FeedbackButton.swift in Sources */,
 				DE392D5A260B0FDA00715173 /* NoteButtonsView.swift in Sources */,
 				DE982EB0260F25170087E0ED /* ChatView.swift in Sources */,
 				DE392CC3260AA28000715173 /* AddNoteView.swift in Sources */,
@@ -706,9 +646,12 @@
 				DE5A4DAF260D6618000FB0E9 /* BookView.swift in Sources */,
 				DE5A4DD8260E9BE5000FB0E9 /* Poz_v3.xcdatamodeld in Sources */,
 				DE392CD8260AAB2400715173 /* SettingsView.swift in Sources */,
+				DEB16A072612F8CC0007505C /* BookPatternModel.swift in Sources */,
 				DE982EAC260F25170087E0ED /* TextViewWrapper.swift in Sources */,
+				DEB16A3826138E0A0007505C /* OnboardingPage.swift in Sources */,
 				DE392CFA260AC64300715173 /* RingView.swift in Sources */,
 				DE392D9D260C512A00715173 /* HomeButtonView.swift in Sources */,
+				DEB16A2026137F3E0007505C /* OnboardingView.swift in Sources */,
 				DE982EAB260F25170087E0ED /* GrowingTextInputView.swift in Sources */,
 				DE392D61260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
 				DE982EAA260F25170087E0ED /* Color.swift in Sources */,
@@ -737,7 +680,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DED1299F2611A81600C2DE33 /* FeedbackButton.swift in Sources */,
 				DE392CEB260AAB6000715173 /* SettingsModel.swift in Sources */,
 				DE5A4DC4260E8146000FB0E9 /* NotebookView.swift in Sources */,
 				DE392D2B260AE6C500715173 /* ChartView.swift in Sources */,
@@ -748,7 +690,9 @@
 				DE392CFB260AC64300715173 /* RingView.swift in Sources */,
 				DE392CD2260AA2A800715173 /* DashboardView.swift in Sources */,
 				DE5A4DD6260E9BE4000FB0E9 /* Poz_v3.xcdatamodeld in Sources */,
+				DEB16A2C2613813F0007505C /* BookPatternModel.swift in Sources */,
 				DE392D62260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
+				DEB16A2126137F3E0007505C /* OnboardingView.swift in Sources */,
 				DE392D8A260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D51260B0F0900715173 /* EmojiPicker.swift in Sources */,
 				DE392D02260ACE1F00715173 /* NotesListView.swift in Sources */,
@@ -758,6 +702,7 @@
 				DE392D7C260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392D9E260C512A00715173 /* HomeButtonView.swift in Sources */,
 				DE392CAD260A9F2600715173 /* HomeView.swift in Sources */,
+				DEB16A3926138E0A0007505C /* OnboardingPage.swift in Sources */,
 				DE392CC4260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBB260AA22300715173 /* ContentView.swift in Sources */,
 				DE5A4DDE260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
@@ -770,8 +715,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB16A2226137F3E0007505C /* OnboardingView.swift in Sources */,
 				DEB1697A26123E620007505C /* Poz_v3Tests.swift in Sources */,
-				DED129A02611A81600C2DE33 /* FeedbackButton.swift in Sources */,
 				DE392CEC260AAB6000715173 /* SettingsModel.swift in Sources */,
 				DE5A4DC5260E8146000FB0E9 /* NotebookView.swift in Sources */,
 				DE392D2C260AE6C500715173 /* ChartView.swift in Sources */,
@@ -786,29 +731,20 @@
 				DE392D63260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
 				DE392D8B260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D52260B0F0900715173 /* EmojiPicker.swift in Sources */,
+				DEB16A3A26138E0A0007505C /* OnboardingPage.swift in Sources */,
 				DE392D03260ACE1F00715173 /* NotesListView.swift in Sources */,
 				DE392D95260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE5A4DB1260D6619000FB0E9 /* BookView.swift in Sources */,
 				DE392D1D260AD18300715173 /* TabsView.swift in Sources */,
 				DE392D7D260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392D9F260C512A00715173 /* HomeButtonView.swift in Sources */,
+				DEB16A2D2613813F0007505C /* BookPatternModel.swift in Sources */,
 				DE392CAE260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392CC5260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBA260AA22300715173 /* ContentView.swift in Sources */,
 				DE5A4DDF260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE392D10260ACE9900715173 /* SearchView.swift in Sources */,
 				DE392DB0260CE7CF00715173 /* NotificationsView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DEB169A626123F870007505C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DEB169CF261242E40007505C /* WidgetContent.swift in Sources */,
-				DEB169B426123F880007505C /* Poz.intentdefinition in Sources */,
-				DEB169AF26123F870007505C /* Poz.swift in Sources */,
-				DEB169D5261244A30007505C /* EntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,11 +760,6 @@
 			isa = PBXTargetDependency;
 			target = DE392C2A260A8CBD00715173 /* Poz-v3 */;
 			targetProxy = DE392C50260A8CC000715173 /* PBXContainerItemProxy */;
-		};
-		DEB169B726123F880007505C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DEB169A926123F870007505C /* PozExtension */;
-			targetProxy = DEB169B626123F880007505C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1088,48 +1019,6 @@
 			};
 			name = Release;
 		};
-		DEB169BA26123F880007505C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GN3TH9WD6W;
-				INFOPLIST_FILE = Poz/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Kish.Poz-v3.Poz";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		DEB169BB26123F880007505C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GN3TH9WD6W;
-				INFOPLIST_FILE = Poz/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Kish.Poz-v3.Poz";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1169,15 +1058,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DEB169B926123F880007505C /* Build configuration list for PBXNativeTarget "PozExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DEB169BA26123F880007505C /* Debug */,
-				DEB169BB26123F880007505C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1205,6 +1085,14 @@
 				minimumVersion = 0.9.2;
 			};
 		};
+		DEB16A2626137F5B0007505C /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ConcentricOnboarding";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1222,6 +1110,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DE392D45260B0E0F00715173 /* XCRemoteSwiftPackageReference "SwiftSpeech" */;
 			productName = SwiftSpeech;
+		};
+		DEB16A2726137F5B0007505C /* ConcentricOnboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEB16A2626137F5B0007505C /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */;
+			productName = ConcentricOnboarding;
 		};
 /* End XCSwiftPackageProductDependency section */
 

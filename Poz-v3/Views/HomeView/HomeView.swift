@@ -18,7 +18,10 @@ struct HomeView: View {
     
     @State var bookOpenAnimation = false
     @State var prevPostsShowing = false
-
+    
+    @Binding var promptSelectedIndex: Int
+    
+    @State var feedbackFormShowing = false
 
     var body: some View {
         
@@ -27,7 +30,7 @@ struct HomeView: View {
                 
                 if !bookOpenAnimation {
                     //top bar
-                    HStack (alignment: .top, spacing: 10) {
+                    HStack (alignment: .top, spacing: 20) {
                         //Hello Text
                         VStack (alignment: .leading, spacing: 0) {
                             Text(Calendar.current.component( .hour, from:Date() ) > 11 ? "Good evening," : "Good morning,")
@@ -39,6 +42,13 @@ struct HomeView: View {
                         }
                         
                         Spacer()
+                        
+                        Button (action: { feedbackFormShowing.toggle() }) {
+                            Text("💬")
+                                .font(Font.custom("Poppins-Light", size: 26))
+                                .foregroundColor(.primary)
+                        }
+                        .sheet(isPresented: $feedbackFormShowing, content: {})
                         
                         Button (action:{ self.settings.showSettings.toggle() }) {
                             Text("⚙️")
@@ -56,24 +66,17 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                BookView(settings: settings, tabIndex: $tabIndex, isOpening: $bookOpenAnimation).environment(\.managedObjectContext, self.moc)
-                    .padding(.top, 35)
-                
-                if !bookOpenAnimation {
-                    PromptsViewB().environment(\.managedObjectContext, self.moc)
-                }
+                BookView(settings: settings, tabIndex: $tabIndex, isOpening: $bookOpenAnimation, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
                 
                 Spacer()
-                
-                if bookOpenAnimation == false {
-                    FeedbackButton()
-                    
-                }
             }
             // settings modal sheet
 //            .preferredColorScheme((colorScheme == .dark ? (.dark) : (.light)))
             .padding(.top, 60).padding(.bottom, 30)
             .background(Color(UIColor(named: "HomeBG")!))
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .onAppear() {
+                promptSelectedIndex = 0
+            }
     }
 }
