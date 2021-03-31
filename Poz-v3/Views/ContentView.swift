@@ -7,7 +7,7 @@ struct ContentView: View {
     @ObservedObject var settings = SettingsModel()
     @Environment(\.colorScheme) var colorScheme
 
-    @State var tabIndex = -1
+    @State var tabIndex = 0
     
     @State var firstTimeNotebookIndex = 0
     
@@ -15,25 +15,36 @@ struct ContentView: View {
     
     @State var promptSelectedIndex = 0
     
+    @State var isUnlocked = false
+    
     var body: some View {
-        VStack {
+        
+   
             
-            if tabIndex == -1 {
-                OnboardingView(settings: settings, tabIndex: $tabIndex)
-                
-            } else if tabIndex == 0 {
-                HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
-                
-            } else if tabIndex == 1 {
-                NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+            VStack {
+                if isUnlocked {
+                    
+                    if tabIndex == -1 {
+                        OnboardingView(settings: settings, tabIndex: $tabIndex)
+                        
+                    } else if tabIndex == 0 {
+                        HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+                        
+                    } else if tabIndex == 1 {
+                        NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+                    }
+                    
+                } else {
+                    //Content to show while FaceID not validated
+                }
             }
-           
+            .background(Color(UIColor(named: "HomeBG")!))
+            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .onAppear {
             
-        }
-//        .preferredColorScheme((settings.darkMode == true ? (.dark) : (.light)))
-        .background(Color(UIColor(named: "HomeBG")!))
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-        .onAppear {
+            if (isUnlocked == false) {
+                AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+            }
             
             if (isAppAlreadyLaunchedOnce()) {
                 firstTimeNotebookIndex = 1

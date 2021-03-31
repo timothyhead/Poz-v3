@@ -33,7 +33,7 @@ struct HomeView: View {
                     HStack (alignment: .top, spacing: 20) {
                         //Hello Text
                         VStack (alignment: .leading, spacing: 0) {
-                            Text(Calendar.current.component( .hour, from:Date() ) > 11 ? "Good evening," : "Good morning,")
+                            Text( timeOfDayOutput() )
                                 .font(Font.custom("Poppins-Light", size: 26))
                                 .foregroundColor(Color(UIColor(named: "PozGray")!))
                             Text("\(settings.username)")
@@ -48,7 +48,7 @@ struct HomeView: View {
                                 .font(Font.custom("Poppins-Light", size: 26))
                                 .foregroundColor(.primary)
                         }
-                        .sheet(isPresented: $feedbackFormShowing, content: {})
+                        .sheet(isPresented: $feedbackFormShowing, content: { FeedbackView() })
                         
                         Button (action:{ self.settings.showSettings.toggle() }) {
                             Text("⚙️")
@@ -78,5 +78,18 @@ struct HomeView: View {
             .onAppear() {
                 promptSelectedIndex = 0
             }
+    }
+    
+    func timeOfDayOutput () -> String {
+        
+        let currentTime = Calendar.current.component( .hour, from:Date() )
+        
+        if (currentTime < 11) {
+            return "Good morning,"
+        } else if (currentTime >= 11 && currentTime < 20) {
+            return "Good evening,"
+        } else {
+            return "Good night,"
+        }
     }
 }

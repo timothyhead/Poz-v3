@@ -68,6 +68,8 @@
 	</array>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>This app uses speech recognition to convert your speech into text.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>This app uses FaceID to protect your data</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
