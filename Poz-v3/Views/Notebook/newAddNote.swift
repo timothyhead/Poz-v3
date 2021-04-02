@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct newAddNote: View {
+struct NotePage: View {
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
@@ -21,6 +21,7 @@ struct newAddNote: View {
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
+//    @Binding var lastModifiedJournalIndex: Int
     
     @State private var emojiPickerShowing: Bool = false;
     @State private var addPromptShowing: Bool = false;
@@ -263,7 +264,6 @@ struct newAddNote: View {
     func saveNoteB () {
         
         if message != "" && message != nil { // && promptSelectedIndex != 3
-            print("hello")
 //            let note = Note(context: self.moc)
             
             note.id = UUID() //create id
@@ -307,6 +307,16 @@ struct newAddNote: View {
             }
 
             try? self.moc.save()
+            
+            let blankNote = Note(context: self.moc)
+//                print(value)
+            blankNote.id = UUID() //create id
+            blankNote.note = ""
+            blankNote.hidden = false
+            blankNote.createdAt = Date() //actual date to sort
+
+            try? self.moc.save()
+            
 //            print(message ?? "bro")
         }
     }

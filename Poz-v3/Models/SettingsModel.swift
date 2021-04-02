@@ -9,7 +9,8 @@ class SettingsModel: ObservableObject {
     @Published var darkMode = false
     @Published var notifications: Bool = UserDefaults.standard.bool(forKey: "NotificationsOn") 
     @Published var goalNumber: Int = UserDefaults.standard.integer(forKey: "goalNumber")
-    // settings.goalNumber
+    
+
     @Published var journalColorAngle: Double = UserDefaults.standard.double(forKey: "journalColorAngle") 
     @Published var journalName: String = UserDefaults.standard.string(forKey: "journalName") ?? "Your Journal"
     @Published var journalEmoji: String = UserDefaults.standard.string(forKey: "journalEmoji") ?? "🤘🏼"

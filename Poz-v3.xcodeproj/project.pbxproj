@@ -91,6 +91,9 @@
 		DE3D2ED22615981900C209CB /* newAddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* newAddNote.swift */; };
 		DE3D2ED32615981900C209CB /* newAddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* newAddNote.swift */; };
 		DE3D2ED42615981900C209CB /* newAddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* newAddNote.swift */; };
+		DE3D2ED92616CFB700C209CB /* OnboardingNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */; };
+		DE3D2EDA2616CFB700C209CB /* OnboardingNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */; };
+		DE3D2EDB2616CFB700C209CB /* OnboardingNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */; };
 		DE5A4DAF260D6618000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB0260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB1260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
@@ -220,6 +223,7 @@
 		DE392D9C260C512A00715173 /* HomeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonView.swift; sourceTree = "<group>"; };
 		DE392DAD260CE7CF00715173 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		DE3D2ED12615981900C209CB /* newAddNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newAddNote.swift; sourceTree = "<group>"; };
+		DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNew.swift; sourceTree = "<group>"; };
 		DE5A4DAE260D6618000FB0E9 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
 		DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldNotesView.swift; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 				DE982E9B260F25140087E0ED /* GrowingTextView */,
 				DE392C32260A8CBD00715173 /* ContentView.swift */,
 				DEB16A1F26137F3E0007505C /* OnboardingView.swift */,
+				DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */,
 				DEB16A3726138E0A0007505C /* OnboardingPage.swift */,
 				DE9C3691260FFE1F00FC2F09 /* HomeView */,
 				DE5A4DBB260E8135000FB0E9 /* Notebook */,
@@ -676,6 +681,7 @@
 				DE392D5A260B0FDA00715173 /* NoteButtonsView.swift in Sources */,
 				DEB16A592614047D0007505C /* AuthenticationModel.swift in Sources */,
 				DE982EB0260F25170087E0ED /* ChatView.swift in Sources */,
+				DE3D2ED92616CFB700C209CB /* OnboardingNew.swift in Sources */,
 				DE392CC3260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392D93260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE392CD1260AA2A800715173 /* DashboardView.swift in Sources */,
@@ -737,6 +743,7 @@
 				DE392D62260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
 				DEB16A2126137F3E0007505C /* OnboardingView.swift in Sources */,
 				DE392D8A260BD23500715173 /* CustomizeJournalView.swift in Sources */,
+				DE3D2EDA2616CFB700C209CB /* OnboardingNew.swift in Sources */,
 				DE392D51260B0F0900715173 /* EmojiPicker.swift in Sources */,
 				DE392D02260ACE1F00715173 /* NotesListView.swift in Sources */,
 				DEB16A6F2614090B0007505C /* PrivacyPolicyView.swift in Sources */,
@@ -775,6 +782,7 @@
 				DE392CDA260AAB2500715173 /* SettingsView.swift in Sources */,
 				DED1299126112CA700C2DE33 /* UserSettingsView.swift in Sources */,
 				DE5A4DCC260E8153000FB0E9 /* OldNotesView.swift in Sources */,
+				DE3D2EDB2616CFB700C209CB /* OnboardingNew.swift in Sources */,
 				DE392D5C260B0FDA00715173 /* NoteButtonsView.swift in Sources */,
 				DE392C54260A8CC000715173 /* Poz_v3UITests.swift in Sources */,
 				DE392CFC260AC64300715173 /* RingView.swift in Sources */,

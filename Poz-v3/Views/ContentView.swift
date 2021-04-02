@@ -7,7 +7,7 @@ struct ContentView: View {
     @ObservedObject var settings = SettingsModel()
     @Environment(\.colorScheme) var colorScheme
 
-    @State var tabIndex = 0
+    @State var tabIndex = -1
     
     @State var firstTimeNotebookIndex = 0
     
@@ -29,13 +29,14 @@ struct ContentView: View {
                 if isUnlocked {
                     
                     if tabIndex == -1 {
-                        OnboardingView(settings: settings, tabIndex: $tabIndex)
+//                        OnboardingView(settings: settings, tabIndex: $tabIndex)
+                        OnboardingNew(settings: settings, tabIndex: $tabIndex)
                         
                     } else if tabIndex == 0 {
                         HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
                         
                     } else if tabIndex == 1 {
-                        NotebookView(tabIndex: $tabIndex, indexAdd: $firstTimeNotebookIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+                        NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
                     }
                     
                 } else {

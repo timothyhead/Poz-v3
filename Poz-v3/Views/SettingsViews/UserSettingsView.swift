@@ -15,7 +15,7 @@ struct UserSettingsView: View {
     
     var body: some View {
         Form {
-                
+            
             TextField("\(settings.username)", text: $settings.username) { isEditing in
                 self.isEditing = isEditing
                 UserDefaults.standard.set(settings.username, forKey: "Username")
