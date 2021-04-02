@@ -55,7 +55,7 @@ struct ContentView: View {
             } else {
                 tabIndex = -1
                 
-
+//create new notes
                 
                 //create welcome message
                 let welcomeNote = Note(context: self.moc)
