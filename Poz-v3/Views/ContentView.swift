@@ -12,14 +12,18 @@ struct ContentView: View {
     @State var firstTimeNotebookIndex = 0
     
     @Environment(\.managedObjectContext) var moc
+    @FetchRequest(
+        entity: Note.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt,ascending: true)]
+//        predicate:  NSPredicate(format: "emoji != %@", "")
+    
+    ) var notes: FetchedResults<Note>
     
     @State var promptSelectedIndex = 0
     
-    @State var isUnlocked = false
+    @State var isUnlocked = true
     
     var body: some View {
-        
-   
             
             VStack {
                 if isUnlocked {
@@ -51,15 +55,31 @@ struct ContentView: View {
             } else {
                 tabIndex = -1
                 
-                //create welcome message
-                let note = Note(context: self.moc)
+
                 
-                note.id = UUID() //create id
-                note.note = settings.welcomeText
-                note.hidden = false
-                note.createdAt = Date() //actual date to sort
+                //create welcome message
+                let welcomeNote = Note(context: self.moc)
+                
+                welcomeNote.id = UUID() //create id
+                welcomeNote.emoji = "🗂️"
+                welcomeNote.note = settings.welcomeText
+                welcomeNote.hidden = false
+                welcomeNote.createdAt = Date() //actual date to sort
                 
                 try? self.moc.save()
+                
+                //create welcome message
+                for value in (0...(countNotes() + 50)) {
+                    let blankNote = Note(context: self.moc)
+                        print(value)
+                    blankNote.id = UUID() //create id
+                    blankNote.note = ""
+                    blankNote.hidden = false
+                    blankNote.createdAt = Date() //actual date to sort
+
+                    try? self.moc.save()
+                }
+                
             }
         }
     }
@@ -80,6 +100,18 @@ struct ContentView: View {
             
         }
     }
+    
+    func countNotes () -> Int {
+        var notesCount = 0
+        
+        for _ in notes {
+            notesCount += 1
+        }
+        
+        print(notesCount)
+        return notesCount
+    }
+    
 }
 
 

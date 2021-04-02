@@ -13,17 +13,17 @@ struct FeedbackView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                
-                Button (action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Close")
-                        .bold()
-                }
-            }
-            .padding()
+//            HStack {
+//                Spacer()
+//                
+//                Button (action: {
+//                    self.presentationMode.wrappedValue.dismiss()
+//                }) {
+//                    Text("Close")
+//                        .bold()
+//                }
+//            }
+//            .padding()
             
             WebView(link: "https://78dxgd9o34y.typeform.com/to/bpax2l9N")
         }

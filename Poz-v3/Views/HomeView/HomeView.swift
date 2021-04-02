@@ -71,7 +71,6 @@ struct HomeView: View {
                 Spacer()
             }
             // settings modal sheet
-//            .preferredColorScheme((colorScheme == .dark ? (.dark) : (.light)))
             .padding(.top, 60).padding(.bottom, 30)
             .background(Color(UIColor(named: "HomeBG")!))
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)

@@ -9,6 +9,8 @@ struct RingView: View {
     @State var endVal: CGFloat
     @State var sizeScale: CGFloat
     
+    @State var animateOn: Bool
+    
     var body: some View {
         ZStack {
             Circle()
@@ -22,7 +24,7 @@ struct RingView: View {
                 .frame(width: 100 * sizeScale, height: 100 * sizeScale, alignment: .center)
                 .rotationEffect(.degrees(90.0))
                 .rotation3DEffect(Angle(degrees: 180), axis: (x: 1, y: 0, z: 0))
-                .animation(.easeOut(duration: 2))
+                .animation(.easeOut(duration: animateOn ? 2 : 0))
                 
         }
         .padding(.all, 20 * (sizeScale/2))

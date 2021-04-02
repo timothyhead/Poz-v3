@@ -166,17 +166,7 @@ struct PromptsViewC: View {
     
 //    @Binding var selectedPrompt: Prompt
     
-    let gratitudePrompts : [String] = [
-        "Write about 3 things you’re grateful for today.",
-        "What did you accomplish today?",
-        "Write about a happy memory.",
-        "Write about someplace you’ve been that you’re grateful for.",
-        "What’s something about your body or health that you’re grateful for?",
-        "What’s something that you’re looking forward to?",
-        "Look around the room and write about everything you see that you’re grateful for.",
-        "How are you able to help others?",
-        "What’s an accomplishment you’re proud of?"
-    ]
+    
     
     //create prompts 
     let prompts:[Prompt] = [

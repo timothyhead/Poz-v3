@@ -7,16 +7,22 @@ class SettingsModel: ObservableObject {
     
     @Published var showSettings = false
     @Published var darkMode = false
-    @Published var notifications = true
-    
-    @Published var goalNumber: Int = 4
-    
+    @Published var notifications: Bool = UserDefaults.standard.bool(forKey: "NotificationsOn") 
+    @Published var goalNumber: Int = UserDefaults.standard.integer(forKey: "goalNumber")
+    // settings.goalNumber
     @Published var journalColorAngle: Double = UserDefaults.standard.double(forKey: "journalColorAngle") 
     @Published var journalName: String = UserDefaults.standard.string(forKey: "journalName") ?? "Your Journal"
     @Published var journalEmoji: String = UserDefaults.standard.string(forKey: "journalEmoji") ?? "🤘🏼"
-    @Published var journalPatternIndex: Int =  UserDefaults.standard.integer(forKey: "journalPatternIndex") 
+    @Published var journalPatternIndex: Int = UserDefaults.standard.integer(forKey: "journalPatternIndex")
     
     @Published var username: String = UserDefaults.standard.string(forKey: "Username") ?? "You"
+    // Reminder \(reminder.reminderIndex) On
+    @Published var reminders = [
+        reminderObject(reminderIndex: 1, reminderTime: Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "Reminder 1 Time")), reminderIsOn: UserDefaults.standard.bool(forKey: "Reminder 1 On") ),
+        reminderObject(reminderIndex: 2, reminderTime: Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "Reminder 2 Time")), reminderIsOn: UserDefaults.standard.bool(forKey: "Reminder 2 On") ),
+        reminderObject(reminderIndex: 3, reminderTime: Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "Reminder 3 Time")), reminderIsOn: UserDefaults.standard.bool(forKey: "Reminder 3 On") ),
+        reminderObject(reminderIndex: 4, reminderTime: Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "Reminder 4 Time")), reminderIsOn: UserDefaults.standard.bool(forKey: "Reminder 4 On") )
+    ]
     
     @Published var welcomeText: String = """
                     Welcome to Poz, your personal mindful journal. Swipe right to add a note and get started, or keep reading for furthur instructions. Entries will autosave and automatically be added as pages to left in the journal when you exit the page (turn to a different page or closing the notebook). Pretty simple, older entries to the left, newer entries to the right, and the last page is for adding new entries.

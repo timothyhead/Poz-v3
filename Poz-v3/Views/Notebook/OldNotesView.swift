@@ -22,11 +22,11 @@ struct OldNotesView: View {
     @FetchRequest(
         entity: Note.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)],
-        predicate:  NSPredicate(format: "note != %@", "")
+        predicate:  NSPredicate(format: "prompt != %@", "Let it all out, don\'t hold back.")
     ) var notes: FetchedResults<Note>
     
     // for previus entry  pages
-    @State var index: Int = 0
+    @Binding var indexNotes: Int
     @State var numberOfEntries = 0
     
     @State var date = Date()
@@ -51,7 +51,7 @@ struct OldNotesView: View {
             
             ModelPages (
                 
-                notes, currentPage: $index,
+                notes, currentPage: $indexNotes,
                 transitionStyle: .pageCurl,
                 bounce: true,
                 hasControl: false
@@ -60,17 +60,13 @@ struct OldNotesView: View {
                 
                 VStack (alignment: .leading) {
                     
-//                    NoteTopMenuView(tabIndex: $tabIndex)
-                    
                     HStack (alignment: .center){
                         Spacer()
                         Text(note.date ?? " ")
                             .font(Font.custom("Poppins-Bold", size: 16))
                             .foregroundColor(Color.primary)
-//
                         Spacer()
 
-                        
                     }.padding(.top, -5)
                     
                     Divider()
@@ -94,22 +90,10 @@ struct OldNotesView: View {
                             Text (note.note ?? "")
                                 .font(Font.custom("Poppins-Regular", size: 16))
                             
+//                            Text("\(indexNotes)")
                         }
                     }
                     .padding(.top, -11)
-//                    .onAppear {
-//
-//                        tempText = note.note ?? "hello"
-//
-//                        inTransition.inTransition = true
-//                        print("transitioning")
-//                    }
-                    
-//                    Button (action: { note.hidden = true }) {
-//                        Image(systemName: "eye")
-//                            .foregroundColor(.primary)
-//                    }
-//
                     Spacer()
                 }
                 .padding(.horizontal, 20)
@@ -125,7 +109,7 @@ struct OldNotesView: View {
         .onAppear {
             if (notes.count > 0) {
                DispatchQueue.main.async {
-                  self.index = notes.count - 1
+                  self.indexNotes = notes.count - 1
                }
             }
         }
@@ -158,14 +142,8 @@ struct NoteText : View {
                 TextEditor(text: $text)
                     .font(Font.custom("Poppins-Regular", size: 16))
                     .padding(.top, 20)
-//                        .background(Color.clear)
-//                        .frame(maxHeight: .infinity)
-//                    .onAppear () {
-//                        text = note.note ?? "Empty"
-//                    }
                     .onAppear {
                         print("textEditor appeared")
-//                                    TextEditorIsShowing = false
                     }
                     .onDisappear {
                         print("textEditor DISappeared")

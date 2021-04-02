@@ -14,13 +14,13 @@ struct UserSettingsView: View {
     @State var isEditing = false
     
     var body: some View {
-        VStack {
-            Text("Edit Name")
+        Form {
+                
             TextField("\(settings.username)", text: $settings.username) { isEditing in
                 self.isEditing = isEditing
                 UserDefaults.standard.set(settings.username, forKey: "Username")
             }
-        }
-        .padding(80)
+            
+        }.navigationTitle("Edit Name")
     }
 }

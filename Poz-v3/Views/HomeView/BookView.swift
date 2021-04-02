@@ -48,17 +48,13 @@ struct BookView: View {
                             .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 5, x: 0.0, y: 10)
                             .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 20, x: 0.0, y: 15)
                             .hueRotation(Angle(degrees: settings.journalColorAngle))
-                        
-                        
                      
-                            Image(bookPatterns.bookPatterns[settings.journalPatternIndex].patternImageString)
-                                .resizable(resizingMode: .tile)
-                                .frame(width: 175, height: 250)
-                                .colorInvert()
-                                .opacity(0.08)
-                                .animation(.easeOut)
-                        
-                         
+                        Image(bookPatterns.bookPatterns[settings.journalPatternIndex].patternImageString)
+                            .resizable(resizingMode: .tile)
+                            .frame(width: 175, height: 250)
+                            .colorInvert()
+                            .opacity(0.08)
+                            .animation(.easeOut)
                         
                         VStack {
                             Text(settings.journalName)
@@ -70,8 +66,11 @@ struct BookView: View {
                         }
                         
                         // Small chart
-                        smallGoalView(settings: settings)
-                            .offset(x: -50, y: 80)
+                        
+                        if settings.goalNumber > 0 {
+                            smallGoalView(settings: settings)
+                                .offset(x: 50, y: 86)
+                        }
                      
                     }
                     .padding(.bottom, 10)
@@ -80,6 +79,7 @@ struct BookView: View {
                 }
                 
                 if !isOpening {
+                    
                     //book details and edit button
                     HStack (spacing: 0) {
                         Text("Last updated: ")
@@ -136,6 +136,8 @@ struct BookStaticView: View {
     
     @State var tempBookPattern = "blank"
     
+    @Binding var bookPatternIndex: Int
+    
     //to get last date
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: false)]) var notes: FetchedResults<Note>
     
@@ -147,14 +149,15 @@ struct BookStaticView: View {
                 .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 20, x: 0.0, y: 15)
                 .hueRotation(Angle(degrees: settings.journalColorAngle))
             
-            Image(tempBookPattern)
+            Image(bookPatterns.bookPatterns[bookPatternIndex].patternImageString)
                 .resizable(resizingMode: .tile)
                 .frame(width: 175, height: 250)
                 .colorInvert()
                 .opacity(0.08)
-                .onAppear() {
-                    tempBookPattern = bookPatterns.bookPatterns[settings.journalPatternIndex].patternImageString
-                }
+//                .onChange(of: bookPatterns.bookPatterns[settings.bookPatternIndex].patternImageString) { value in
+//                    print(value)
+//                    tempBookPattern = bookPatterns.bookPatterns[settings.journalPatternIndex].patternImageString
+//                }
             
             VStack {
                 Text(settings.journalName)

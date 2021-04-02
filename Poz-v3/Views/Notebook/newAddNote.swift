@@ -1,13 +1,15 @@
 import SwiftUI
 
-struct addNoteView: View {
+struct newAddNote: View {
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
+    @ObservedObject var settings: SettingsModel
     
     //vars
     @State private var message: String?
     @State private var emoji: String = ""
+    @Environment(\.colorScheme) var colorScheme
     
     @State private var noteSelfTempText: String = ""
     @State private var swiftSpeechTempText: String = ""
@@ -19,14 +21,6 @@ struct addNoteView: View {
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
-    @State var menuOpen = false
-
-    @Environment(\.colorScheme) var colorScheme
-    
-    @Binding var tabIndex: Int
-    @Binding var indexNotes: Int
-    
-    @Binding var showing: Bool
     
     @State private var emojiPickerShowing: Bool = false;
     @State private var addPromptShowing: Bool = false;
@@ -118,9 +112,12 @@ struct addNoteView: View {
                     
                 }.padding(.top, -5)
                 .onAppear() {
-                       dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
-                       dateString = dateFormatter.string(from: date as Date)
+                    dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
+                    dateString = dateFormatter.string(from: (note.createdAt ?? date) as Date)
                 }
+//                .onChange(of: dateString) {
+//                    note.createdAt = dateString
+//                }
                 
             Divider()
                 .foregroundColor(Color.primary)
@@ -135,128 +132,49 @@ struct addNoteView: View {
                     VStack (alignment: .leading) {
                         
                         //show emoji
-                        Text((selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji)
+                        
+                        
+                        if note.emoji != "" {
+                        Text(selected)
                             .font(Font.custom("Poppins-Regular", size: 48))
                             .padding(.bottom, -20)
-                            .onChange(of: promptSelectedIndex) { value in
-                                if promptSelectedIndex == 4 {
-                                    dynamicPrompt = gratitudePrompts.randomElement()!
-                                }
-                                if promptSelectedIndex == 2 {
-                                    dynamicPrompt = introspectPrompts.randomElement()!
-                                }
-                            }
-                        
-                        //show prompt
-                        if (promptSelectedIndex != 0) {
-                            if promptSelectedIndex == 4 {
-                                Text("\(dynamicPrompt)")
-                                    .font(Font.custom("Poppins-Medium", size: 16))
-                                    .padding(.top, 10)
-                                    .padding(.bottom, -8)
-                                    .onAppear() {
-                                        dynamicPrompt = gratitudePrompts.randomElement()!
-                                    }
-                            } else if promptSelectedIndex == 2 {
-                                Text("\(dynamicPrompt)")
-                                    .font(Font.custom("Poppins-Medium", size: 16))
-                                    .padding(.top, 10)
-                                    .padding(.bottom, -8)
-                                    .onAppear() {
-                                        dynamicPrompt = introspectPrompts.randomElement()!
-                                    }
-                                
-                            } else {
-                            Text("\(selectedPrompt.prompt)")
-                                .font(Font.custom("Poppins-Medium", size: 16))
-                                .padding(.top, 10)
-                                .padding(.bottom, -8)
-                                
+                            .onAppear() {
+                                selected = note.emoji ?? ""
                             }
                         }
-                        
-                        
-                        //if vent selected
-                        if promptSelectedIndex == 3 {
-                            HStack {
-                                Image(systemName: "trash")
-                                
-                                Text("This will be autodeleted")
-                                    
-                            }
-                            .foregroundColor(Color.red)
-                            .font(Font.custom("Poppins-Regular", size: 16))
-                            .padding(.top, 8)
+                        else {
+                            Text((selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji)
+                                .font(Font.custom("Poppins-Regular", size: 48))
+                                .padding(.bottom, -20)
+                                .onChange(of: selectedPrompt.emoji) { value in
+                                    note.emoji = selected
+                                }
                         }
                         
-                        //if note to self selected, show note to self notification options
-                        if (promptSelectedIndex == 1) {
-                            HStack {
-                                Image(systemName: "paperplane")
-                                
-                                Text("This will be sent back to you")
-                                    
-                            }
-                            .foregroundColor(Color.blue)
-                            .font(Font.custom("Poppins-Regular", size: 16))
-                            .padding(.vertical,5)
-                            
-                            VStack {
-                                
-                                Picker(selection: $noteToSelfRandomTime, label: Text("Random or manual time?")) {
-                                    Text("Random Time").tag(false)
-                                    Text("Manual Time").tag(true)
-                                }
-                                .font(Font.custom("Poppins-Regular", size: 16))
-                                .pickerStyle(SegmentedPickerStyle())
-                                
-                                if noteToSelfRandomTime {
-                                    DatePicker(
-                                        "",
-                                        selection: $noteToSelfNotification,
-                                        displayedComponents: [.date, .hourAndMinute]
-                                    )
-                                    .font(Font.custom("Poppins-Regular", size: 16))
-                                    .onChange (of: noteToSelfNotification) { value in
-                                        if message != "" && message != nil {
-                                            createNotification(message: message ?? "No Message", dateIn: noteToSelfNotification)
-                                        }
-                                    }
-                                } else {
-                                    Text("This note will return to you sometime in the next week")
-                                        .font(Font.custom("Poppins-Regular", size: 0)).opacity(0)
-                                        .padding(.bottom, -22)
-                                        .onAppear() {
-                                            if message != "" && message != nil {
-                                                createNotification(message: message ?? "No Message", dateIn: generateRandomDate(daysForward: 7)!)
-                                            }
-                                        }
-                                        .onChange (of: message) { value in
-                                            if message != "" && message != nil {
-                                                createNotification(message: message ?? "No Message", dateIn: generateRandomDate(daysForward: 7)!)
-                                            }
-                                        }
-                                }
-                            }
-                        }
+//                        Text(note.note ?? "no note")
                         
                         //text input
                         GrowingTextInputView(text: $message, placeholder: "Tap here to begin typing")
                             .font(Font.custom("Poppins-Regular", size: 16))
                             .padding(.top, 8)
+                            .onAppear() {
+//                                print(note.note ?? "empty")
+                                message = note.note
+                            }
                         
                     }
                     .padding(.horizontal, 20)
-//                    .onChange(of: message) { value in
-//                        if (message != "") {
+                    .onChange(of: message) { value in
+                        if (message != "") {
 //                            saveNoteB()
-//                        }
-//                    }
-//                    .onChange(of: selected) { value in
-//                        if (message != "") {
+//                            note.note = message
+                        }
+                    }
+                    .onChange(of: selected) { value in
+                        if (message != "") {
 //                            saveNoteB()
-//                        }
-//                    }
+                        }
+                    }
                     
                     Spacer(minLength: 50)
                 }
@@ -284,15 +202,18 @@ struct addNoteView: View {
                     
                 }
 
-                if (message != "") {
-                    showing = false
-                    saveNoteB()
+//                if (message != "") {
+//                    showing = false
+//                    saveNoteB()
 //                    try? self.moc.save()
-                    print("saved")
-                    resetNote()
-                    showing = true
-                }
+//                    print("saved")
+//                    resetNote()
+//                    showing = true
+//                }
                 
+                if (message != "" && message != settings.welcomeText) {
+                saveNoteB()
+                }
             }
 
             if emojiPickerShowing {
@@ -339,17 +260,43 @@ struct addNoteView: View {
         
     }
     
-    func saveNoteA () {
+    func saveNoteB () {
         
         if message != "" && message != nil { // && promptSelectedIndex != 3
+            print("hello")
+//            let note = Note(context: self.moc)
             
             note.id = UUID() //create id
             
-            note.note = message ?? ""
-
-            note.createdAt = date //actual date to sort
-            note.date = dateString //formatted date to sort
-            note.emoji = (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji  // emoji
+//            if promptSelectedIndex == 3 {
+//
+//                note.note = message ?? ""
+//
+//                note.emoji = (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji  // emoji
+//                note.prompt = selectedPrompt.prompt
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                    note.note = "Message autodeleted" //input message
+//                    note.emoji = "🗑"  // emoji
+//                    note.prompt = ""
+//                    try? self.moc.save()
+//                }
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+//                    note.note = "..." //input message
+//                    note.emoji = ""  // emoji
+//                    note.prompt = ""
+//                    try? self.moc.save()
+//                }
+//
+//            } else {
+                note.note = message ?? "" //input message
+//            }
+            
+//            note.createdAt = date //actual date to sort
+//            note.date = dateString //formatted date to sort
+//            note.emoji = (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji  // emoji
+            note.emoji = selected
             note.prompt = selectedPrompt.prompt
             
             if (promptSelectedIndex == 1) {
@@ -359,69 +306,18 @@ struct addNoteView: View {
                 note.helpText = "Note will be autodeleted"
             }
 
-        }
-    }
-    
-    
-    func saveNoteB () {
-        
-        if message != "" && message != nil { // && promptSelectedIndex != 3
-            
-            let newNote = Note(context: self.moc)
-            
-            newNote.id = UUID() //create id
-            
-//            if promptSelectedIndex == 3 {
-//
-//                newNote.note = message ?? ""
-//
-//                newNote.emoji = (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji  // emoji
-//                newNote.prompt = selectedPrompt.prompt
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                    newNote.note = "Message autodeleted" //input message
-//                    newNote.emoji = "🗑"  // emoji
-//                    newNote.prompt = ""
-//                    try? self.moc.save()
-//                }
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-//                    newNote.note = "..." //input message
-//                    newNote.emoji = ""  // emoji
-//                    newNote.prompt = ""
-//                    try? self.moc.save()
-//                }
-//
-//            } else {
-                newNote.note = message ?? "" //input message
-//            }
-            
-            newNote.createdAt = date //actual date to sort
-            newNote.date = dateString //formatted date to sort
-            newNote.emoji = (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji  // emoji
-            newNote.prompt = selectedPrompt.prompt
-            
-//            print(selectedPrompt.emoji)
-//            print(selectedPrompt.prompt)
-            
-            if (promptSelectedIndex == 1) {
-                newNote.helpText = "Note will be sent back to you"
-            }
-            if (promptSelectedIndex == 3) {
-                newNote.helpText = "Note will be autodeleted"
-            }
-
             try? self.moc.save()
+//            print(message ?? "bro")
         }
     }
     
-    func resetNote () {
-        message = ""
-        selected = ""
-        emojiPickerShowing = false
-        addPromptShowing = false
-        promptSelectedIndex = 0
-    }
+//    func resetNote () {
+//        message = ""
+//        selected = ""
+//        emojiPickerShowing = false
+//        addPromptShowing = false
+//        promptSelectedIndex = 0
+//    }
     
     func createNotification (message: String, dateIn: Date) {
         
@@ -487,70 +383,70 @@ struct addNoteView: View {
     }
 }
 
-//#if canImport(UIKit)
-//extension View {
-//    func hideKeyboard() {
-//        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//    }
-//}
-//#endif
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
 
 
-//struct EmojiButton : View {
-//    
-//    @Binding var emojiPickerShowing: Bool
-//    
-//    var body: some View {
-//        
-//        //emoji button
-//        
-//        ZStack{
-//            if emojiPickerShowing {
-//                Text("Tag with emoji")
-//                    .font(Font.custom("Poppins-Light", size: 12))
-//                    .zIndex(-1)
-//                    .offset(x: 15, y: -35)
-//                    
-//            }
-//            Button(action: { emojiPickerShowing.toggle()}) {
-//                Text("🎭")
-//                    .font(.system(size: 30))
-//            }
-//        }
-//        .scaleEffect((emojiPickerShowing ? 1.76 : 1))
-//        .animation(.easeOut)
-////        .animation(.interpolatingSpring(
-////           mass: 1,
-////           stiffness: 200,
-////           damping: 10,
-////           initialVelocity: 0
-////        ))
-////
-//    }
-//}
-//struct PromptsButton : View {
-//    
-//    @Binding var addPromptShowing: Bool
-//    
-//    var body: some View {
-//        ZStack{
-//            if addPromptShowing {
-//                Text("Add prompt/action")
-//                    .font(Font.custom("Poppins-Light", size: 12))
-//                    .zIndex(-1)
-//                    .offset(x: 0, y: -35)
-//                    
-//            }
-//            Button(action: { addPromptShowing.toggle() }) {
-//                
-//                Text("📝")
-//                    .font(.system(size: 30))
-//            }
-//        }
-//        .scaleEffect((addPromptShowing ? 1.76 : 1))
-//        .animation(.easeOut)
-//    }
-//}
+struct EmojiButton : View {
+    
+    @Binding var emojiPickerShowing: Bool
+    
+    var body: some View {
+        
+        //emoji button
+        
+        ZStack{
+            if emojiPickerShowing {
+                Text("Tag with emoji")
+                    .font(Font.custom("Poppins-Light", size: 12))
+                    .zIndex(-1)
+                    .offset(x: 15, y: -35)
+                    
+            }
+            Button(action: { emojiPickerShowing.toggle()}) {
+                Text("🎭")
+                    .font(.system(size: 30))
+            }
+        }
+        .scaleEffect((emojiPickerShowing ? 1.76 : 1))
+        .animation(.easeOut)
+//        .animation(.interpolatingSpring(
+//           mass: 1,
+//           stiffness: 200,
+//           damping: 10,
+//           initialVelocity: 0
+//        ))
+//
+    }
+}
+struct PromptsButton : View {
+    
+    @Binding var addPromptShowing: Bool
+    
+    var body: some View {
+        ZStack{
+            if addPromptShowing {
+                Text("Add prompt/action")
+                    .font(Font.custom("Poppins-Light", size: 12))
+                    .zIndex(-1)
+                    .offset(x: 0, y: -35)
+                    
+            }
+            Button(action: { addPromptShowing.toggle() }) {
+                
+                Text("📝")
+                    .font(.system(size: 30))
+            }
+        }
+        .scaleEffect((addPromptShowing ? 1.76 : 1))
+        .animation(.easeOut)
+    }
+}
 
 
 //struct noteToSelfNotificationPicker : View {

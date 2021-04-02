@@ -16,67 +16,88 @@ class reminderObject : Identifiable, ObservableObject {
     }
 }
 
-class Reminders :  ObservableObject {
-    @Published var reminders = [
-        reminderObject(reminderIndex: 1, reminderTime: Date(), reminderIsOn: true),
-        reminderObject(reminderIndex: 2, reminderTime: Date(), reminderIsOn: true)
-    ]
-}
-
-
 struct NotificationsView: View {
     
     @ObservedObject var settings: SettingsModel
     
-    @State var notificationsAreOn = true
-    
-    @State private var aDate = Date()
-    @State private var aBool = false
-    
-    @EnvironmentObject var reminders: Reminders
-    
+    @State var notificationsAreOn = false
     
     var body: some View {
         
         Form {
+            
+            
+//            smallGoalView(settings: settings)
+            HStack {
+                Spacer()
+                bigGoalView(settings: settings)
+                Spacer()
+            }
+                    
+            
+            Stepper("Entries per day - \(settings.goalNumber)", onIncrement: {
+                settings.goalNumber += 1
+                UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
+            }, onDecrement: {
+                if ( settings.goalNumber > 0) {
+                    settings.goalNumber -= 1
+                }
+                UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
+            })
         
             Toggle("Daily Notifications", isOn: $notificationsAreOn)
-                .onAppear() {
+                .onChange(of: notificationsAreOn) { value in
                     settings.notifications = notificationsAreOn
+                    UserDefaults.standard.set(settings.notifications, forKey: "NotificationsOn")
+                    
+                    if !(settings.notifications) {
+                       UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                    }
                 }
+                .onAppear() {
+                    notificationsAreOn = settings.notifications
+                }
+            
             if (notificationsAreOn == true) {
-                ForEach (reminders.reminders.indices) { reminderIndex in
-                    ReminderSectionView().environmentObject(self.reminders.reminders[reminderIndex])
+                ForEach (settings.reminders.indices) { reminderIndex in
+                    ReminderSectionView().environmentObject(settings.reminders[reminderIndex])
                 }
             }
-        }
+        }.navigationTitle("Daily Goal")
     }
 }
 
 struct ReminderSectionView: View {
     
     @EnvironmentObject var reminder: reminderObject
-    @State var isOn = true;
+    
     var body: some View {
         Section(header: Text("Reminder #\(reminder.reminderIndex)")) {
+            
             Button (action: {
                 reminder.reminderIsOn.toggle()
-                isOn = reminder.reminderIsOn
+                
+                UserDefaults.standard.set(reminder.reminderIsOn, forKey: "Reminder \(reminder.reminderIndex) On")
+                
+                
+                if !(reminder.reminderIsOn) {
+                   UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                }
             }) {
-                Text(isOn ? "Remove Reminder" : "Add Reminder")
-            }
-            .onAppear() {
-                isOn = reminder.reminderIsOn
+                Text(reminder.reminderIsOn ? "Remove Reminder" : "Add Reminder")
             }
             
-            if (isOn) {
+            
+            if (reminder.reminderIsOn) {
                 DatePicker(
                     "Notification Time",
                     selection: $reminder.reminderTime,
                     displayedComponents: [.hourAndMinute]
                 )
-                
-                Button("Update Time") {
+                .onChange (of: reminder.reminderTime) {value in
+                    
+                    UserDefaults.standard.set(reminder.reminderTime.timeIntervalSince1970, forKey: "Reminder \(reminder.reminderIndex) Time")
+                    print ("Reminder \(reminder.reminderIndex) Time")
                     
                     UNUserNotificationCenter.current()
                         .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
@@ -88,7 +109,7 @@ struct ReminderSectionView: View {
                         }
                     
                     
-                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                     let content = UNMutableNotificationContent()
                     content.title = "Feed cat"
                     content.subtitle = "its time"
@@ -110,8 +131,9 @@ struct ReminderSectionView: View {
                     
                     let request = UNNotificationRequest(identifier: String(reminder.reminderIndex), content: content, trigger: trigger)
                     UNUserNotificationCenter.current().add(request)
+                    print("Done")
                 }
-            }
+            } 
         }
     }
 }

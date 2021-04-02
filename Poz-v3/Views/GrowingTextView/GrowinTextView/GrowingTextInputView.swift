@@ -11,8 +11,8 @@ struct GrowingTextInputView: View {
   @State var contentHeight: CGFloat = 0
 
   let placeholder: String?
-  let minHeight: CGFloat = 300
-  let maxHeight: CGFloat = 450
+  let minHeight: CGFloat = UIScreen.main.bounds.height
+  let maxHeight: CGFloat = UIScreen.main.bounds.height
 
   var countedHeight: CGFloat {
     min(max(minHeight, contentHeight), maxHeight)

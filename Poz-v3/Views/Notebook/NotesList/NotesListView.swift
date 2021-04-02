@@ -29,7 +29,7 @@ struct NotesListView: View {
 //            VStack {
 //                ZStack (alignment: .topLeading) {
 //
-////                    SearchView(searchText: $text)
+//                    SearchView(searchText: $text)
 //
 //                    if text.isEmpty {
 //                        Text("Search previous entries")
@@ -44,24 +44,30 @@ struct NotesListView: View {
             //.filter{ text == "" ? true : $0.note!.localizedCaseInsensitiveContains(text)}
             
             List {
-                ForEach (notes, id: \.id) { notes in //
+                ForEach (notes, id: \.id) { note in
                     
-                    if ((notes.note) != nil) && ((notes.note) != "") && (notes.note != settings.welcomeText) {
+                    if ((note.note) != nil) && ((note.note) != "") && (note.note != settings.welcomeText) && (note.note != "...") {
                         HStack (alignment: .top) {
-                            Text(notes.emoji ?? "")
+                            Text(note.emoji ?? "")
                                 .font(.system(size: 48))
                             VStack (alignment: .leading) {
-                                Text(notes.date ?? " ")
+                                Text(note.date ?? " ")
                                     .font(.system(size: 16, weight: .bold))
                                     .padding(.bottom, -3)
-                                Text(notes.note ?? "This is an empty post.")
+                                Text(note.note ?? "This is an empty post.")
                                     .font(.system(size: 20))
+                            }
+                        }
+                        .onAppear() {
+                            if filterList(note: note) {
+                                print("is true")
                             }
                         }
                         .padding(.top, 2)
                         .padding(.bottom, 2)
                     }
                 }
+                
 //                .onDelete(perform: removeItem)
 //                .alert(isPresented: $showingAlert) {
 //                    Alert(title: Text("Can't delete"), message: Text("You must have 2 notes minimum. Add more notes to delete this one"), dismissButton: .default(Text("Got it!")))
@@ -71,6 +77,17 @@ struct NotesListView: View {
             .padding(.bottom, -8)
 
         }
+    }
+    
+    func filterList (note: Note) -> Bool {
+//       filterList
+//        let hello = note.note
+
+        print (note.note ?? "note text")
+        print(NSString(string: note.note!).localizedCaseInsensitiveContains(""))
+        
+        return NSString(string: note.note!).localizedCaseInsensitiveContains("")
+//
     }
     
     // delete function

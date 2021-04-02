@@ -88,6 +88,9 @@
 		DE392DAE260CE7CF00715173 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392DAD260CE7CF00715173 /* NotificationsView.swift */; };
 		DE392DAF260CE7CF00715173 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392DAD260CE7CF00715173 /* NotificationsView.swift */; };
 		DE392DB0260CE7CF00715173 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392DAD260CE7CF00715173 /* NotificationsView.swift */; };
+		DE3D2ED22615981900C209CB /* newAddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* newAddNote.swift */; };
+		DE3D2ED32615981900C209CB /* newAddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* newAddNote.swift */; };
+		DE3D2ED42615981900C209CB /* newAddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* newAddNote.swift */; };
 		DE5A4DAF260D6618000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB0260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB1260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
@@ -128,6 +131,15 @@
 		DEB16A592614047D0007505C /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A582614047D0007505C /* AuthenticationModel.swift */; };
 		DEB16A5A2614047D0007505C /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A582614047D0007505C /* AuthenticationModel.swift */; };
 		DEB16A5B2614047D0007505C /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A582614047D0007505C /* AuthenticationModel.swift */; };
+		DEB16A60261408610007505C /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A5F261408610007505C /* AcknowledgementsView.swift */; };
+		DEB16A61261408610007505C /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A5F261408610007505C /* AcknowledgementsView.swift */; };
+		DEB16A62261408610007505C /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A5F261408610007505C /* AcknowledgementsView.swift */; };
+		DEB16A67261409000007505C /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A66261409000007505C /* TermsOfServiceView.swift */; };
+		DEB16A68261409000007505C /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A66261409000007505C /* TermsOfServiceView.swift */; };
+		DEB16A69261409000007505C /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A66261409000007505C /* TermsOfServiceView.swift */; };
+		DEB16A6E2614090B0007505C /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A6D2614090B0007505C /* PrivacyPolicyView.swift */; };
+		DEB16A6F2614090B0007505C /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A6D2614090B0007505C /* PrivacyPolicyView.swift */; };
+		DEB16A702614090B0007505C /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A6D2614090B0007505C /* PrivacyPolicyView.swift */; };
 		DED1298F26112CA700C2DE33 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1298E26112CA700C2DE33 /* UserSettingsView.swift */; };
 		DED1299026112CA700C2DE33 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1298E26112CA700C2DE33 /* UserSettingsView.swift */; };
 		DED1299126112CA700C2DE33 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1298E26112CA700C2DE33 /* UserSettingsView.swift */; };
@@ -207,6 +219,7 @@
 		DE392D92260BEC2700715173 /* PopOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverView.swift; sourceTree = "<group>"; };
 		DE392D9C260C512A00715173 /* HomeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonView.swift; sourceTree = "<group>"; };
 		DE392DAD260CE7CF00715173 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		DE3D2ED12615981900C209CB /* newAddNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newAddNote.swift; sourceTree = "<group>"; };
 		DE5A4DAE260D6618000FB0E9 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
 		DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldNotesView.swift; sourceTree = "<group>"; };
@@ -226,6 +239,9 @@
 		DEB16A472613B7E60007505C /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		DEB16A512613B8610007505C /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		DEB16A582614047D0007505C /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
+		DEB16A5F261408610007505C /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
+		DEB16A66261409000007505C /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
+		DEB16A6D2614090B0007505C /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		DED1298E26112CA700C2DE33 /* UserSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -376,7 +392,10 @@
 			children = (
 				DE392DAD260CE7CF00715173 /* NotificationsView.swift */,
 				DED1298E26112CA700C2DE33 /* UserSettingsView.swift */,
+				DEB16A66261409000007505C /* TermsOfServiceView.swift */,
+				DEB16A6D2614090B0007505C /* PrivacyPolicyView.swift */,
 				DE392CD7260AAB2400715173 /* SettingsView.swift */,
+				DEB16A5F261408610007505C /* AcknowledgementsView.swift */,
 				DEB16A512613B8610007505C /* FeedbackView.swift */,
 				DE392D88260BD23500715173 /* CustomizeJournalView.swift */,
 			);
@@ -397,6 +416,7 @@
 			children = (
 				DE49DE1E26104FA80006CB63 /* NotesList */,
 				DE392CC2260AA28000715173 /* AddNoteView.swift */,
+				DE3D2ED12615981900C209CB /* newAddNote.swift */,
 				DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */,
 				DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */,
 				DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */,
@@ -668,11 +688,13 @@
 				DE392CFA260AC64300715173 /* RingView.swift in Sources */,
 				DE392D9D260C512A00715173 /* HomeButtonView.swift in Sources */,
 				DEB16A2026137F3E0007505C /* OnboardingView.swift in Sources */,
+				DEB16A67261409000007505C /* TermsOfServiceView.swift in Sources */,
 				DE982EAB260F25170087E0ED /* GrowingTextInputView.swift in Sources */,
 				DE392D61260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
 				DE982EAA260F25170087E0ED /* Color.swift in Sources */,
 				DE392D7B260B154D00715173 /* PromptsView.swift in Sources */,
 				DED1298F26112CA700C2DE33 /* UserSettingsView.swift in Sources */,
+				DEB16A60261408610007505C /* AcknowledgementsView.swift in Sources */,
 				DE392C2F260A8CBD00715173 /* AppDelegate.swift in Sources */,
 				DE392D89260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D01260ACE1F00715173 /* NotesListView.swift in Sources */,
@@ -681,7 +703,9 @@
 				DE5A4DDD260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE5A4DCA260E8153000FB0E9 /* OldNotesView.swift in Sources */,
 				DE392D1B260AD18300715173 /* TabsView.swift in Sources */,
+				DE3D2ED22615981900C209CB /* newAddNote.swift in Sources */,
 				DE392D0E260ACE9900715173 /* SearchView.swift in Sources */,
+				DEB16A6E2614090B0007505C /* PrivacyPolicyView.swift in Sources */,
 				DE392CEA260AAB6000715173 /* SettingsModel.swift in Sources */,
 				DEB16A522613B8610007505C /* FeedbackView.swift in Sources */,
 				DE5A4DC3260E8146000FB0E9 /* NotebookView.swift in Sources */,
@@ -715,16 +739,20 @@
 				DE392D8A260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D51260B0F0900715173 /* EmojiPicker.swift in Sources */,
 				DE392D02260ACE1F00715173 /* NotesListView.swift in Sources */,
+				DEB16A6F2614090B0007505C /* PrivacyPolicyView.swift in Sources */,
 				DE392D94260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE5A4DB0260D6619000FB0E9 /* BookView.swift in Sources */,
 				DE392D1C260AD18300715173 /* TabsView.swift in Sources */,
 				DEB16A492613B7E60007505C /* WebView.swift in Sources */,
 				DE392D7C260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392D9E260C512A00715173 /* HomeButtonView.swift in Sources */,
+				DEB16A68261409000007505C /* TermsOfServiceView.swift in Sources */,
 				DE392CAD260A9F2600715173 /* HomeView.swift in Sources */,
 				DEB16A3926138E0A0007505C /* OnboardingPage.swift in Sources */,
 				DE392CC4260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBB260AA22300715173 /* ContentView.swift in Sources */,
+				DEB16A61261408610007505C /* AcknowledgementsView.swift in Sources */,
+				DE3D2ED32615981900C209CB /* newAddNote.swift in Sources */,
 				DE5A4DDE260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE392D0F260ACE9900715173 /* SearchView.swift in Sources */,
 				DEB16A5A2614047D0007505C /* AuthenticationModel.swift in Sources */,
@@ -739,8 +767,10 @@
 				DEB16A2226137F3E0007505C /* OnboardingView.swift in Sources */,
 				DEB1697A26123E620007505C /* Poz_v3Tests.swift in Sources */,
 				DE392CEC260AAB6000715173 /* SettingsModel.swift in Sources */,
+				DEB16A702614090B0007505C /* PrivacyPolicyView.swift in Sources */,
 				DEB16A482613B7E60007505C /* WebView.swift in Sources */,
 				DE5A4DC5260E8146000FB0E9 /* NotebookView.swift in Sources */,
+				DEB16A69261409000007505C /* TermsOfServiceView.swift in Sources */,
 				DE392D2C260AE6C500715173 /* ChartView.swift in Sources */,
 				DE392CDA260AAB2500715173 /* SettingsView.swift in Sources */,
 				DED1299126112CA700C2DE33 /* UserSettingsView.swift in Sources */,
@@ -763,8 +793,10 @@
 				DE392D7D260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392D9F260C512A00715173 /* HomeButtonView.swift in Sources */,
 				DEB16A2D2613813F0007505C /* BookPatternModel.swift in Sources */,
+				DE3D2ED42615981900C209CB /* newAddNote.swift in Sources */,
 				DE392CAE260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392CC5260AA28000715173 /* AddNoteView.swift in Sources */,
+				DEB16A62261408610007505C /* AcknowledgementsView.swift in Sources */,
 				DE392CBA260AA22300715173 /* ContentView.swift in Sources */,
 				DE5A4DDF260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE392D10260ACE9900715173 /* SearchView.swift in Sources */,

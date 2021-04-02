@@ -11,36 +11,24 @@ struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
+        
         NavigationView {
             
             Form {
-                Section(header: Text("Your journal")) {
+                Section(header: Text("Customization")) {
                     NavigationLink(destination: UserSettingsView(settings: settings) ) {
                         HStack {
-                            Text("Personalize")
+                            Text("Name")
                         }
                     }
-                    NavigationLink(destination:  NotificationsView(settings: settings).environmentObject(Reminders()) ) {
+                    NavigationLink(destination:  NotificationsView(settings: settings) ) {
                         HStack {
-                            Text("Notifications")
+                            Text("Daily goal")
                         }
                     }
-                    NavigationLink(destination: Text("hi")) {
-                        HStack {
-                            Text("Passwords/Face ID")
-                        }
-                    }
-                    NavigationLink(destination: Text("hi")) {
-                        HStack {
-                            Text("Accessibility")
-                        }
-                    }
-                }
-                
-                Section(header: Text("Customization")) {
-                    Toggle(isOn: $darkMode, label: {
-                        Text("Dark Mode")
-                    })
+//                    Toggle(isOn: $darkMode, label: {
+//                        Text("Dark Mode")
+//                    })
                     NavigationLink(destination: CustomizeJournalView(settings: settings)) {
                         HStack {
                             Text("Customize Journal")
@@ -56,7 +44,7 @@ struct SettingsView: View {
                     }
                     NavigationLink(destination: Text("hi")) {
                         HStack {
-                            Text("Rate us on app store")
+                            Text("Rate Poz on the app store")
                         }
                     }
                     NavigationLink(destination: Text("hi")) {
@@ -67,13 +55,8 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("Application")) {
-
-                    NavigationLink(destination: Text("hi")) {
-                        HStack {
-                            Text("Request a feature")
-                        }
-                    }
-                    NavigationLink(destination: Text("hi")) {
+                    
+                    NavigationLink(destination: FeedbackView() ) {
                         HStack {
                             Text("Feedback / Contact Us")
                         }
@@ -88,12 +71,7 @@ struct SettingsView: View {
                             Text("Privacy")
                         }
                     }
-                    NavigationLink(destination: Text("hi")) {
-                        HStack {
-                            Text("FAQ")
-                        }
-                    }
-                    NavigationLink(destination: Text("hi")) {
+                    NavigationLink(destination: AcknowledgementsView() ) {
                         HStack {
                             Text("Acknowledgements")
                         }
