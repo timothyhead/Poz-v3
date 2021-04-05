@@ -35,7 +35,7 @@ struct NotebookView: View {
                     notes, currentPage: $indexNotes,
                     transitionStyle: .pageCurl,
                     bounce: true,
-                    hasControl: true
+                    hasControl: false
 
                 ) { pageIndex, note in
                     
@@ -45,6 +45,10 @@ struct NotebookView: View {
                         }
                 }
             }
+            
+//            Button( action: { indexNotes = 1 }) {
+//                Text("Jump")
+//            }
         }
     }
 }

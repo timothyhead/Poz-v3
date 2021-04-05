@@ -17,11 +17,10 @@ struct TextViewWrapper: UIViewRepresentable {
   func makeUIView(context: Context) -> UITextView {
     let textView = UITextView()
     textView.delegate = context.coordinator
-//    textView.font = .systemFont(ofSize: 16)
-    textView.font = UIFont(name: "Poppins-Light", size: 16)
+    textView.font = UIFont(name: "Poppins-Regular", size: 16)
     textView.backgroundColor = .clear
     textView.autocorrectionType = .no
-//    textView.isScrollEnabled = false
+    textView.showsVerticalScrollIndicator = false
     return textView
   }
 

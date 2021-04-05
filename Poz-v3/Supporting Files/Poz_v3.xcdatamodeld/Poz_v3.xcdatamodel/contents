@@ -5,10 +5,10 @@
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="emoji" optional="YES" attributeType="String"/>
         <attribute name="helpText" optional="YES" attributeType="String"/>
-        <attribute name="hidden" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="prompt" optional="YES" attributeType="String"/>
+        <attribute name="promptIndex" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <attribute name="tagColor" optional="YES" attributeType="String"/>
     </entity>
     <elements>

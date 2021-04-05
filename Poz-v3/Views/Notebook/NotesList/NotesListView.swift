@@ -42,7 +42,7 @@ struct NotesListView: View {
 //                .padding(.horizontal, 20)
 //            }
             //.filter{ text == "" ? true : $0.note!.localizedCaseInsensitiveContains(text)}
-            
+            // https://www.youtube.com/watch?v=oK1K5h5EbZY
             List {
                 ForEach (notes, id: \.id) { note in
                     

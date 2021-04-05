@@ -88,9 +88,9 @@
 		DE392DAE260CE7CF00715173 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392DAD260CE7CF00715173 /* NotificationsView.swift */; };
 		DE392DAF260CE7CF00715173 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392DAD260CE7CF00715173 /* NotificationsView.swift */; };
 		DE392DB0260CE7CF00715173 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392DAD260CE7CF00715173 /* NotificationsView.swift */; };
-		DE3D2ED22615981900C209CB /* newAddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* newAddNote.swift */; };
-		DE3D2ED32615981900C209CB /* newAddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* newAddNote.swift */; };
-		DE3D2ED42615981900C209CB /* newAddNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* newAddNote.swift */; };
+		DE3D2ED22615981900C209CB /* FullNotePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* FullNotePage.swift */; };
+		DE3D2ED32615981900C209CB /* FullNotePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* FullNotePage.swift */; };
+		DE3D2ED42615981900C209CB /* FullNotePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED12615981900C209CB /* FullNotePage.swift */; };
 		DE3D2ED92616CFB700C209CB /* OnboardingNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */; };
 		DE3D2EDA2616CFB700C209CB /* OnboardingNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */; };
 		DE3D2EDB2616CFB700C209CB /* OnboardingNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */; };
@@ -222,7 +222,7 @@
 		DE392D92260BEC2700715173 /* PopOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverView.swift; sourceTree = "<group>"; };
 		DE392D9C260C512A00715173 /* HomeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonView.swift; sourceTree = "<group>"; };
 		DE392DAD260CE7CF00715173 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
-		DE3D2ED12615981900C209CB /* newAddNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newAddNote.swift; sourceTree = "<group>"; };
+		DE3D2ED12615981900C209CB /* FullNotePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullNotePage.swift; sourceTree = "<group>"; };
 		DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNew.swift; sourceTree = "<group>"; };
 		DE5A4DAE260D6618000FB0E9 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
@@ -421,7 +421,7 @@
 			children = (
 				DE49DE1E26104FA80006CB63 /* NotesList */,
 				DE392CC2260AA28000715173 /* AddNoteView.swift */,
-				DE3D2ED12615981900C209CB /* newAddNote.swift */,
+				DE3D2ED12615981900C209CB /* FullNotePage.swift */,
 				DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */,
 				DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */,
 				DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */,
@@ -709,7 +709,7 @@
 				DE5A4DDD260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE5A4DCA260E8153000FB0E9 /* OldNotesView.swift in Sources */,
 				DE392D1B260AD18300715173 /* TabsView.swift in Sources */,
-				DE3D2ED22615981900C209CB /* newAddNote.swift in Sources */,
+				DE3D2ED22615981900C209CB /* FullNotePage.swift in Sources */,
 				DE392D0E260ACE9900715173 /* SearchView.swift in Sources */,
 				DEB16A6E2614090B0007505C /* PrivacyPolicyView.swift in Sources */,
 				DE392CEA260AAB6000715173 /* SettingsModel.swift in Sources */,
@@ -759,7 +759,7 @@
 				DE392CC4260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBB260AA22300715173 /* ContentView.swift in Sources */,
 				DEB16A61261408610007505C /* AcknowledgementsView.swift in Sources */,
-				DE3D2ED32615981900C209CB /* newAddNote.swift in Sources */,
+				DE3D2ED32615981900C209CB /* FullNotePage.swift in Sources */,
 				DE5A4DDE260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE392D0F260ACE9900715173 /* SearchView.swift in Sources */,
 				DEB16A5A2614047D0007505C /* AuthenticationModel.swift in Sources */,
@@ -801,7 +801,7 @@
 				DE392D7D260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392D9F260C512A00715173 /* HomeButtonView.swift in Sources */,
 				DEB16A2D2613813F0007505C /* BookPatternModel.swift in Sources */,
-				DE3D2ED42615981900C209CB /* newAddNote.swift in Sources */,
+				DE3D2ED42615981900C209CB /* FullNotePage.swift in Sources */,
 				DE392CAE260A9F2600715173 /* HomeView.swift in Sources */,
 				DE392CC5260AA28000715173 /* AddNoteView.swift in Sources */,
 				DEB16A62261408610007505C /* AcknowledgementsView.swift in Sources */,

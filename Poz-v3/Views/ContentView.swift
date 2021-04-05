@@ -7,7 +7,7 @@ struct ContentView: View {
     @ObservedObject var settings = SettingsModel()
     @Environment(\.colorScheme) var colorScheme
 
-    @State var tabIndex = -1
+    @State var tabIndex = 0
     
     @State var firstTimeNotebookIndex = 0
     
@@ -55,7 +55,7 @@ struct ContentView: View {
                 firstTimeNotebookIndex = 1
             } else {
                 tabIndex = -1
-                
+                print("new setup")
 //create new notes
                 
                 //create welcome message
@@ -64,19 +64,19 @@ struct ContentView: View {
                 welcomeNote.id = UUID() //create id
                 welcomeNote.emoji = "🗂️"
                 welcomeNote.note = settings.welcomeText
-                welcomeNote.hidden = false
                 welcomeNote.createdAt = Date() //actual date to sort
+                welcomeNote.date = "-"
                 
                 try? self.moc.save()
                 
                 //create welcome message
-                for value in (0...(countNotes() + 50)) {
+                for value in (0...(countNotes() + 2)) {
                     let blankNote = Note(context: self.moc)
                         print(value)
                     blankNote.id = UUID() //create id
                     blankNote.note = ""
-                    blankNote.hidden = false
                     blankNote.createdAt = Date() //actual date to sort
+                    blankNote.date = "-"
 
                     try? self.moc.save()
                 }
