@@ -21,8 +21,6 @@ struct NotePage: View {
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
-//    @Binding var lastModifiedJournalIndex: Int
-    
     @State var noteToSelfNotification = Date()
     @State var noteToSelfRandomTime = false
     
@@ -35,43 +33,24 @@ struct NotePage: View {
     let note: Note  // = Note(context: self.moc)
 
     @Binding var promptSelectedIndex: Int
+    @Binding var tabIndex: Int
+    @Binding var showPageSlider: Bool
     
     @State var dynamicPrompt = ""
-    
-//    @State var defaultPrompt = Prompt(name: "", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "", subtext: "", index: 0, prompt: "")
-    
-    var selectedPrompt : Prompt {
-        switch promptSelectedIndex {
-        
-        case 0:
-            return Prompt(name: "Simple", color: Color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)), emoji: "🗒️", subtext: "Just a plain blank plage", index: 0, prompt: "")
-        case 1:
-           return Prompt(name: "Note to self", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "📪", subtext: "Gets sent to you later", index: 1, prompt: "Leave yourself a note, reminder, or encourage your future self.")
-        case 2:
-           return Prompt(name: "Reflection", color: Color(#colorLiteral(red: 1, green: 0.8737214208, blue: 1, alpha: 1)), emoji: "🔮", subtext: "Questions for introspection", index: 2, prompt: "If this were the last day of my life, would I have the same plans for today?")
-        case 3:
-           return Prompt(name: "Vent", color: Color(#colorLiteral(red: 1, green: 0.8275836706, blue: 0.8228347898, alpha: 1)), emoji: "💢", subtext: "Autodeletes at later date", index: 3, prompt: "Let it all out, don't hold back.")
-        case 4:
-           return Prompt(name: "Gratitude", color: Color(#colorLiteral(red: 1, green: 0.8277564049, blue: 0.6865769625, alpha: 1)), emoji: "🙏🏾", subtext: "Open prompts for appreciation", index: 4, prompt: "Write about 3 things you’re grateful for today.")
-            
-        default:
-            return Prompt(name: "", color: Color(#colorLiteral(red: 0.7467747927, green: 1, blue: 0.9897406697, alpha: 1)), emoji: "", subtext: "", index: 0, prompt: "")
-        }
-    }
     
     var body: some View {
         
         ZStack {
             VStack {
+                NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
                 
                 HStack {
                     Text("\(dateString)")
-                        .font(Font.custom("Poppins-Bold", size: 16))
-                        .foregroundColor(Color.primary)
+                        .font(Font.custom("Poppins-Regular", size: 14))
+                        .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3037465077)))
                     
-//                    Spacer()
-                    
-                }.padding(.top, -5)
+                }
+                .padding(.bottom, 20)
                 .onAppear() {
                     dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
                     if note.date != "-" {
@@ -80,14 +59,11 @@ struct NotePage: View {
                         dateString = note.date ?? "-"
                     }
                 }
-//                .onChange(of: dateString) {
-//                    note.createdAt = dateString
-//                }
-                
-            Divider()
-                .foregroundColor(Color.primary)
-                .padding(.horizontal, 20)
-                .padding(.bottom, 3)
+//
+//            Divider()
+//                .foregroundColor(Color.primary)
+//                .padding(.horizontal, 20)
+//                .padding(.bottom, 3)
             
             //text input
             VStack {
@@ -96,18 +72,15 @@ struct NotePage: View {
                     // body content
                     VStack (alignment: .leading) {
                         
-                        //show emoji
-//                        Text((selectedPrompt.emoji == "" || selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji)
-                            
                         
                         Text(selected)
                             .font(Font.custom("Poppins-Regular", size: 48))
-                            .padding(.bottom, -20)
+                            .padding(.bottom, 3)
                         
                         if dynamicPrompt != "" {
                             Text(dynamicPrompt)
                                 .font(Font.custom("Poppins-Bold", size: 16))
-                                .padding(.top, 16)
+//                                .padding(.top, 16)
                         }
                         
                         if promptSelectedIndex == 0 {
@@ -178,122 +151,11 @@ struct NotePage: View {
                             
                         }
                         
-                        
-//                        promptContent(promptSelectedIndex: $promptSelectedIndex, settings: settings, dynamicPrompt: $dynamicPrompt, message: $emoji, selectedPrompt: $defaultPrompt)
-//                            .onChange(of: defaultPrompt) { value in
-//                                print("hi")
-//                            }
-
-//                        //show prompt
-//                        if (promptSelectedIndex != 0) {
-//                            if promptSelectedIndex == 4 {
-//                                Text("\(dynamicPrompt)")
-//                                    .font(Font.custom("Poppins-Medium", size: 16))
-//                                    .padding(.top, 10)
-//                                    .padding(.bottom, -8)
-//                                    .onAppear() {
-//                                        dynamicPrompt = settings.gratitudePrompts.randomElement()!
-//                                    }
-//                            } else if promptSelectedIndex == 2 {
-//                                Text("\(dynamicPrompt)")
-//                                    .font(Font.custom("Poppins-Medium", size: 16))
-//                                    .padding(.top, 10)
-//                                    .padding(.bottom, -8)
-//                                    .onAppear() {
-//                                        dynamicPrompt = settings.introspectPrompts.randomElement()!
-//                                    }
-//                            }
-//
-//                            else {
-//                                Text("\(selectedPrompt.prompt)")
-//                                    .font(Font.custom("Poppins-Medium", size: 16))
-//                                    .padding(.top, 10)
-//                                    .padding(.bottom, -8)
-//                                    .onAppear() {
-//
-//                                    }
-//                            }
-//                        }
-//
-//                        //if vent selected, autodelete
-//                        if promptSelectedIndex == 3 {
-//                            HStack {
-//                                Image(systemName: "trash")
-//
-//                                Text("This will be autodeleted")
-//
-//                            }
-//                            .foregroundColor(Color.red)
-//                            .font(Font.custom("Poppins-Regular", size: 16))
-//                            .padding(.top, 8)
-//                        }
-//
-//
-//                        //if note to self selected, show note to self notification options
-//                        if (promptSelectedIndex == 1) {
-//                            HStack {
-//                                Image(systemName: "paperplane")
-//
-//                                Text("This will be sent back to you")
-//
-//                            }
-//                            .foregroundColor(Color.blue)
-//                            .font(Font.custom("Poppins-Regular", size: 16))
-//                            .padding(.vertical,5)
-//
-//                            VStack {
-//
-//                                Picker(selection: $noteToSelfRandomTime, label: Text("Random or manual time?")) {
-//                                    Text("Random Time").tag(false)
-//                                    Text("Manual Time").tag(true)
-//                                }
-//                                .font(Font.custom("Poppins-Regular", size: 16))
-//                                .pickerStyle(SegmentedPickerStyle())
-//
-//                                if noteToSelfRandomTime {
-//                                    DatePicker(
-//                                        "",
-//                                        selection: $noteToSelfNotification,
-//                                        displayedComponents: [.date, .hourAndMinute]
-//                                    )
-//                                    .font(Font.custom("Poppins-Regular", size: 16))
-//                                    .onChange (of: noteToSelfNotification) { value in
-//                                        if message != "" {
-//                                            createNotification(message: message ?? "", dateIn: noteToSelfNotification)
-//                                        }
-//                                    }
-//                                } else {
-//                                    Text("This note will return to you sometime in the next week")
-//                                        .font(Font.custom("Poppins-Regular", size: 0)).opacity(0)
-//                                        .padding(.bottom, -22)
-//                                        .onAppear() {
-//                                            if message != "" {
-//                                                createNotification(message: message ?? "", dateIn: generateRandomDate(daysForward: 7)!)
-//                                            }
-//                                        }
-//                                        .onChange (of: message) { value in
-//                                            if message != "" {
-//                                                createNotification(message: message ?? "", dateIn: generateRandomDate(daysForward: 7)!)
-//                                            }
-//                                        }
-//                                }
-//                            }
-//                        }
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         //text input
                         GrowingTextInputView(text: $message, placeholder: "Tap here to begin typing")
                             .font(Font.custom("Poppins-Regular", size: 16))
                             .padding(.leading, -4)
+                            .padding(.top, -5)
                         
                     }
                     .padding(.horizontal, 20)
@@ -332,23 +194,15 @@ struct NotePage: View {
             }
             .onTapGesture {
                 hideKeyboard() //hide keyboard when user taps outside text field
-//                    .onAppear() {
-//                    }
             }
             .onAppear() {
                 message = note.note
                 selected = note.emoji ?? ""
                 dynamicPrompt = note.prompt ?? ""
-                
-//                if (note.prompt != "" || note.prompt != nil) {
-//                    defaultPrompt.prompt = note.prompt ?? selectedPrompt.prompt
-//                } else {
-//                    defaultPrompt.prompt = selectedPrompt.prompt
-//                }
             }
             .onDisappear() {
-                print(note.note ?? "none")
-                promptSelectedIndex = 0
+                
+                
                 if promptSelectedIndex != 1 {
                     
                     //remove all notifications with the same message if note to self
@@ -356,12 +210,36 @@ struct NotePage: View {
                     
                 }
                 
+//                if promptSelectedIndex == 3 {
+////                    
+////                    note.note = message ?? ""
+////                    note.emoji = "💢"
+////                    note.prompt = dynamicPrompt
+//
+//                    print("aaa")
+//                    
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                        note.note = "Message autodeleted" //input message
+//                        note.emoji = "🗑"  // emoji
+//                        note.prompt = ""
+//                        try? self.moc.save()
+//                    }
+//
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+//                        note.note = "" //input message
+//                        note.emoji = ""  // emoji
+//                        note.prompt = ""
+//                        try? self.moc.save()
+//                        print("note deleted")
+//                    }
+//                }
+                
+                
                 if ((message != "" || selected != "") && message !=
                         settings.welcomeText && (message != initialText || selected != initialEmoji)) {
                     saveNoteB()
                     
                 }
-                promptSelectedIndex = 0
             }
 
             if emojiPickerShowing {
@@ -376,7 +254,7 @@ struct NotePage: View {
             
             HStack (spacing: 0) {
                 
-                if (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") {
+                if (promptSelectedIndex == 0) {
                     EmojiButton(emojiPickerShowing: $emojiPickerShowing)
                 }
                 
@@ -389,7 +267,13 @@ struct NotePage: View {
 
                 PromptsButton(addPromptShowing: $addPromptShowing)
                 
+                
                 Spacer()
+                
+                Button (action: { showPageSlider.toggle() }) {
+                    Text("🗂")
+                        .font(.system(size: 30))
+                }
             }
             .padding(.bottom, 40)
             .padding(.horizontal, 20)
@@ -402,62 +286,27 @@ struct NotePage: View {
             dateString = dateFormatter.string(from: date as Date)
             
         }
-        .padding(.top, 60)
+        .padding(.top, 10)
         .background(Color(UIColor(named: "NoteBG")!))
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         
     }
     
     func saveNoteB () {
-            note.id = UUID() //create id
-            
-            if promptSelectedIndex == 3 {
-
-                note.note = message ?? ""
-
-                note.emoji = (selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji  // emoji
-                note.prompt = selectedPrompt.prompt
-
-                print("aaa")
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    note.note = "Message autodeleted" //input message
-                    note.emoji = "🗑"  // emoji
-                    note.prompt = ""
-                    try? self.moc.save()
-                    print("a")
-                }
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-                    note.note = "..." //input message
-                    note.emoji = ""  // emoji
-                    note.prompt = ""
-                    try? self.moc.save()
-                }
-
-            } else {
-                note.note = message ?? "" //input message
-            }
-            
-            note.date = dateString //formatted date to display
         
-            note.emoji = ((selectedPrompt.emoji == "" || selectedPrompt.emoji == "X" || selectedPrompt.emoji == "🗒️") ? selected : selectedPrompt.emoji)
+        note.id = UUID() //create id
+    
+        note.note = message ?? "" //input message
         
-//        print(note.prompt ?? "")
-//            note.prompt = selectedPrompt.prompt
-        
-//            print(note.prompt ?? "")
+        note.date = dateString //formatted date to display
+    
+        note.emoji = selected
         
         note.prompt = dynamicPrompt
-            
-            if (promptSelectedIndex == 1) {
-                note.helpText = "Note will be sent back to you"
-            }
-            if (promptSelectedIndex == 3) {
-                note.helpText = "Note will be autodeleted"
-            }
         
-            try? self.moc.save()
+        try? self.moc.save()
+        
+        promptSelectedIndex = 0
         
     }
     

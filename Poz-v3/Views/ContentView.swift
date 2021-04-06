@@ -7,7 +7,7 @@ struct ContentView: View {
     @ObservedObject var settings = SettingsModel()
     @Environment(\.colorScheme) var colorScheme
 
-    @State var tabIndex = 0
+    @State var tabIndex = -1
     
     @State var firstTimeNotebookIndex = 0
     
@@ -70,7 +70,7 @@ struct ContentView: View {
                 try? self.moc.save()
                 
                 //create welcome message
-                for value in (0...(countNotes() + 2)) {
+                for value in (0...(countNotes() + 50)) {
                     let blankNote = Note(context: self.moc)
                         print(value)
                     blankNote.id = UUID() //create id

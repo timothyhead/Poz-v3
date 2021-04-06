@@ -19,7 +19,6 @@ struct NoteTopMenuView: View {
     
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
     
-    
     var body: some View {
         HStack {
             
@@ -70,5 +69,9 @@ struct NoteTopMenuView: View {
             }
             
         }
+        .padding(.top, 45)
+        .padding(.bottom, -35)
+        .padding(.horizontal, 20)
+//        .background(Color(#colorLiteral(red: 0.279927969, green: 0.1855148077, blue: 0.0344821997, alpha: 1)))
     }
 }

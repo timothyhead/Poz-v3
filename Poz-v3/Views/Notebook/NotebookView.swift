@@ -23,32 +23,61 @@ struct NotebookView: View {
 
     @Binding var promptSelectedIndex: Int
     
-    @State var showing = true
+    
+    @State var showPageSlider = false
+    @State var isEditing = true
+    @State var pageNumber = 0.0
+    
     
     var body: some View {
         
         ZStack {
-            if showing {
-                    
-                ModelPages (
-
-                    notes, currentPage: $indexNotes,
-                    transitionStyle: .pageCurl,
-                    bounce: true,
-                    hasControl: false
-
-                ) { pageIndex, note in
-                    
-                    NotePage(settings: settings, note: note, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
-                        .onDisappear () {
-                            UserDefaults.standard.set(indexNotes, forKey: "LastPageOpen")
-                        }
-                }
-            }
+                   
+//            NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
             
-//            Button( action: { indexNotes = 1 }) {
-//                Text("Jump")
-//            }
+            ModelPages (
+
+                notes, currentPage: $indexNotes,
+                transitionStyle: .pageCurl,
+                bounce: true,
+                hasControl: false
+
+            ) { pageIndex, note in
+                
+                NotePage(settings: settings, note: note, promptSelectedIndex: $promptSelectedIndex, tabIndex: $tabIndex, showPageSlider: $showPageSlider).environment(\.managedObjectContext, self.moc)
+                    .onDisappear () {
+                        UserDefaults.standard.set(indexNotes, forKey: "LastPageOpen")
+                    }
+            }
+            .padding(.top, -6)
+            
+            if showPageSlider {
+                
+                ZStack {
+                    
+                    if (isEditing || showPageSlider) {
+                        Text("Turn to page \(Int(pageNumber))")
+                            .font(Font.custom("Poppins-Regular", size: 16))
+                            .offset(x: 50, y: 45)
+                    }
+                
+                    Slider(
+                        value: $pageNumber,
+                        in: 0...Double(notes.count - 1),
+                        onEditingChanged: { editing in
+                            isEditing = editing
+                            indexNotes = Int(pageNumber)
+                            if !isEditing {
+                                showPageSlider = false
+                            }
+                        }
+                    )
+                }
+                .background(Color(UIColor(named: "NoteBG")!))
+                .offset(y: (UIScreen.main.bounds.height/2 - 100))
+                .padding()
+                
+            }
         }
     }
 }

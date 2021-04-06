@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE33591B261CEEB100FF2D3B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33591A261CEEB100FF2D3B /* LottieView.swift */; };
+		DE33591C261CEEB200FF2D3B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33591A261CEEB100FF2D3B /* LottieView.swift */; };
+		DE33591D261CEEB200FF2D3B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33591A261CEEB100FF2D3B /* LottieView.swift */; };
 		DE392C2F260A8CBD00715173 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392C2E260A8CBD00715173 /* AppDelegate.swift */; };
 		DE392C31260A8CBD00715173 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392C30260A8CBD00715173 /* SceneDelegate.swift */; };
 		DE392C33260A8CBD00715173 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392C32260A8CBD00715173 /* ContentView.swift */; };
@@ -119,7 +122,6 @@
 		DEB16A2026137F3E0007505C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A1F26137F3E0007505C /* OnboardingView.swift */; };
 		DEB16A2126137F3E0007505C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A1F26137F3E0007505C /* OnboardingView.swift */; };
 		DEB16A2226137F3E0007505C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A1F26137F3E0007505C /* OnboardingView.swift */; };
-		DEB16A2826137F5B0007505C /* ConcentricOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = DEB16A2726137F5B0007505C /* ConcentricOnboarding */; };
 		DEB16A2C2613813F0007505C /* BookPatternModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A062612F8CC0007505C /* BookPatternModel.swift */; };
 		DEB16A2D2613813F0007505C /* BookPatternModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A062612F8CC0007505C /* BookPatternModel.swift */; };
 		DEB16A3826138E0A0007505C /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A3726138E0A0007505C /* OnboardingPage.swift */; };
@@ -181,6 +183,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DE33591A261CEEB100FF2D3B /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		DE392C2B260A8CBD00715173 /* Poz-v3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Poz-v3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE392C2E260A8CBD00715173 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE392C30260A8CBD00715173 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -257,7 +260,6 @@
 				DE392D35260AE78500715173 /* Pages in Frameworks */,
 				DE392D47260B0E0F00715173 /* SwiftSpeech in Frameworks */,
 				DE392D3B260AE79600715173 /* SwiftUICharts in Frameworks */,
-				DEB16A2826137F5B0007505C /* ConcentricOnboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +512,7 @@
 		DED129A42611B64E00C2DE33 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				DE33591A261CEEB100FF2D3B /* LottieView.swift */,
 				DE392D4F260B0F0900715173 /* EmojiPicker.swift */,
 				DE392D1A260AD18300715173 /* TabsView.swift */,
 				DE392CF9260AC64300715173 /* RingView.swift */,
@@ -539,7 +542,6 @@
 				DE392D34260AE78500715173 /* Pages */,
 				DE392D3A260AE79600715173 /* SwiftUICharts */,
 				DE392D46260B0E0F00715173 /* SwiftSpeech */,
-				DEB16A2726137F5B0007505C /* ConcentricOnboarding */,
 			);
 			productName = "Poz-v3";
 			productReference = DE392C2B260A8CBD00715173 /* Poz-v3.app */;
@@ -616,7 +618,6 @@
 				DE392D33260AE78500715173 /* XCRemoteSwiftPackageReference "Pages" */,
 				DE392D39260AE79600715173 /* XCRemoteSwiftPackageReference "ChartView" */,
 				DE392D45260B0E0F00715173 /* XCRemoteSwiftPackageReference "SwiftSpeech" */,
-				DEB16A2626137F5B0007505C /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */,
 			);
 			productRefGroup = DE392C2C260A8CBD00715173 /* Products */;
 			projectDirPath = "";
@@ -709,6 +710,7 @@
 				DE5A4DDD260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE5A4DCA260E8153000FB0E9 /* OldNotesView.swift in Sources */,
 				DE392D1B260AD18300715173 /* TabsView.swift in Sources */,
+				DE33591B261CEEB100FF2D3B /* LottieView.swift in Sources */,
 				DE3D2ED22615981900C209CB /* FullNotePage.swift in Sources */,
 				DE392D0E260ACE9900715173 /* SearchView.swift in Sources */,
 				DEB16A6E2614090B0007505C /* PrivacyPolicyView.swift in Sources */,
@@ -756,6 +758,7 @@
 				DEB16A68261409000007505C /* TermsOfServiceView.swift in Sources */,
 				DE392CAD260A9F2600715173 /* HomeView.swift in Sources */,
 				DEB16A3926138E0A0007505C /* OnboardingPage.swift in Sources */,
+				DE33591C261CEEB200FF2D3B /* LottieView.swift in Sources */,
 				DE392CC4260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBB260AA22300715173 /* ContentView.swift in Sources */,
 				DEB16A61261408610007505C /* AcknowledgementsView.swift in Sources */,
@@ -779,6 +782,7 @@
 				DE5A4DC5260E8146000FB0E9 /* NotebookView.swift in Sources */,
 				DEB16A69261409000007505C /* TermsOfServiceView.swift in Sources */,
 				DE392D2C260AE6C500715173 /* ChartView.swift in Sources */,
+				DE33591D261CEEB200FF2D3B /* LottieView.swift in Sources */,
 				DE392CDA260AAB2500715173 /* SettingsView.swift in Sources */,
 				DED1299126112CA700C2DE33 /* UserSettingsView.swift in Sources */,
 				DE5A4DCC260E8153000FB0E9 /* OldNotesView.swift in Sources */,
@@ -1149,14 +1153,6 @@
 				minimumVersion = 0.9.2;
 			};
 		};
-		DEB16A2626137F5B0007505C /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/ConcentricOnboarding";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.6;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1174,11 +1170,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DE392D45260B0E0F00715173 /* XCRemoteSwiftPackageReference "SwiftSpeech" */;
 			productName = SwiftSpeech;
-		};
-		DEB16A2726137F5B0007505C /* ConcentricOnboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DEB16A2626137F5B0007505C /* XCRemoteSwiftPackageReference "ConcentricOnboarding" */;
-			productName = ConcentricOnboarding;
 		};
 /* End XCSwiftPackageProductDependency section */
 

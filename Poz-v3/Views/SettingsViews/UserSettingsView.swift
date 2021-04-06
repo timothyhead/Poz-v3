@@ -21,6 +21,6 @@ struct UserSettingsView: View {
                 UserDefaults.standard.set(settings.username, forKey: "Username")
             }
             
-        }.navigationTitle("Edit Name")
+        }.navigationTitle("Edit Name").background(Color.black)
     }
 }
