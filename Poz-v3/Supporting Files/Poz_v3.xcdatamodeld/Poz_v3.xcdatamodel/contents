@@ -2,14 +2,14 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="date" optional="YES" attributeType="String"/>
-        <attribute name="emoji" optional="YES" attributeType="String"/>
-        <attribute name="helpText" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="emoji" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="helpText" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="note" optional="YES" attributeType="String"/>
-        <attribute name="prompt" optional="YES" attributeType="String"/>
+        <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="prompt" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="promptIndex" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
-        <attribute name="tagColor" optional="YES" attributeType="String"/>
+        <attribute name="tagColor" optional="YES" attributeType="String" defaultValueString=""/>
     </entity>
     <elements>
         <element name="Note" positionX="-63" positionY="-18" width="128" height="164"/>

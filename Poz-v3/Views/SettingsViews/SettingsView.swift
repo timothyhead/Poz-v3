@@ -37,17 +37,17 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("Community")) {
-                    NavigationLink(destination: Text("hi")) {
-                        HStack {
-                            Text("Share Poz")
-                        }
-                    }
-                    NavigationLink(destination: Text("hi")) {
-                        HStack {
-                            Text("Rate Poz on the app store")
-                        }
-                    }
-                    NavigationLink(destination: Text("hi")) {
+//                    NavigationLink(destination: Text("hi")) {
+//                        HStack {
+//                            Text("Share Poz")
+//                        }
+//                    }
+//                    NavigationLink(destination: Text("hi")) {
+//                        HStack {
+//                            Text("Rate Poz on the app store")
+//                        }
+//                    }
+                    NavigationLink(destination:  WebView(link: "https://pozjournal.webflow.io/") ) {
                         HStack {
                             Text("Visit website")
                         }
@@ -61,19 +61,9 @@ struct SettingsView: View {
                             Text("Feedback / Contact Us")
                         }
                     }
-                    NavigationLink(destination: Text("hi")) {
-                        HStack {
-                            Text("Terms of Service")
-                        }
-                    }
-                    NavigationLink(destination: Text("hi")) {
+                    NavigationLink(destination: PrivacyPolicyView() ) {
                         HStack {
                             Text("Privacy")
-                        }
-                    }
-                    NavigationLink(destination: AcknowledgementsView() ) {
-                        HStack {
-                            Text("Acknowledgements")
                         }
                     }
                 }

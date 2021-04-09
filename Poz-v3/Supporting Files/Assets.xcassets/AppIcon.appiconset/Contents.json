@@ -1,109 +1,109 @@
 {
   "images" : [
     {
-      "filename" : "Poz App Icon-20@2x.png",
+      "filename" : "iPhone Notification - 2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "Poz App Icon-20@3x.png",
+      "filename" : "iPhone Notification - 3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
-      "filename" : "Poz App Icon-29@2x-1.png",
+      "filename" : "iPhone Settings - 2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "Poz App Icon-29@3x.png",
+      "filename" : "iPhone Settings - 3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
-      "filename" : "Poz App Icon-40@2x-1.png",
+      "filename" : "iPhone Spotlight - 2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
-      "filename" : "Poz App Icon-40@3x.png",
+      "filename" : "iPhone Spotlight - 3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
-      "filename" : "Poz App Icon-60@2x.png",
+      "filename" : "iPhone App - 2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "Poz App Icon-60@3x.png",
+      "filename" : "iPhone App - 3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
     },
     {
-      "filename" : "Poz App Icon-20@1x.png",
+      "filename" : "iPad Notification - 1x.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "20x20"
     },
     {
-      "filename" : "Poz App Icon-40@1x.png",
+      "filename" : "iPad Notification - 2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "Poz App Icon-29@1x.png",
+      "filename" : "iPad Settings - 1x.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "29x29"
     },
     {
-      "filename" : "Poz App Icon-29@2x.png",
+      "filename" : "iPad Settings - 2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "Poz App Icon-40@1x-1.png",
+      "filename" : "iPad Spotlight -  1x.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "40x40"
     },
     {
-      "filename" : "Poz App Icon-40@2x.png",
+      "filename" : "iPad Spotlight -  2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
-      "filename" : "Poz App Icon-76@1x.png",
+      "filename" : "iPad App -  1x.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "76x76"
     },
     {
-      "filename" : "Poz App Icon-76@2x.png",
+      "filename" : "iPad App -  2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "76x76"
     },
     {
-      "filename" : "Group 2.png",
+      "filename" : "iPad Pro (12.9-inch) App -  2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "83.5x83.5"
     },
     {
-      "filename" : "Poz App Icon-1024@1x.png",
+      "filename" : "App Store - 1x.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"

@@ -26,15 +26,6 @@ struct NotificationsView: View {
         
         Form {
             
-            
-//            smallGoalView(settings: settings)
-            HStack {
-                Spacer()
-                bigGoalView(settings: settings)
-                Spacer()
-            }
-                    
-            
             Stepper("Entries per day - \(settings.goalNumber)", onIncrement: {
                 settings.goalNumber += 1
                 UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")

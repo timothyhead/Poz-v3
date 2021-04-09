@@ -7,9 +7,7 @@ struct ContentView: View {
     @ObservedObject var settings = SettingsModel()
     @Environment(\.colorScheme) var colorScheme
 
-    @State var tabIndex = -1
-    
-    @State var firstTimeNotebookIndex = 0
+
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
@@ -19,9 +17,15 @@ struct ContentView: View {
     
     ) var notes: FetchedResults<Note>
     
+    @State var tabIndex = 0
+    
+    @State var firstTimeNotebookIndex = 0
+    
     @State var promptSelectedIndex = 0
     
-    @State var isUnlocked = true
+    @State var isUnlocked = false
+    
+    @State var firstTimeLaunched = true
     
     var body: some View {
             
@@ -36,7 +40,7 @@ struct ContentView: View {
                         HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
                         
                     } else if tabIndex == 1 {
-                        NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+                        NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex, firstTimeLaunched: $firstTimeLaunched).environment(\.managedObjectContext, self.moc)
                     }
                     
                 } else {
@@ -52,11 +56,14 @@ struct ContentView: View {
             }
             
             if (isAppAlreadyLaunchedOnce()) {
+                
+                
+                
                 firstTimeNotebookIndex = 1
+//                firstTimeLaunched = false
             } else {
+//                firstTimeLaunched = true
                 tabIndex = -1
-                print("new setup")
-//create new notes
                 
                 //create welcome message
                 let welcomeNote = Note(context: self.moc)
@@ -70,7 +77,7 @@ struct ContentView: View {
                 try? self.moc.save()
                 
                 //create welcome message
-                for value in (0...(countNotes() + 50)) {
+                for value in (0...100) {
                     let blankNote = Note(context: self.moc)
                         print(value)
                     blankNote.id = UUID() //create id
@@ -81,6 +88,7 @@ struct ContentView: View {
                     try? self.moc.save()
                 }
                 
+                UserDefaults.standard.set(2, forKey: "goalNumber")
             }
         }
     }
@@ -90,6 +98,7 @@ struct ContentView: View {
 
         if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
             
+            firstTimeLaunched = false
             print("App already launched : \(isAppAlreadyLaunchedOnce)")
             return true
             

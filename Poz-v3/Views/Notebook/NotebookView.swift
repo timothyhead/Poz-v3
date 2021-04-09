@@ -22,7 +22,7 @@ struct NotebookView: View {
     ) var notes: FetchedResults<Note>
 
     @Binding var promptSelectedIndex: Int
-    
+    @Binding var firstTimeLaunched: Bool
     
     @State var showPageSlider = false
     @State var isEditing = true
@@ -56,7 +56,7 @@ struct NotebookView: View {
                 ZStack {
                     
                     if (isEditing || showPageSlider) {
-                        Text("Turn to page \(Int(pageNumber))")
+                        Text("Turn to page \(Int(pageNumber) + 1)")
                             .font(Font.custom("Poppins-Regular", size: 16))
                             .offset(x: 50, y: 45)
                     }
@@ -78,6 +78,20 @@ struct NotebookView: View {
                 .padding()
                 
             }
+            
+            if firstTimeLaunched {
+                SwipeTutorialView(show: firstTimeLaunched)
+                    .onAppear() {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            withAnimation () {
+                                firstTimeLaunched = false
+                            }
+                        }
+                    }
+            }
+        }
+        .onTapGesture {
+            firstTimeLaunched = false
         }
     }
 }

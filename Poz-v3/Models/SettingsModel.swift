@@ -69,24 +69,23 @@ class SettingsModel: ObservableObject {
         reminderObject(reminderIndex: 3, reminderTime: Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "Reminder 3 Time")), reminderIsOn: UserDefaults.standard.bool(forKey: "Reminder 3 On") ),
         reminderObject(reminderIndex: 4, reminderTime: Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "Reminder 4 Time")), reminderIsOn: UserDefaults.standard.bool(forKey: "Reminder 4 On") )
     ]
+    //📝
     
     @Published var welcomeText: String = """
-                    Welcome to Poz, your personal mindful journal.
+                    Welcome to Poz, your personal mindful journal. Here's a quick guide:
 
-                    Swipe right or left to navigate between pages. Type to add an entry, they will autosave and  remain in the same location. You can revisit and edit them later.
+                    👆🏼 - Swipe right or left to navigate between pages.
+                    ⌨️ - Tap and type to add an entry
 
-                    Explore the buttons in the bottom left of each page to customize them:
+                    ✖️ - Go back to home screen
+                    🔍 - Look through previous entries in a list
 
                     🎭 - Tag the post with an emoji
                     🎤 - Use speech to text to type your entry
-                    📝 - Prompts or actions for your note
+                    🗑️ - Clear the note
+                    📔 - Quick jump between pages
 
-                    More buttons:
-
-                    ✖️ - Go back to home screen
-                    🔍 - Search/filter through previous entries in a list (appear when there is >1 note)
-
-                    If you run into issues, share your feedback/issues/questions using the feedback button on the home page. - Poz team
+                    If you run into issues, share your feedback/issues/questions using the feedback button on the home page.
                     """
 }
     

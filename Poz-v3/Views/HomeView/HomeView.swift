@@ -22,9 +22,12 @@ struct HomeView: View {
     @Binding var promptSelectedIndex: Int
     
     @State var feedbackFormShowing = false
+    
+    @State var firstTimeShowing = true
 
     var body: some View {
         
+        ZStack {
             
             VStack (alignment: .leading, spacing: 0) {
                 
@@ -77,6 +80,40 @@ struct HomeView: View {
             .onAppear() {
                 promptSelectedIndex = 0
             }
+
+            if (firstTimeShowing) {
+                HomeViewTutorial(show: firstTimeShowing)
+                    .onAppear() {
+                        firstTimeShowing = firstTimeAppearing()
+                        
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                            withAnimation (.easeOut) {
+//                                firstTimeShowing = firstTimeAppearing()
+//                            }
+//                        }
+                    }
+            }
+        }
+        .onTapGesture {
+            firstTimeShowing = false
+        }
+    }
+    
+    func firstTimeAppearing()->Bool{
+        let homeScreendefaults = UserDefaults.standard
+
+        if let firstTimeAppearing = homeScreendefaults.string(forKey: "firstTimeAppearing"){
+
+            print("Screen already launched : \(firstTimeAppearing)")
+            return false
+
+        } else {
+            
+            homeScreendefaults.set(true, forKey: "firstTimeAppearing")
+            print("Screen launched first time")
+            return true
+
+        }
     }
     
     func timeOfDayOutput () -> String {

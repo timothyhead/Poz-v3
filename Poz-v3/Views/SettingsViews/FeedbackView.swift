@@ -13,19 +13,13 @@ struct FeedbackView: View {
     
     var body: some View {
         VStack {
-//            HStack {
-//                Spacer()
-//                
-//                Button (action: {
-//                    self.presentationMode.wrappedValue.dismiss()
-//                }) {
-//                    Text("Close")
-//                        .bold()
-//                }
-//            }
-//            .padding()
-            
-            WebView(link: "https://78dxgd9o34y.typeform.com/to/bpax2l9N")
+//            WebView(link: "https://78dxgd9o34y.typeform.com/to/bpax2l9N")
+            WebView(link: "https://forms.gle/4SWfHXyq5KKaUbNR7")
+//                .foregroundColor(Color(UIColor(named: "PozGray")!))PozYellow
+            Button( action: { self.presentationMode.wrappedValue.dismiss() }) {
+                Text("Close")
+                    .font(Font.custom("Poppins-Regular", size: 20))
+            }.padding()
         }
     }
 }

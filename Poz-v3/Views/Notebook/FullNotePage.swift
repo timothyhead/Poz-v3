@@ -38,6 +38,8 @@ struct NotePage: View {
     
     @State var dynamicPrompt = ""
     
+    @State var confirmDelete = false
+    
     var body: some View {
         
         ZStack {
@@ -47,7 +49,7 @@ struct NotePage: View {
                 HStack {
                     Text("\(dateString)")
                         .font(Font.custom("Poppins-Regular", size: 14))
-                        .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3037465077)))
+                        .foregroundColor(colorScheme == .dark ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3037465077)))
                     
                 }
                 .padding(.bottom, 20)
@@ -134,8 +136,6 @@ struct NotePage: View {
                                 }
                                 }
                         }
-                        if promptSelectedIndex == 2 {
-                        }
                         if promptSelectedIndex == 3 {
                             HStack {
                                 Image(systemName: "trash")
@@ -146,9 +146,6 @@ struct NotePage: View {
                             .foregroundColor(Color.red)
                             .font(Font.custom("Poppins-Regular", size: 16))
                             .padding(.top, 8)
-                        }
-                        if promptSelectedIndex == 4 {
-                            
                         }
                         
                         //text input
@@ -264,14 +261,39 @@ struct NotePage: View {
                         message = swiftSpeechTempText
                     }
                     .animation(.easeOut)
+                
+                Button (action: {
+                    //clearNote()
+                    confirmDelete = true
+                }) {
+                    Text("🗑️")
+                        .font(.system(size: 25))
+                }
+                .alert(isPresented: $confirmDelete) {
+                    Alert(
+                        title: Text("Are you sure you want to clear this note?"),
+                        message: Text("You cannot undo this"),
+                        primaryButton: .destructive(Text("Clear note")) {
+                            print("Deleting...")
+                            clearNote()
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
+                .animation(.easeOut)
+               
 
-                PromptsButton(addPromptShowing: $addPromptShowing)
+               // PromptsButton(addPromptShowing: $addPromptShowing)
                 
                 
                 Spacer()
                 
-                Button (action: { showPageSlider.toggle() }) {
-                    Text("🗂")
+                Button (action: {
+                    withAnimation(.easeOut) {
+                        showPageSlider.toggle()
+                    }
+                }) {
+                    Text(showPageSlider ? "📖" : "📔")
                         .font(.system(size: 30))
                 }
             }
@@ -281,7 +303,6 @@ struct NotePage: View {
             }
         }
         .onAppear() {
-//            initialText = note.note ?? ""
             dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
             dateString = dateFormatter.string(from: date as Date)
             
@@ -290,6 +311,15 @@ struct NotePage: View {
         .background(Color(UIColor(named: "NoteBG")!))
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         
+    }
+    
+    func clearNote() {
+        message = ""
+        note.note = ""
+        selected = ""
+        note.emoji = ""
+        dateString = "-"
+        note.date = "-"
     }
     
     func saveNoteB () {

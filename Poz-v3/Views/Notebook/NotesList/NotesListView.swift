@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreData
 
 struct NotesListView: View {
     
@@ -9,6 +10,8 @@ struct NotesListView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: false)],
         predicate:  NSPredicate(format: "note != %@", "")
     ) var notes: FetchedResults<Note>
+    
+    let sort = NSSortDescriptor(key: "name", ascending: true)
     
     //filtering
     @State var text = ""
@@ -78,6 +81,20 @@ struct NotesListView: View {
 
         }
     }
+    
+//    func getNotes (with name: String) -> Note? {
+//        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+//        fetchRequest.predicate = NSPredicate(format: "%K == %@",
+//                                             argumentArray: ["name", name])
+//        
+//        return try? persistentContainer.viewContext.fetch(fetchRequest).first
+////        do {
+////            return try persistentContainer.viewContext.fetch(fetchRequest).first
+////        } catch let error {
+////            print("\(error)")
+////            return nil
+////        }
+//    }
     
     func filterList (note: Note) -> Bool {
 //       filterList

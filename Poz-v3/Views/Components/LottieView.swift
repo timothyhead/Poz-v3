@@ -8,12 +8,6 @@ struct LottieView: UIViewRepresentable {
     
     
     var fileName: String
-//    @Binding var animationInProgress: Bool
-    @Binding var isPaused: Bool
-    @Binding var stopAnim: Bool
-    
-    @State var startFrame: CGFloat = 55
-    @State var endFrame: CGFloat = 200
     
     let view = UIView(frame: .zero)
     let animationView = AnimationView()
@@ -23,9 +17,8 @@ struct LottieView: UIViewRepresentable {
         let animation = Animation.named(fileName)
         animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
-//        animationView.play(fromFrame: endFrame, toFrame: startFrame, loopMode: .none) { complete in
-//
-//        }
+        animationView.play()
+        animationView.loopMode = .loop
         
         animationView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -40,39 +33,19 @@ struct LottieView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
-        if isPaused && !stopAnim {
-            context.coordinator.parent.animationView.play(fromFrame: endFrame, toFrame: startFrame)
-        } else if (isPaused == false) {
-            context.coordinator.parent.animationView.play(fromFrame: startFrame, toFrame: endFrame)
-
-        }
+        animationView.play()
+        animationView.loopMode = .loop
     }
     
     func makeCoordinator() -> Coordinator {
             Coordinator(self)
         }
 
-        class Coordinator: NSObject {
-            var parent: LottieView
+    class Coordinator: NSObject {
+        var parent: LottieView
 
-            init(_ parent: LottieView) {
-                self.parent = parent
-            }
+        init(_ parent: LottieView) {
+            self.parent = parent
         }
-    
-    func openBook() {
-        animationView.play()
-        
-//        NSLayoutConstraint.activate([
-//            animationView.widthAnchor.constraint(equalTo: view.widthAnchor),
-//            animationView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 2)
-//        ])
-        
     }
-    
-    func closeBook() {
-        
-        
-    }
-    
 }

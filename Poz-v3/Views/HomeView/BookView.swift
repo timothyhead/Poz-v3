@@ -97,20 +97,21 @@ struct BookView: View {
                         Button( action: {
                             customizeJournal.toggle()
                         } ) {
-                            Image(systemName: "pencil")
+                            Text("✏️")
                                 .font(Font.custom("Poppins-Medium", size: 20))
                                 .foregroundColor(Color(UIColor(named: "PozGray")!))
-                                .padding(.leading, 14)
+                                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                         }
+                        .padding(.leading, 14)
                         .sheet(isPresented: $customizeJournal, content: {
                             CustomizeJournalView(settings: settings).environment(\.managedObjectContext, self.moc)
                         })
                     }
+                    .padding(.bottom, 85)
                     
-                    
-                    withAnimation () {
-                        PromptsViewB(promptSelectedIndex: $promptSelectedIndex, tabIndex:$tabIndex,  isOpening: $isOpening).environment(\.managedObjectContext, self.moc)
-                    }
+//                    withAnimation () {
+//                        PromptsViewB(promptSelectedIndex: $promptSelectedIndex, tabIndex:$tabIndex,  isOpening: $isOpening).environment(\.managedObjectContext, self.moc)
+//                    }
                 }
             }
            
@@ -154,10 +155,6 @@ struct BookStaticView: View {
                 .frame(width: 175, height: 250)
                 .colorInvert()
                 .opacity(0.08)
-//                .onChange(of: bookPatterns.bookPatterns[settings.bookPatternIndex].patternImageString) { value in
-//                    print(value)
-//                    tempBookPattern = bookPatterns.bookPatterns[settings.journalPatternIndex].patternImageString
-//                }
             
             VStack {
                 Text(settings.journalName)
