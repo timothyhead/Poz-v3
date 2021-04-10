@@ -44,24 +44,24 @@ struct BookView: View {
                 }) {
                     ZStack {
                         Image("book").resizable()
-                            .frame(width: 180, height: 250)
+                            .frame(width: UIScreen.main.bounds.width/2, height: (UIScreen.main.bounds.width/2)*1.4)
                             .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 5, x: 0.0, y: 10)
                             .shadow(color: (colorScheme == .dark ? Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)) : Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))), radius: 20, x: 0.0, y: 15)
                             .hueRotation(Angle(degrees: settings.journalColorAngle))
                      
                         Image(bookPatterns.bookPatterns[settings.journalPatternIndex].patternImageString)
                             .resizable(resizingMode: .tile)
-                            .frame(width: 175, height: 250)
+                            .frame(width: UIScreen.main.bounds.width/2, height: (UIScreen.main.bounds.width/2)*1.4)
                             .colorInvert()
                             .opacity(0.08)
                             .animation(.easeOut)
                         
                         VStack {
                             Text(settings.journalName)
-                                .font(Font.custom("Blueberry Regular", size: 20))
+                                .font(Font.custom("Blueberry Regular", size: (UIScreen.main.bounds.width/2)/9))
                                 .foregroundColor(Color(.white))
                             Text(settings.journalEmoji)
-                                .font(Font.custom("Blueberry Regular", size: 52))
+                                .font(Font.custom("Blueberry Regular", size: (UIScreen.main.bounds.width/2)/3.3))
                                 .foregroundColor(Color(.white))
                         }
                         
@@ -69,7 +69,7 @@ struct BookView: View {
                         
                         if settings.goalNumber > 0 {
                             smallGoalView(settings: settings)
-                                .offset(x: 50, y: 86)
+                                .offset(x: (UIScreen.main.bounds.width/2)/3.3, y: (UIScreen.main.bounds.width/2)/2)
                         }
                      
                     }
@@ -83,11 +83,13 @@ struct BookView: View {
                     //book details and edit button
                     HStack (spacing: 0) {
                         Text("Last updated: ")
-                            .font(Font.custom("Poppins-Light", size: 16))
+                            .font(Font.custom("Poppins-Light", size:
+                                                (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
                             .foregroundColor(Color(UIColor(named: "PozGray")!))
                         
                             Text(dateString)
-                                .font(Font.custom("Poppins-Medium", size: 16))
+                                .font(Font.custom("Poppins-Medium", size:
+                    (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
                                 .onAppear() {
                                     dateFormatter.dateFormat = "MM/dd/yy"
                                     dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
@@ -98,7 +100,7 @@ struct BookView: View {
                             customizeJournal.toggle()
                         } ) {
                             Text("✏️")
-                                .font(Font.custom("Poppins-Medium", size: 20))
+                                .font(Font.custom("Poppins-Medium", size: (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
                                 .foregroundColor(Color(UIColor(named: "PozGray")!))
                                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                         }

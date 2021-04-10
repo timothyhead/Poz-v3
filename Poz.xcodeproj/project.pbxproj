@@ -11,12 +11,6 @@
 		DE33591C261CEEB200FF2D3B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33591A261CEEB100FF2D3B /* LottieView.swift */; };
 		DE33591D261CEEB200FF2D3B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33591A261CEEB100FF2D3B /* LottieView.swift */; };
 		DE335929261CF04A00FF2D3B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DE335928261CF04A00FF2D3B /* Lottie */; };
-		DE33592E261CF08B00FF2D3B /* swipe.json in Resources */ = {isa = PBXBuildFile; fileRef = DE33592D261CF08B00FF2D3B /* swipe.json */; };
-		DE33592F261CF08B00FF2D3B /* swipe.json in Resources */ = {isa = PBXBuildFile; fileRef = DE33592D261CF08B00FF2D3B /* swipe.json */; };
-		DE335930261CF08B00FF2D3B /* swipe.json in Resources */ = {isa = PBXBuildFile; fileRef = DE33592D261CF08B00FF2D3B /* swipe.json */; };
-		DE33593E261CF4B300FF2D3B /* swipe-color.json in Resources */ = {isa = PBXBuildFile; fileRef = DE33593D261CF4B300FF2D3B /* swipe-color.json */; };
-		DE33593F261CF4B300FF2D3B /* swipe-color.json in Resources */ = {isa = PBXBuildFile; fileRef = DE33593D261CF4B300FF2D3B /* swipe-color.json */; };
-		DE335940261CF4B300FF2D3B /* swipe-color.json in Resources */ = {isa = PBXBuildFile; fileRef = DE33593D261CF4B300FF2D3B /* swipe-color.json */; };
 		DE33594B261CF57200FF2D3B /* swipe-simple.json in Resources */ = {isa = PBXBuildFile; fileRef = DE33594A261CF57200FF2D3B /* swipe-simple.json */; };
 		DE33594C261CF57200FF2D3B /* swipe-simple.json in Resources */ = {isa = PBXBuildFile; fileRef = DE33594A261CF57200FF2D3B /* swipe-simple.json */; };
 		DE33594D261CF57200FF2D3B /* swipe-simple.json in Resources */ = {isa = PBXBuildFile; fileRef = DE33594A261CF57200FF2D3B /* swipe-simple.json */; };
@@ -50,9 +44,6 @@
 		DE392CAE260A9F2600715173 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392CAB260A9F2600715173 /* HomeView.swift */; };
 		DE392CBA260AA22300715173 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392C32260A8CBD00715173 /* ContentView.swift */; };
 		DE392CBB260AA22300715173 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392C32260A8CBD00715173 /* ContentView.swift */; };
-		DE392CC3260AA28000715173 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392CC2260AA28000715173 /* AddNoteView.swift */; };
-		DE392CC4260AA28000715173 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392CC2260AA28000715173 /* AddNoteView.swift */; };
-		DE392CC5260AA28000715173 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392CC2260AA28000715173 /* AddNoteView.swift */; };
 		DE392CD1260AA2A800715173 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392CD0260AA2A800715173 /* DashboardView.swift */; };
 		DE392CD2260AA2A800715173 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392CD0260AA2A800715173 /* DashboardView.swift */; };
 		DE392CD3260AA2A800715173 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392CD0260AA2A800715173 /* DashboardView.swift */; };
@@ -116,9 +107,6 @@
 		DE5A4DC3260E8146000FB0E9 /* NotebookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */; };
 		DE5A4DC4260E8146000FB0E9 /* NotebookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */; };
 		DE5A4DC5260E8146000FB0E9 /* NotebookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */; };
-		DE5A4DCA260E8153000FB0E9 /* OldNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */; };
-		DE5A4DCB260E8153000FB0E9 /* OldNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */; };
-		DE5A4DCC260E8153000FB0E9 /* OldNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */; };
 		DE5A4DD6260E9BE4000FB0E9 /* Poz_v3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE392C34260A8CBD00715173 /* Poz_v3.xcdatamodeld */; };
 		DE5A4DD7260E9BE4000FB0E9 /* Poz_v3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE392C34260A8CBD00715173 /* Poz_v3.xcdatamodeld */; };
 		DE5A4DD8260E9BE5000FB0E9 /* Poz_v3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE392C34260A8CBD00715173 /* Poz_v3.xcdatamodeld */; };
@@ -133,9 +121,6 @@
 		DE982EB0260F25170087E0ED /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE982EA6260F25150087E0ED /* ChatView.swift */; };
 		DEB1697A26123E620007505C /* Poz_v3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE392C48260A8CBF00715173 /* Poz_v3Tests.swift */; };
 		DEB16A072612F8CC0007505C /* BookPatternModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A062612F8CC0007505C /* BookPatternModel.swift */; };
-		DEB16A2026137F3E0007505C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A1F26137F3E0007505C /* OnboardingView.swift */; };
-		DEB16A2126137F3E0007505C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A1F26137F3E0007505C /* OnboardingView.swift */; };
-		DEB16A2226137F3E0007505C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A1F26137F3E0007505C /* OnboardingView.swift */; };
 		DEB16A2C2613813F0007505C /* BookPatternModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A062612F8CC0007505C /* BookPatternModel.swift */; };
 		DEB16A2D2613813F0007505C /* BookPatternModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A062612F8CC0007505C /* BookPatternModel.swift */; };
 		DEB16A3826138E0A0007505C /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB16A3726138E0A0007505C /* OnboardingPage.swift */; };
@@ -201,8 +186,6 @@
 
 /* Begin PBXFileReference section */
 		DE33591A261CEEB100FF2D3B /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		DE33592D261CF08B00FF2D3B /* swipe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = swipe.json; sourceTree = "<group>"; };
-		DE33593D261CF4B300FF2D3B /* swipe-color.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "swipe-color.json"; sourceTree = "<group>"; };
 		DE33594A261CF57200FF2D3B /* swipe-simple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "swipe-simple.json"; sourceTree = "<group>"; };
 		DE335971261D705400FF2D3B /* SwipeTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTutorialView.swift; sourceTree = "<group>"; };
 		DE392C2B260A8CBD00715173 /* Poz-v3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Poz-v3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,7 +209,6 @@
 		DE392C67260A8CC600715173 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		DE392C9B260A8DD400715173 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		DE392CAB260A9F2600715173 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		DE392CC2260AA28000715173 /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		DE392CD0260AA2A800715173 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		DE392CD7260AAB2400715173 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DE392CE9260AAB6000715173 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
@@ -250,7 +232,6 @@
 		DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNew.swift; sourceTree = "<group>"; };
 		DE5A4DAE260D6618000FB0E9 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
-		DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldNotesView.swift; sourceTree = "<group>"; };
 		DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTopMenuView.swift; sourceTree = "<group>"; };
 		DE5A94812620FE8A0005DE02 /* Poz-v3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Poz-v3.entitlements"; sourceTree = "<group>"; };
 		DE5A94852620FE8E0005DE02 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -262,7 +243,6 @@
 		DEB1695526123DD20007505C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		DEB1695726123DD20007505C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		DEB16A062612F8CC0007505C /* BookPatternModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPatternModel.swift; sourceTree = "<group>"; };
-		DEB16A1F26137F3E0007505C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DEB16A3726138E0A0007505C /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		DEB16A472613B7E60007505C /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		DEB16A512613B8610007505C /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
@@ -383,8 +363,8 @@
 		DE392CB9260AA21E00715173 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DE982E9B260F25140087E0ED /* GrowingTextView */,
 				DE392C32260A8CBD00715173 /* ContentView.swift */,
+				DE982E9B260F25140087E0ED /* GrowingTextView */,
 				DE47B818262108BC00C6C5DB /* Onboarding */,
 				DE9C3691260FFE1F00FC2F09 /* HomeView */,
 				DE5A4DBB260E8135000FB0E9 /* Notebook */,
@@ -435,7 +415,6 @@
 			children = (
 				DE335971261D705400FF2D3B /* SwipeTutorialView.swift */,
 				DEF838DD261E6C3C00556E5E /* HomeViewTutorial.swift */,
-				DEB16A1F26137F3E0007505C /* OnboardingView.swift */,
 				DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */,
 				DEB16A3726138E0A0007505C /* OnboardingPage.swift */,
 			);
@@ -455,11 +434,9 @@
 			isa = PBXGroup;
 			children = (
 				DE49DE1E26104FA80006CB63 /* NotesList */,
-				DE392CC2260AA28000715173 /* AddNoteView.swift */,
 				DE3D2ED12615981900C209CB /* FullNotePage.swift */,
 				DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */,
 				DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */,
-				DE5A4DC9260E8153000FB0E9 /* OldNotesView.swift */,
 			);
 			path = Notebook;
 			sourceTree = "<group>";
@@ -516,8 +493,6 @@
 			isa = PBXGroup;
 			children = (
 				DE33594A261CF57200FF2D3B /* swipe-simple.json */,
-				DE33593D261CF4B300FF2D3B /* swipe-color.json */,
-				DE33592D261CF08B00FF2D3B /* swipe.json */,
 				DE392C37260A8CBF00715173 /* Assets.xcassets */,
 				DE392C3C260A8CBF00715173 /* LaunchScreen.storyboard */,
 				DE392CB5260AA20C00715173 /* Fonts */,
@@ -675,13 +650,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE392C3E260A8CBF00715173 /* LaunchScreen.storyboard in Resources */,
-				DE33593E261CF4B300FF2D3B /* swipe-color.json in Resources */,
 				DE392C83260A8D8800715173 /* Poppins-Light.ttf in Resources */,
 				DE392C8F260A8D8B00715173 /* Poppins-Regular.ttf in Resources */,
 				DE392C3B260A8CBF00715173 /* Preview Assets.xcassets in Resources */,
 				DE392C77260A8D8500715173 /* Poppins-Bold.ttf in Resources */,
 				DE392C9C260A8DD400715173 /* Poppins-Medium.ttf in Resources */,
-				DE33592E261CF08B00FF2D3B /* swipe.json in Resources */,
 				DE392C6B260A8D8200715173 /* Blueberry Regular.otf in Resources */,
 				DE392C38260A8CBF00715173 /* Assets.xcassets in Resources */,
 				DE33594B261CF57200FF2D3B /* swipe-simple.json in Resources */,
@@ -696,11 +669,9 @@
 				DE33594C261CF57200FF2D3B /* swipe-simple.json in Resources */,
 				DE392C87260A8D8800715173 /* Poppins-Light.ttf in Resources */,
 				DE392C7B260A8D8500715173 /* Poppins-Bold.ttf in Resources */,
-				DE33592F261CF08B00FF2D3B /* swipe.json in Resources */,
 				DE392C93260A8D8B00715173 /* Poppins-Regular.ttf in Resources */,
 				DED1299526117D6600C2DE33 /* Assets.xcassets in Resources */,
 				DE392C9D260A8DD400715173 /* Poppins-Medium.ttf in Resources */,
-				DE33593F261CF4B300FF2D3B /* swipe-color.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,11 +683,9 @@
 				DE33594D261CF57200FF2D3B /* swipe-simple.json in Resources */,
 				DE392C8B260A8D8800715173 /* Poppins-Light.ttf in Resources */,
 				DE392C7F260A8D8600715173 /* Poppins-Bold.ttf in Resources */,
-				DE335930261CF08B00FF2D3B /* swipe.json in Resources */,
 				DE392C97260A8D8B00715173 /* Poppins-Regular.ttf in Resources */,
 				DED1299926117D6600C2DE33 /* Assets.xcassets in Resources */,
 				DE392C9E260A8DD400715173 /* Poppins-Medium.ttf in Resources */,
-				DE335940261CF4B300FF2D3B /* swipe-color.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,7 +700,6 @@
 				DEB16A592614047D0007505C /* AuthenticationModel.swift in Sources */,
 				DE982EB0260F25170087E0ED /* ChatView.swift in Sources */,
 				DE3D2ED92616CFB700C209CB /* OnboardingNew.swift in Sources */,
-				DE392CC3260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392D93260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE392CD1260AA2A800715173 /* DashboardView.swift in Sources */,
 				DE335972261D705400FF2D3B /* SwipeTutorialView.swift in Sources */,
@@ -743,7 +711,6 @@
 				DEB16A3826138E0A0007505C /* OnboardingPage.swift in Sources */,
 				DE392CFA260AC64300715173 /* RingView.swift in Sources */,
 				DE392D9D260C512A00715173 /* HomeButtonView.swift in Sources */,
-				DEB16A2026137F3E0007505C /* OnboardingView.swift in Sources */,
 				DEB16A67261409000007505C /* TermsOfServiceView.swift in Sources */,
 				DE982EAB260F25170087E0ED /* GrowingTextInputView.swift in Sources */,
 				DE392D61260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
@@ -758,7 +725,6 @@
 				DE392D2A260AE6C500715173 /* ChartView.swift in Sources */,
 				DE392DAE260CE7CF00715173 /* NotificationsView.swift in Sources */,
 				DE5A4DDD260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
-				DE5A4DCA260E8153000FB0E9 /* OldNotesView.swift in Sources */,
 				DE392D1B260AD18300715173 /* TabsView.swift in Sources */,
 				DE33591B261CEEB100FF2D3B /* LottieView.swift in Sources */,
 				DE3D2ED22615981900C209CB /* FullNotePage.swift in Sources */,
@@ -785,7 +751,6 @@
 				DE392D2B260AE6C500715173 /* ChartView.swift in Sources */,
 				DE392CD9260AAB2500715173 /* SettingsView.swift in Sources */,
 				DED1299026112CA700C2DE33 /* UserSettingsView.swift in Sources */,
-				DE5A4DCB260E8153000FB0E9 /* OldNotesView.swift in Sources */,
 				DE392D5B260B0FDA00715173 /* NoteButtonsView.swift in Sources */,
 				DE392CFB260AC64300715173 /* RingView.swift in Sources */,
 				DE392CD2260AA2A800715173 /* DashboardView.swift in Sources */,
@@ -795,7 +760,6 @@
 				DEB16A532613B8610007505C /* FeedbackView.swift in Sources */,
 				DE392D62260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
 				DE335973261D705400FF2D3B /* SwipeTutorialView.swift in Sources */,
-				DEB16A2126137F3E0007505C /* OnboardingView.swift in Sources */,
 				DE392D8A260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE3D2EDA2616CFB700C209CB /* OnboardingNew.swift in Sources */,
 				DE392D51260B0F0900715173 /* EmojiPicker.swift in Sources */,
@@ -811,7 +775,6 @@
 				DE392CAD260A9F2600715173 /* HomeView.swift in Sources */,
 				DEB16A3926138E0A0007505C /* OnboardingPage.swift in Sources */,
 				DE33591C261CEEB200FF2D3B /* LottieView.swift in Sources */,
-				DE392CC4260AA28000715173 /* AddNoteView.swift in Sources */,
 				DE392CBB260AA22300715173 /* ContentView.swift in Sources */,
 				DEB16A61261408610007505C /* AcknowledgementsView.swift in Sources */,
 				DE3D2ED32615981900C209CB /* FullNotePage.swift in Sources */,
@@ -826,7 +789,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEB16A2226137F3E0007505C /* OnboardingView.swift in Sources */,
 				DEB1697A26123E620007505C /* Poz_v3Tests.swift in Sources */,
 				DE392CEC260AAB6000715173 /* SettingsModel.swift in Sources */,
 				DEB16A702614090B0007505C /* PrivacyPolicyView.swift in Sources */,
@@ -837,7 +799,6 @@
 				DE33591D261CEEB200FF2D3B /* LottieView.swift in Sources */,
 				DE392CDA260AAB2500715173 /* SettingsView.swift in Sources */,
 				DED1299126112CA700C2DE33 /* UserSettingsView.swift in Sources */,
-				DE5A4DCC260E8153000FB0E9 /* OldNotesView.swift in Sources */,
 				DE3D2EDB2616CFB700C209CB /* OnboardingNew.swift in Sources */,
 				DEF838E0261E6C3C00556E5E /* HomeViewTutorial.swift in Sources */,
 				DE392D5C260B0FDA00715173 /* NoteButtonsView.swift in Sources */,
@@ -861,7 +822,6 @@
 				DEB16A2D2613813F0007505C /* BookPatternModel.swift in Sources */,
 				DE3D2ED42615981900C209CB /* FullNotePage.swift in Sources */,
 				DE392CAE260A9F2600715173 /* HomeView.swift in Sources */,
-				DE392CC5260AA28000715173 /* AddNoteView.swift in Sources */,
 				DEB16A62261408610007505C /* AcknowledgementsView.swift in Sources */,
 				DE392CBA260AA22300715173 /* ContentView.swift in Sources */,
 				DE5A4DDF260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
@@ -1021,7 +981,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Poz-v3/Poz-v3.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Poz-v3/Preview Content\"";
 				DEVELOPMENT_TEAM = GN3TH9WD6W;
 				ENABLE_PREVIEWS = YES;
@@ -1047,7 +1007,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Poz-v3/Poz-v3.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Poz-v3/Preview Content\"";
 				DEVELOPMENT_TEAM = GN3TH9WD6W;
 				ENABLE_PREVIEWS = YES;

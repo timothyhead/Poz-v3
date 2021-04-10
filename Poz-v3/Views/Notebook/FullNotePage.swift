@@ -40,6 +40,8 @@ struct NotePage: View {
     
     @State var confirmDelete = false
     
+    @State var newText = ""
+    
     var body: some View {
         
         ZStack {
@@ -247,6 +249,8 @@ struct NotePage: View {
             if addPromptShowing {
                 PromptsViewC(promptIndex: $promptSelectedIndex)
                     .padding(.bottom, 50)
+                    .onAppear() {
+                    }
             }
             
             HStack (spacing: 0) {
@@ -256,11 +260,24 @@ struct NotePage: View {
                 }
                 
                 
-                SwiftSpeechButtonView(output: $swiftSpeechTempText)
+                SwiftSpeechButtonView(input: $newText, output: $swiftSpeechTempText)
                     .onChange (of: swiftSpeechTempText) { value in
+//                        newText = "\(message ?? "") \(swiftSpeechTempText)"
                         message = swiftSpeechTempText
+//                        print("\(message ?? "") \(swiftSpeechTempText)" )
+//                        print(newText)
                     }
-                    .animation(.easeOut)
+//                    .onTapGesture {
+//                        swiftSpeechTempText = message ?? ""
+//                    }
+//                    .animation(.easeOut)
+//                    .onAppear() {
+//                        newText = message ?? ""
+//                        swiftSpeechTempText = message ?? ""
+//                    }
+//                    .onChange(of: message) { value in
+//                        swiftSpeechTempText = message ?? ""
+//                    }
                 
                 Button (action: {
                     //clearNote()

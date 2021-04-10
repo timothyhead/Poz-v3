@@ -63,6 +63,7 @@ struct smallGoalView : View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
     
+    
     @ObservedObject var settings: SettingsModel
     
     @State var date = Date()
@@ -81,7 +82,7 @@ struct smallGoalView : View {
                 }
                 
                 Text("\(entriesToday)/\(settings.goalNumber)")
-                    .font(Font.custom("Poppins-Bold", size: (entriesToday > 9 ? 12.5 : 16)))
+                    .font(Font.custom("Poppins-Bold", size: (entriesToday > 9 ? UIScreen.main.bounds.width/2/15 : UIScreen.main.bounds.width/2/14)))
                     .foregroundColor(Color(UIColor(named: "PozBlue")!))
             }
         }

@@ -51,7 +51,7 @@ struct NotificationsView: View {
             
             if (notificationsAreOn == true) {
                 ForEach (settings.reminders.indices) { reminderIndex in
-                    ReminderSectionView().environmentObject(settings.reminders[reminderIndex])
+                    ReminderSectionView(settings: settings).environmentObject(settings.reminders[reminderIndex])
                 }
             }
         }.navigationTitle("Daily Goal")
@@ -61,6 +61,9 @@ struct NotificationsView: View {
 struct ReminderSectionView: View {
     
     @EnvironmentObject var reminder: reminderObject
+    @ObservedObject var settings: SettingsModel
+    
+    @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
     
     var body: some View {
         Section(header: Text("Reminder #\(reminder.reminderIndex)")) {
@@ -102,8 +105,8 @@ struct ReminderSectionView: View {
                     
 //                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                     let content = UNMutableNotificationContent()
-                    content.title = "Feed cat"
-                    content.subtitle = "its time"
+                    content.title = "\(countEntriesToday())/\(settings.goalNumber) entries completed today"
+                    content.subtitle = "Hit poz. Take a moment to reflect"
                     content.sound = UNNotificationSound.default
                     
                     let date = reminder.reminderTime
@@ -126,6 +129,20 @@ struct ReminderSectionView: View {
                 }
             } 
         }
+    }
+    
+    func countEntriesToday () -> Int {
+        
+        var entriesToday = 0
+        for note in notes {
+            
+            let isToday = Calendar.current.isDateInToday(note.createdAt ?? Date().addingTimeInterval(100000))
+            
+            if (isToday && note.note != settings.welcomeText && note.note != "") {
+                entriesToday += 1
+            }
+        }
+        return entriesToday
     }
 }
 

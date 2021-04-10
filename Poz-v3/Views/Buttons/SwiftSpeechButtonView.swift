@@ -7,21 +7,25 @@ struct SwiftSpeechButtonView: View {
     
     var sessionConfiguration: SwiftSpeech.Session.Configuration
     
+    @Binding var input: String
     @Binding var output: String
     
-    public init(sessionConfiguration: SwiftSpeech.Session.Configuration, output: Binding<String>) {
+    public init(sessionConfiguration: SwiftSpeech.Session.Configuration, input: Binding<String>, output: Binding<String>) {
         self.sessionConfiguration = sessionConfiguration
+        self._input = input
         self._output = output
     }
-    public init(locale: Locale = .current, output: Binding<String>) {
-        self.init(sessionConfiguration: SwiftSpeech.Session.Configuration(locale: locale), output: output)
+    public init(locale: Locale = .current, input: Binding<String>, output: Binding<String>) {
+        self.init(sessionConfiguration: SwiftSpeech.Session.Configuration(locale: locale), input: input, output: output)
     }
-    public init(localeIdentifier: String, output: Binding<String>) {
-        self.init(locale: Locale(identifier: localeIdentifier), output: output)
+    public init(localeIdentifier: String, input: Binding<String>, output: Binding<String>) {
+        self.init(locale: Locale(identifier: localeIdentifier), input: input, output: output)
     }
     
     var body: some View {
-        VStack {
+        ZStack {
+//            Text(output)
+//                .offset(x: 40, y: -60)
         SwiftSpeech.RecordButton()
             .swiftSpeechToggleRecordingOnTap(sessionConfiguration: sessionConfiguration, animation: .spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0))
             .onRecognizeLatest(update: $output)
@@ -30,6 +34,7 @@ struct SwiftSpeechButtonView: View {
 //            .onChange
         }
         .onAppear {
+            output = input
             SwiftSpeech.requestSpeechRecognitionAuthorization()
         }
     }

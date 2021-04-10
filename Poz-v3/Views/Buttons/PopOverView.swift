@@ -38,7 +38,7 @@ struct SimpleButtonView: View {
             
             .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.1490374432)), radius: 5)
             
-            SwiftSpeechButtonView(output: $message)
+//            SwiftSpeechButtonView(output: $message)
             
             // photo button
             Button(action: {

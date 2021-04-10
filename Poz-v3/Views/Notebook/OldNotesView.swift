@@ -12,109 +12,109 @@ class isInTransition: ObservableObject {
     @Published var inTransition: Bool = false
 }
 
-struct OldNotesView: View {
+//struct OldNotesView: View {
     
-    @State var hidden = false
-    
-    
-    //get data from CoreData
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(
-        entity: Note.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)],
-        predicate:  NSPredicate(format: "prompt != %@", "Let it all out, don\'t hold back.")
-    ) var notes: FetchedResults<Note>
-    
-    // for previus entry  pages
-    @Binding var indexNotes: Int
-    @State var numberOfEntries = 0
-    
-    @State var date = Date()
-    @State var dateFormatter = DateFormatter();
-    @State var dateString: String = ""
-    
-    @State var selected = ""
-    @State private var selectedIndex: Int = 0
-    
-    @Binding var tabIndex: Int
-    
-//    @State var inTransition: Bool = false
-    @StateObject var inTransition = isInTransition()
-    
-//    @State var isEditing = false
-    
-    @State var tempText: String = "hello"
-    
-    var body: some View {
-        
-        ZStack {
-            
-            ModelPages (
-                
-                notes, currentPage: $indexNotes,
-                transitionStyle: .pageCurl,
-                bounce: true,
-                hasControl: false
-                
-            ) { pageIndex, note in
-                
-                VStack (alignment: .leading) {
-                    
-                    HStack (alignment: .center){
-                        Spacer()
-                        Text(note.date ?? " ")
-                            .font(Font.custom("Poppins-Bold", size: 16))
-                            .foregroundColor(Color.primary)
-                        Spacer()
-
-                    }.padding(.top, -5)
-                    
-                    Divider()
-                        .foregroundColor(Color.primary)
-                        .padding(.bottom, 3)
-                    
-                    ScrollView (.vertical){
-                        VStack (alignment: .leading){
-                            
-                            Text(note.emoji ?? "")
-                                .font(Font.custom("Poppins-Regular", size: 48))
-                                .padding(.bottom, -9)
-                            
-                            if ((note.prompt != "") && (note.prompt != nil)) {
-                                Text(note.prompt ?? "")
-                                    .font(Font.custom("Poppins-Medium", size: 16))
-                                    .padding(.top, 10)
-                                    .padding(.bottom, 6)
-                            }
-                            
-                            Text (note.note ?? "")
-                                .font(Font.custom("Poppins-Regular", size: 16))
-                            
-//                            Text("\(indexNotes)")
-                        }
-                    }
-                    .padding(.top, -11)
-                    Spacer()
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 60)
-                .background(Color(UIColor(named: "NoteBG")!))
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            }
-        
-        }
-        .background(Color(UIColor(named: "NoteBG")!))
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-        // set the previous entry pages index to last - 1 so its starts at the most recent entry
-        .onAppear {
-            if (notes.count > 0) {
-               DispatchQueue.main.async {
-                  self.indexNotes = notes.count - 1
-               }
-            }
-        }
-    }
-}
+//    @State var hidden = false
+//    
+//    
+//    //get data from CoreData
+//    @Environment(\.managedObjectContext) var moc
+//    @FetchRequest(
+//        entity: Note.entity(),
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)],
+//        predicate:  NSPredicate(format: "prompt != %@", "Let it all out, don\'t hold back.")
+//    ) var notes: FetchedResults<Note>
+//    
+//    // for previus entry  pages
+//    @Binding var indexNotes: Int
+//    @State var numberOfEntries = 0
+//    
+//    @State var date = Date()
+//    @State var dateFormatter = DateFormatter();
+//    @State var dateString: String = ""
+//    
+//    @State var selected = ""
+//    @State private var selectedIndex: Int = 0
+//    
+//    @Binding var tabIndex: Int
+//    
+////    @State var inTransition: Bool = false
+//    @StateObject var inTransition = isInTransition()
+//    
+////    @State var isEditing = false
+//    
+//    @State var tempText: String = "hello"
+//    
+//    var body: some View {
+//        
+//        ZStack {
+//            
+//            ModelPages (
+//                
+//                notes, currentPage: $indexNotes,
+//                transitionStyle: .pageCurl,
+//                bounce: true,
+//                hasControl: false
+//                
+//            ) { pageIndex, note in
+//                
+//                VStack (alignment: .leading) {
+//                    
+//                    HStack (alignment: .center){
+//                        Spacer()
+//                        Text(note.date ?? " ")
+//                            .font(Font.custom("Poppins-Bold", size: 16))
+//                            .foregroundColor(Color.primary)
+//                        Spacer()
+//
+//                    }.padding(.top, -5)
+//                    
+//                    Divider()
+//                        .foregroundColor(Color.primary)
+//                        .padding(.bottom, 3)
+//                    
+//                    ScrollView (.vertical){
+//                        VStack (alignment: .leading){
+//                            
+//                            Text(note.emoji ?? "")
+//                                .font(Font.custom("Poppins-Regular", size: 48))
+//                                .padding(.bottom, -9)
+//                            
+//                            if ((note.prompt != "") && (note.prompt != nil)) {
+//                                Text(note.prompt ?? "")
+//                                    .font(Font.custom("Poppins-Medium", size: 16))
+//                                    .padding(.top, 10)
+//                                    .padding(.bottom, 6)
+//                            }
+//                            
+//                            Text (note.note ?? "")
+//                                .font(Font.custom("Poppins-Regular", size: 16))
+//                            
+////                            Text("\(indexNotes)")
+//                        }
+//                    }
+//                    .padding(.top, -11)
+//                    Spacer()
+//                }
+//                .padding(.horizontal, 20)
+//                .padding(.top, 60)
+//                .background(Color(UIColor(named: "NoteBG")!))
+//                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+//            }
+//        
+//        }
+//        .background(Color(UIColor(named: "NoteBG")!))
+//        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+//        // set the previous entry pages index to last - 1 so its starts at the most recent entry
+//        .onAppear {
+//            if (notes.count > 0) {
+//               DispatchQueue.main.async {
+//                  self.indexNotes = notes.count - 1
+//               }
+//            }
+//        }
+//    }
+//}
 
 
 struct OldNotePageView: View {

@@ -44,7 +44,7 @@ struct HomeViewTutorial: View {
                 }
             }
             .padding(.all, 40)
-            .frame(width: UIScreen.main.bounds.width - 40, height: 380, alignment: .topLeading)
+            .frame(width: 320, height: 450, alignment: .topLeading)
             .background(Color.black.opacity(0.85))
             .cornerRadius(10)
             
