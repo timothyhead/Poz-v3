@@ -346,6 +346,7 @@ struct NotePage: View {
         note.note = message ?? "" //input message
         
         note.date = dateString //formatted date to display
+        note.createdAt = Date()
     
         note.emoji = selected
         

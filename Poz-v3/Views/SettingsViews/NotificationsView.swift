@@ -26,16 +26,20 @@ struct NotificationsView: View {
         
         Form {
             
-            Stepper("Entries per day - \(settings.goalNumber)", onIncrement: {
-                settings.goalNumber += 1
-                UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
-            }, onDecrement: {
-                if ( settings.goalNumber > 0) {
-                    settings.goalNumber -= 1
-                }
-                UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
-            })
-        
+            HStack {
+                smallGoalView(settings: settings)
+                
+                Stepper("Entries per day - \(settings.goalNumber)", onIncrement: {
+                    settings.goalNumber += 1
+                    UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
+                }, onDecrement: {
+                    if ( settings.goalNumber > 0) {
+                        settings.goalNumber -= 1
+                    }
+                    UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
+                })
+            }
+            
             Toggle("Daily Notifications", isOn: $notificationsAreOn)
                 .onChange(of: notificationsAreOn) { value in
                     settings.notifications = notificationsAreOn

@@ -70,24 +70,22 @@ struct smallGoalView : View {
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
-    @State var entriesToday = 0
-    
     @State var show = false
     
     var body : some View {
         ZStack {
             if settings.goalNumber > 0 {
                 if show {
-                    RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: ((CGFloat(entriesToday))/(CGFloat(settings.goalNumber)) == 0.0) ? 0.01 : ((CGFloat(entriesToday))/(CGFloat(settings.goalNumber))), sizeScale: 0.4, animateOn: true)
+                    RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: ((CGFloat(countEntriesToday()))/(CGFloat(settings.goalNumber)) == 0.0) ? 0.01 : ((CGFloat(countEntriesToday()))/(CGFloat(settings.goalNumber))), sizeScale: 0.4, animateOn: true)
                 }
                 
-                Text("\(entriesToday)/\(settings.goalNumber)")
-                    .font(Font.custom("Poppins-Bold", size: (entriesToday > 9 ? UIScreen.main.bounds.width/2/15 : UIScreen.main.bounds.width/2/14)))
+                Text("\(countEntriesToday())/\(settings.goalNumber)")
+                    .font(Font.custom("Poppins-Bold", size: (countEntriesToday() > 9 ? UIScreen.main.bounds.width/2/15 : UIScreen.main.bounds.width/2/14)))
                     .foregroundColor(Color(UIColor(named: "PozBlue")!))
             }
         }
         .onAppear() {
-            countEntriesToday()
+           // countEntriesToday()
             dateFormatter.dateFormat = "MM/dd/yy"
             dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
             
@@ -97,16 +95,23 @@ struct smallGoalView : View {
         }
     }
     
-    func countEntriesToday () {
+    func countEntriesToday () -> Int {
+        var entriesToday = 0
+        
         for note in notes {
             
 //            let sameDay = Calendar.current.isDate(date, equalTo: note.createdAt ?? Date().addingTimeInterval(100000), toGranularity: .day)
-            let isToday = Calendar.current.isDateInToday(note.createdAt ?? Date().addingTimeInterval(100000))
+            let isToday = Calendar.current.isDateInToday(note.createdAt ?? Date().addingTimeInterval(1000000))
             
-            if (isToday && note.note != settings.welcomeText && note.note != "") {
+            if(isToday && note.note != settings.welcomeText && note.note != "") {
                 entriesToday += 1
             }
+//            if (isToday && note.note != settings.welcomeText && note.note != "") {
+//                entriesToday += 1
+//            }
+            
         }
+        return entriesToday
     }
 }
 
