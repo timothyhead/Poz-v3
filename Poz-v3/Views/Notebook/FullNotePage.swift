@@ -55,14 +55,14 @@ struct NotePage: View {
                     
                 }
                 .padding(.bottom, 20)
-                .onAppear() {
-                    dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
-                    if note.date != "-" {
-                        dateString = dateFormatter.string(from: (note.createdAt ?? date) as Date)
-                    } else {
-                        dateString = note.date ?? "-"
-                    }
-                }
+//                .onAppear() {
+//                    dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
+////                    if note.date != "-" {
+////                        dateString = note.date ?? "-"
+////                    } else {
+//                        dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
+////                    }
+//                }
 //
 //            Divider()
 //                .foregroundColor(Color.primary)
@@ -187,8 +187,8 @@ struct NotePage: View {
                 }
             }
             .onChange(of: message) { value in
-                if (message != "") {
-                    dateString = dateFormatter.string(from: date as Date)
+                if (message != "" && message != initialText) {
+                    dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
                 }
             }
             .onTapGesture {
@@ -198,6 +198,13 @@ struct NotePage: View {
                 message = note.note
                 selected = note.emoji ?? ""
                 dynamicPrompt = note.prompt ?? ""
+                dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+                
+//                if (note.lastUpdated != nil) {
+                    dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
+//                } else {
+//                    dateString = "-"
+//                }
             }
             .onDisappear() {
                 
@@ -260,7 +267,7 @@ struct NotePage: View {
                 }
                 
                 
-                SwiftSpeechButtonView(input: $newText, output: $swiftSpeechTempText)
+                SwiftSpeechButtonView(input: $swiftSpeechTempText, output: $swiftSpeechTempText)
                     .onChange (of: swiftSpeechTempText) { value in
 //                        newText = "\(message ?? "") \(swiftSpeechTempText)"
                         message = swiftSpeechTempText
@@ -271,10 +278,9 @@ struct NotePage: View {
 //                        swiftSpeechTempText = message ?? ""
 //                    }
 //                    .animation(.easeOut)
-//                    .onAppear() {
-//                        newText = message ?? ""
-//                        swiftSpeechTempText = message ?? ""
-//                    }
+                    .onAppear() {
+                        swiftSpeechTempText = message ?? ""
+                    }
 //                    .onChange(of: message) { value in
 //                        swiftSpeechTempText = message ?? ""
 //                    }
@@ -319,11 +325,12 @@ struct NotePage: View {
                 
             }
         }
-        .onAppear() {
-            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-            dateString = dateFormatter.string(from: date as Date)
-            
-        }
+//        .onAppear() {
+//            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+//            print (note.lastUpdated ?? "")
+//            dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
+//
+//        }
         .padding(.top, 10)
         .background(Color(UIColor(named: "NoteBG")!))
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -345,8 +352,13 @@ struct NotePage: View {
     
         note.note = message ?? "" //input message
         
-        note.date = dateString //formatted date to display
-        note.createdAt = Date()
+       // note.date = dateString //formatted date to display
+        
+        note.lastUpdated = Date()
+        
+        dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+        
+        note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
     
         note.emoji = selected
         

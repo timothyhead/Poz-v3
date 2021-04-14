@@ -81,13 +81,6 @@ struct NotebookView: View {
             
             if firstTimeLaunched {
                 SwipeTutorialView(show: firstTimeLaunched)
-                    .onAppear() {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                            withAnimation () {
-                                firstTimeLaunched = false
-                            }
-                        }
-                    }
             }
         }
         .onTapGesture {

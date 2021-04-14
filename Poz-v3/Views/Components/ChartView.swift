@@ -101,7 +101,7 @@ struct smallGoalView : View {
         for note in notes {
             
 //            let sameDay = Calendar.current.isDate(date, equalTo: note.createdAt ?? Date().addingTimeInterval(100000), toGranularity: .day)
-            let isToday = Calendar.current.isDateInToday(note.createdAt ?? Date().addingTimeInterval(1000000))
+            let isToday = Calendar.current.isDateInToday(note.lastUpdated ?? Date().addingTimeInterval(1000000))
             
             if(isToday && note.note != settings.welcomeText && note.note != "") {
                 entriesToday += 1
