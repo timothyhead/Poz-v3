@@ -16,7 +16,7 @@ struct BookView: View {
     
     //to get last date
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: false)]) var notes: FetchedResults<Note>
+    @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.lastUpdated, ascending: false)]) var notes: FetchedResults<Note>
     
     @State var date = Date()
     @State var dateFormatter = DateFormatter();
@@ -75,26 +75,23 @@ struct BookView: View {
                     }
                     .padding(.bottom, 10)
                     .scaleEffect(isOpening ? 1.75 : 1)
-                    
+                    .onAppear() {
+                        dateFormatter.dateFormat = "MM/dd/yy"
+                        dateString = dateFormatter.string(from: (notes[0].lastUpdated ?? Date()) as Date)
+                    }
                 }
                 
-                if !isOpening {
-                    
-                    //book details and edit button
-                    HStack (spacing: 0) {
-                        Text("Last updated: ")
-                            .font(Font.custom("Poppins-Light", size:
-                                                (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
-                            .foregroundColor(Color(UIColor(named: "PozGray")!))
-                        
-                            Text(dateString)
-                                .font(Font.custom("Poppins-Medium", size:
-                    (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
-                                .onAppear() {
-                                    dateFormatter.dateFormat = "MM/dd/yy"
-                                    dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
-                                }
-                        
+                if (!isOpening && dateString != "12/31/00") {
+                        //book details and edit button
+                        HStack (spacing: 0) {
+                            Text("Last updated: ")
+                                .font(Font.custom("Poppins-Light", size:
+                                                    (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                                .foregroundColor(Color(UIColor(named: "PozGray")!))
+                            
+                                Text(dateString)
+                                    .font(Font.custom("Poppins-Medium", size:
+                        (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
                         
                         Button( action: {
                             customizeJournal.toggle()
@@ -110,10 +107,6 @@ struct BookView: View {
                         })
                     }
                     .padding(.bottom, 85)
-                    
-//                    withAnimation () {
-//                        PromptsViewB(promptSelectedIndex: $promptSelectedIndex, tabIndex:$tabIndex,  isOpening: $isOpening).environment(\.managedObjectContext, self.moc)
-//                    }
                 }
             }
            

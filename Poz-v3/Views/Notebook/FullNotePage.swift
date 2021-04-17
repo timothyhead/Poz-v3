@@ -55,19 +55,11 @@ struct NotePage: View {
                     
                 }
                 .padding(.bottom, 20)
-//                .onAppear() {
-//                    dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
-////                    if note.date != "-" {
-////                        dateString = note.date ?? "-"
-////                    } else {
-//                        dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
-////                    }
-//                }
-//
-//            Divider()
-//                .foregroundColor(Color.primary)
-//                .padding(.horizontal, 20)
-//                .padding(.bottom, 3)
+                .onChange(of: message) { value in
+                    if (message != "" && message != initialText) {
+                        dateString = dateFormatter.string(from: Date() as Date)
+                    }
+                }
             
             //text input
             VStack {
@@ -186,25 +178,25 @@ struct NotePage: View {
                     selected = "🙏🏾"
                 }
             }
-            .onChange(of: message) { value in
-                if (message != "" && message != initialText) {
-                    dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
-                }
-            }
             .onTapGesture {
                 hideKeyboard() //hide keyboard when user taps outside text field
             }
             .onAppear() {
+                initialText = note.note ?? ""
                 message = note.note
                 selected = note.emoji ?? ""
                 dynamicPrompt = note.prompt ?? ""
                 dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
                 
-//                if (note.lastUpdated != nil) {
+                
+                print(dateFormatter.string(from: (note.lastUpdated ?? date) as Date) )
+                
+                if (dateFormatter.string(from: (note.lastUpdated ?? date) as Date) != "Dec 31, 2000 | 4:00 PM") {
                     dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
-//                } else {
-//                    dateString = "-"
-//                }
+                } else {
+                    print("hi")
+                    dateString = "-"
+                }
             }
             .onDisappear() {
                 
@@ -325,12 +317,6 @@ struct NotePage: View {
                 
             }
         }
-//        .onAppear() {
-//            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-//            print (note.lastUpdated ?? "")
-//            dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
-//
-//        }
         .padding(.top, 10)
         .background(Color(UIColor(named: "NoteBG")!))
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
