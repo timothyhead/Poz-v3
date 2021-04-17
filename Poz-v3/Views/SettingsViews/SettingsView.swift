@@ -56,11 +56,11 @@ struct SettingsView: View {
                 
                 Section(header: Text("Application")) {
                     
-                    NavigationLink(destination: FeedbackView() ) {
-                        HStack {
-                            Text("Feedback / Contact Us")
-                        }
-                    }
+//                    NavigationLink(destination: FeedbackView() ) {
+//                        HStack {
+//                            Text("Feedback / Contact Us")
+//                        }
+//                    }
                     NavigationLink(destination: PrivacyPolicyView() ) {
                         HStack {
                             Text("Privacy")

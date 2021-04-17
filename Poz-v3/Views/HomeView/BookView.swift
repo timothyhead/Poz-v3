@@ -67,10 +67,10 @@ struct BookView: View {
                         
                         // Small chart
                         
-                        if settings.goalNumber > 0 {
-                            smallGoalView(settings: settings)
-                                .offset(x: (UIScreen.main.bounds.width/2)/3.3, y: (UIScreen.main.bounds.width/2)/2)
-                        }
+//                        if settings.goalNumber > 0 {
+//                            smallGoalView(settings: settings)
+//                                .offset(x: (UIScreen.main.bounds.width/2)/3.3, y: (UIScreen.main.bounds.width/2)/2)
+//                        }
                      
                     }
                     .padding(.bottom, 10)
@@ -81,20 +81,32 @@ struct BookView: View {
                     }
                 }
                 
-                if (!isOpening && dateString != "12/31/00") {
+                if (!isOpening) {
                         //book details and edit button
                         HStack (spacing: 0) {
-                            Text("Last updated: ")
-                                .font(Font.custom("Poppins-Light", size:
-                                                    (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
-                                .foregroundColor(Color(UIColor(named: "PozGray")!))
                             
-                                Text(dateString)
-                                    .font(Font.custom("Poppins-Medium", size:
-                        (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                            if (dateString != "12/31/00") {
+                                Text("Last updated: ")
+                                    .font(Font.custom("Poppins-Light", size:
+                                                        (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                                    .foregroundColor(Color(UIColor(named: "PozGray")!))
+                                
+                                    Text(dateString)
+                                        .font(Font.custom("Poppins-Medium", size:
+                            (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                            
+                            } else {
+                                Text("Add your first entry")
+                                    .font(Font.custom("Poppins-Light", size:
+                                                        (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                                    .foregroundColor(Color(UIColor(named: "PozGray")!))
+                            }
                         
                         Button( action: {
-                            customizeJournal.toggle()
+                            withAnimation(.spring()) {
+                                isOpening = true
+                                openBook()
+                            }
                         } ) {
                             Text("✏️")
                                 .font(Font.custom("Poppins-Medium", size: (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))

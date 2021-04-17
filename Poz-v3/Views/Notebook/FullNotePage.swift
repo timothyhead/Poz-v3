@@ -188,13 +188,9 @@ struct NotePage: View {
                 dynamicPrompt = note.prompt ?? ""
                 dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
                 
-                
-                print(dateFormatter.string(from: (note.lastUpdated ?? date) as Date) )
-                
                 if (dateFormatter.string(from: (note.lastUpdated ?? date) as Date) != "Dec 31, 2000 | 4:00 PM") {
                     dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
                 } else {
-                    print("hi")
                     dateString = "-"
                 }
             }
@@ -337,8 +333,6 @@ struct NotePage: View {
         note.id = UUID() //create id
     
         note.note = message ?? "" //input message
-        
-       // note.date = dateString //formatted date to display
         
         note.lastUpdated = Date()
         

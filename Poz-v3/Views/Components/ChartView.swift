@@ -12,30 +12,47 @@ struct barGoalView : View {
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
-    @State var entriesToday = 0
-    
     @State var show = false
     
+    var chartWidth = UIScreen.main.bounds.width-60
+    
     var body : some View {
-        ZStack (alignment: .leading) {
+        ZStack (alignment: .center) {
             if settings.goalNumber > 0 {
                 
-                Rectangle().frame(width: 400, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .padding()
-                Rectangle().frame(width: 200, height: 10, alignment: .center)
-                
-                
-                if show {
-//                    RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: ((CGFloat(entriesToday))/(CGFloat(settings.goalNumber)) == 0.0) ? 0.01 : ((CGFloat(entriesToday))/(CGFloat(settings.goalNumber))), sizeScale: 0.4, animateOn: true)
+                HStack (alignment: .center) {
+                    Spacer()
+                    ZStack (alignment: .leading) {
+                        Rectangle()
+                            .frame(width: UIScreen.main.bounds.width-60, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .foregroundColor(Color(#colorLiteral(red: 0.2391142547, green: 0.6743282676, blue: 0.9696038365, alpha: 1)).opacity(0.2))
+                            .cornerRadius(25)
+                        
+                        Rectangle()
+                            .frame(width: show ? ((calcGoalPerformance() > 1) ? chartWidth : (calcGoalPerformance()*chartWidth)) : 0, height: 12, alignment: .center)
+                            .cornerRadius(25)
+                            .foregroundColor(Color(#colorLiteral(red: 0.2391142547, green: 0.6743282676, blue: 0.9696038365, alpha: 1)))
+                            .animation(.easeOut(duration: 2))
+                    }
+                    Spacer()
+                }
+                .onAppear() {
+                    show = true
+                    print(calcGoalPerformance())
                 }
                 
-                Text("\(entriesToday)/\(settings.goalNumber)")
-                    .font(Font.custom("Poppins-Bold", size: (entriesToday > 9 ? 12.5 : 16)))
-                    .foregroundColor(Color(UIColor(named: "PozBlue")!))
+                HStack (spacing: 2) {
+                    Text("\(countEntriesToday())/\(settings.goalNumber)")
+                        .font(Font.custom("Poppins-Medium", size: (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+//                        .foregroundColor(Color(#colorLiteral(red: 0.2391142547, green: 0.6743282676, blue: 0.9696038365, alpha: 1)))
+                    Text(" entries completed today")
+                        .font(Font.custom("Poppins-Light", size: (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                        .foregroundColor(Color(UIColor(named: "PozGray")!))
+                }
+                .offset(x: 0, y: -25)
             }
         }
         .onAppear() {
-            countEntriesToday()
             dateFormatter.dateFormat = "MM/dd/yy"
             dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
             
@@ -45,16 +62,22 @@ struct barGoalView : View {
         }
     }
     
-    func countEntriesToday () {
+    func calcGoalPerformance () -> CGFloat {
+        return (CGFloat(countEntriesToday()))/(CGFloat(settings.goalNumber))
+    }
+    
+    func countEntriesToday () -> Int {
+        var entriesToday = 0
+        
         for note in notes {
+            let isToday = Calendar.current.isDateInToday(note.lastUpdated ?? Date().addingTimeInterval(1000000))
             
-//            let sameDay = Calendar.current.isDate(date, equalTo: note.createdAt ?? Date().addingTimeInterval(100000), toGranularity: .day)
-            let isToday = Calendar.current.isDateInToday(note.createdAt ?? Date().addingTimeInterval(100000))
-            
-            if (isToday && note.note != settings.welcomeText ) {
+            if(isToday && note.note != settings.welcomeText && note.note != "") {
                 entriesToday += 1
             }
+            
         }
+        return entriesToday
     }
 }
 
@@ -99,16 +122,11 @@ struct smallGoalView : View {
         var entriesToday = 0
         
         for note in notes {
-            
-//            let sameDay = Calendar.current.isDate(date, equalTo: note.createdAt ?? Date().addingTimeInterval(100000), toGranularity: .day)
             let isToday = Calendar.current.isDateInToday(note.lastUpdated ?? Date().addingTimeInterval(1000000))
             
             if(isToday && note.note != settings.welcomeText && note.note != "") {
                 entriesToday += 1
             }
-//            if (isToday && note.note != settings.welcomeText && note.note != "") {
-//                entriesToday += 1
-//            }
             
         }
         return entriesToday

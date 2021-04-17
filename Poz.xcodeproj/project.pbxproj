@@ -101,6 +101,15 @@
 		DE3D2ED92616CFB700C209CB /* OnboardingNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */; };
 		DE3D2EDA2616CFB700C209CB /* OnboardingNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */; };
 		DE3D2EDB2616CFB700C209CB /* OnboardingNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */; };
+		DE47B83E262B942800C6C5DB /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B83D262B942800C6C5DB /* MailView.swift */; };
+		DE47B83F262B942800C6C5DB /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B83D262B942800C6C5DB /* MailView.swift */; };
+		DE47B840262B942800C6C5DB /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B83D262B942800C6C5DB /* MailView.swift */; };
+		DE47B845262B9F9200C6C5DB /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B844262B9F9200C6C5DB /* OnboardingController.swift */; };
+		DE47B846262B9F9200C6C5DB /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B844262B9F9200C6C5DB /* OnboardingController.swift */; };
+		DE47B847262B9F9200C6C5DB /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B844262B9F9200C6C5DB /* OnboardingController.swift */; };
+		DE47B84C262B9FB200C6C5DB /* OnboardingStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B84B262B9FB200C6C5DB /* OnboardingStepView.swift */; };
+		DE47B84D262B9FB200C6C5DB /* OnboardingStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B84B262B9FB200C6C5DB /* OnboardingStepView.swift */; };
+		DE47B84E262B9FB200C6C5DB /* OnboardingStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B84B262B9FB200C6C5DB /* OnboardingStepView.swift */; };
 		DE5A4DAF260D6618000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB0260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB1260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
@@ -230,6 +239,9 @@
 		DE392DAD260CE7CF00715173 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		DE3D2ED12615981900C209CB /* FullNotePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullNotePage.swift; sourceTree = "<group>"; };
 		DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNew.swift; sourceTree = "<group>"; };
+		DE47B83D262B942800C6C5DB /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		DE47B844262B9F9200C6C5DB /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
+		DE47B84B262B9FB200C6C5DB /* OnboardingStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepView.swift; sourceTree = "<group>"; };
 		DE5A4DAE260D6618000FB0E9 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
 		DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTopMenuView.swift; sourceTree = "<group>"; };
@@ -405,6 +417,7 @@
 				DE392CD7260AAB2400715173 /* SettingsView.swift */,
 				DEB16A5F261408610007505C /* AcknowledgementsView.swift */,
 				DEB16A512613B8610007505C /* FeedbackView.swift */,
+				DE47B83D262B942800C6C5DB /* MailView.swift */,
 				DE392D88260BD23500715173 /* CustomizeJournalView.swift */,
 			);
 			path = SettingsViews;
@@ -416,6 +429,8 @@
 				DE335971261D705400FF2D3B /* SwipeTutorialView.swift */,
 				DEF838DD261E6C3C00556E5E /* HomeViewTutorial.swift */,
 				DE3D2ED82616CFB700C209CB /* OnboardingNew.swift */,
+				DE47B844262B9F9200C6C5DB /* OnboardingController.swift */,
+				DE47B84B262B9FB200C6C5DB /* OnboardingStepView.swift */,
 				DEB16A3726138E0A0007505C /* OnboardingPage.swift */,
 			);
 			path = Onboarding;
@@ -704,6 +719,8 @@
 				DE392CD1260AA2A800715173 /* DashboardView.swift in Sources */,
 				DE335972261D705400FF2D3B /* SwipeTutorialView.swift in Sources */,
 				DE5A4DAF260D6618000FB0E9 /* BookView.swift in Sources */,
+				DE47B845262B9F9200C6C5DB /* OnboardingController.swift in Sources */,
+				DE47B84C262B9FB200C6C5DB /* OnboardingStepView.swift in Sources */,
 				DE5A4DD8260E9BE5000FB0E9 /* Poz_v3.xcdatamodeld in Sources */,
 				DE392CD8260AAB2400715173 /* SettingsView.swift in Sources */,
 				DEB16A072612F8CC0007505C /* BookPatternModel.swift in Sources */,
@@ -711,6 +728,7 @@
 				DEB16A3826138E0A0007505C /* OnboardingPage.swift in Sources */,
 				DE392CFA260AC64300715173 /* RingView.swift in Sources */,
 				DE392D9D260C512A00715173 /* HomeButtonView.swift in Sources */,
+				DE47B83E262B942800C6C5DB /* MailView.swift in Sources */,
 				DEB16A67261409000007505C /* TermsOfServiceView.swift in Sources */,
 				DE982EAB260F25170087E0ED /* GrowingTextInputView.swift in Sources */,
 				DE392D61260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
@@ -748,6 +766,7 @@
 			files = (
 				DE392CEB260AAB6000715173 /* SettingsModel.swift in Sources */,
 				DE5A4DC4260E8146000FB0E9 /* NotebookView.swift in Sources */,
+				DE47B83F262B942800C6C5DB /* MailView.swift in Sources */,
 				DE392D2B260AE6C500715173 /* ChartView.swift in Sources */,
 				DE392CD9260AAB2500715173 /* SettingsView.swift in Sources */,
 				DED1299026112CA700C2DE33 /* UserSettingsView.swift in Sources */,
@@ -755,7 +774,9 @@
 				DE392CFB260AC64300715173 /* RingView.swift in Sources */,
 				DE392CD2260AA2A800715173 /* DashboardView.swift in Sources */,
 				DE5A4DD6260E9BE4000FB0E9 /* Poz_v3.xcdatamodeld in Sources */,
+				DE47B846262B9F9200C6C5DB /* OnboardingController.swift in Sources */,
 				DEB16A2C2613813F0007505C /* BookPatternModel.swift in Sources */,
+				DE47B84D262B9FB200C6C5DB /* OnboardingStepView.swift in Sources */,
 				DEF838DF261E6C3C00556E5E /* HomeViewTutorial.swift in Sources */,
 				DEB16A532613B8610007505C /* FeedbackView.swift in Sources */,
 				DE392D62260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
@@ -817,6 +838,7 @@
 				DE392D95260BEC2700715173 /* PopOverView.swift in Sources */,
 				DE5A4DB1260D6619000FB0E9 /* BookView.swift in Sources */,
 				DE392D1D260AD18300715173 /* TabsView.swift in Sources */,
+				DE47B847262B9F9200C6C5DB /* OnboardingController.swift in Sources */,
 				DE392D7D260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392D9F260C512A00715173 /* HomeButtonView.swift in Sources */,
 				DEB16A2D2613813F0007505C /* BookPatternModel.swift in Sources */,
@@ -826,6 +848,8 @@
 				DE392CBA260AA22300715173 /* ContentView.swift in Sources */,
 				DE5A4DDF260EC095000FB0E9 /* NoteTopMenuView.swift in Sources */,
 				DE392D10260ACE9900715173 /* SearchView.swift in Sources */,
+				DE47B840262B942800C6C5DB /* MailView.swift in Sources */,
+				DE47B84E262B9FB200C6C5DB /* OnboardingStepView.swift in Sources */,
 				DE392DB0260CE7CF00715173 /* NotificationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

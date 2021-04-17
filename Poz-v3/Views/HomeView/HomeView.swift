@@ -71,9 +71,13 @@ struct HomeView: View {
                 
                 BookView(settings: settings, tabIndex: $tabIndex, isOpening: $bookOpenAnimation, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
                 
+                
                 Spacer()
+                
+                if !bookOpenAnimation {
+                    barGoalView(settings: settings)
+                }
             }
-            // settings modal sheet
             .padding(.top, 60).padding(.bottom, 30)
             .background(Color(UIColor(named: "HomeBG")!))
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
