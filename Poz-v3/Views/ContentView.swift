@@ -27,18 +27,29 @@ struct ContentView: View {
     
     @State var firstTimeLaunched = true
     
+    @State private var onboardingDone = true
+    
     var body: some View {
             
             VStack {
                 if isUnlocked {
                     
-                    if tabIndex == -1 {
-//                        OnboardingView(settings: settings, tabIndex: $tabIndex)
-                        OnboardingNew(settings: settings, tabIndex: $tabIndex)
+                    if tabIndex == 0 {
                         
-                    } else if tabIndex == 0 {
-                        HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+                        Group {
+                            if !onboardingDone {
+                                OnboardingView(settings: settings, tabIndex: $tabIndex, doneFunction: {
+                                    self.onboardingDone = true
+                                    print("done onboarding")
+                                })
+                            } else {
+                                HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+                            }
+                        }
                         
+//                    } else if tabIndex == 0 {
+//                        HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+//                        
                     } else if tabIndex == 1 {
                         NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex, firstTimeLaunched: $firstTimeLaunched).environment(\.managedObjectContext, self.moc)
                     }
@@ -56,8 +67,6 @@ struct ContentView: View {
             }
             
             if (isAppAlreadyLaunchedOnce()) {
-                
-                
                 
                 firstTimeNotebookIndex = 1
 //                firstTimeLaunched = false
@@ -93,7 +102,7 @@ struct ContentView: View {
         }
     }
 
-    func isAppAlreadyLaunchedOnce()->Bool{
+    func isAppAlreadyLaunchedOnce()->Bool {
         let defaults = UserDefaults.standard
 
         if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){

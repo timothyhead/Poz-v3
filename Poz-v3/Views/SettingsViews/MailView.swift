@@ -3,6 +3,8 @@ import SwiftUI
 import UIKit
 import MessageUI
 
+// taken from https://www.youtube.com/watch?v=S1qM9oNEwLE&t=62s
+
 struct MailView: UIViewControllerRepresentable {
 
     @Environment(\.presentationMode) var presentation

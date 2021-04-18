@@ -1,10 +1,3 @@
-//
-//  BookPatternModel.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/29/21.
-//
-
 import SwiftUI
 
 struct bookPattern : Hashable {

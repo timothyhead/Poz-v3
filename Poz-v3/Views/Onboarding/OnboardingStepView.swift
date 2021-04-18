@@ -2,14 +2,14 @@ import SwiftUI
 
 struct OnboardingStepView: View {
     var data: OnboardingDataModel
-    
+    @State var textString = ""
     var body: some View {
         VStack {
             Image(data.image)
                 .resizable()
                 .scaledToFit()
                 .padding(.bottom, 50)
-            
+            TextField("HI", text: $textString)
             Text(data.heading)
                 .font(.system(size: 25, design: .rounded))
                 .fontWeight(.bold)

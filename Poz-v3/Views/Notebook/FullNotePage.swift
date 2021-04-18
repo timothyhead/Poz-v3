@@ -75,24 +75,24 @@ struct NotePage: View {
                         
                         if dynamicPrompt != "" {
                             Text(dynamicPrompt)
-                                .font(Font.custom("Poppins-Bold", size: 16))
-//                                .padding(.top, 16)
+                                .font(Font.custom("Poppins-Medium", size: 16))
                         }
                         
                         if promptSelectedIndex == 0 {
                         }
-                        if promptSelectedIndex == 1 {
-                            HStack {
-                                Image(systemName: "paperplane")
+                        if selected == "📪" {
+                            if message != initialText {
+                                HStack {
+                                    Image(systemName: "paperplane")
 
-                                Text("This will be sent back to you")
+                                    Text("This will be sent back to you")
 
-                            }
-                            .foregroundColor(Color.blue)
-                            .font(Font.custom("Poppins-Regular", size: 16))
-                            .padding(.vertical,5)
-
-                            VStack {
+                                }
+                                .foregroundColor(Color.blue)
+                                .font(Font.custom("Poppins-Regular", size: 16))
+                                .padding(.vertical,5)
+                            
+                                VStack {
 
                                 Picker(selection: $noteToSelfRandomTime, label: Text("Random or manual time?")) {
                                     Text("Random Time").tag(false)
@@ -128,18 +128,20 @@ struct NotePage: View {
                                             }
                                         }
                                 }
-                                }
-                        }
-                        if promptSelectedIndex == 3 {
-                            HStack {
-                                Image(systemName: "trash")
-
-                                Text("This will be autodeleted")
-
                             }
-                            .foregroundColor(Color.red)
-                            .font(Font.custom("Poppins-Regular", size: 16))
-                            .padding(.top, 8)
+                            }
+                        }
+                        if selected == "💢" {
+//                            if message != initialText {
+                                HStack {
+                                    Image(systemName: "trash")
+                                    Text("This will be autodeleted")
+
+                                }
+                                .foregroundColor(Color.red)
+                                .font(Font.custom("Poppins-Regular", size: 16))
+                                .padding(.top, 8)
+//                            }
                         }
                         
                         //text input
@@ -204,36 +206,13 @@ struct NotePage: View {
                     
                 }
                 
-//                if promptSelectedIndex == 3 {
-////                    
-////                    note.note = message ?? ""
-////                    note.emoji = "💢"
-////                    note.prompt = dynamicPrompt
-//
-//                    print("aaa")
-//                    
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                        note.note = "Message autodeleted" //input message
-//                        note.emoji = "🗑"  // emoji
-//                        note.prompt = ""
-//                        try? self.moc.save()
-//                    }
-//
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-//                        note.note = "" //input message
-//                        note.emoji = ""  // emoji
-//                        note.prompt = ""
-//                        try? self.moc.save()
-//                        print("note deleted")
-//                    }
-//                }
-                
                 
                 if ((message != "" || selected != "") && message !=
                         settings.welcomeText && (message != initialText || selected != initialEmoji)) {
                     saveNoteB()
                     
                 }
+                
             }
 
             if emojiPickerShowing {
@@ -244,8 +223,6 @@ struct NotePage: View {
             if addPromptShowing {
                 PromptsViewC(promptIndex: $promptSelectedIndex)
                     .padding(.bottom, 50)
-                    .onAppear() {
-                    }
             }
             
             HStack (spacing: 0) {
@@ -269,9 +246,13 @@ struct NotePage: View {
                     .onAppear() {
                         swiftSpeechTempText = message ?? ""
                     }
+                    .animation(.easeOut)
 //                    .onChange(of: message) { value in
 //                        swiftSpeechTempText = message ?? ""
 //                    }
+                
+                PromptsButton(addPromptShowing: $addPromptShowing)
+//
                 
                 Button (action: {
                     //clearNote()
@@ -292,10 +273,7 @@ struct NotePage: View {
                     )
                 }
                 .animation(.easeOut)
-               
-
-               // PromptsButton(addPromptShowing: $addPromptShowing)
-                
+                .padding(.horizontal, 20)
                 
                 Spacer()
                 
@@ -319,6 +297,34 @@ struct NotePage: View {
         
     }
     
+    func saveNoteB () {
+        
+        if (promptSelectedIndex == 3) {
+            note.note = ""
+            note.prompt = ""
+            note.emoji = ""
+        } else {
+            note.id = UUID() //create id
+        
+            note.note = message ?? "" //input message
+            
+            note.lastUpdated = Date()
+            
+            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+            
+            note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+        
+            note.emoji = selected
+            
+            note.prompt = dynamicPrompt
+        }
+        
+        try? self.moc.save()
+        
+        promptSelectedIndex = 0
+        
+    }
+    
     func clearNote() {
         message = ""
         note.note = ""
@@ -326,28 +332,6 @@ struct NotePage: View {
         note.emoji = ""
         dateString = "-"
         note.date = "-"
-    }
-    
-    func saveNoteB () {
-        
-        note.id = UUID() //create id
-    
-        note.note = message ?? "" //input message
-        
-        note.lastUpdated = Date()
-        
-        dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-        
-        note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
-    
-        note.emoji = selected
-        
-        note.prompt = dynamicPrompt
-        
-        try? self.moc.save()
-        
-        promptSelectedIndex = 0
-        
     }
     
     func clearNotifications (message: String) {
@@ -476,7 +460,7 @@ struct PromptsButton : View {
             }
             Button(action: { addPromptShowing.toggle() }) {
                 
-                Text("📝")
+                Text("⚡️")
                     .font(.system(size: 30))
             }
         }

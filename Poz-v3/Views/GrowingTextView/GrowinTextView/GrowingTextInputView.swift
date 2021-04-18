@@ -36,6 +36,7 @@ struct GrowingTextInputView: View {
           Text($0)
             .foregroundColor(.gray)
             .font(Font.custom("Poppins-Regular", size: 16))
+            .offset(x: 4, y: 6)
         } : nil
     )
   }

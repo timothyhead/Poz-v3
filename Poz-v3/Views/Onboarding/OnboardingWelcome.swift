@@ -1,7 +1,6 @@
 import SwiftUI
-import Pages
 
-struct OnboardingNew: View {
+struct OnboardingWelcome: View {
     
     @State var index = 0
     @ObservedObject var settings: SettingsModel
@@ -26,20 +25,8 @@ struct OnboardingNew: View {
             Image("Alone").resizable().frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.width - 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .padding(.bottom, 30)
             
-            Button (action: { tabIndex = 0 }) {
-                ZStack {
-                    Text("Get started")
-                }
-                .foregroundColor(.black)
-                .frame(width: 200, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .background(Color(#colorLiteral(red: 0.980877459, green: 0.8209024072, blue: 0.5006054044, alpha: 1)))
-                .cornerRadius(100)
-            }
-            
         }
         .background((Color(UIColor(named: "HomeBG")!)))
-        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        .padding(.all, 20)
         
     }
 }
