@@ -27,7 +27,7 @@ struct ContentView: View {
     
     @State var firstTimeLaunched = true
     
-    @State private var onboardingDone = true
+    @State private var onboardingDone: Bool = UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce")
     
     var body: some View {
             
@@ -72,7 +72,7 @@ struct ContentView: View {
 //                firstTimeLaunched = false
             } else {
 //                firstTimeLaunched = true
-                tabIndex = -1
+//                tabIndex = -1
                 
                 //create welcome message
                 let welcomeNote = Note(context: self.moc)
