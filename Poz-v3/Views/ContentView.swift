@@ -19,14 +19,15 @@ struct ContentView: View {
     @State var firstTimeNotebookIndex = 0
     
     @State var promptSelectedIndex = 0
+    @State var promptSelectedFromHome = false
     
-    @State var isUnlocked = false
+    @State var isUnlocked = true
     
     @State var isAuthenticateOn = false
     
     @State var firstTimeLaunched = true
     
-    @State private var onboardingDone: Bool = false //UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce")
+    @State private var onboardingDone: Bool = UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce")
     
     var body: some View {
             
@@ -42,15 +43,12 @@ struct ContentView: View {
                                     print("done onboarding")
                                 })
                             } else {
-                                HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+                                HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome).environment(\.managedObjectContext, self.moc)
                             }
                         }
                         
-//                    } else if tabIndex == 0 {
-//                        HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
-//                        
                     } else if tabIndex == 1 {
-                        NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex, firstTimeLaunched: $firstTimeLaunched).environment(\.managedObjectContext, self.moc)
+                        NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome, firstTimeLaunched: $firstTimeLaunched).environment(\.managedObjectContext, self.moc)
                     }
                     
                 } else {
@@ -61,26 +59,24 @@ struct ContentView: View {
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             .onAppear {
             
-                if (isUnlocked == false) {
-                    AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
-                }
+
                 
                 if (isAppAlreadyLaunchedOnce()) {
                     
                     firstTimeNotebookIndex = 1
-    //                firstTimeLaunched = false
+                    firstTimeLaunched = false
+                    
                 } else {
-    //                firstTimeLaunched = true
-    //                tabIndex = -1
+                    firstTimeLaunched = true
                         
-                        //create welcome message
-                        let welcomeNote = Note(context: self.moc)
-                        
-                        welcomeNote.id = UUID() //create id
-                        welcomeNote.emoji = "🗂️"
-                        welcomeNote.note = settings.welcomeText
-                        welcomeNote.createdAt = Date() //actual date to sort
-                        welcomeNote.date = "-"
+                    //create welcome message
+                    let welcomeNote = Note(context: self.moc)
+                    
+                    welcomeNote.id = UUID() //create id
+                    welcomeNote.emoji = "🗂️"
+                    welcomeNote.note = settings.welcomeText
+                    welcomeNote.createdAt = Date() //actual date to sort
+                    welcomeNote.date = "-"
                         
                     try? self.moc.save()
                     
@@ -97,6 +93,12 @@ struct ContentView: View {
                     }
                     
                     UserDefaults.standard.set(2, forKey: "goalNumber")
+                }
+                
+                if !isUnlocked {
+                    if !firstTimeLaunched {
+                        AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+                    }
                 }
         }
     }

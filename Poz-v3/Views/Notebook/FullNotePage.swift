@@ -33,6 +33,7 @@ struct NotePage: View {
     let note: Note  // = Note(context: self.moc)
 
     @Binding var promptSelectedIndex: Int
+    @Binding var promptSelectedFromHome: Bool
     @Binding var tabIndex: Int
     @Binding var showPageSlider: Bool
     
@@ -55,11 +56,11 @@ struct NotePage: View {
                     
                 }
                 .padding(.bottom, 20)
-                .onChange(of: message) { value in
-                    if (message != "" && message != initialText) {
-                        dateString = dateFormatter.string(from: Date() as Date)
-                    }
-                }
+//                .onChange(of: message) { value in
+//                    if (message != "" && message != initialText && dateString != dateFormatter.string(from: Date() as Date)) {
+//                        dateString = dateFormatter.string(from: Date() as Date)
+//                    }
+//                }
             
             //text input
             VStack {
@@ -159,7 +160,26 @@ struct NotePage: View {
                 .padding(.top, -11)
             }
             .onChange(of: promptSelectedIndex) { value in
-                activatePrompt()
+                if promptSelectedIndex == 0 {
+                    dynamicPrompt = ""
+                    selected = ""
+                }
+                if promptSelectedIndex == 1 {
+                    dynamicPrompt = "Leave a note or reminder for your future self."
+                    selected = "📪"
+                }
+                if promptSelectedIndex == 2 {
+                    dynamicPrompt = settings.introspectPrompts.randomElement()!
+                    selected = "🔮"
+                }
+                if promptSelectedIndex == 3 {
+                    dynamicPrompt = "Let it all out, don't hold back."
+                    selected = "💢"
+                }
+                if promptSelectedIndex == 4 {
+                    dynamicPrompt = settings.gratitudePrompts.randomElement()!
+                    selected = "🙏🏾"
+                }
             }
             .onTapGesture {
                 hideKeyboard() //hide keyboard when user taps outside text field
@@ -170,10 +190,6 @@ struct NotePage: View {
                 selected = note.emoji ?? ""
                 dynamicPrompt = note.prompt ?? ""
                 dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-                
-                if promptSelectedIndex != 0 {
-                    activatePrompt()
-                }
                 
                 if (dateFormatter.string(from: (note.lastUpdated ?? date) as Date) != "Dec 31, 2000 | 4:00 PM") {
                     dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
@@ -292,6 +308,7 @@ struct NotePage: View {
             dynamicPrompt = settings.gratitudePrompts.randomElement()!
             selected = "🙏🏾"
         }
+//        promptSelectedFromHome = false
     }
     
     func saveNoteB () {
@@ -314,6 +331,7 @@ struct NotePage: View {
         try? self.moc.save()
         
         promptSelectedIndex = 0
+//        promptSelectedFromHome = false
         
     }
     
@@ -461,170 +479,170 @@ struct PromptsButton : View {
     }
 }
 
-struct promptContent: View {
-    
-    @Binding var promptSelectedIndex: Int
-    @ObservedObject var settings: SettingsModel
-    @Binding var dynamicPrompt:  String
-    @Binding var message: String
-    @Binding var selectedPrompt: Prompt
-    
-    @State var noteToSelfNotification = Date()
-    @State var noteToSelfRandomTime = false
-    
-    var body: some View {
-        //show prompt
-        if (promptSelectedIndex != 0) {
-            if promptSelectedIndex == 4 {
-                Text("\(dynamicPrompt)")
-                    .font(Font.custom("Poppins-Medium", size: 16))
-                    .padding(.top, 10)
-                    .padding(.bottom, -8)
-                    .onAppear() {
-                        dynamicPrompt = settings.gratitudePrompts.randomElement()!
-                    }
-            } else if promptSelectedIndex == 2 {
-                Text("\(dynamicPrompt)")
-                    .font(Font.custom("Poppins-Medium", size: 16))
-                    .padding(.top, 10)
-                    .padding(.bottom, -8)
-                    .onAppear() {
-                        dynamicPrompt = settings.introspectPrompts.randomElement()!
-                    }
-            } else {
-                Text("\(selectedPrompt.prompt)")
-                    .font(Font.custom("Poppins-Medium", size: 16))
-                    .padding(.top, 10)
-                    .padding(.bottom, -8)
-            }
-        }
-                
-        //if vent selected
-        if promptSelectedIndex == 3 {
-            HStack {
-                Image(systemName: "trash")
-                
-                Text("This will be autodeleted")
-                    
-            }
-            .foregroundColor(Color.red)
-            .font(Font.custom("Poppins-Regular", size: 16))
-            .padding(.top, 8)
-        }
-        
-        //if note to self selected, show note to self notification options
-        if (promptSelectedIndex == 1) {
-            HStack {
-                Image(systemName: "paperplane")
-                
-                Text("This will be sent back to you")
-                    
-            }
-            .foregroundColor(Color.blue)
-            .font(Font.custom("Poppins-Regular", size: 16))
-            .padding(.vertical,5)
-            
-            VStack {
-                
-                Picker(selection: $noteToSelfRandomTime, label: Text("Random or manual time?")) {
-                    Text("Random Time").tag(false)
-                    Text("Manual Time").tag(true)
-                }
-                .font(Font.custom("Poppins-Regular", size: 16))
-                .pickerStyle(SegmentedPickerStyle())
-                
-                if noteToSelfRandomTime {
-                    DatePicker(
-                        "",
-                        selection: $noteToSelfNotification,
-                        displayedComponents: [.date, .hourAndMinute]
-                    )
-                    .font(Font.custom("Poppins-Regular", size: 16))
-                    .onChange (of: noteToSelfNotification) { value in
-                        if message != "" {
-                            createNotification(message: message, dateIn: noteToSelfNotification)
-                        }
-                    }
-                } else {
-                    Text("This note will return to you sometime in the next week")
-                        .font(Font.custom("Poppins-Regular", size: 0)).opacity(0)
-                        .padding(.bottom, -22)
-                        .onAppear() {
-                            if message != "" {
-                                createNotification(message: message, dateIn: generateRandomDate(daysForward: 7)!)
-                            }
-                        }
-                        .onChange (of: message) { value in
-                            if message != "" {
-                                createNotification(message: message, dateIn: generateRandomDate(daysForward: 7)!)
-                            }
-                        }
-                        
-                }
-            }
-        }
-    }
-    
-    func createNotification (message: String, dateIn: Date) {
-        
-        UNUserNotificationCenter.current()
-            .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                if success {
-                    print("Note to self configured")
-                } else if let error = error {
-                    print(error.localizedDescription)
-                }
-            }
-        
-        //remove all notifications with the same message
-        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
-           var identifiers: [String] = []
-           for notification:UNNotificationRequest in notificationRequests {
-            if notification.identifier == "Note to Self \(message )" {
-                  identifiers.append(notification.identifier)
-               }
-           }
-           UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
-        }
-        
-        let content = UNMutableNotificationContent()
-        
-        content.title = "Note to Self"
-        content.subtitle = message
-        content.sound = UNNotificationSound.default
-        
-        let date = dateIn
-        let calendar = Calendar.current
-        
-        
-        var dateComponents = DateComponents()
-        
-        dateComponents.hour = calendar.component(.hour, from: date)
-        dateComponents.minute = calendar.component(.minute, from: date)
-        
-        //daily notification
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        
-        let request = UNNotificationRequest(identifier: String("Note to Self \(message)"), content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request)
-        
-        
-        print("Notification created to print \(message) at \(dateIn)")
-    }
-    
-    func generateRandomDate(daysForward: Int)-> Date? {
-        let day = arc4random_uniform(UInt32(daysForward))+1
-        let hour = arc4random_uniform(23)
-        let minute = arc4random_uniform(59)
-        
-        let today = Date(timeIntervalSinceNow: 0)
-        let gregorian  = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
-        var offsetComponents = DateComponents()
-        offsetComponents.day = Int(day - 1)
-        offsetComponents.hour = Int(hour)
-        offsetComponents.minute = Int(minute)
-        
-        let randomDate = gregorian?.date(byAdding: offsetComponents, to: today, options: .init(rawValue: 0) )
-        return randomDate
-    }
-}
+//struct promptContent: View {
+//
+//    @Binding var promptSelectedIndex: Int
+//    @ObservedObject var settings: SettingsModel
+//    @Binding var dynamicPrompt:  String
+//    @Binding var message: String
+//    @Binding var selectedPrompt: Prompt
+//
+//    @State var noteToSelfNotification = Date()
+//    @State var noteToSelfRandomTime = false
+//
+//    var body: some View {
+//        //show prompt
+//        if (promptSelectedIndex != 0) {
+//            if promptSelectedIndex == 4 {
+//                Text("\(dynamicPrompt)")
+//                    .font(Font.custom("Poppins-Medium", size: 16))
+//                    .padding(.top, 10)
+//                    .padding(.bottom, -8)
+//                    .onAppear() {
+//                        dynamicPrompt = settings.gratitudePrompts.randomElement()!
+//                    }
+//            } else if promptSelectedIndex == 2 {
+//                Text("\(dynamicPrompt)")
+//                    .font(Font.custom("Poppins-Medium", size: 16))
+//                    .padding(.top, 10)
+//                    .padding(.bottom, -8)
+//                    .onAppear() {
+//                        dynamicPrompt = settings.introspectPrompts.randomElement()!
+//                    }
+//            } else {
+//                Text("\(selectedPrompt.prompt)")
+//                    .font(Font.custom("Poppins-Medium", size: 16))
+//                    .padding(.top, 10)
+//                    .padding(.bottom, -8)
+//            }
+//        }
+//
+//        //if vent selected
+//        if promptSelectedIndex == 3 {
+//            HStack {
+//                Image(systemName: "trash")
+//
+//                Text("This will be autodeleted")
+//
+//            }
+//            .foregroundColor(Color.red)
+//            .font(Font.custom("Poppins-Regular", size: 16))
+//            .padding(.top, 8)
+//        }
+//
+//        //if note to self selected, show note to self notification options
+//        if (promptSelectedIndex == 1) {
+//            HStack {
+//                Image(systemName: "paperplane")
+//
+//                Text("This will be sent back to you")
+//
+//            }
+//            .foregroundColor(Color.blue)
+//            .font(Font.custom("Poppins-Regular", size: 16))
+//            .padding(.vertical,5)
+//
+//            VStack {
+//
+//                Picker(selection: $noteToSelfRandomTime, label: Text("Random or manual time?")) {
+//                    Text("Random Time").tag(false)
+//                    Text("Manual Time").tag(true)
+//                }
+//                .font(Font.custom("Poppins-Regular", size: 16))
+//                .pickerStyle(SegmentedPickerStyle())
+//
+//                if noteToSelfRandomTime {
+//                    DatePicker(
+//                        "",
+//                        selection: $noteToSelfNotification,
+//                        displayedComponents: [.date, .hourAndMinute]
+//                    )
+//                    .font(Font.custom("Poppins-Regular", size: 16))
+//                    .onChange (of: noteToSelfNotification) { value in
+//                        if message != "" {
+//                            createNotification(message: message, dateIn: noteToSelfNotification)
+//                        }
+//                    }
+//                } else {
+//                    Text("This note will return to you sometime in the next week")
+//                        .font(Font.custom("Poppins-Regular", size: 0)).opacity(0)
+//                        .padding(.bottom, -22)
+//                        .onAppear() {
+//                            if message != "" {
+//                                createNotification(message: message, dateIn: generateRandomDate(daysForward: 7)!)
+//                            }
+//                        }
+//                        .onChange (of: message) { value in
+//                            if message != "" {
+//                                createNotification(message: message, dateIn: generateRandomDate(daysForward: 7)!)
+//                            }
+//                        }
+//
+//                }
+//            }
+//        }
+//    }
+//
+//    func createNotification (message: String, dateIn: Date) {
+//
+//        UNUserNotificationCenter.current()
+//            .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+//                if success {
+//                    print("Note to self configured")
+//                } else if let error = error {
+//                    print(error.localizedDescription)
+//                }
+//            }
+//
+//        //remove all notifications with the same message
+//        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
+//           var identifiers: [String] = []
+//           for notification:UNNotificationRequest in notificationRequests {
+//            if notification.identifier == "Note to Self \(message )" {
+//                  identifiers.append(notification.identifier)
+//               }
+//           }
+//           UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+//        }
+//
+//        let content = UNMutableNotificationContent()
+//
+//        content.title = "Note to Self"
+//        content.subtitle = message
+//        content.sound = UNNotificationSound.default
+//
+//        let date = dateIn
+//        let calendar = Calendar.current
+//
+//
+//        var dateComponents = DateComponents()
+//
+//        dateComponents.hour = calendar.component(.hour, from: date)
+//        dateComponents.minute = calendar.component(.minute, from: date)
+//
+//        //daily notification
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+//
+//        let request = UNNotificationRequest(identifier: String("Note to Self \(message)"), content: content, trigger: trigger)
+//        UNUserNotificationCenter.current().add(request)
+//
+//
+//        print("Notification created to print \(message) at \(dateIn)")
+//    }
+//
+//    func generateRandomDate(daysForward: Int)-> Date? {
+//        let day = arc4random_uniform(UInt32(daysForward))+1
+//        let hour = arc4random_uniform(23)
+//        let minute = arc4random_uniform(59)
+//
+//        let today = Date(timeIntervalSinceNow: 0)
+//        let gregorian  = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
+//        var offsetComponents = DateComponents()
+//        offsetComponents.day = Int(day - 1)
+//        offsetComponents.hour = Int(hour)
+//        offsetComponents.minute = Int(minute)
+//
+//        let randomDate = gregorian?.date(byAdding: offsetComponents, to: today, options: .init(rawValue: 0) )
+//        return randomDate
+//    }
+//}

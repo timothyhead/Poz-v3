@@ -83,7 +83,7 @@ struct EnableAuthViewOnboard: View {
             
             Spacer()
         }
-        .padding(.top, 160)
+        .padding(.top, 100)
         .multilineTextAlignment(.center)
         .onAppear() {
             canAuthenticate = AuthenticationModel(isUnlocked: $moveForward).canUseAuthentication()

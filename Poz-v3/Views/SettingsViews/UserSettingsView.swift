@@ -31,6 +31,7 @@ struct UserSettingsViewOnboard: View {
     @Binding var nameIsEntered: Bool
     
     @State var isEditing = false
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
@@ -50,7 +51,7 @@ struct UserSettingsViewOnboard: View {
                     
             }
             .padding(10)
-            .background(Color(#colorLiteral(red: 0.4156862745, green: 0.4156862745, blue: 0.4156862745, alpha: 1)))
+            .background(colorScheme == .dark ? Color(#colorLiteral(red: 0.4971166849, green: 0.5021517277, blue: 0.5019699335, alpha: 1)) : Color(#colorLiteral(red: 0.888705194, green: 0.8834225535, blue: 0.892766118, alpha: 1)))
             .font(Font.custom("Poppins-Regular", size: 18))
             .cornerRadius(10)
             .onChange(of: settings.username) { value in
@@ -75,7 +76,7 @@ struct UserSettingsViewOnboard: View {
             settings.username = ""
             nameIsEntered = false
         }
-        .padding(.top, 160)
+        .padding(.top, 100)
         .multilineTextAlignment(.center)
         .padding()
     }

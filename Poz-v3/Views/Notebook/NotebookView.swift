@@ -22,6 +22,7 @@ struct NotebookView: View {
     ) var notes: FetchedResults<Note>
 
     @Binding var promptSelectedIndex: Int
+    @Binding var promptSelectedFromHome: Bool
     @Binding var firstTimeLaunched: Bool
     
     @State var showPageSlider = false
@@ -44,7 +45,7 @@ struct NotebookView: View {
 
             ) { pageIndex, note in
                 
-                NotePage(settings: settings, note: note, promptSelectedIndex: $promptSelectedIndex, tabIndex: $tabIndex, showPageSlider: $showPageSlider).environment(\.managedObjectContext, self.moc)
+                NotePage(settings: settings, note: note, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome, tabIndex: $tabIndex, showPageSlider: $showPageSlider).environment(\.managedObjectContext, self.moc)
                     .onDisappear () {
                         UserDefaults.standard.set(indexNotes, forKey: "LastPageOpen")
                     }

@@ -20,10 +20,13 @@ struct HomeView: View {
     @State var prevPostsShowing = false
     
     @Binding var promptSelectedIndex: Int
+    @Binding var promptSelectedFromHome: Bool
     
     @State var feedbackFormShowing = false
     
     @State var firstTimeShowing = true
+    
+    
 
     var body: some View {
         
@@ -69,7 +72,7 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                BookView(settings: settings, tabIndex: $tabIndex, isOpening: $bookOpenAnimation, promptSelectedIndex: $promptSelectedIndex).environment(\.managedObjectContext, self.moc)
+                BookView(settings: settings, tabIndex: $tabIndex, isOpening: $bookOpenAnimation, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome).environment(\.managedObjectContext, self.moc)
                 
                 
                 Spacer()
@@ -85,18 +88,18 @@ struct HomeView: View {
                 promptSelectedIndex = 0
             }
 
-//            if (firstTimeShowing) {
-//                HomeViewTutorial(show: firstTimeShowing)
-//                    .onAppear() {
-//                        firstTimeShowing = firstTimeAppearing()
-//
+            if (firstTimeShowing) {
+                HomeViewTutorial(show: firstTimeShowing)
+                    .onAppear() {
+                        firstTimeShowing = firstTimeAppearing()
+
 //                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
 //                            withAnimation (.easeOut) {
 //                                firstTimeShowing = firstTimeAppearing()
 //                            }
 //                        }
-//                    }
-//            }
+                    }
+            }
         }
         .onTapGesture {
             firstTimeShowing = false

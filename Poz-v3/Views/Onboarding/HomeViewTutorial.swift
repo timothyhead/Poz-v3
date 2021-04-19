@@ -25,11 +25,11 @@ struct HomeViewTutorial: View {
                         .font(Font.custom("Poppins-Medium", size: 20))
                         .padding(.top, 10)
                     
-                    Text("📙 - Click to open your journal")
+                    Text("Click on your journal to open")
                         .foregroundColor(.white)
                         .font(Font.custom("Poppins-Light", size: 16))
                     
-                    Text("✏️ - Customize your journal")
+                    Text("📪🔮💢🙏🏾 - Jump into a prompt")
                         .foregroundColor(.white)
                         .font(Font.custom("Poppins-Light", size: 16))
                     
@@ -37,7 +37,7 @@ struct HomeViewTutorial: View {
                         .foregroundColor(.white)
                         .font(Font.custom("Poppins-Light", size: 16))
                     
-                    Text("⚙️ - Change your name, setup daily goal and notifications, and much more")
+                    Text("⚙️ - Change your name, customize your journal, setup daily goal and notifications, and much more")
                         .foregroundColor(.white)
                         .font(Font.custom("Poppins-Light", size: 16))
                     

@@ -49,10 +49,12 @@ struct OnboardingView: View {
                     .offset(x: 1 * self.distance)
                     .offset(x: self.slideGesture.width - CGFloat(self.curSlideIndex) * self.distance)
                     .animation(.spring())
+                    .padding(.bottom, 40)
                 EnableAuthViewOnboard(moveForward: $securitySettingSet)
                     .offset(x: 2 * self.distance)
                     .offset(x: self.slideGesture.width - CGFloat(self.curSlideIndex) * self.distance)
                     .animation(.spring())
+                    .padding(.bottom, 40)
                 NotificationsViewOnboard(settings: settings)
                     .offset(x: 3 * self.distance)
                     .offset(x: self.slideGesture.width - CGFloat(self.curSlideIndex) * self.distance)
@@ -66,6 +68,7 @@ struct OnboardingView: View {
                     .offset(x: 5 * self.distance)
                     .offset(x: self.slideGesture.width - CGFloat(self.curSlideIndex) * self.distance)
                     .animation(.spring())
+                    .padding(.bottom, 40)
             }
             .onChange(of: nameIsEntered) { value in
                 if nameIsEntered == true {

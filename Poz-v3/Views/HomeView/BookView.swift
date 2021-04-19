@@ -29,6 +29,7 @@ struct BookView: View {
     @State var bookPatterns = bookPatternsList()
     
     @Binding var promptSelectedIndex: Int
+    @Binding var promptSelectedFromHome: Bool
     
     var body: some View {
         VStack {
@@ -98,7 +99,7 @@ struct BookView: View {
                         (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
                         
                         } else {
-                            Text("Add your first entry")
+                            Text("Click journal to add first entry")
                                 .font(Font.custom("Poppins-Light", size:
                                                     (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
                                 .foregroundColor(Color(UIColor(named: "PozGray")!))
@@ -106,7 +107,7 @@ struct BookView: View {
                 }
                     
                     
-                    PromptsViewB(promptSelectedIndex: $promptSelectedIndex, tabIndex: $tabIndex, isOpening: $isOpening)
+                    PromptsViewB(promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome, tabIndex: $tabIndex, isOpening: $isOpening)
                         .padding(.bottom, 40)
                         .padding(.top, -10)
                 }

@@ -116,6 +116,7 @@ struct PromptsView: View {
 struct PromptsViewB: View {
     
     @Binding var promptSelectedIndex: Int
+    @Binding var promptSelectedFromHome: Bool
     @Binding var tabIndex: Int
     @Binding var isOpening: Bool
     
@@ -137,6 +138,7 @@ struct PromptsViewB: View {
                                 isOpening = true
                             }
                             promptSelectedIndex = prompt.index
+                            promptSelectedFromHome = true
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1.15) {
                                 withAnimation () {
