@@ -33,5 +33,12 @@ struct AuthenticationModel {
         } else {
             self.isUnlocked = true
         }
-    } //faceID function
+    }
+    
+    func canUseAuthentication() -> Bool {
+        let context = LAContext()
+        var error: NSError?
+
+        return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+    }
 }

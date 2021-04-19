@@ -10,7 +10,9 @@ import SwiftUI
 struct PrivacyPolicyView: View {
     var body: some View {
         
-        ScrollView (.vertical) {
+        VStack (alignment: .leading) {
+          
+        Form {
             Text(
                  """
                 ‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍Kish Parikh built the Poz app as a Free app. This SERVICE is provided by Kish Parikh at no cost and is intended for use as is. Long story short, Poz does not have any access to your data nor does it track you directly. All your data is stored locally.
@@ -59,7 +61,9 @@ struct PrivacyPolicyView: View {
                 If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at kishparikh18@gmail.com.
                 """
             )
-            .padding()
+            .padding(.vertical, 10)
+        }
+        .navigationTitle("Privacy Policy 🔒")
         }
     }
 }

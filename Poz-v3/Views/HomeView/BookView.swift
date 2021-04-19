@@ -81,44 +81,34 @@ struct BookView: View {
                     }
                 }
                 
+                
+                
                 if (!isOpening) {
-                        //book details and edit button
-                        HStack (spacing: 0) {
-                            
-                            if (dateString != "12/31/00") {
-                                Text("Last updated: ")
-                                    .font(Font.custom("Poppins-Light", size:
-                                                        (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
-                                    .foregroundColor(Color(UIColor(named: "PozGray")!))
-                                
-                                    Text(dateString)
-                                        .font(Font.custom("Poppins-Medium", size:
-                            (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
-                            
-                            } else {
-                                Text("Add your first entry")
-                                    .font(Font.custom("Poppins-Light", size:
-                                                        (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
-                                    .foregroundColor(Color(UIColor(named: "PozGray")!))
-                            }
+                    
+                    HStack (spacing: 0) {
                         
-                        Button( action: {
-                            withAnimation(.spring()) {
-                                isOpening = true
-                                openBook()
-                            }
-                        } ) {
-                            Text("✏️")
-                                .font(Font.custom("Poppins-Medium", size: (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                        if (dateString != "12/31/00") {
+                            Text("Last updated: ")
+                                .font(Font.custom("Poppins-Light", size:
+                                                    (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
                                 .foregroundColor(Color(UIColor(named: "PozGray")!))
-                                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                            
+                                Text(dateString)
+                                    .font(Font.custom("Poppins-Medium", size:
+                        (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                        
+                        } else {
+                            Text("Add your first entry")
+                                .font(Font.custom("Poppins-Light", size:
+                                                    (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                                .foregroundColor(Color(UIColor(named: "PozGray")!))
                         }
-                        .padding(.leading, 14)
-                        .sheet(isPresented: $customizeJournal, content: {
-                            CustomizeJournalView(settings: settings).environment(\.managedObjectContext, self.moc)
-                        })
-                    }
-                    .padding(.bottom, 85)
+                }
+                    
+                    
+                    PromptsViewB(promptSelectedIndex: $promptSelectedIndex, tabIndex: $tabIndex, isOpening: $isOpening)
+                        .padding(.bottom, 40)
+                        .padding(.top, -10)
                 }
             }
            

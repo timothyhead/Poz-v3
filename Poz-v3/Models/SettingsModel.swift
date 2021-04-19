@@ -61,7 +61,7 @@ class SettingsModel: ObservableObject {
     @Published var journalEmoji: String = UserDefaults.standard.string(forKey: "journalEmoji") ?? "🤘🏼"
     @Published var journalPatternIndex: Int = UserDefaults.standard.integer(forKey: "journalPatternIndex")
     
-    @Published var username: String = UserDefaults.standard.string(forKey: "Username") ?? "You"
+    @Published var username: String = UserDefaults.standard.string(forKey: "Username") ?? ""
     // Reminder \(reminder.reminderIndex) On
     @Published var reminders = [
         reminderObject(reminderIndex: 1, reminderTime: Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "Reminder 1 Time")), reminderIsOn: UserDefaults.standard.bool(forKey: "Reminder 1 On") ),
@@ -82,6 +82,7 @@ class SettingsModel: ObservableObject {
 
                     🎭 - Tag the post with an emoji
                     🎤 - Use speech to text to type your entry
+                    ⚡️ - Add a prompt/action
                     🗑️ - Clear the note
                     📔 - Quick jump between pages
 

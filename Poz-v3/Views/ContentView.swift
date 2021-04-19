@@ -6,14 +6,11 @@ struct ContentView: View {
     
     @ObservedObject var settings = SettingsModel()
     @Environment(\.colorScheme) var colorScheme
-
-
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
         entity: Note.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt,ascending: true)]
-//        predicate:  NSPredicate(format: "emoji != %@", "")
     
     ) var notes: FetchedResults<Note>
     
@@ -25,9 +22,11 @@ struct ContentView: View {
     
     @State var isUnlocked = false
     
+    @State var isAuthenticateOn = false
+    
     @State var firstTimeLaunched = true
     
-    @State private var onboardingDone: Bool = UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce")
+    @State private var onboardingDone: Bool = false //UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce")
     
     var body: some View {
             
@@ -62,43 +61,43 @@ struct ContentView: View {
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             .onAppear {
             
-            if (isUnlocked == false) {
-                AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
-            }
-            
-            if (isAppAlreadyLaunchedOnce()) {
-                
-                firstTimeNotebookIndex = 1
-//                firstTimeLaunched = false
-            } else {
-//                firstTimeLaunched = true
-//                tabIndex = -1
-                
-                //create welcome message
-                let welcomeNote = Note(context: self.moc)
-                
-                welcomeNote.id = UUID() //create id
-                welcomeNote.emoji = "🗂️"
-                welcomeNote.note = settings.welcomeText
-                welcomeNote.createdAt = Date() //actual date to sort
-                welcomeNote.date = "-"
-                
-                try? self.moc.save()
-                
-                //create welcome message
-                for value in (0...100) {
-                    let blankNote = Note(context: self.moc)
-                        print(value)
-                    blankNote.id = UUID() //create id
-                    blankNote.note = ""
-                    blankNote.createdAt = Date() //actual date to sort
-                    blankNote.date = "-"
-
-                    try? self.moc.save()
+                if (isUnlocked == false) {
+                    AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
                 }
                 
-                UserDefaults.standard.set(2, forKey: "goalNumber")
-            }
+                if (isAppAlreadyLaunchedOnce()) {
+                    
+                    firstTimeNotebookIndex = 1
+    //                firstTimeLaunched = false
+                } else {
+    //                firstTimeLaunched = true
+    //                tabIndex = -1
+                        
+                        //create welcome message
+                        let welcomeNote = Note(context: self.moc)
+                        
+                        welcomeNote.id = UUID() //create id
+                        welcomeNote.emoji = "🗂️"
+                        welcomeNote.note = settings.welcomeText
+                        welcomeNote.createdAt = Date() //actual date to sort
+                        welcomeNote.date = "-"
+                        
+                    try? self.moc.save()
+                    
+                    //create welcome message
+                    for value in (0...100) {
+                        let blankNote = Note(context: self.moc)
+                            print(value)
+                        blankNote.id = UUID() //create id
+                        blankNote.note = ""
+                        blankNote.createdAt = Date() //actual date to sort
+                        blankNote.date = "-"
+
+                        try? self.moc.save()
+                    }
+                    
+                    UserDefaults.standard.set(2, forKey: "goalNumber")
+                }
         }
     }
 

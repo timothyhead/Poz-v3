@@ -83,8 +83,27 @@ struct NotebookView: View {
                 SwipeTutorialView(show: firstTimeLaunched)
             }
         }
+        .onAppear() {
+            if promptSelectedIndex != 0 {
+                indexNotes = findFirstEmptyPage() - 1
+            }
+        }
+        
         .onTapGesture {
             firstTimeLaunched = false
         }
+    }
+    
+    func findFirstEmptyPage () -> Int {
+        var noteIndex = 0
+        
+        for note in notes {
+            noteIndex += 1
+            
+            if note.note == "" && note.emoji == "" {
+                break
+            }
+        }
+        return noteIndex
     }
 }

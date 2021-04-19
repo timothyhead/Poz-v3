@@ -38,7 +38,6 @@ struct barGoalView : View {
                 }
                 .onAppear() {
                     show = true
-                    print(calcGoalPerformance())
                 }
                 
                 HStack (spacing: 2) {
@@ -133,10 +132,12 @@ struct smallGoalView : View {
     }
 }
 
+
 struct bigGoalView : View {
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
+    
     
     @ObservedObject var settings: SettingsModel
     
@@ -144,43 +145,39 @@ struct bigGoalView : View {
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
-    @State var entriesToday = 0
-    
-    @State var show = false
+    @State var show = true
     
     var body : some View {
         ZStack {
             if settings.goalNumber > 0 {
                 if show {
-                    RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: ((CGFloat(entriesToday))/(CGFloat(settings.goalNumber)) == 0.0) ? 0.01 : ((CGFloat(entriesToday))/(CGFloat(settings.goalNumber))), sizeScale: 2, animateOn: false)
+                    RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: ((CGFloat(countEntriesToday()))/(CGFloat(settings.goalNumber)) == 0.0) ? 0.01 : ((CGFloat(countEntriesToday()))/(CGFloat(settings.goalNumber))), sizeScale: 2, animateOn: false)
                 }
                 
-                Text("\(entriesToday)/\(settings.goalNumber)")
-                    .font(Font.custom("Poppins-Bold", size: (entriesToday > 9 ? 36 : 48)))
+                Text("\(countEntriesToday())/\(settings.goalNumber)")
+                    .font(Font.custom("Poppins-Bold", size: (countEntriesToday() > 9 ? UIScreen.main.bounds.width/2/7 : UIScreen.main.bounds.width/2/6)))
                     .foregroundColor(Color(UIColor(named: "PozBlue")!))
             }
         }
         .onAppear() {
-            countEntriesToday()
+           // countEntriesToday()
             dateFormatter.dateFormat = "MM/dd/yy"
             dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                show = true
-            }
         }
     }
     
-    func countEntriesToday () {
+    func countEntriesToday () -> Int {
+        var entriesToday = 0
+        
         for note in notes {
+            let isToday = Calendar.current.isDateInToday(note.lastUpdated ?? Date().addingTimeInterval(1000000))
             
-//            let sameDay = Calendar.current.isDate(date, equalTo: note.createdAt ?? Date().addingTimeInterval(100000), toGranularity: .day)
-            let isToday = Calendar.current.isDateInToday(note.createdAt ?? Date().addingTimeInterval(100000))
-            
-            if (isToday && note.note != settings.welcomeText && note.note != "") {
+            if(isToday && note.note != settings.welcomeText && note.note != "") {
                 entriesToday += 1
             }
+            
         }
+        return entriesToday
     }
 }
 

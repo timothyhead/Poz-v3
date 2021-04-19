@@ -85,18 +85,18 @@ struct HomeView: View {
                 promptSelectedIndex = 0
             }
 
-            if (firstTimeShowing) {
-                HomeViewTutorial(show: firstTimeShowing)
-                    .onAppear() {
-                        firstTimeShowing = firstTimeAppearing()
-                        
+//            if (firstTimeShowing) {
+//                HomeViewTutorial(show: firstTimeShowing)
+//                    .onAppear() {
+//                        firstTimeShowing = firstTimeAppearing()
+//
 //                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
 //                            withAnimation (.easeOut) {
 //                                firstTimeShowing = firstTimeAppearing()
 //                            }
 //                        }
-                    }
-            }
+//                    }
+//            }
         }
         .onTapGesture {
             firstTimeShowing = false

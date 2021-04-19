@@ -104,6 +104,7 @@
 		DE47B845262B9F9200C6C5DB /* OnboardingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B844262B9F9200C6C5DB /* OnboardingViews.swift */; };
 		DE47B846262B9F9200C6C5DB /* OnboardingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B844262B9F9200C6C5DB /* OnboardingViews.swift */; };
 		DE47B847262B9F9200C6C5DB /* OnboardingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B844262B9F9200C6C5DB /* OnboardingViews.swift */; };
+		DE47B875262CE9FA00C6C5DB /* EnableAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B874262CE9FA00C6C5DB /* EnableAuthView.swift */; };
 		DE5A4DAF260D6618000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB0260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB1260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
@@ -231,6 +232,7 @@
 		DE3D2ED12615981900C209CB /* FullNotePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullNotePage.swift; sourceTree = "<group>"; };
 		DE47B83D262B942800C6C5DB /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		DE47B844262B9F9200C6C5DB /* OnboardingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViews.swift; sourceTree = "<group>"; };
+		DE47B874262CE9FA00C6C5DB /* EnableAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableAuthView.swift; sourceTree = "<group>"; };
 		DE5A4DAE260D6618000FB0E9 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
 		DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTopMenuView.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				DE392DAD260CE7CF00715173 /* NotificationsView.swift */,
+				DE47B874262CE9FA00C6C5DB /* EnableAuthView.swift */,
 				DED1298E26112CA700C2DE33 /* UserSettingsView.swift */,
 				DEB16A66261409000007505C /* TermsOfServiceView.swift */,
 				DEB16A6D2614090B0007505C /* PrivacyPolicyView.swift */,
@@ -715,6 +718,7 @@
 				DE982EAB260F25170087E0ED /* GrowingTextInputView.swift in Sources */,
 				DE392D61260B118B00715173 /* SwiftSpeechButtonView.swift in Sources */,
 				DE982EAA260F25170087E0ED /* Color.swift in Sources */,
+				DE47B875262CE9FA00C6C5DB /* EnableAuthView.swift in Sources */,
 				DEF838DE261E6C3C00556E5E /* HomeViewTutorial.swift in Sources */,
 				DE392D7B260B154D00715173 /* PromptsView.swift in Sources */,
 				DED1298F26112CA700C2DE33 /* UserSettingsView.swift in Sources */,
@@ -981,7 +985,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Poz-v3/Poz-v3.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Poz-v3/Preview Content\"";
 				DEVELOPMENT_TEAM = GN3TH9WD6W;
 				ENABLE_PREVIEWS = YES;
@@ -1007,7 +1011,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Poz-v3/Poz-v3.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Poz-v3/Preview Content\"";
 				DEVELOPMENT_TEAM = GN3TH9WD6W;
 				ENABLE_PREVIEWS = YES;

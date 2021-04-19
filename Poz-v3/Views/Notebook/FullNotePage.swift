@@ -159,26 +159,7 @@ struct NotePage: View {
                 .padding(.top, -11)
             }
             .onChange(of: promptSelectedIndex) { value in
-                if promptSelectedIndex == 0 {
-                    dynamicPrompt = ""
-                    selected = ""
-                }
-                if promptSelectedIndex == 1 {
-                    dynamicPrompt = "Leave a note or reminder for your future self."
-                    selected = "📪"
-                }
-                if promptSelectedIndex == 2 {
-                    dynamicPrompt = settings.introspectPrompts.randomElement()!
-                    selected = "🔮"
-                }
-                if promptSelectedIndex == 3 {
-                    dynamicPrompt = "Let it all out, don't hold back."
-                    selected = "💢"
-                }
-                if promptSelectedIndex == 4 {
-                    dynamicPrompt = settings.gratitudePrompts.randomElement()!
-                    selected = "🙏🏾"
-                }
+                activatePrompt()
             }
             .onTapGesture {
                 hideKeyboard() //hide keyboard when user taps outside text field
@@ -189,6 +170,10 @@ struct NotePage: View {
                 selected = note.emoji ?? ""
                 dynamicPrompt = note.prompt ?? ""
                 dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+                
+                if promptSelectedIndex != 0 {
+                    activatePrompt()
+                }
                 
                 if (dateFormatter.string(from: (note.lastUpdated ?? date) as Date) != "Dec 31, 2000 | 4:00 PM") {
                     dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
@@ -234,25 +219,14 @@ struct NotePage: View {
                 
                 SwiftSpeechButtonView(input: $swiftSpeechTempText, output: $swiftSpeechTempText)
                     .onChange (of: swiftSpeechTempText) { value in
-//                        newText = "\(message ?? "") \(swiftSpeechTempText)"
                         message = swiftSpeechTempText
-//                        print("\(message ?? "") \(swiftSpeechTempText)" )
-//                        print(newText)
                     }
-//                    .onTapGesture {
-//                        swiftSpeechTempText = message ?? ""
-//                    }
-//                    .animation(.easeOut)
                     .onAppear() {
                         swiftSpeechTempText = message ?? ""
                     }
                     .animation(.easeOut)
-//                    .onChange(of: message) { value in
-//                        swiftSpeechTempText = message ?? ""
-//                    }
                 
                 PromptsButton(addPromptShowing: $addPromptShowing)
-//
                 
                 Button (action: {
                     //clearNote()
@@ -297,6 +271,29 @@ struct NotePage: View {
         
     }
     
+    func activatePrompt() {
+        if promptSelectedIndex == 0 {
+            dynamicPrompt = ""
+            selected = ""
+        }
+        if promptSelectedIndex == 1 {
+            dynamicPrompt = "Leave a note or reminder for your future self."
+            selected = "📪"
+        }
+        if promptSelectedIndex == 2 {
+            dynamicPrompt = settings.introspectPrompts.randomElement()!
+            selected = "🔮"
+        }
+        if promptSelectedIndex == 3 {
+            dynamicPrompt = "Let it all out, don't hold back."
+            selected = "💢"
+        }
+        if promptSelectedIndex == 4 {
+            dynamicPrompt = settings.gratitudePrompts.randomElement()!
+            selected = "🙏🏾"
+        }
+    }
+    
     func saveNoteB () {
         
         if (promptSelectedIndex == 3) {
@@ -304,18 +301,13 @@ struct NotePage: View {
             note.prompt = ""
             note.emoji = ""
         } else {
+            
             note.id = UUID() //create id
-        
             note.note = message ?? "" //input message
-            
             note.lastUpdated = Date()
-            
             dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-            
             note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
-        
             note.emoji = selected
-            
             note.prompt = dynamicPrompt
         }
         
