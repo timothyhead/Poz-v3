@@ -18,7 +18,7 @@ struct FeedbackView: View {
             if MFMailComposeViewController.canSendMail() && !useGoogleForm {
                 
                 if (showMailSheet) {
-                    MailView(result: self.$result, newSubject: "Poz Feedback",
+                    MailView(result: self.$result, newSubject: "Poz Feedback 💬",
                              newMsgBody: """
                                          I had an issue with…
                                          I wanted to tell you that…

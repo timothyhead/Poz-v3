@@ -20,9 +20,10 @@ struct SettingsView: View {
             Form {
                 
                 Section(header: Text("Name")) {
-                    TextField("\(settings.username)", text: $settings.username) { isEditing in
+                    TextField("Enter name", text: $settings.username) { isEditing in
                         UserDefaults.standard.set(settings.username, forKey: "Username")
                     }
+                    .disableAutocorrection(true)
                 }
                 
                 Section(header: Text("Customization")) {

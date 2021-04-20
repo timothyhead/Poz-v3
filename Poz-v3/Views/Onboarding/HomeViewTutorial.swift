@@ -20,7 +20,7 @@ struct HomeViewTutorial: View {
                 
                 VStack (alignment: .leading, spacing: 20) {
                     
-                    Text("What you need to know:")
+                    Text("Quick tips:")
                         .foregroundColor(.white)
                         .font(Font.custom("Poppins-Medium", size: 20))
                         .padding(.top, 10)
@@ -37,14 +37,14 @@ struct HomeViewTutorial: View {
                         .foregroundColor(.white)
                         .font(Font.custom("Poppins-Light", size: 16))
                     
-                    Text("⚙️ - Change your name, customize your journal, setup daily goal and notifications, and much more")
+                    Text("⚙️ - Change your name, customize your journal, setup notifications, and much more")
                         .foregroundColor(.white)
                         .font(Font.custom("Poppins-Light", size: 16))
                     
                 }
             }
             .padding(.all, 40)
-            .frame(width: 320, height: 420, alignment: .topLeading)
+            .frame(width: 320, height: 380, alignment: .topLeading)
             .background(Color.black.opacity(0.85))
             .cornerRadius(10)
             

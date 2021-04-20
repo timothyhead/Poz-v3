@@ -102,7 +102,7 @@ class SettingsModel: ObservableObject {
     
 
     @Published var journalColorAngle: Double = UserDefaults.standard.double(forKey: "journalColorAngle") 
-    @Published var journalName: String = UserDefaults.standard.string(forKey: "journalName") ?? "Your Journal"
+    @Published var journalName: String = UserDefaults.standard.string(forKey: "journalName") ?? "Poz Journal"
     @Published var journalEmoji: String = UserDefaults.standard.string(forKey: "journalEmoji") ?? "🤘🏼"
     @Published var journalPatternIndex: Int = UserDefaults.standard.integer(forKey: "journalPatternIndex")
     
@@ -126,8 +126,8 @@ class SettingsModel: ObservableObject {
 
                     🎭 - Tag the post with an emoji
                     🎤 - Use speech to text to type your entry
+                    ⚡️ - Get a random prompt
                     🗑️ - Clear the note
-                    ⚡️ - Use a random prompt
                     📔 - Quick jump between pages
 
                     If you run into issues, share your feedback/issues/questions using the feedback button on the home page.

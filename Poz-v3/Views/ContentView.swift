@@ -49,7 +49,7 @@ struct ContentView: View {
                         }
                         
                     } else if tabIndex == 1 {
-                        NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome, firstTimeLaunched: $firstTimeLaunched).environment(\.managedObjectContext, self.moc)
+                        NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome).environment(\.managedObjectContext, self.moc)
                     }
                     
                 } else {
@@ -67,7 +67,6 @@ struct ContentView: View {
                     } else {
                         isUnlocked = true
                     }
-//                    onboardingDone = true
                     
                     firstTimeNotebookIndex = 1
                     firstTimeLaunched = false
@@ -89,7 +88,7 @@ struct ContentView: View {
                     try? self.moc.save()
                     
                     //create welcome message
-                    for value in (0...2) {
+                    for value in (0...1) {
                         let blankNote = Note(context: self.moc)
                             print(value)
                         blankNote.id = UUID() //create id
@@ -100,12 +99,8 @@ struct ContentView: View {
                         try? self.moc.save()
                     }
                     
-                    UserDefaults.standard.set(2, forKey: "goalNumber")
+                    
                 }
-//
-//                if !firstTimeLaunched {
-//                    AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
-//                }
         }
     }
 

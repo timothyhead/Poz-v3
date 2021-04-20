@@ -67,8 +67,9 @@ struct UserSettingsViewOnboard: View {
             TextField("Type your name here", text: $settings.username) { isEditing in
                 self.isEditing = isEditing
                 UserDefaults.standard.set(settings.username, forKey: "Username")
-                    
+                
             }
+            .disableAutocorrection(true)
             .padding(10)
             .background(colorScheme == .dark ? Color(#colorLiteral(red: 0.3082331717, green: 0.3096653819, blue: 0.3131458759, alpha: 1)) : Color(#colorLiteral(red: 0.888705194, green: 0.8834225535, blue: 0.892766118, alpha: 1)))
             .font(Font.custom("Poppins-Regular", size: 18))
@@ -88,6 +89,7 @@ struct UserSettingsViewOnboard: View {
             
             Spacer()
         }
+        .background(Color(UIColor(named: "HomeBG")!))
         .onTapGesture {
             hideKeyboard() //hide keyboard when user taps outside text field
         }

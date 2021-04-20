@@ -176,5 +176,8 @@ struct CustomizeJournalViewOnboard: View {
         }
         .padding(.top, 80)
         .multilineTextAlignment(.center)
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
 }

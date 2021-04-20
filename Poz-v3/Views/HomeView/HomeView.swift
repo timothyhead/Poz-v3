@@ -133,13 +133,13 @@ struct HomeView: View {
         let currentTime = Calendar.current.component( .hour, from:Date() )
         
         if (currentTime < 12) {
-            return "Good morning,"
+            return settings.username != "" ? "Good morning," : "Good morning"
         } else if (currentTime >= 12 && currentTime < 17) {
-            return "Good afternoon,"
+            return settings.username != "" ? "Good afternoon," : "Good afternoon"
         } else if (currentTime >= 17 && currentTime < 20) {
-            return "Good evening,"
+            return settings.username != "" ? "Good evening," : "Good evening"
         } else {
-            return "Good night,"
+            return settings.username != "" ? "Good night," : "Good night"
         }
     }
 }

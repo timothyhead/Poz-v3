@@ -46,7 +46,7 @@ struct NotificationsView: View {
                         settings.goalNumber += 1
                         UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
                     }, onDecrement: {
-                        if ( settings.goalNumber > 0) {
+                        if ( settings.goalNumber > 1) {
                             settings.goalNumber -= 1
                         }
                         UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
@@ -158,7 +158,7 @@ struct NotificationsViewOnboard: View {
     @State var notificationsAreOn = false
     
     var body: some View {
-        VStack (alignment: .leading) {
+        VStack (alignment: .center) {
             VStack {
                 Text("Be Consistent")
                         .font(Font.custom("Blueberry", size: 28))
@@ -173,6 +173,10 @@ struct NotificationsViewOnboard: View {
             HStack (alignment: .center) {
                 Spacer()
                 bigGoalView(settings: settings)
+                    .onAppear() {
+                        settings.goalNumber = 2
+                        UserDefaults.standard.set(Int(2), forKey: "goalNumber")
+                    }
                 Spacer()
            }
             
