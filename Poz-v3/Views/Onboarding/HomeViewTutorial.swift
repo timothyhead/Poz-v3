@@ -25,13 +25,13 @@ struct HomeViewTutorial: View {
                         .font(Font.custom("Poppins-Medium", size: 20))
                         .padding(.top, 10)
                     
-                    Text("Click on your journal to open")
+                    Text("📔 - Click on your journal to open")
                         .foregroundColor(.white)
                         .font(Font.custom("Poppins-Light", size: 16))
                     
-                    Text("📪🔮💢🙏🏾 - Jump into a prompt")
-                        .foregroundColor(.white)
-                        .font(Font.custom("Poppins-Light", size: 16))
+//                    Text("📪🔮💢🙏🏾 - Jump into a prompt")
+//                        .foregroundColor(.white)
+//                        .font(Font.custom("Poppins-Light", size: 16))
                     
                     Text("💬 - Give feedback/ask questions/suggest changes quickly")
                         .foregroundColor(.white)
@@ -44,7 +44,7 @@ struct HomeViewTutorial: View {
                 }
             }
             .padding(.all, 40)
-            .frame(width: 320, height: 450, alignment: .topLeading)
+            .frame(width: 320, height: 420, alignment: .topLeading)
             .background(Color.black.opacity(0.85))
             .cornerRadius(10)
             

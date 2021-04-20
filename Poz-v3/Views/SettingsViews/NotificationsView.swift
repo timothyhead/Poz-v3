@@ -25,40 +25,47 @@ struct NotificationsView: View {
     var body: some View {
         VStack (alignment: .leading) {
             
-            barGoalView(settings: settings)
-                .padding(.top, 60)
+//            barGoalView(settings: settings)
+//                .padding(.top, 60)
+            
+            HStack (alignment: .center) {
+                Spacer()
+                bigGoalView(settings: settings)
+                Spacer()
+           }
+            .padding(.top, 60)
             
             Form {
                 
                 
             
-            HStack {
-//                smallGoalView(settings: settings)
-                
-                Stepper("Entries per day - \(settings.goalNumber)", onIncrement: {
-                    settings.goalNumber += 1
-                    UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
-                }, onDecrement: {
-                    if ( settings.goalNumber > 0) {
-                        settings.goalNumber -= 1
-                    }
-                    UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
-                })
-            }
-            
-            Toggle("Daily Notifications", isOn: $notificationsAreOn)
-                .onChange(of: notificationsAreOn) { value in
-                    settings.notifications = notificationsAreOn
-                    UserDefaults.standard.set(settings.notifications, forKey: "NotificationsOn")
+                HStack {
+    //                smallGoalView(settings: settings)
                     
-                    if !(settings.notifications) {
-                       UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                    Stepper("Entries per day - \(settings.goalNumber)", onIncrement: {
+                        settings.goalNumber += 1
+                        UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
+                    }, onDecrement: {
+                        if ( settings.goalNumber > 0) {
+                            settings.goalNumber -= 1
+                        }
+                        UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
+                    })
+                }
+                
+                Toggle("Daily Notifications", isOn: $notificationsAreOn)
+                    .onChange(of: notificationsAreOn) { value in
+                        settings.notifications = notificationsAreOn
+                        UserDefaults.standard.set(settings.notifications, forKey: "NotificationsOn")
+                        
+                        if !(settings.notifications) {
+                           UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                        }
                     }
-                }
-                .onAppear() {
-                    notificationsAreOn = settings.notifications
-                }
-            
+                    .onAppear() {
+                        notificationsAreOn = settings.notifications
+                    }
+                
             if (notificationsAreOn == true) {
                 ForEach (settings.reminders.indices) { reminderIndex in
                     ReminderSectionView(settings: settings).environmentObject(settings.reminders[reminderIndex])
@@ -66,6 +73,80 @@ struct NotificationsView: View {
             }
         }
             .navigationTitle("Daily Goal 🎯")
+        }
+    }
+}
+
+struct NotificationsViewPopup: View {
+    
+    @ObservedObject var settings: SettingsModel
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State var notificationsAreOn = false
+    
+    var body: some View {
+        
+        NavigationView {
+            VStack (alignment: .leading) {
+            
+            
+            
+//            barGoalView(settings: settings)
+//                .padding(.top, 60)
+            
+                HStack (alignment: .center) {
+                    Spacer()
+                    bigGoalView(settings: settings)
+                    Spacer()
+               }
+                .padding(.top, 60)
+                
+                Form {
+                    
+                    
+                
+                    HStack {
+        //                smallGoalView(settings: settings)
+                        
+                        Stepper("Entries per day - \(settings.goalNumber)", onIncrement: {
+                            settings.goalNumber += 1
+                            UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
+                        }, onDecrement: {
+                            if ( settings.goalNumber > 0) {
+                                settings.goalNumber -= 1
+                            }
+                            UserDefaults.standard.set(settings.goalNumber, forKey: "goalNumber")
+                        })
+                    }
+                    
+                    Toggle("Daily Notifications", isOn: $notificationsAreOn)
+                        .onChange(of: notificationsAreOn) { value in
+                            settings.notifications = notificationsAreOn
+                            UserDefaults.standard.set(settings.notifications, forKey: "NotificationsOn")
+                            
+                            if !(settings.notifications) {
+                               UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                            }
+                        }
+                        .onAppear() {
+                            notificationsAreOn = settings.notifications
+                        }
+                    
+                    if (notificationsAreOn == true) {
+                        ForEach (settings.reminders.indices) { reminderIndex in
+                            ReminderSectionView(settings: settings).environmentObject(settings.reminders[reminderIndex])
+                        }
+                    }
+                }
+                .navigationTitle("Daily Goal 🎯")
+                    
+                .navigationBarItems(trailing: Button(action: {
+    //                self.settings.darkMode = self.darkMode
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Done")
+                }))
+            }
         }
     }
 }
@@ -79,10 +160,10 @@ struct NotificationsViewOnboard: View {
     var body: some View {
         VStack (alignment: .leading) {
             VStack {
-                Text("Get Consistent")
+                Text("Be Consistent")
                         .font(Font.custom("Blueberry", size: 28))
                         .foregroundColor(.primary)
-                Text("Choose a daily goal number and set up notifications to help keep you accountable and support your daily journaling habit")
+                Text("Set a daily goal (2 is fine) and use notifications to support your daily journaling habit")
                         .font(Font.custom("Poppins-Light", size: 18))
                         .foregroundColor(Color(#colorLiteral(red: 0.4156862745, green: 0.4156862745, blue: 0.4156862745, alpha: 1)))
                 

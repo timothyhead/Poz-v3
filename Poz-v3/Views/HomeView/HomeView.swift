@@ -26,7 +26,7 @@ struct HomeView: View {
     
     @State var firstTimeShowing = true
     
-    
+    @State var dailyGoalSheetShowing = false
 
     var body: some View {
         
@@ -78,7 +78,12 @@ struct HomeView: View {
                 Spacer()
                 
                 if !bookOpenAnimation {
-                    barGoalView(settings: settings)
+                    Button (action: { dailyGoalSheetShowing = true }) {
+                        barGoalView(settings: settings)
+                    }
+                    .sheet(isPresented: $dailyGoalSheetShowing) {
+                        NotificationsViewPopup(settings: settings)
+                    }
                 }
             }
             .padding(.top, 60).padding(.bottom, 30)
@@ -127,9 +132,11 @@ struct HomeView: View {
         
         let currentTime = Calendar.current.component( .hour, from:Date() )
         
-        if (currentTime < 11) {
+        if (currentTime < 12) {
             return "Good morning,"
-        } else if (currentTime >= 11 && currentTime < 20) {
+        } else if (currentTime >= 12 && currentTime < 17) {
+            return "Good afternoon,"
+        } else if (currentTime >= 17 && currentTime < 20) {
             return "Good evening,"
         } else {
             return "Good night,"

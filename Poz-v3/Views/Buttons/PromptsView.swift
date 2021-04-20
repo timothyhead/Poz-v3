@@ -188,10 +188,7 @@ struct PromptsViewC: View {
                         
                         Button (action: {
                             promptIndex = prompt.index
-//                            selectedPrompt = prompt
-//                            if (prompt.index == 4) {
-//                                prompt.prompt = gratitudePrompts.randomElement()!
-//                            }
+                            
                         }) {
                             HStack {
                                 

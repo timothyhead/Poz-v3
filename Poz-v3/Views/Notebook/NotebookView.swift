@@ -1,10 +1,3 @@
-//
-//  NotebookView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/26/21.
-//
-
 import SwiftUI
 import Pages
 
@@ -85,6 +78,7 @@ struct NotebookView: View {
             }
         }
         .onAppear() {
+            print("total notes: \(notes.count)")
             if promptSelectedIndex != 0 {
                 indexNotes = findFirstEmptyPage() - 1
             }
@@ -92,6 +86,25 @@ struct NotebookView: View {
         
         .onTapGesture {
             firstTimeLaunched = false
+        }
+        .onChange(of: indexNotes) { value in
+            checkIfCurrNoteIsLastPage()
+        }
+    }
+    
+    func checkIfCurrNoteIsLastPage () {
+        
+        print(indexNotes)
+           
+        if (indexNotes == notes.count - 1) {
+            
+            let blankNote = Note(context: self.moc)
+            blankNote.id = UUID() //create id
+            blankNote.note = ""
+            blankNote.createdAt = Date() //actual date to sort
+            blankNote.date = "-"
+
+            try? self.moc.save()
         }
     }
     

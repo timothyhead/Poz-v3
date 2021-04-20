@@ -10,25 +10,27 @@ struct SettingsView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State var useAuth = UserDefaults.standard.bool(forKey: "useAuthentication")
+    @State var isUnlocked = false
+    
     var body: some View {
         
         NavigationView {
             
             Form {
-                Section(header: Text("Customization")) {
-                    NavigationLink(destination: UserSettingsView(settings: settings) ) {
-                        HStack {
-                            Text("Name")
-                        }
+                
+                Section(header: Text("Name")) {
+                    TextField("\(settings.username)", text: $settings.username) { isEditing in
+                        UserDefaults.standard.set(settings.username, forKey: "Username")
                     }
+                }
+                
+                Section(header: Text("Customization")) {
                     NavigationLink(destination:  NotificationsView(settings: settings) ) {
                         HStack {
                             Text("Daily goal")
                         }
                     }
-//                    Toggle(isOn: $darkMode, label: {
-//                        Text("Dark Mode")
-//                    })
                     NavigationLink(destination: CustomizeJournalView(settings: settings)) {
                         HStack {
                             Text("Customize Journal")
@@ -36,10 +38,10 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section(header: Text("Community")) {
-//                    NavigationLink(destination: Text("hi")) {
+                Section(header: Text("Poz")) {
+//                    NavigationLink(destination: FeedbackViewClean()) {
 //                        HStack {
-//                            Text("Share Poz")
+//                            Text("Feedback")
 //                        }
 //                    }
 //                    NavigationLink(destination: Text("hi")) {
@@ -47,20 +49,25 @@ struct SettingsView: View {
 //                            Text("Rate Poz on the app store")
 //                        }
 //                    }
-                    NavigationLink(destination:  WebView(link: "https://pozjournal.webflow.io/") ) {
+                    NavigationLink(destination:  WebView(link: "https://pozjournal.com/") ) {
                         HStack {
                             Text("Visit website")
                         }
                     }
                 }
                 
-                Section(header: Text("Application")) {
+                
+                Section(header: Text("Security")) {
+                    Toggle("Face/Touch ID Login", isOn: $useAuth)
+                        .onChange(of: useAuth) { value in
+                            
+                            UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
+                            
+                            if useAuth {
+                                AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+                            }
+                        }
                     
-//                    NavigationLink(destination: FeedbackView() ) {
-//                        HStack {
-//                            Text("Feedback / Contact Us")
-//                        }
-//                    }
                     NavigationLink(destination: PrivacyPolicyView() ) {
                         HStack {
                             Text("Privacy")
@@ -70,7 +77,7 @@ struct SettingsView: View {
             }
             .font(Font.custom("Poppins-Light", size: 16))
             
-            .navigationTitle( Text("Settings"))
+            .navigationTitle( Text("Settings ⚙️"))
                 
             .navigationBarItems(trailing: Button(action: {
 //                self.settings.darkMode = self.darkMode
@@ -79,11 +86,7 @@ struct SettingsView: View {
                 Text("Save")
             }))
         }
-//        .preferredColorScheme((darkMode == true ? (.dark) : (.light)))
         .preferredColorScheme((colorScheme == .dark ? (.dark) : (.light)))
-//        .onAppear(perform: {
-//            self.darkMode = self.settings.darkMode
-//        })
         
     }
 }

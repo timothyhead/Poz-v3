@@ -56,11 +56,11 @@ struct NotePage: View {
                     
                 }
                 .padding(.bottom, 20)
-//                .onChange(of: message) { value in
-//                    if (message != "" && message != initialText && dateString != dateFormatter.string(from: Date() as Date)) {
-//                        dateString = dateFormatter.string(from: Date() as Date)
-//                    }
-//                }
+                .onChange(of: message) { value in
+                    if (message != "" && message != initialText && dateString != dateFormatter.string(from: Date() as Date)) {
+                        dateString = dateFormatter.string(from: Date() as Date)
+                    }
+                }
             
             //text input
             VStack {
@@ -146,7 +146,7 @@ struct NotePage: View {
                         }
                         
                         //text input
-                        GrowingTextInputView(text: $message, placeholder: "Tap here to begin typing")
+                        GrowingTextInputView(text: $message, placeholder: "Tap here to begin typing, or shake to get a randomized prompt ⚡️")
                             .font(Font.custom("Poppins-Regular", size: 16))
                             .padding(.leading, -4)
                             .padding(.top, -5)
@@ -159,28 +159,28 @@ struct NotePage: View {
                 
                 .padding(.top, -11)
             }
-            .onChange(of: promptSelectedIndex) { value in
-                if promptSelectedIndex == 0 {
-                    dynamicPrompt = ""
-                    selected = ""
-                }
-                if promptSelectedIndex == 1 {
-                    dynamicPrompt = "Leave a note or reminder for your future self."
-                    selected = "📪"
-                }
-                if promptSelectedIndex == 2 {
-                    dynamicPrompt = settings.introspectPrompts.randomElement()!
-                    selected = "🔮"
-                }
-                if promptSelectedIndex == 3 {
-                    dynamicPrompt = "Let it all out, don't hold back."
-                    selected = "💢"
-                }
-                if promptSelectedIndex == 4 {
-                    dynamicPrompt = settings.gratitudePrompts.randomElement()!
-                    selected = "🙏🏾"
-                }
-            }
+//            .onChange(of: promptSelectedIndex) { value in
+//                if promptSelectedIndex == 0 {
+//                    dynamicPrompt = ""
+//                    selected = ""
+//                }
+//                if promptSelectedIndex == 1 {
+//                    dynamicPrompt = "Leave a note or reminder for your future self."
+//                    selected = "📪"
+//                }
+//                if promptSelectedIndex == 2 {
+//                    dynamicPrompt = settings.introspectPrompts.randomElement()!
+//                    selected = "🔮"
+//                }
+//                if promptSelectedIndex == 3 {
+//                    dynamicPrompt = "Let it all out, don't hold back."
+//                    selected = "💢"
+//                }
+//                if promptSelectedIndex == 4 {
+//                    dynamicPrompt = settings.gratitudePrompts.randomElement()!
+//                    selected = "🙏🏾"
+//                }
+//            }
             .onTapGesture {
                 hideKeyboard() //hide keyboard when user taps outside text field
             }
@@ -188,7 +188,11 @@ struct NotePage: View {
                 initialText = note.note ?? ""
                 message = note.note
                 selected = note.emoji ?? ""
+                
+//                print(dynamicPrompt)
+//                print(note.prompt ?? "")
                 dynamicPrompt = note.prompt ?? ""
+                
                 dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
                 
                 if (dateFormatter.string(from: (note.lastUpdated ?? date) as Date) != "Dec 31, 2000 | 4:00 PM") {
@@ -214,6 +218,9 @@ struct NotePage: View {
                     
                 }
                 
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
+                dynamicPrompt = settings.allPrompts.randomElement()!
             }
 
             if emojiPickerShowing {
@@ -241,8 +248,19 @@ struct NotePage: View {
                         swiftSpeechTempText = message ?? ""
                     }
                     .animation(.easeOut)
+
                 
-                PromptsButton(addPromptShowing: $addPromptShowing)
+                // basic prompt button
+                Button (action: {
+                    dynamicPrompt = settings.allPrompts.randomElement()!
+                }) {
+                    Text("⚡️")
+                        .font(.system(size: 25))
+                }
+                .padding(.trailing, 20)
+                
+                //advanced prompt button
+//                PromptsButton(addPromptShowing: $addPromptShowing)
                 
                 Button (action: {
                     //clearNote()
@@ -263,7 +281,7 @@ struct NotePage: View {
                     )
                 }
                 .animation(.easeOut)
-                .padding(.horizontal, 20)
+//                .padding(.horizontal, 20)
                 
                 Spacer()
                 
@@ -313,12 +331,12 @@ struct NotePage: View {
     
     func saveNoteB () {
         
-        if (promptSelectedIndex == 3) {
-            note.note = ""
-            note.prompt = ""
-            note.emoji = ""
-        } else {
-            
+//        if (promptSelectedIndex == 3) {
+//            note.note = ""
+//            note.prompt = ""
+//            note.emoji = ""
+//        } else {
+//
             note.id = UUID() //create id
             note.note = message ?? "" //input message
             note.lastUpdated = Date()
@@ -326,7 +344,7 @@ struct NotePage: View {
             note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
             note.emoji = selected
             note.prompt = dynamicPrompt
-        }
+//        }
         
         try? self.moc.save()
         
@@ -340,6 +358,7 @@ struct NotePage: View {
         note.note = ""
         selected = ""
         note.emoji = ""
+        note.prompt = ""
         dateString = "-"
         note.date = "-"
     }
@@ -476,6 +495,17 @@ struct PromptsButton : View {
         }
         .scaleEffect((addPromptShowing ? 1.76 : 1))
         .animation(.easeOut)
+    }
+}
+
+extension NSNotification.Name {
+    public static let deviceDidShakeNotification = NSNotification.Name("MyDeviceDidShakeNotification")
+}
+
+extension UIWindow {
+    open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        super.motionEnded(motion, with: event)
+        NotificationCenter.default.post(name: .deviceDidShakeNotification, object: event)
     }
 }
 

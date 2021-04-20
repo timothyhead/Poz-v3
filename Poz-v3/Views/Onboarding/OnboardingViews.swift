@@ -50,7 +50,7 @@ struct OnboardingView: View {
                     .offset(x: self.slideGesture.width - CGFloat(self.curSlideIndex) * self.distance)
                     .animation(.spring())
                     .padding(.bottom, 40)
-                EnableAuthViewOnboard(moveForward: $securitySettingSet)
+                EnableAuthViewOnboard(settings: settings, moveForward: $securitySettingSet)
                     .offset(x: 2 * self.distance)
                     .offset(x: self.slideGesture.width - CGFloat(self.curSlideIndex) * self.distance)
                     .animation(.spring())
@@ -86,6 +86,10 @@ struct OnboardingView: View {
                 }
             }
             .onChange(of: curSlideIndex) { value in
+                
+                if curSlideIndex == 0 {
+                    disabledButton = false
+                }
                 
                 if curSlideIndex == 1 && !nameIsEntered {
                     disabledButton = true

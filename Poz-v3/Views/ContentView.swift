@@ -21,18 +21,18 @@ struct ContentView: View {
     @State var promptSelectedIndex = 0
     @State var promptSelectedFromHome = false
     
-    @State var isUnlocked = true
+    @State var isUnlocked = false
     
     @State var isAuthenticateOn = false
     
     @State var firstTimeLaunched = true
     
-    @State private var onboardingDone: Bool = UserDefaults.standard.bool(forKey: "isAppAlreadyLaunchedOnce")
+    @State private var onboardingDone: Bool = UserDefaults.standard.bool(forKey: "onboardingDone")
     
     var body: some View {
             
             VStack {
-                if isUnlocked {
+                if isUnlocked || firstTimeLaunched {
                     
                     if tabIndex == 0 {
                         
@@ -40,6 +40,7 @@ struct ContentView: View {
                             if !onboardingDone {
                                 OnboardingView(settings: settings, tabIndex: $tabIndex, doneFunction: {
                                     self.onboardingDone = true
+                                    UserDefaults.standard.set(true, forKey: "onboardingDone")
                                     print("done onboarding")
                                 })
                             } else {
@@ -58,15 +59,22 @@ struct ContentView: View {
             .background(Color(UIColor(named: "HomeBG")!))
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             .onAppear {
-            
-
                 
                 if (isAppAlreadyLaunchedOnce()) {
+                    
+                    if onboardingDone && settings.useAuthentication {
+                        AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+                    } else {
+                        isUnlocked = true
+                    }
+//                    onboardingDone = true
                     
                     firstTimeNotebookIndex = 1
                     firstTimeLaunched = false
                     
+                    
                 } else {
+                    
                     firstTimeLaunched = true
                         
                     //create welcome message
@@ -81,7 +89,7 @@ struct ContentView: View {
                     try? self.moc.save()
                     
                     //create welcome message
-                    for value in (0...100) {
+                    for value in (0...2) {
                         let blankNote = Note(context: self.moc)
                             print(value)
                         blankNote.id = UUID() //create id
@@ -94,12 +102,10 @@ struct ContentView: View {
                     
                     UserDefaults.standard.set(2, forKey: "goalNumber")
                 }
-                
-                if !isUnlocked {
-                    if !firstTimeLaunched {
-                        AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
-                    }
-                }
+//
+//                if !firstTimeLaunched {
+//                    AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+//                }
         }
     }
 

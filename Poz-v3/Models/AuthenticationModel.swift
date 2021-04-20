@@ -1,10 +1,3 @@
-//
-//  AuthenticationModel.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/30/21.
-//
-
 import SwiftUI
 import LocalAuthentication
 

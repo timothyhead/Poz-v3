@@ -102,14 +102,14 @@ struct BookView: View {
                             Text("Click journal to add first entry")
                                 .font(Font.custom("Poppins-Light", size:
                                                     (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
-                                .foregroundColor(Color(UIColor(named: "PozGray")!))
+                                .foregroundColor(Color.primary)
                         }
-                }
+                    }
+                    .padding(.bottom, 70)
                     
-                    
-                    PromptsViewB(promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome, tabIndex: $tabIndex, isOpening: $isOpening)
-                        .padding(.bottom, 40)
-                        .padding(.top, -10)
+//                    PromptsViewB(promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome, tabIndex: $tabIndex, isOpening: $isOpening)
+//                        .padding(.bottom, 40)
+//                        .padding(.top, -10)
                 }
             }
            

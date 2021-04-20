@@ -49,6 +49,15 @@ struct barGoalView : View {
                         .foregroundColor(Color(UIColor(named: "PozGray")!))
                 }
                 .offset(x: 0, y: -25)
+            } else {
+                HStack (alignment: .center) {
+                    Spacer()
+                    Text("Click to set a daily goal 🎯")
+                        .font(Font.custom("Poppins-Light", size: (UIScreen.main.bounds.width > 420 ? ((UIScreen.main.bounds.width/2)/18) : ((UIScreen.main.bounds.width/2)/12))))
+                        .foregroundColor(Color(UIColor(named: "PozGray")!))
+                        .padding(.bottom, 10)
+                    Spacer()
+                }
             }
         }
         .onAppear() {
@@ -151,7 +160,12 @@ struct bigGoalView : View {
         ZStack {
             if settings.goalNumber > 0 {
                 if show {
-                    RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: ((CGFloat(countEntriesToday()))/(CGFloat(settings.goalNumber)) == 0.0) ? 0.01 : ((CGFloat(countEntriesToday()))/(CGFloat(settings.goalNumber))), sizeScale: 2, animateOn: false)
+                    RingView(color: Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)), endVal: (calcGoalPerformance() == 0.0) ? 0.01 : (calcGoalPerformance()), sizeScale: 2, animateOn: false)
+//                        .animation(.easeOut(duration: 2))
+//                        .onChange(of: calcGoalPerformance()) { value in
+//                            print (calcGoalPerformance())
+//                            print(settings.goalNumber)
+//                        }
                 }
                 
                 Text("\(countEntriesToday())/\(settings.goalNumber)")
@@ -164,6 +178,10 @@ struct bigGoalView : View {
             dateFormatter.dateFormat = "MM/dd/yy"
             dateString = dateFormatter.string(from: (notes[0].createdAt ?? Date()) as Date)
         }
+    }
+    
+    func calcGoalPerformance () -> CGFloat {
+        return (CGFloat(countEntriesToday()))/(CGFloat(settings.goalNumber))
     }
     
     func countEntriesToday () -> Int {

@@ -5,17 +5,36 @@ struct UserSettingsView: View {
     @ObservedObject var settings: SettingsModel
     
     @State var isEditing = false
+    @State var useAuth = UserDefaults.standard.bool(forKey: "useAuthentication") 
+    @State var isUnlocked = false
     
     var body: some View {
         
         VStack (alignment: .leading) {
             
             Form {
-                TextField("\(settings.username)", text: $settings.username) { isEditing in
-                    self.isEditing = isEditing
-                    UserDefaults.standard.set(settings.username, forKey: "Username")
+                Section(header: Text("Name")) {
+                    TextField("\(settings.username)", text: $settings.username) { isEditing in
+                        self.isEditing = isEditing
+                        UserDefaults.standard.set(settings.username, forKey: "Username")
+                    }
                 }
-            }.navigationTitle("Edit Name 📛")
+                
+                Section(header: Text("Security")) {
+                    Toggle("Face/Touch ID Login", isOn: $useAuth)
+                        .onChange(of: useAuth) { value in
+                            
+                            UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
+                            
+                            if useAuth {
+                                AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+                            }
+                        }
+                        .onAppear() {
+                            useAuth = settings.useAuthentication
+                        }
+                }
+            }.navigationTitle("Name & Security 👤")
         }
         .onTapGesture {
             hideKeyboard() //hide keyboard when user taps outside text field
@@ -51,7 +70,7 @@ struct UserSettingsViewOnboard: View {
                     
             }
             .padding(10)
-            .background(colorScheme == .dark ? Color(#colorLiteral(red: 0.4971166849, green: 0.5021517277, blue: 0.5019699335, alpha: 1)) : Color(#colorLiteral(red: 0.888705194, green: 0.8834225535, blue: 0.892766118, alpha: 1)))
+            .background(colorScheme == .dark ? Color(#colorLiteral(red: 0.3082331717, green: 0.3096653819, blue: 0.3131458759, alpha: 1)) : Color(#colorLiteral(red: 0.888705194, green: 0.8834225535, blue: 0.892766118, alpha: 1)))
             .font(Font.custom("Poppins-Regular", size: 18))
             .cornerRadius(10)
             .onChange(of: settings.username) { value in
