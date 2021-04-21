@@ -19,14 +19,11 @@ struct AuthenticationModel {
                     print("success")
                     isUnlocked = true
                     
-                    UserDefaults.standard.set(true, forKey: "useAuthentication")
-                    
                 } else {
                     // Handle evaluation failure or cancel
                     print("cancelled")
                     isUnlocked = false
                     
-                    UserDefaults.standard.set(false, forKey: "useAuthentication")
 //                    authenticate()
                     
                 }
@@ -36,8 +33,6 @@ struct AuthenticationModel {
         } else {
             isUnlocked = true
         }
-        
-//        return isUnlocked
         
     }
     

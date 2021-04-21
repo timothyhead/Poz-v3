@@ -24,20 +24,21 @@ struct UserSettingsView: View {
                     Toggle("Face/Touch ID Login", isOn: $useAuth)
                         .onChange(of: useAuth) { value in
                             
-                            UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
+                            
                             
                             if useAuth {
                                 AuthenticationModel(isUnlocked: $isUnlocked).authenticateDo()
                                 
-                                if (isUnlocked) {
+                                if (AuthenticationModel(isUnlocked: $isUnlocked).authenticate()) {
                                     useAuth = true
                                 } else {
                                     useAuth = false
                                 }
                             }
+                            UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
                         }
                         .onAppear() {
-                            useAuth = settings.useAuthentication
+                            useAuth = UserDefaults.standard.bool(forKey: "useAuthentication")
                         }
                 }
             }.navigationTitle("Name & Security 👤")

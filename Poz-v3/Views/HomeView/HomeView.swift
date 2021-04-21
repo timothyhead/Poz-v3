@@ -62,7 +62,7 @@ struct HomeView: View {
                                 .foregroundColor(Color(UIColor(named: "PozGray")!))
                         }
                         .sheet(isPresented: $settings.showSettings, content: {
-                                SettingsView(settings: self.settings)
+                            SettingsView(settings: self.settings)
                                     .environment(\.managedObjectContext, self.moc)
                         })
                         

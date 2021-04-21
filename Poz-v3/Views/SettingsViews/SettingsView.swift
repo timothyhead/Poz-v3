@@ -62,11 +62,16 @@ struct SettingsView: View {
                     Toggle("Lock noteboook", isOn: $useAuth)
                         .onChange(of: useAuth) { value in
                             
-                            UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
-                            
                             if useAuth {
                                 useAuth = AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+                                
+                                UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
+//                                useAuth = isUnlocked
+                                
+                            } else {
+                                UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
                             }
+                            
                         }
                     
                     
