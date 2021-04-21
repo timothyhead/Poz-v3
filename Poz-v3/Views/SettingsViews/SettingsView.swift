@@ -59,7 +59,7 @@ struct SettingsView: View {
                 
                 
                 Section(header: Text("Security")) {
-                    Toggle("Face/Touch ID Login", isOn: $useAuth)
+                    Toggle("Lock noteboook", isOn: $useAuth)
                         .onChange(of: useAuth) { value in
                             
                             UserDefaults.standard.set(useAuth, forKey: "useAuthentication")

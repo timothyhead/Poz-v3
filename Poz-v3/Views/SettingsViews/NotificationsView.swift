@@ -272,7 +272,7 @@ struct ReminderSectionView: View {
                     
 //                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                     let content = UNMutableNotificationContent()
-                    content.title = "\(countEntriesToday())/\(settings.goalNumber) entries completed today"
+                    content.title = "Hit your daily goal"
                     content.subtitle = "Hit poz. Take a moment to reflect"
                     content.sound = UNNotificationSound.default
                     

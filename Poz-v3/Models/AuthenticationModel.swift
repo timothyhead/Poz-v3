@@ -6,27 +6,32 @@ struct AuthenticationModel {
     @Binding var isUnlocked: Bool
     
     func authenticate() {
-        let context = LAContext()
+        let authenticationContext = LAContext()
         var error: NSError?
+        let reasonString = "Enter passcode or touch ID to unlock."
 
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "We need to unlock your journal"
+        // Check if the device can evaluate the policy.
+        if authenticationContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthentication, error: &error) {
 
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+            authenticationContext.evaluatePolicy( .deviceOwnerAuthentication, localizedReason: reasonString, reply: { (success, evalPolicyError) in
 
-                DispatchQueue.main.async {
-                    if success {
-                        self.isUnlocked = true
-                    } else {
-                        authenticate()
-                    }
+                if success {
+                    print("success")
+                    isUnlocked = true
+                } else {
+                    // Handle evaluation failure or cancel
+                    print("cancelled")
+                    isUnlocked = false
+                    authenticate()
                 }
+            })
 
-            }
         } else {
-            self.isUnlocked = true
+            print("passcode not set")
         }
     }
+    
+    
     
     func canUseAuthentication() -> Bool {
         let context = LAContext()
