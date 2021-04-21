@@ -63,7 +63,7 @@ struct ContentView: View {
                 if (isAppAlreadyLaunchedOnce()) {
                     
                     if onboardingDone && settings.useAuthentication {
-                        AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+                        AuthenticationModel(isUnlocked: $isUnlocked).authenticateDo()
                     } else {
                         isUnlocked = true
                     }

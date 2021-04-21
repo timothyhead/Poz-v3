@@ -19,10 +19,10 @@ struct EnableAuthViewOnboard: View {
         
         VStack {
             VStack {
-                Text("Secure your journal")
+                Text("Protect your journal")
                         .font(Font.custom("Blueberry", size: 28))
                         .foregroundColor(.primary)
-                Text("Poz is YOUR personal journal, secure it using Face or Touch ID so only you can access your entries")
+                Text("Secure login uses Face/Touch ID or a password to ensure only you can access you can access your journal.")
                         .font(Font.custom("Poppins-Light", size: 18))
                         .foregroundColor(Color(#colorLiteral(red: 0.4156862745, green: 0.4156862745, blue: 0.4156862745, alpha: 1)))
                 
@@ -33,9 +33,9 @@ struct EnableAuthViewOnboard: View {
                 if !moveForward {
                     VStack {
                         Button(action: {
-                            AuthenticationModel(isUnlocked: $moveForward).authenticate()
-                            isAuthenticateOn = true
-                            UserDefaults.standard.set(true, forKey: "useAuthentication")
+//                            AuthenticationModel(isUnlocked: $moveForward).authenticate()
+                            isAuthenticateOn = AuthenticationModel(isUnlocked: $moveForward).authenticate()
+                            UserDefaults.standard.set(AuthenticationModel(isUnlocked: $moveForward).authenticate(), forKey: "useAuthentication")
                         }) {
                             ZStack {
                                 Rectangle()
@@ -44,7 +44,7 @@ struct EnableAuthViewOnboard: View {
                                     .cornerRadius(100)
                                 
                                         
-                                Text("Enable Face/Touch ID")
+                                Text("Enable Secure Login")
                                     .font(Font.custom("Poppins-Regular", size: 18))
                                     .foregroundColor(Color.black)
                             }

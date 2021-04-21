@@ -27,7 +27,13 @@ struct UserSettingsView: View {
                             UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
                             
                             if useAuth {
-                                AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+                                AuthenticationModel(isUnlocked: $isUnlocked).authenticateDo()
+                                
+                                if (isUnlocked) {
+                                    useAuth = true
+                                } else {
+                                    useAuth = false
+                                }
                             }
                         }
                         .onAppear() {

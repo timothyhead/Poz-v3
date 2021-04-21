@@ -65,9 +65,10 @@ struct SettingsView: View {
                             UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
                             
                             if useAuth {
-                                AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+                                useAuth = AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
                             }
                         }
+                    
                     
                     NavigationLink(destination: PrivacyPolicyView() ) {
                         HStack {
@@ -77,7 +78,6 @@ struct SettingsView: View {
                 }
             }
             .font(Font.custom("Poppins-Light", size: 16))
-            
             .navigationTitle( Text("Settings ⚙️"))
                 
             .navigationBarItems(trailing: Button(action: {
