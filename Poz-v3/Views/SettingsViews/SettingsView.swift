@@ -62,8 +62,9 @@ struct SettingsView: View {
                     Toggle("Lock noteboook", isOn: $useAuth)
                         .onChange(of: useAuth) { value in
                             
-                            if useAuth {
+                            if value {
                                 useAuth = AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
+                               // AuthenticationModel(isUnlocked: $isUnlocked).authenticateDo()
                                 
                                 UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
 //                                useAuth = isUnlocked
@@ -84,7 +85,9 @@ struct SettingsView: View {
             }
             .font(Font.custom("Poppins-Light", size: 16))
             .navigationTitle( Text("Settings ⚙️"))
-                
+            .onChange(of: settings.useAuthentication) { value in
+                useAuth = value
+            }
             .navigationBarItems(trailing: Button(action: {
 //                self.settings.darkMode = self.darkMode
                 self.presentationMode.wrappedValue.dismiss()
