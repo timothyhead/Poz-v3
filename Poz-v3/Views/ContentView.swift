@@ -65,11 +65,11 @@ struct ContentView: View {
                     
                 } else {
                     
-                    // Content to show when authentication is not unlocked and not first time using,
-                    // not sure this state gets reached in any case
-                    Text("Something went wrong, please restart the app.")
-                        .font(Font.custom("Poppins-Light", size: 26))
-                        .foregroundColor(Color(UIColor(named: "PozGray")!))
+                    // Content to show when authentication is not unlocked and not first time using
+                    
+//                    Text("Poz Journal")
+//                        .font(Font.custom("Blueberry", size: 32))
+//                        .foregroundColor(Color.primary)
                 }
             }
             .background(Color(UIColor(named: "HomeBG")!))
