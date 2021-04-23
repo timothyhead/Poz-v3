@@ -1,6 +1,8 @@
 import SwiftUI
 import CoreData
 
+// list of notes
+
 struct NotesListView: View {
     
     @Environment(\.managedObjectContext) var moc

@@ -1,5 +1,8 @@
 import SwiftUI
 
+// book patterns for book customization
+// from https://www.heropatterns.com/
+
 struct bookPattern : Hashable {
     
     let patternImageString : String

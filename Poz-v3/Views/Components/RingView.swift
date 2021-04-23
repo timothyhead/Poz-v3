@@ -1,5 +1,6 @@
 import SwiftUI
 
+// a circular ring to display daily goal
 // code adapted from https://www.youtube.com/watch?v=6PFYMUL8uQY
 
 struct RingView: View {

@@ -1,15 +1,7 @@
 import SwiftUI
 import SwiftSpeech
 
-
-//
-//struct NoteButtonsView: View {
-//
-//    
-//}
-
-
-
+// buttons vertically arranged for popover, not in use
 
 struct NoteButtonsVerticalView: View {
 

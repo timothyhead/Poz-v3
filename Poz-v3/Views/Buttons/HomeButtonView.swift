@@ -1,11 +1,6 @@
-//
-//  HomeButtomView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/24/21.
-//
-
 import SwiftUI
+
+// home button, not in use
 
 struct HomeButtonView: View {
     

@@ -1,6 +1,8 @@
 import SwiftUI
 import SwiftUICharts
 
+//  all the actual daily goal charts, bar, small, big, as well as compontents for the swift ui charts
+
 struct barGoalView : View {
     
     @Environment(\.managedObjectContext) var moc

@@ -1,31 +1,33 @@
-//
-//  HomeVIew.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/23/21.
-//
-
 import SwiftUI
+
+// main home screen with book, good morning text, feedback, settings, and daily goal
 
 struct HomeView: View {
     
+    // get core data and color scheme
     @Environment(\.managedObjectContext) var moc
-    
-    @ObservedObject var settings: SettingsModel
     @Environment(\.colorScheme) var colorScheme
     
+    // pass in settings
+    @ObservedObject var settings: SettingsModel
+    
+    // main nav control
     @Binding var tabIndex: Int
     
+    // if book is being opened
     @State var bookOpenAnimation = false
-    @State var prevPostsShowing = false
     
+    // open prompts from home, not in use
     @Binding var promptSelectedIndex: Int
     @Binding var promptSelectedFromHome: Bool
     
+    // for feedback view
     @State var feedbackFormShowing = false
     
+    // for onboarding
     @State var firstTimeShowing = true
     
+    // for goal view
     @State var dailyGoalSheetShowing = false
 
     var body: some View {
@@ -34,9 +36,12 @@ struct HomeView: View {
             
             VStack (alignment: .leading, spacing: 0) {
                 
+                // hides if book is opening
                 if !bookOpenAnimation {
+                    
                     //top bar
                     HStack (alignment: .top, spacing: 20) {
+                        
                         //Hello Text
                         VStack (alignment: .leading, spacing: 0) {
                             Text( timeOfDayOutput() )
@@ -49,6 +54,7 @@ struct HomeView: View {
                         
                         Spacer()
                         
+                        // feedback button
                         Button (action: { feedbackFormShowing.toggle() }) {
                             Text("💬")
                                 .font(Font.custom("Poppins-Light", size: 26))
@@ -56,6 +62,7 @@ struct HomeView: View {
                         }
                         .sheet(isPresented: $feedbackFormShowing, content: { FeedbackView() })
                         
+                        //settins button
                         Button (action:{ self.settings.showSettings.toggle() }) {
                             Text("⚙️")
                                 .font(Font.custom("Poppins-Light", size: 26))
@@ -72,12 +79,15 @@ struct HomeView: View {
                 
                 Spacer()
                 
+                //book
                 BookView(settings: settings, tabIndex: $tabIndex, isOpening: $bookOpenAnimation, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome).environment(\.managedObjectContext, self.moc)
-                
                 
                 Spacer()
                 
+                // hides if book is opening
                 if !bookOpenAnimation {
+                    
+                    // daily goal view
                     Button (action: { dailyGoalSheetShowing = true }) {
                         barGoalView(settings: settings)
                     }
@@ -93,11 +103,13 @@ struct HomeView: View {
                 promptSelectedIndex = 0
             }
 
+            // show onboarding tutorial first time opened
             if (firstTimeShowing) {
                 HomeViewTutorial(show: firstTimeShowing)
                     .onAppear() {
                         firstTimeShowing = firstTimeAppearing()
 
+                        // auto dismiss after 5 s
 //                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
 //                            withAnimation (.easeOut) {
 //                                firstTimeShowing = firstTimeAppearing()
@@ -107,10 +119,13 @@ struct HomeView: View {
             }
         }
         .onTapGesture {
+            
+            // dismisses onboarding on click
             firstTimeShowing = false
         }
     }
     
+    //checks if first time appearing, same of content view
     func firstTimeAppearing()->Bool{
         let homeScreendefaults = UserDefaults.standard
 
@@ -128,6 +143,7 @@ struct HomeView: View {
         }
     }
     
+    // checks time of day and returns appropriate greeting
     func timeOfDayOutput () -> String {
         
         let currentTime = Calendar.current.component( .hour, from:Date() )

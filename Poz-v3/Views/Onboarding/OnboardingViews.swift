@@ -1,32 +1,45 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
+    // pass in settings & get colorscheme
     @ObservedObject var settings: SettingsModel
-    @Binding var tabIndex: Int
     @Environment(\.colorScheme) var colorScheme
-    var doneFunction: () -> ()
     
+    // navigation control var
+    @Binding var tabIndex: Int
+    
+    // slide management
     var slideCount = 6
-    
-    @State var slideGesture: CGSize = CGSize.zero
     @State var curSlideIndex = 0
+    
+    // for slide animations
+    @State var slideGesture: CGSize = CGSize.zero
     var distance: CGFloat = UIScreen.main.bounds.size.width
     
+    // for checking if screens have been completed
     @State var nameIsEntered = false
-    
-    @State var disabledButton = false
-    
     @State var securitySettingSet = false
     
-    @State var gatedAccess = 0
+    // for disabling next button
+    @State var disabledButton = false
     
+    // done function initialization
+    var doneFunction: () -> ()
+    
+    // next buttons
     func nextButton() {
+        
+        // if last slide, be done
         if self.curSlideIndex == slideCount - 1 {
             doneFunction()
             return
         }
         
+        // if not last slide, go to next slide
         if self.curSlideIndex < slideCount - 1 {
+            
+            // if button not disabled
             if !disabledButton {
                 withAnimation {
                     self.curSlideIndex += 1
@@ -70,14 +83,19 @@ struct OnboardingView: View {
                     .animation(.spring())
                     .padding(.bottom, 40)
             }
+            
+            // disabled button management
+            
+            // update disabled button when name entered
             .onChange(of: nameIsEntered) { value in
                 if nameIsEntered == true {
-                    gatedAccess = 1
                     disabledButton = false
                 } else {
                     disabledButton = true
                 }
             }
+            
+            // update disabled button when authentication setting set
             .onChange(of: securitySettingSet) { value in
                 if securitySettingSet == true {
                     disabledButton = false
@@ -85,12 +103,13 @@ struct OnboardingView: View {
                     disabledButton = true
                 }
             }
+            
+            // on change of slide, check whtehre button sgould be disabled
             .onChange(of: curSlideIndex) { value in
                 
                 if curSlideIndex == 0 {
                     disabledButton = false
                 }
-                
                 if curSlideIndex == 1 && !nameIsEntered {
                     disabledButton = true
                 } else if curSlideIndex == 1 && nameIsEntered {
@@ -103,6 +122,7 @@ struct OnboardingView: View {
                 }
             }
             
+            // bottom nav, back button and  next button
             VStack {
                 Spacer()
                 HStack {
@@ -120,6 +140,7 @@ struct OnboardingView: View {
         }
     }
     
+    // next button view, that is dynamic based on which slide
     func arrowView() -> some View {
         Group {
             
@@ -140,14 +161,15 @@ struct OnboardingView: View {
                             .opacity(disabledButton ? 0.2 : 1)
                     }
                     .foregroundColor(Color(.black))
-              
             }
-            
         }
     }
     
+    // back button and slide nav view, that is dynamic based on which slide
     func progressView() -> some View {
         VStack {
+            
+            // generate circles and fill in some based on which slide
             HStack {
                 ForEach(0..<slideCount) { i in
                     Circle()
@@ -156,6 +178,8 @@ struct OnboardingView: View {
                         .foregroundColor(self.curSlideIndex >= i ? (colorScheme == .dark ? Color.white : Color.black) : (colorScheme == .dark ? Color.white.opacity(0.2) : Color.black.opacity(0.2)))
                 }
             }
+            
+            // back button
             if (curSlideIndex != 0) {
                 Button (action: {
                     withAnimation {
@@ -172,6 +196,7 @@ struct OnboardingView: View {
     
 }
 
+//welcome screen
 struct OnboardingWelcome: View {
     
     @ObservedObject var settings: SettingsModel
@@ -190,6 +215,7 @@ struct OnboardingWelcome: View {
                 .font(Font.custom("Poppins-Light", size: 18))
                 .foregroundColor(Color(#colorLiteral(red: 0.4156862745, green: 0.4156862745, blue: 0.4156862745, alpha: 1)))
             
+            // this image from https://storyset.com/
             Image("Alone").resizable().frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.width - 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .padding(.bottom, 30)
             
@@ -204,6 +230,8 @@ struct OnboardingWelcome: View {
     }
 }
 
+
+// last slide of onboardings
 struct OnboardingAllDone: View {
     var body : some View {
         VStack (alignment: .center) {

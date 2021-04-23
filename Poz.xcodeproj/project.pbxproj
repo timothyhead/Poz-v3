@@ -485,7 +485,6 @@
 			children = (
 				DE392D60260B118B00715173 /* SwiftSpeechButtonView.swift */,
 				DE392D7A260B154D00715173 /* PromptsView.swift */,
-				DE392D92260BEC2700715173 /* PopOverView.swift */,
 				DE392D9C260C512A00715173 /* HomeButtonView.swift */,
 				DE392D59260B0FDA00715173 /* NoteButtonsView.swift */,
 			);
@@ -527,6 +526,7 @@
 		DED129A42611B64E00C2DE33 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				DE392D92260BEC2700715173 /* PopOverView.swift */,
 				DE33591A261CEEB100FF2D3B /* LottieView.swift */,
 				DE392D4F260B0F0900715173 /* EmojiPicker.swift */,
 				DE392D1A260AD18300715173 /* TabsView.swift */,

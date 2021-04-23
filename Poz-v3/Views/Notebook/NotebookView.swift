@@ -1,28 +1,38 @@
 import SwiftUI
 import Pages
 
-struct NotebookView: View {
+// notebook that displays all journal entries in page turn style
+// using pages library by https://github.com/nachonavarro/Pages
 
+struct NotebookView: View {
+    
+    // main nav var
     @Binding var tabIndex: Int
 
+    // get the last page that was open from user defaults
     @State var indexNotes: Int = UserDefaults.standard.integer(forKey: "LastPageOpen")
     
+    // settings, color scheme
     @ObservedObject var settings: SettingsModel
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
         entity: Note.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt,ascending: true)]
+        sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt,ascending: true)] // notes sorted from first created to last
     ) var notes: FetchedResults<Note>
 
+    // for prompts, not in use
     @Binding var promptSelectedIndex: Int
     @Binding var promptSelectedFromHome: Bool
     
+    // for onboarding
     @State var firstTimeShowing = true
     
+    //for page slider
     @State var showPageSlider = false
     @State var isEditing = true
     @State var pageNumber = 0.0
     
+    // for last page detection, not in use
     @State var isLastPage = false
     
     var body: some View {
@@ -31,6 +41,7 @@ struct NotebookView: View {
                    
 //            NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
             
+            // dynamic page system of all note objects in array of core data
             ModelPages (
 
                 notes, currentPage: $indexNotes,
@@ -40,13 +51,16 @@ struct NotebookView: View {
 
             ) { pageIndex, note in
                 
+                // note page, passing in almost everything possible
                 NotePage(settings: settings, note: note, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome, tabIndex: $tabIndex, showPageSlider: $showPageSlider, pageIndex: $indexNotes).environment(\.managedObjectContext, self.moc)
                     .onDisappear () {
+                        // when notebook closes, save last open page
                         UserDefaults.standard.set(indexNotes, forKey: "LastPageOpen")
                     }
             }
             .padding(.top, -6)
             
+            // page turn slider
             if showPageSlider {
                 
                 ZStack {
@@ -78,6 +92,7 @@ struct NotebookView: View {
                 
             }
             
+            // onboarding
             if (firstTimeShowing) {
                 SwipeTutorialView(show: firstTimeShowing)
                     .onAppear() {
@@ -95,15 +110,20 @@ struct NotebookView: View {
             indexNotes = Int(pageNumber)
         }
         .onAppear() {
+            
+            // initialize notebook page to last opened page
             if promptSelectedIndex != 0 {
                 indexNotes = findFirstEmptyPage() - 1
             }
         }
         .onTapGesture {
+            
+            // close onboarding on click
             firstTimeShowing = false
         }
     }
     
+    // check if first time screen appearing for onboarding
     func firstTimeAppearing()->Bool{
         let homeScreendefaults = UserDefaults.standard
 
@@ -121,6 +141,7 @@ struct NotebookView: View {
         }
     }
     
+    // check if curr page is the last page
     func isCurrNoteLastPage () -> Bool {
            
         if (indexNotes == notes.count - 1) {
@@ -144,6 +165,7 @@ struct NotebookView: View {
         }
     }
     
+    // finds the first empty page 
     func findFirstEmptyPage () -> Int {
         var noteIndex = 0
         

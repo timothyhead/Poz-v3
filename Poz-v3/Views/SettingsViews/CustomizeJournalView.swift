@@ -1,24 +1,27 @@
 import SwiftUI
 
+// for customizing journal, duh
+
 struct CustomizeJournalView: View {
     
+    // settings, colorscheme, presentation mode
     @ObservedObject var settings: SettingsModel
     @Environment(\.colorScheme) var colorScheme
-    
-    @State private var isEditing = false
-    
     @Environment(\.presentationMode) var presentationMode
     
+    // for slider
+    @State private var isEditing = false
+    
+    // for emoji and pattern picking
     @State var index = 0
-    
     @State var bookPatterns = bookPatternsList()
-    
     @State var patternIndex = 0
     
     var body: some View {
         VStack (alignment: .center) {
             
-           BookStaticView(settings: settings, bookPatternIndex: $settings.journalPatternIndex)
+            // shoow book simplified
+            BookStaticView(settings: settings, bookPatternIndex: $settings.journalPatternIndex)
                 .padding(.vertical, 40 - CGFloat(patternIndex))
                 
             Form {
@@ -80,6 +83,7 @@ struct CustomizeJournalView: View {
 }
 
 
+// same as above but tweaked a bit for onboarding
 struct CustomizeJournalViewOnboard: View {
     
     @ObservedObject var settings: SettingsModel

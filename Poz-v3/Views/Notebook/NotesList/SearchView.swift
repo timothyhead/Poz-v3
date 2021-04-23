@@ -1,5 +1,6 @@
 import SwiftUI
 
+// search bar to search through notes
 // code from https://www.youtube.com/watch?v=TOUD5Rm6GS0
 // adapted to work with core data
 

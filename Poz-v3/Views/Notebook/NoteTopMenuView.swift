@@ -1,11 +1,6 @@
-//
-//  NoteTopMenuView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/26/21.
-//
-
 import SwiftUI
+
+// top menu of note page
 
 struct NoteTopMenuView: View {
     
@@ -22,6 +17,7 @@ struct NoteTopMenuView: View {
     var body: some View {
         HStack {
             
+            // search button
             if notes.count > 2 {
                 Button (action:{ prevPostsShowing.toggle() }) {
                     ZStack {

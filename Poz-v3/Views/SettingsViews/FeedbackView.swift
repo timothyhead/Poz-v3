@@ -2,6 +2,7 @@ import SwiftUI
 import UIKit
 import MessageUI
 
+// feedback view, if user can email, opens mailview, otherwise, google form. user als has option to switch
 
 struct FeedbackView: View {
     

@@ -1,15 +1,21 @@
 import SwiftUI
 
+// main settings view
+
 struct SettingsView: View {
     
+    //settings, colorscheme, presentation mode
     @ObservedObject var settings: SettingsModel
-    @State var darkMode = false
-    @State var notifications = true
-    
     @Environment(\.colorScheme) var colorScheme
-    
     @Environment(\.presentationMode) var presentationMode
     
+    // for old manual dark mode toggle
+    @State var darkMode = false
+    
+    // for notification control
+    @State var notifications = true
+    
+    // for controlling authentication
     @State var useAuth = UserDefaults.standard.bool(forKey: "useAuthentication")
     @State var isUnlocked = false
     

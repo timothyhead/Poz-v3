@@ -1,7 +1,9 @@
 import SwiftUI
 
+// for setting up daily goal and settings
 // https://www.youtube.com/watch?v=t0l0-Kx_4l0
 
+// a single reminder object with index, time, and on switch
 class reminderObject : Identifiable, ObservableObject {
 
     var reminderIndex: Int
@@ -18,6 +20,7 @@ class reminderObject : Identifiable, ObservableObject {
 
 struct NotificationsView: View {
     
+    // pass in settings
     @ObservedObject var settings: SettingsModel
     
     @State var notificationsAreOn = false
@@ -28,6 +31,7 @@ struct NotificationsView: View {
 //            barGoalView(settings: settings)
 //                .padding(.top, 60)
             
+            // display goal view up top
             HStack (alignment: .center) {
                 Spacer()
                 bigGoalView(settings: settings)
@@ -39,6 +43,7 @@ struct NotificationsView: View {
                 
                 
             
+                // stepper to change daily goal number
                 HStack {
     //                smallGoalView(settings: settings)
                     
@@ -53,6 +58,7 @@ struct NotificationsView: View {
                     })
                 }
                 
+                // turn daily notification on/off
                 Toggle("Daily Notifications", isOn: $notificationsAreOn)
                     .onChange(of: notificationsAreOn) { value in
                         settings.notifications = notificationsAreOn
@@ -66,17 +72,19 @@ struct NotificationsView: View {
                         notificationsAreOn = settings.notifications
                     }
                 
-            if (notificationsAreOn == true) {
-                ForEach (settings.reminders.indices) { reminderIndex in
-                    ReminderSectionView(settings: settings).environmentObject(settings.reminders[reminderIndex])
+                // show reminder controls for each reminder
+                if (notificationsAreOn == true) {
+                    ForEach (settings.reminders.indices) { reminderIndex in
+                        ReminderSectionView(settings: settings).environmentObject(settings.reminders[reminderIndex])
+                    }
                 }
             }
-        }
             .navigationTitle("Daily Goal 🎯")
         }
     }
 }
 
+// same as above but modified for popup
 struct NotificationsViewPopup: View {
     
     @ObservedObject var settings: SettingsModel
@@ -88,8 +96,6 @@ struct NotificationsViewPopup: View {
         
         NavigationView {
             VStack (alignment: .leading) {
-            
-            
             
 //            barGoalView(settings: settings)
 //                .padding(.top, 60)
@@ -103,8 +109,6 @@ struct NotificationsViewPopup: View {
                 
                 Form {
                     
-                    
-                
                     HStack {
         //                smallGoalView(settings: settings)
                         
@@ -151,6 +155,7 @@ struct NotificationsViewPopup: View {
     }
 }
 
+// for onboarding, similar to above
 struct NotificationsViewOnboard: View {
     
     @ObservedObject var settings: SettingsModel
@@ -225,6 +230,7 @@ struct NotificationsViewOnboard: View {
     }
 }
 
+// a single reminder object, with toggle, and time picker
 struct ReminderSectionView: View {
     
     @EnvironmentObject var reminder: reminderObject
@@ -255,6 +261,7 @@ struct ReminderSectionView: View {
                     selection: $reminder.reminderTime,
                     displayedComponents: [.hourAndMinute]
                 )
+                // creates notification as time changes
                 .onChange (of: reminder.reminderTime) {value in
                     
                     UserDefaults.standard.set(reminder.reminderTime.timeIntervalSince1970, forKey: "Reminder \(reminder.reminderIndex) Time")
@@ -298,6 +305,7 @@ struct ReminderSectionView: View {
         }
     }
     
+    // count entries today to output, not in use
     func countEntriesToday () -> Int {
         
         var entriesToday = 0

@@ -1,13 +1,6 @@
-//
-//  PromptsView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/23/21.
-//
-
 import SwiftUI
 
-//prompt object
+//a prompt category object
 struct Prompt : Hashable {
     var name : String
     var color : Color
@@ -113,6 +106,7 @@ struct PromptsView: View {
     }
 }
 
+// vertical menu prompt selection, for note page, not used atm
 struct PromptsViewB: View {
     
     @Binding var promptSelectedIndex: Int
@@ -164,12 +158,11 @@ struct PromptsViewB: View {
 }
 
 
+// circular prompt selection menu, for home page, not used atm
 struct PromptsViewC: View {
     
 //    @Binding var selectedPrompt: Prompt
-    
-    
-    
+     
     //create prompts 
     let prompts:[Prompt] = [
         Prompt(name: "Simple", color: Color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)), emoji: "🗒️", subtext: "Just a plain blank plage", index: 0, prompt: ""),

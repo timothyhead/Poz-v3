@@ -1,12 +1,14 @@
 import SwiftUI
 
- // https://github.com/exyte/ConcentricOnboarding
-
 struct ContentView: View {
     
+    // initialize setting model
     @ObservedObject var settings = SettingsModel()
+    
+    // device color scheme (dark vs light mode)
     @Environment(\.colorScheme) var colorScheme
     
+    // get core date notes
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
         entity: Note.entity(),
@@ -14,70 +16,90 @@ struct ContentView: View {
     
     ) var notes: FetchedResults<Note>
     
+    // primary navigational index
     @State var tabIndex = 0
     
-    @State var firstTimeNotebookIndex = 0
-    
+    // for opening prompts from home screen, currently not in use
     @State var promptSelectedIndex = 0
     @State var promptSelectedFromHome = false
     
+    // for authentication
     @State var isUnlocked = false
-    
     @State var isAuthenticateOn = false
     
+    // for onboarding/initial setup on first launch
+    @State var firstTimeNotebookIndex = 0
     @State var firstTimeLaunched = true
-    
     @State private var onboardingDone: Bool = UserDefaults.standard.bool(forKey: "onboardingDone")
     
     var body: some View {
             
             VStack {
+                
+                // if phone is unlocked or if its the first time, then only show content
                 if isUnlocked || firstTimeLaunched {
                     
                     if tabIndex == 0 {
                         
                         Group {
                             if !onboardingDone {
+                                
+                                //onboarding
                                 OnboardingView(settings: settings, tabIndex: $tabIndex, doneFunction: {
                                     self.onboardingDone = true
                                     UserDefaults.standard.set(true, forKey: "onboardingDone")
                                     print("done onboarding")
                                 })
                             } else {
+                                
+                                // home view
                                 HomeView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome).environment(\.managedObjectContext, self.moc)
                             }
                         }
                         
                     } else if tabIndex == 1 {
+                        
+                        // notebook
                         NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome).environment(\.managedObjectContext, self.moc)
                     }
                     
                 } else {
-                    //Content to show while FaceID not validated
+                    
+                    // Content to show when authentication is not unlocked and not first time using,
+                    // not sure this state gets reached in any case
+                    Text("Something went wrong, please restart the app.")
+                        .font(Font.custom("Poppins-Light", size: 26))
+                        .foregroundColor(Color(UIColor(named: "PozGray")!))
                 }
             }
             .background(Color(UIColor(named: "HomeBG")!))
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             .onAppear {
                 
+                // when this first screen loads, check if its the first time launched
                 if (isAppAlreadyLaunchedOnce()) {
                     
+                    // if its not the first time, onboarding is done and use authentication is turned on
                     if onboardingDone && settings.useAuthentication {
+                        
+                        // authenticate
                         AuthenticationModel(isUnlocked: $isUnlocked).authenticateDo() 
                          
                     } else {
+                        // else unlock and let them through
                         isUnlocked = true
                     }
                     
+                    // open notebook to page 1
                     firstTimeNotebookIndex = 1
                     firstTimeLaunched = false
                     
-                    
                 } else {
+                    // if first time opening
                     
                     firstTimeLaunched = true
                         
-                    //create welcome message
+                    //create onboarding note
                     let welcomeNote = Note(context: self.moc)
                     
                     welcomeNote.id = UUID() //create id
@@ -88,10 +110,10 @@ struct ContentView: View {
                         
                     try? self.moc.save()
                     
-                    //create welcome message
+                    //create one blank note
                     for value in (0...1) {
                         let blankNote = Note(context: self.moc)
-                            print(value)
+                        print(value)
                         blankNote.id = UUID() //create id
                         blankNote.note = ""
                         blankNote.createdAt = Date() //actual date to sort
@@ -99,23 +121,27 @@ struct ContentView: View {
 
                         try? self.moc.save()
                     }
-                    
-                    
-                }
+            }
         }
     }
 
+    // check if app has already launched one
     func isAppAlreadyLaunchedOnce()->Bool {
+        
+        // user defaults
         let defaults = UserDefaults.standard
 
+        // checks if userdefaults has "isAppAlreadyLaunchedOnce" string
         if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
             
+            // if it does, return not first time
             firstTimeLaunched = false
             print("App already launched : \(isAppAlreadyLaunchedOnce)")
             return true
             
         } else {
             
+            // if not, return first time and save "isAppAlreadyLaunchedOnce" to user defaults
             defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
             print("App launched first time")
             return false
@@ -123,6 +149,8 @@ struct ContentView: View {
         }
     }
     
+    
+    // return number of notes, not in use
     func countNotes () -> Int {
         var notesCount = 0
         
@@ -137,11 +165,11 @@ struct ContentView: View {
 }
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}
 
 
 

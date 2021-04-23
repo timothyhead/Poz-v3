@@ -1,5 +1,10 @@
 import SwiftUI
 
+// emoji picker used in note page and journal customization
+
+// category = emoji
+// index = position of emoji in picker
+
 var Categories: [Category] = []
 var lastIndex: Int = 0
 
@@ -15,6 +20,7 @@ struct Category: Hashable {
     }
 }
 
+// emoji picker for notebook emoji taggin
 struct EmojiPicker: View {
     
     @Binding var selectedIndex: Int
@@ -171,6 +177,8 @@ struct EmojiPicker: View {
     }
 }
 
+
+// emoji picker for journal customization
 struct EmojiPickerB: View {
     
     @Binding var selectedIndex: Int

@@ -1,11 +1,7 @@
-//
-//  PopOverView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/24/21.
-//
-
 import SwiftUI
+
+// popover view adapted from Kavsoft - https://www.youtube.com/watch?v=4Wbyje-TMME
+// not in use
 
 struct SimpleButtonView: View {
     

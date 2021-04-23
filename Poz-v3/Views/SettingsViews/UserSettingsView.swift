@@ -1,5 +1,7 @@
 import SwiftUI
 
+// for use to customize name
+
 struct UserSettingsView: View {
     
     @ObservedObject var settings: SettingsModel
@@ -49,6 +51,8 @@ struct UserSettingsView: View {
     }
 }
 
+
+// customized for onboarding
 
 struct UserSettingsViewOnboard: View {
     

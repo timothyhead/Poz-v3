@@ -1,5 +1,7 @@
 import SwiftUI
 
+// dashbooard of user statistics, not in use
+
 struct DashboardView: View {
     
     @State var prevPostsShowing = false

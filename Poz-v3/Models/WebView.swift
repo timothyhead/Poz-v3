@@ -9,6 +9,7 @@ import SwiftUI
 import WebKit
 
 
+// web view that can pass in any web link
 struct WebView: UIViewRepresentable {
     
     @State var link: String
@@ -20,7 +21,6 @@ struct WebView: UIViewRepresentable {
     func updateUIView(_ view: WKWebView, context: UIViewRepresentableContext<WebView>) {
 
         let request = URLRequest(url: URL(string: link)!)
-
         view.load(request)
     }
 }

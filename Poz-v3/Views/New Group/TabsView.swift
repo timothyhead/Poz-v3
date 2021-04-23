@@ -1,5 +1,7 @@
 import SwiftUI
 
+// a standard bottom tab navigation, not in use atm
+
 struct TabsView: View {
     
     @Binding var index: Int

@@ -1,6 +1,8 @@
 import SwiftUI
 import Lottie
 
+// displays a lottie animation!
+
 // swipe animation from https://lottiefiles.com/17651-swipe-left-to-right
 // lottie book file from https://lottiefiles.com/38292-full-book
 

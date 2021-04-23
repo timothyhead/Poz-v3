@@ -107,7 +107,6 @@ class SettingsModel: ObservableObject {
     @Published var journalPatternIndex: Int = UserDefaults.standard.integer(forKey: "journalPatternIndex")
     
     @Published var username: String = UserDefaults.standard.string(forKey: "Username") ?? ""
-    // Reminder \(reminder.reminderIndex) On
     @Published var reminders = [
         reminderObject(reminderIndex: 1, reminderTime: Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "Reminder 1 Time")), reminderIsOn: UserDefaults.standard.bool(forKey: "Reminder 1 On") ),
         reminderObject(reminderIndex: 2, reminderTime: Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "Reminder 2 Time")), reminderIsOn: UserDefaults.standard.bool(forKey: "Reminder 2 On") ),

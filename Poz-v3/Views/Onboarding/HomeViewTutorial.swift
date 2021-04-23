@@ -1,12 +1,6 @@
-//
-//  HomeViewTutorial.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 4/7/21.
-//
-
 import SwiftUI
 
+// simple view that shows the first time the home screen is opened
 struct HomeViewTutorial: View {
     @State var show = true
     

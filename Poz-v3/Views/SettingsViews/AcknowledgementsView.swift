@@ -1,11 +1,6 @@
-//
-//  AcknowledgementsView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/30/21.
-//
-
 import SwiftUI
+
+// not in use
 
 struct AcknowledgementsView: View {
     var body: some View {

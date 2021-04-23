@@ -1,12 +1,8 @@
-//
-//  EnableAuthView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 4/18/21.
-//
-
 import SwiftUI
 
+//for user to to opt in/out of using authentication
+
+//simplified version for onboarding
 struct EnableAuthViewOnboard: View {
     
     @ObservedObject var settings: SettingsModel

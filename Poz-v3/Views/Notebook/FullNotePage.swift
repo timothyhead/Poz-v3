@@ -1,56 +1,72 @@
 import SwiftUI
 
+// a page of a note
+
 struct NotePage: View {
     
+    // gets all notes from core data
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
     @ObservedObject var settings: SettingsModel
     
-    //vars
-    @State private var message: String?
-    @State private var emoji: String = ""
+    // color scheme
     @Environment(\.colorScheme) var colorScheme
     
+    // temp vars to hold note data
+    @State private var message: String?
+    @State private var emoji: String = ""
+    
+    // for swift speech
     @State private var noteSelfTempText: String = ""
     @State private var swiftSpeechTempText: String = ""
 
+    // for emoji
     @State var selected = ""
     @State private var selectedIndex: Int = 0
     
+    // for date
     @State var date = Date()
     @State var dateFormatter = DateFormatter();
     @State var dateString: String = ""
     
+    // for complex prompts, not in use
     @State var noteToSelfNotification = Date()
     @State var noteToSelfRandomTime = false
     
+    // for showing the specific popups
     @State private var emojiPickerShowing: Bool = false;
     @State private var addPromptShowing: Bool = false;
 
+    // for checking whether use has modifies previously entered note
     @State var initialText =  ""
     @State var initialEmoji = ""
 
+    // passes in note object from notebook view - *important*
     let note: Note  // = Note(context: self.moc)
 
+    // for controlling prompt and updating note page
     @Binding var promptSelectedIndex: Int
     @Binding var promptSelectedFromHome: Bool
+    
+    // for navigation
     @Binding var tabIndex: Int
     @Binding var showPageSlider: Bool
     
+    // prompt that changes when user shakes or selects
     @State var dynamicPrompt = ""
     
+    // for deleting
     @State var confirmDelete = false
     
-    @State var newText = ""
-    
-    @State var isLastPage = false
-    
+    // page in notebook
     @Binding var pageIndex: Int
     
     var body: some View {
         
         VStack {
 //            VStack {
+            
+            // top menu, back button, search button
                 NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
                 
                 HStack {
@@ -66,24 +82,25 @@ struct NotePage: View {
                     }
                 }
             
-            //text input
+            
             VStack {
                 ScrollView {
                     
                     // body content
                     VStack (alignment: .leading) {
                         
-                        
+                        // emoji
                         Text(selected)
                             .font(Font.custom("Poppins-Regular", size: 48))
                             .padding(.bottom, 3)
                         
-                        
+                        // prompt, only shows if not empty
                         if dynamicPrompt != "" {
                             Text(dynamicPrompt)
                                 .font(Font.custom("Poppins-Medium", size: 16))
                         }
                         
+                        // prompt stuff
                         if promptSelectedIndex == 0 {
                         }
                         if selected == "📪" {
@@ -195,18 +212,18 @@ struct NotePage: View {
                 hideKeyboard() //hide keyboard when user taps outside text field
             }
             .onAppear() {
+                
+                // initialize note
+                
                 initialText = note.note ?? ""
                 message = note.note
                 selected = note.emoji ?? ""
-            
-                
-//                print(dynamicPrompt)
-//                print(note.prompt ?? "")
+
                 dynamicPrompt = note.prompt ?? ""
 
-                
                 dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
                 
+                // initializes date
                 if (dateFormatter.string(from: (note.lastUpdated ?? date) as Date) != "Dec 31, 2000 | 4:00 PM") {
                     dateString = dateFormatter.string(from: (note.lastUpdated ?? date) as Date)
                 } else {
@@ -219,40 +236,46 @@ struct NotePage: View {
             }
             .onDisappear() {
                 
-                
+                // remove notifications for specific prompts, noto in use
                 if promptSelectedIndex != 1 {
                     //remove all notifications with the same message if note to self
                     clearNotifications(message: message ?? "")
                 }
                 
-                
+                // saves note
                 if ((message != "" || selected != "") && message !=
                         settings.welcomeText && (message != initialText || selected != initialEmoji)) {
                     saveNoteB()
                 }
                 
             }
+            // check if user shakes device
             .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
+                // change prompt
                 dynamicPrompt = settings.allPrompts.randomElement()!
             }
 
+            // emoji pickers
             if emojiPickerShowing {
                 EmojiPicker(selectedIndex: $selectedIndex, selected: $selected)
 //                    .padding(.bottom, 20)
             }
                 
+            // prompt picker
 //            if addPromptShowing {
 //                PromptsViewC(promptIndex: $promptSelectedIndex)
 //                    .padding(.bottom, 50)
 //            }
             
+            // bottom menu
             HStack (spacing: 0) {
                 
+                //emoji button
                 if (promptSelectedIndex == 0) {
                     EmojiButton(emojiPickerShowing: $emojiPickerShowing)
                 }
                 
-                
+                // speech to text button
                 SwiftSpeechButtonView(input: $swiftSpeechTempText, output: $swiftSpeechTempText)
                     .onChange (of: swiftSpeechTempText) { value in
                         message = swiftSpeechTempText
@@ -275,6 +298,7 @@ struct NotePage: View {
                 //advanced prompt button
 //                PromptsButton(addPromptShowing: $addPromptShowing)
                 
+                // delete button
                 Button (action: {
                     //clearNote()
                     confirmDelete = true
@@ -321,11 +345,12 @@ struct NotePage: View {
             }
 //        }
         .padding(.top, 10)
-        .background(Color(UIColor(named: "NoteBG")!)) // isLastPage ? Color(UIColor(named: "PozYellow")!) : 
+        .background(Color(UIColor(named: "NoteBG")!))
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         
     }
     
+    // get page number of current note
     func getPageNumber() -> Int {
         
         var noteCount = 0
@@ -339,6 +364,7 @@ struct NotePage: View {
         return (noteCount)
     }
     
+    // checks if curr note is the last page, not in use
     func isCurrNoteLastPage () -> Bool {
            
         if (pageIndex == (notes.count-2)) {
@@ -352,6 +378,7 @@ struct NotePage: View {
         }
     }
     
+    // for prompts, not in use
     func activatePrompt() {
         if promptSelectedIndex == 0 {
             dynamicPrompt = ""
@@ -376,6 +403,7 @@ struct NotePage: View {
 //        promptSelectedFromHome = false
     }
     
+    // saves note
     func saveNoteB () {
         
 //        if (promptSelectedIndex == 3) {
@@ -400,6 +428,7 @@ struct NotePage: View {
         
     }
     
+    // clears note and moves it to end
     func clearNote() {
         message = ""
         note.note = ""
@@ -411,6 +440,7 @@ struct NotePage: View {
         note.createdAt = Date()
     }
     
+    // clears all notifications with certain string
     func clearNotifications (message: String) {
         UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
            var identifiers: [String] = []
@@ -423,6 +453,7 @@ struct NotePage: View {
         }
     }
     
+    // creates notification
     func createNotification (message: String, dateIn: Date) {
         
         UNUserNotificationCenter.current()
@@ -470,6 +501,7 @@ struct NotePage: View {
         print("Notification created to print \(message) at \(dateIn)")
     }
     
+    // for one of the prompts, not in use
     func generateRandomDate(daysForward: Int)-> Date? {
         let day = arc4random_uniform(UInt32(daysForward))+1
         let hour = arc4random_uniform(23)
@@ -549,6 +581,8 @@ struct PromptsButton : View {
     }
 }
 
+
+// detects device shake
 extension NSNotification.Name {
     public static let deviceDidShakeNotification = NSNotification.Name("MyDeviceDidShakeNotification")
 }

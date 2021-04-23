@@ -1,12 +1,6 @@
-//
-//  SwipeTutorialView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 4/6/21.
-//
-
 import SwiftUI
 
+// simple view that shows the first time the notebook is opened
 struct SwipeTutorialView: View {
     @State var show = true
     
@@ -20,6 +14,7 @@ struct SwipeTutorialView: View {
                 
                 VStack {
                     
+                    // lottie animation from Jed Nocum - https://lottiefiles.com/17651-swipe-left-to-right
                     LottieView(fileName: "swipe-simple")
                         .frame(width: 150, height: 100)
                     Text("Swipe to turn pages")
@@ -36,10 +31,9 @@ struct SwipeTutorialView: View {
     }
 }
 
-struct SwipeTutorialView_Previews: PreviewProvider {
-    
-//    @State var boolean = false
-    static var previews: some View {
-        SwipeTutorialView()
-    }
-}
+//struct SwipeTutorialView_Previews: PreviewProvider {
+//
+//    static var previews: some View {
+//        SwipeTutorialView()
+//    }
+//}

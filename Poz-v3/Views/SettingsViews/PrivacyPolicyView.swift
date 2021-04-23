@@ -1,11 +1,7 @@
-//
-//  PrivacyPolicyView.swift
-//  Poz-v3
-//
-//  Created by Kish Parikh on 3/30/21.
-//
-
 import SwiftUI
+
+// simple privacy policy view
+// for web see https://pozjournal.com/privacy-policy
 
 struct PrivacyPolicyView: View {
     var body: some View {
