@@ -426,6 +426,10 @@ struct NotePage: View {
         promptSelectedIndex = 0
 //        promptSelectedFromHome = false
         
+        //write note to calendar
+        let calDateFormatter = DateFormatter()
+        calDateFormatter.dateFormat = "yyyyddHHmmSSS"
+        
         var titleForCal = ""
         if (selected == "") {
             titleForCal = "📔 Poz Entry"
@@ -436,8 +440,9 @@ struct NotePage: View {
         var messageForCal = message ?? "\n"
         messageForCal += "\n\nLast Updated on "
         messageForCal += dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+        messageForCal += "\n\nPoz Entry ID: " + calDateFormatter.string(from: (note.createdAt ?? Date()) as Date)
         
-        CalendarWriter().askAddToCal(start: Date(), end: Date(), id: dateFormatter.string(from: (note.createdAt ?? Date()) as Date), title: titleForCal, notes: messageForCal)
+        CalendarWriter().askAddToCal(start: Date(), end: Date(), id: calDateFormatter.string(from: (note.createdAt ?? Date()) as Date), title: titleForCal, notes: messageForCal)
         
     }
     

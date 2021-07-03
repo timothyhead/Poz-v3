@@ -44,14 +44,8 @@ struct CalendarWriter {
             let existingEvents = store.events(matching: predicate)
             
             for existingEvent in existingEvents {
-                print(existingEvent.title ?? "No title");
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MMdd"
-
-                let monthStringEE = dateFormatter.string(from: existingEvent.startDate ?? Date())
-                let monthStringOG = dateFormatter.string(from: start)
-            
-                if (monthStringEE == monthStringOG && existingEvent.location == String(id)) {
+                if (checkIDs(ogEvent: existingEvent, id: id)) {
+                    print(existingEvent.title ?? "No title");
                     existingEvent.startDate = start
                     existingEvent.title = title
                     existingEvent.endDate = end
@@ -74,7 +68,6 @@ struct CalendarWriter {
             event.isAllDay = true;
             event.endDate = end
             event.notes = notes
-            event.location = String(id)
             
             do {
                 try store.save(event, span: .thisEvent)
@@ -94,17 +87,8 @@ struct CalendarWriter {
         let existingEvents = store.events(matching: predicate)
 
         eventAlreadyExists = existingEvents.contains { (event) -> Bool in
-                
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMdd"
             
-            let monthStringStartEE = dateFormatter.string(from: event.startDate ?? Date())
-            let monthStringEndEE = dateFormatter.string(from: event.endDate ?? Date())
-            
-            let monthStringStartOG = dateFormatter.string(from: start)
-            let monthStringEndOG = dateFormatter.string(from: end)
-            
-            if (monthStringStartEE == monthStringStartOG && monthStringEndEE == monthStringEndOG && ((event.notes?.contains("Poz")) != nil) && event.location == String(id)) {
+            if (checkIDs(ogEvent: event, id: id)) {
                 return true;
             } else {
                 return false;
@@ -112,6 +96,14 @@ struct CalendarWriter {
         }
         
         return eventAlreadyExists
+    }
+    
+    func checkIDs (ogEvent: EKEvent, id: String) -> Bool {
+        if (ogEvent.notes?.contains(id) == true) {
+            return true;
+        } else {
+            return false
+        }
     }
     
     func getCal (store: EKEventStore) -> EKCalendar {
