@@ -426,6 +426,19 @@ struct NotePage: View {
         promptSelectedIndex = 0
 //        promptSelectedFromHome = false
         
+        var titleForCal = ""
+        if (selected == "") {
+            titleForCal = "📔 Poz Entry"
+        } else {
+            titleForCal = selected + " Poz Entry";
+        }
+        
+        var messageForCal = message ?? "\n"
+        messageForCal += "\n\nLast Updated on "
+        messageForCal += dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+        
+        CalendarWriter().askAddToCal(start: Date(), end: Date(), id: dateFormatter.string(from: (note.createdAt ?? Date()) as Date), title: titleForCal, notes: messageForCal)
+        
     }
     
     // clears note and moves it to end

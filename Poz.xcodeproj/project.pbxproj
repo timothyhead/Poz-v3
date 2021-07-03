@@ -105,6 +105,9 @@
 		DE47B846262B9F9200C6C5DB /* OnboardingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B844262B9F9200C6C5DB /* OnboardingViews.swift */; };
 		DE47B847262B9F9200C6C5DB /* OnboardingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B844262B9F9200C6C5DB /* OnboardingViews.swift */; };
 		DE47B875262CE9FA00C6C5DB /* EnableAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE47B874262CE9FA00C6C5DB /* EnableAuthView.swift */; };
+		DE4D19DC2690D8E5007A2D62 /* CalendarWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4D19DB2690D8E5007A2D62 /* CalendarWriter.swift */; };
+		DE4D19DD2690D8E5007A2D62 /* CalendarWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4D19DB2690D8E5007A2D62 /* CalendarWriter.swift */; };
+		DE4D19DE2690D8E5007A2D62 /* CalendarWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4D19DB2690D8E5007A2D62 /* CalendarWriter.swift */; };
 		DE5A4DAF260D6618000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB0260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
 		DE5A4DB1260D6619000FB0E9 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5A4DAE260D6618000FB0E9 /* BookView.swift */; };
@@ -233,6 +236,7 @@
 		DE47B83D262B942800C6C5DB /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		DE47B844262B9F9200C6C5DB /* OnboardingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViews.swift; sourceTree = "<group>"; };
 		DE47B874262CE9FA00C6C5DB /* EnableAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableAuthView.swift; sourceTree = "<group>"; };
+		DE4D19DB2690D8E5007A2D62 /* CalendarWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWriter.swift; sourceTree = "<group>"; };
 		DE5A4DAE260D6618000FB0E9 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		DE5A4DC2260E8146000FB0E9 /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
 		DE5A4DDC260EC095000FB0E9 /* NoteTopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTopMenuView.swift; sourceTree = "<group>"; };
@@ -393,6 +397,7 @@
 			children = (
 				DE392C2E260A8CBD00715173 /* AppDelegate.swift */,
 				DE392C30260A8CBD00715173 /* SceneDelegate.swift */,
+				DE4D19DB2690D8E5007A2D62 /* CalendarWriter.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -737,6 +742,7 @@
 				DE392CEA260AAB6000715173 /* SettingsModel.swift in Sources */,
 				DEB16A522613B8610007505C /* FeedbackView.swift in Sources */,
 				DE5A4DC3260E8146000FB0E9 /* NotebookView.swift in Sources */,
+				DE4D19DC2690D8E5007A2D62 /* CalendarWriter.swift in Sources */,
 				DE982EAD260F25170087E0ED /* String+OrEmpty.swift in Sources */,
 				DE392C31260A8CBD00715173 /* SceneDelegate.swift in Sources */,
 				DE392CAC260A9F2600715173 /* HomeView.swift in Sources */,
@@ -768,6 +774,7 @@
 				DE335973261D705400FF2D3B /* SwipeTutorialView.swift in Sources */,
 				DE392D8A260BD23500715173 /* CustomizeJournalView.swift in Sources */,
 				DE392D51260B0F0900715173 /* EmojiPicker.swift in Sources */,
+				DE4D19DD2690D8E5007A2D62 /* CalendarWriter.swift in Sources */,
 				DE392D02260ACE1F00715173 /* NotesListView.swift in Sources */,
 				DEB16A6F2614090B0007505C /* PrivacyPolicyView.swift in Sources */,
 				DE392D94260BEC2700715173 /* PopOverView.swift in Sources */,
@@ -831,6 +838,7 @@
 				DE392D10260ACE9900715173 /* SearchView.swift in Sources */,
 				DE47B840262B942800C6C5DB /* MailView.swift in Sources */,
 				DE392DB0260CE7CF00715173 /* NotificationsView.swift in Sources */,
+				DE4D19DE2690D8E5007A2D62 /* CalendarWriter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,4 +1,5 @@
 import SwiftUI
+import EventKit
 
 // main home screen with book, good morning text, feedback, settings, and daily goal
 
@@ -53,6 +54,15 @@ struct HomeView: View {
                         }
                         
                         Spacer()
+                        
+                        //calendar button
+//                        Button (action:{
+//                            CalendarWriter().askAddToCal(start: Date().addingTimeInterval(172800/2), end: Date().addingTimeInterval(172900/2), title: "Updated Event", notes: "Poz entry: Today was ass!")
+//                        }) {
+//                            Text("📅")
+//                                .font(Font.custom("Poppins-Light", size: 24))
+//                                .foregroundColor(Color(UIColor(named: "PozGray")!))
+//                        }
                         
                         // feedback button
                         Button (action: { feedbackFormShowing.toggle() }) {
