@@ -1,4 +1,5 @@
 import SwiftUI
+import EventKit
 
 // main settings view
 
@@ -18,6 +19,11 @@ struct SettingsView: View {
     // for controlling authentication
     @State var useAuth = UserDefaults.standard.bool(forKey: "useAuthentication")
     @State var isUnlocked = false
+    
+    @State var saveNotesToCal = UserDefaults.standard.bool(forKey: "saveToCal")
+    
+    @State var showingCalendarChooser = false
+    let eventStore = EKEventStore()
     
     var body: some View {
         
@@ -45,38 +51,33 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section(header: Text("Poz")) {
-//                    NavigationLink(destination: FeedbackViewClean()) {
-//                        HStack {
-//                            Text("Feedback")
+                Section(header: Text("Integrations")) {
+                    // calendar button
+                    HStack {
+//                        Button (action:{ showingCalendarChooser.toggle() }) {
+//                            Text("Calendar")
+//                                .foregroundColor(.black)
 //                        }
-//                    }
-//                    NavigationLink(destination: Text("hi")) {
-//                        HStack {
-//                            Text("Rate Poz on the app store")
+//                        .sheet(isPresented: $showingCalendarChooser) {
+//                            CalendarChooser(eventStore: eventStore)
 //                        }
-//                    }
-                    NavigationLink(destination:  WebView(link: "https://pozjournal.com/") ) {
-                        HStack {
-                            Text("Visit website")
+                        
+                        Toggle("Sync to calendar", isOn: $saveNotesToCal)
+                        .onChange(of: saveNotesToCal) { value in
+                            UserDefaults.standard.set(saveNotesToCal, forKey: "saveToCal")
                         }
                     }
                 }
-                
                 
                 Section(header: Text("Security")) {
                     Toggle("Lock noteboook", isOn: $useAuth)
                         .onChange(of: useAuth) { value in
                             
                             if value {
-                                useAuth = AuthenticationModel(isUnlocked: $isUnlocked).authenticate()
-                               // AuthenticationModel(isUnlocked: $isUnlocked).authenticateDo()
-                                
-                                UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
-//                                useAuth = isUnlocked
+                                UserDefaults.standard.set(settings.username, forKey: "saveToCal")
                                 
                             } else {
-                                UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
+                                UserDefaults.standard.set(settings.username, forKey: "saveToCal")
                             }
                             
                         }
@@ -85,6 +86,21 @@ struct SettingsView: View {
                     NavigationLink(destination: PrivacyPolicyView() ) {
                         HStack {
                             Text("Privacy")
+                        }
+                    }
+                }
+                
+                Section(header: Text("Poz")) {
+//                    NavigationLink(destination: WebView(link: "itms-apps://itunes.apple.com/app/id1560847986") ) {
+//                        //https://apps.apple.com/us/app/poz-journal/id1560847986?action=write-review
+//                        HStack {
+//                            Text("Rate Poz on the app store")
+//                        }
+//                    }
+//                    
+                    NavigationLink(destination: WebView(link: "https://pozjournal.com/") ) {
+                        HStack {
+                            Text("Visit website")
                         }
                     }
                 }

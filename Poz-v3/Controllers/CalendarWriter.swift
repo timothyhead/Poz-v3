@@ -7,12 +7,68 @@
 
 import SwiftUI
 import EventKit
+import EventKitUI
+
+struct CalendarChooser: UIViewControllerRepresentable {
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(self)
+    }
+
+    @Environment(\.presentationMode) var presentationMode
+    let eventStore: EKEventStore
+//    @Binding var calendars: Set<EKCalendar>? = []
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<CalendarChooser>) -> UINavigationController {
+        let chooser = EKCalendarChooser(selectionStyle: .single, displayStyle: .writableCalendarsOnly, entityType: .event, eventStore: eventStore)
+//        chooser.selectedCalendars = calendars ?? []
+        chooser.delegate = context.coordinator
+        chooser.showsDoneButton = true
+        chooser.showsCancelButton = true
+        return UINavigationController(rootViewController: chooser)
+    }
+
+    func updateUIViewController(_ uiViewController: UINavigationController, context: UIViewControllerRepresentableContext<CalendarChooser>) {
+    }
+
+    class Coordinator: NSObject, UINavigationControllerDelegate, EKCalendarChooserDelegate {
+        let parent: CalendarChooser
+
+        init(_ parent: CalendarChooser) {
+            self.parent = parent
+        }
+
+        func calendarChooserDidFinish(_ calendarChooser: EKCalendarChooser) {
+//            parent.calendars = calendarChooser.selectedCalendars
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+
+        func calendarChooserDidCancel(_ calendarChooser: EKCalendarChooser) {
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+    }
+    private func saveSelectedCalendars(_ calendars: Set<EKCalendar>?) {
+        if let identifiers = calendars?.compactMap({ $0.calendarIdentifier }) {
+            UserDefaults.standard.set(identifiers, forKey: "CalendarIdentifiers")
+        }
+    }
+
+    
+    private func loadSelectedCalendars() -> Set<EKCalendar>? {
+        if let identifiers = UserDefaults.standard.stringArray(forKey: "CalendarIdentifiers") {
+            let calendars = eventStore.calendars(for: .event).filter({ identifiers.contains($0.calendarIdentifier) })
+            guard !calendars.isEmpty else { return nil }
+            return Set(calendars)
+        } else {
+            return nil
+        }
+    }
+}
 
 struct CalendarWriter {
     
     // request access to calendar
-    func askAddToCal (start: Date, end: Date, id: String, title: String, notes: String) {
-        let eventStore = EKEventStore()
+    func askAddToCal (eventStore: EKEventStore, start: Date, end: Date, id: String, title: String, notes: String) {
+        
         switch EKEventStore.authorizationStatus(for: .event) {
         case .notDetermined:
             eventStore.requestAccess(to: .event) { (status, error) in
@@ -60,7 +116,6 @@ struct CalendarWriter {
                 }
             }
         } else {
-            print("b");
             let event = EKEvent(eventStore: store)
             event.calendar = cal
             event.startDate = start
@@ -75,6 +130,9 @@ struct CalendarWriter {
             } catch {
                 print (error.localizedDescription)
             }
+            
+//            let nPozCal = noteCal(pozEntryID: id, calEventID: event.eventIdentifier)
+//            calMap.add(nPozCal)
         }
     }
     
@@ -88,7 +146,7 @@ struct CalendarWriter {
 
         eventAlreadyExists = existingEvents.contains { (event) -> Bool in
             
-            if (checkIDs(ogEvent: event, id: id)) {
+            if (checkIDs(ogEvent: event, id: id))  {
                 return true;
             } else {
                 return false;
@@ -107,11 +165,12 @@ struct CalendarWriter {
     }
     
     func getCal (store: EKEventStore) -> EKCalendar {
+        
         let calendars = store.calendars(for: .event)
         
         var calendarFound = false;
         for calendar in calendars {
-            if calendar.title == "Calendar" {
+            if calendar.title == "Personal" {
                 calendarFound = true;
                 return calendar
             }
@@ -120,4 +179,7 @@ struct CalendarWriter {
             return calendars[0]
         }
     }
+    
+    // calendar chooser
+    // from https://nemecek.be/blog/16/how-to-use-ekcalendarchooser-in-swift-to-let-user-select-calendar-in-ios
 }

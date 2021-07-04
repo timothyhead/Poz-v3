@@ -25,9 +25,6 @@ struct UserSettingsView: View {
                 Section(header: Text("Security")) {
                     Toggle("Face/Touch ID Login", isOn: $useAuth)
                         .onChange(of: useAuth) { value in
-                            
-                            
-                            
                             if useAuth {
                                 AuthenticationModel(isUnlocked: $isUnlocked).authenticateDo()
                                 
