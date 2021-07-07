@@ -53,16 +53,8 @@ struct SettingsView: View {
                 
                 Section(header: Text("Integrations")) {
                     // calendar button
-                    HStack {
-//                        Button (action:{ showingCalendarChooser.toggle() }) {
-//                            Text("Calendar")
-//                                .foregroundColor(.black)
-//                        }
-//                        .sheet(isPresented: $showingCalendarChooser) {
-//                            CalendarChooser(eventStore: eventStore)
-//                        }
-                        
-                        Toggle("Sync to calendar", isOn: $saveNotesToCal)
+                    NavigationLink(destination:  CalendarController() ) {
+                        Toggle("Sync to calendar", isOn: $saveNotesToCal) //Sync to calendar
                         .onChange(of: saveNotesToCal) { value in
                             UserDefaults.standard.set(saveNotesToCal, forKey: "saveToCal")
                         }
@@ -74,10 +66,9 @@ struct SettingsView: View {
                         .onChange(of: useAuth) { value in
                             
                             if value {
-                                UserDefaults.standard.set(settings.username, forKey: "saveToCal")
-                                
+                                UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
                             } else {
-                                UserDefaults.standard.set(settings.username, forKey: "saveToCal")
+                                UserDefaults.standard.set(useAuth, forKey: "useAuthentication")
                             }
                             
                         }

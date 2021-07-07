@@ -221,6 +221,7 @@ struct NotePage: View {
                 // initialize note
                 
                 initialText = note.note ?? ""
+                initialEmoji = note.emoji ?? ""
                 message = note.note
                 selected = note.emoji ?? ""
 
@@ -250,7 +251,12 @@ struct NotePage: View {
                 // saves note
                 if ((message != "" || selected != "") && message !=
                         settings.welcomeText && (message != initialText || selected != initialEmoji)) {
-                    print ("something's changed")
+//                    print (message)
+//                    print (updatedText)
+//                    print(selected)
+//                    print(initialText)
+//                    print(initialEmoji)
+//                    print ("something's changed")
                     saveNoteB()
                 }
                 
@@ -294,10 +300,16 @@ struct NotePage: View {
                 
                 // basic prompt button
                 Button (action: {
-                    dynamicPrompt = settings.allPrompts.randomElement()!
+//                    dynamicPrompt = settings.allPrompts.randomElement()!
                 }) {
                     Text("⚡️")
                         .font(.system(size: 25))
+                        .onTapGesture {
+                            dynamicPrompt = settings.allPrompts.randomElement()!
+                        }
+                        .onLongPressGesture(minimumDuration: 0.1) {
+                            dynamicPrompt = ""
+                        }
                 }
                 .padding(.trailing, 20)
                 
@@ -451,7 +463,7 @@ struct NotePage: View {
             messageForCal += dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
             messageForCal += "\n\nPoz Entry ID: " + calDateFormatter.string(from: (note.createdAt ?? Date()) as Date)
             
-            CalendarWriter().askAddToCal(eventStore: eventStore, start: note.lastUpdated ?? Date(), end: note.lastUpdated ?? Date(), id: calDateFormatter.string(from: (note.createdAt ?? Date()) as Date), title: titleForCal, notes: messageForCal)
+            CalendarController().askToAddToCal(start: note.lastUpdated ?? Date(), end: note.lastUpdated ?? Date(), id: calDateFormatter.string(from: (note.createdAt ?? Date()) as Date), title: titleForCal, notes: messageForCal)
         }
         
     }
@@ -585,6 +597,7 @@ struct EmojiButton : View {
     }
 }
 
+// not in use
 struct PromptsButton : View {
     
     @Binding var addPromptShowing: Bool
@@ -598,10 +611,19 @@ struct PromptsButton : View {
                     .offset(x: 0, y: -35)
                     
             }
-            Button(action: { addPromptShowing.toggle() }) {
-                
+            Button(action: {
+//                addPromptShowing.toggle()
+            }) {
                 Text("⚡️")
                     .font(.system(size: 30))
+                    .onTapGesture {
+                        addPromptShowing.toggle()
+                        print("short press")
+                    }
+                    .onLongPressGesture(minimumDuration: 0.1) {
+                        addPromptShowing.toggle()
+                        print("long press")
+                    }
             }
         }
         .scaleEffect((addPromptShowing ? 1.76 : 1))

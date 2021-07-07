@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE1EC4A2269592FB00B8301A /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1EC4A1269592FB00B8301A /* EventsRepository.swift */; };
+		DE1EC4A3269592FB00B8301A /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1EC4A1269592FB00B8301A /* EventsRepository.swift */; };
+		DE1EC4A4269592FB00B8301A /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1EC4A1269592FB00B8301A /* EventsRepository.swift */; };
 		DE33591B261CEEB100FF2D3B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33591A261CEEB100FF2D3B /* LottieView.swift */; };
 		DE33591C261CEEB200FF2D3B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33591A261CEEB100FF2D3B /* LottieView.swift */; };
 		DE33591D261CEEB200FF2D3B /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33591A261CEEB100FF2D3B /* LottieView.swift */; };
@@ -189,6 +192,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DE1EC4A1269592FB00B8301A /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
 		DE33591A261CEEB100FF2D3B /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		DE33594A261CF57200FF2D3B /* swipe-simple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "swipe-simple.json"; sourceTree = "<group>"; };
 		DE335971261D705400FF2D3B /* SwipeTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTutorialView.swift; sourceTree = "<group>"; };
@@ -290,6 +294,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE1EC4A0269592DB00B8301A /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				DE4D19DB2690D8E5007A2D62 /* CalendarWriter.swift */,
+				DE1EC4A1269592FB00B8301A /* EventsRepository.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		DE392C22260A8CBD00715173 = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +398,7 @@
 		DE392CDE260AAB3200715173 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DE1EC4A0269592DB00B8301A /* Calendar */,
 				DEB16A472613B7E60007505C /* WebView.swift */,
 				DE392CE9260AAB6000715173 /* SettingsModel.swift */,
 				DEB16A582614047D0007505C /* AuthenticationModel.swift */,
@@ -397,7 +411,6 @@
 			children = (
 				DE392C2E260A8CBD00715173 /* AppDelegate.swift */,
 				DE392C30260A8CBD00715173 /* SceneDelegate.swift */,
-				DE4D19DB2690D8E5007A2D62 /* CalendarWriter.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -716,6 +729,7 @@
 				DE392CD8260AAB2400715173 /* SettingsView.swift in Sources */,
 				DEB16A072612F8CC0007505C /* BookPatternModel.swift in Sources */,
 				DE982EAC260F25170087E0ED /* TextViewWrapper.swift in Sources */,
+				DE1EC4A2269592FB00B8301A /* EventsRepository.swift in Sources */,
 				DE392CFA260AC64300715173 /* RingView.swift in Sources */,
 				DE392D9D260C512A00715173 /* HomeButtonView.swift in Sources */,
 				DE47B83E262B942800C6C5DB /* MailView.swift in Sources */,
@@ -778,6 +792,7 @@
 				DE392D02260ACE1F00715173 /* NotesListView.swift in Sources */,
 				DEB16A6F2614090B0007505C /* PrivacyPolicyView.swift in Sources */,
 				DE392D94260BEC2700715173 /* PopOverView.swift in Sources */,
+				DE1EC4A3269592FB00B8301A /* EventsRepository.swift in Sources */,
 				DE5A4DB0260D6619000FB0E9 /* BookView.swift in Sources */,
 				DE392D1C260AD18300715173 /* TabsView.swift in Sources */,
 				DEB16A492613B7E60007505C /* WebView.swift in Sources */,
@@ -830,6 +845,7 @@
 				DE392D7D260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392D9F260C512A00715173 /* HomeButtonView.swift in Sources */,
 				DEB16A2D2613813F0007505C /* BookPatternModel.swift in Sources */,
+				DE1EC4A4269592FB00B8301A /* EventsRepository.swift in Sources */,
 				DE3D2ED42615981900C209CB /* FullNotePage.swift in Sources */,
 				DE392CAE260A9F2600715173 /* HomeView.swift in Sources */,
 				DEB16A62261408610007505C /* AcknowledgementsView.swift in Sources */,

@@ -9,57 +9,79 @@ import SwiftUI
 import EventKit
 import EventKitUI
 
+struct CalendarController: View {
+    enum ActiveSheet {
+        case calendarChooser
+    }
+    
+    @State private var showingSheet = false
+    @State private var activeSheet: ActiveSheet = .calendarChooser
+    
+    @ObservedObject var eventsRepository = EventsRepository.shared
+    
+    @State private var selectedEvent: EKEvent?
+    
+    var body: some View {
+        CalendarChooser(calendars: self.$eventsRepository.selectedCalendars, eventStore: self.eventsRepository.eventStore)
+    }
+    
+    func askToAddToCal (start: Date, end: Date, id: String, title: String, notes: String) {
+        CalendarWriter().askAddToCal(eventStore: self.eventsRepository.eventStore, start: start, end: end, id: id, title: title, notes: notes)
+    }
+}
+
+struct SelectedCalendarsList: View {
+    
+    @ObservedObject var eventsRepository = EventsRepository.shared
+    
+    var body: some View {
+        
+        VStack {
+            Text(self.eventsRepository.selectedCalendars?.first!.title ?? "No title")
+        }
+//        .foregroundColor(Color(eventsRepository.selectedCalendars.first!.cgColor))
+        
+    }
+}
+
 struct CalendarChooser: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
     }
-
+    
     @Environment(\.presentationMode) var presentationMode
+    @Binding var calendars: Set<EKCalendar>?
+    
     let eventStore: EKEventStore
-//    @Binding var calendars: Set<EKCalendar>? = []
-
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<CalendarChooser>) -> UINavigationController {
         let chooser = EKCalendarChooser(selectionStyle: .single, displayStyle: .writableCalendarsOnly, entityType: .event, eventStore: eventStore)
-//        chooser.selectedCalendars = calendars ?? []
+        chooser.selectedCalendars = calendars ?? []
         chooser.delegate = context.coordinator
-        chooser.showsDoneButton = true
-        chooser.showsCancelButton = true
+//        chooser.showsDoneButton = true
+//        chooser.showsCancelButton = true
         return UINavigationController(rootViewController: chooser)
     }
-
+    
     func updateUIViewController(_ uiViewController: UINavigationController, context: UIViewControllerRepresentableContext<CalendarChooser>) {
+        
     }
-
+    
     class Coordinator: NSObject, UINavigationControllerDelegate, EKCalendarChooserDelegate {
         let parent: CalendarChooser
-
+        
         init(_ parent: CalendarChooser) {
             self.parent = parent
         }
-
+        
         func calendarChooserDidFinish(_ calendarChooser: EKCalendarChooser) {
-//            parent.calendars = calendarChooser.selectedCalendars
+            parent.calendars = calendarChooser.selectedCalendars
+            
             parent.presentationMode.wrappedValue.dismiss()
         }
-
+        
         func calendarChooserDidCancel(_ calendarChooser: EKCalendarChooser) {
             parent.presentationMode.wrappedValue.dismiss()
-        }
-    }
-    private func saveSelectedCalendars(_ calendars: Set<EKCalendar>?) {
-        if let identifiers = calendars?.compactMap({ $0.calendarIdentifier }) {
-            UserDefaults.standard.set(identifiers, forKey: "CalendarIdentifiers")
-        }
-    }
-
-    
-    private func loadSelectedCalendars() -> Set<EKCalendar>? {
-        if let identifiers = UserDefaults.standard.stringArray(forKey: "CalendarIdentifiers") {
-            let calendars = eventStore.calendars(for: .event).filter({ identifiers.contains($0.calendarIdentifier) })
-            guard !calendars.isEmpty else { return nil }
-            return Set(calendars)
-        } else {
-            return nil
         }
     }
 }
@@ -68,6 +90,8 @@ struct CalendarWriter {
     
     // request access to calendar
     func askAddToCal (eventStore: EKEventStore, start: Date, end: Date, id: String, title: String, notes: String) {
+        
+        @ObservedObject var eventsRepository = EventsRepository.shared
         
         switch EKEventStore.authorizationStatus(for: .event) {
         case .notDetermined:
@@ -93,10 +117,17 @@ struct CalendarWriter {
     // add event to calendar
     func addORUpdateEvent (store: EKEventStore, id: String, start: Date, end: Date, title: String, notes: String) {
         
-        let cal = getCal(store: store)
+        @ObservedObject var eventsRepository = EventsRepository.shared
         
         if (eventAlreadyExists(store: store, id: id, start: start, end: end)) {
-            let predicate = store.predicateForEvents(withStart: start, end: end, calendars: [cal])
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            let startDate = dateFormatter.date(from: "2021-01-01")!
+            let endDate = dateFormatter.date(from: "2021-12-31")!
+            let predicate = store.predicateForEvents(withStart: startDate, end: endDate, calendars: Array(eventsRepository.selectedCalendars!))
+            
+            
             let existingEvents = store.events(matching: predicate)
             
             for existingEvent in existingEvents {
@@ -117,7 +148,7 @@ struct CalendarWriter {
             }
         } else {
             let event = EKEvent(eventStore: store)
-            event.calendar = cal
+            event.calendar = Array(eventsRepository.selectedCalendars!).first
             event.startDate = start
             event.title = title
             event.isAllDay = true;
@@ -130,20 +161,24 @@ struct CalendarWriter {
             } catch {
                 print (error.localizedDescription)
             }
-            
-//            let nPozCal = noteCal(pozEntryID: id, calEventID: event.eventIdentifier)
-//            calMap.add(nPozCal)
         }
     }
     
     func eventAlreadyExists(store: EKEventStore, id: String, start: Date, end: Date) -> Bool {
 
+        @ObservedObject var eventsRepository = EventsRepository.shared
+        
         var eventAlreadyExists = false;
         
-        let cal = getCal(store: store)
-        let predicate = store.predicateForEvents(withStart: start, end: end, calendars: [cal])
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let startDate = dateFormatter.date(from: "2021-01-01")!
+        let endDate = dateFormatter.date(from: "2021-12-31")!
+        let predicate = store.predicateForEvents(withStart: startDate, end: endDate, calendars: Array(eventsRepository.selectedCalendars!))
+        
         let existingEvents = store.events(matching: predicate)
-
+        
         eventAlreadyExists = existingEvents.contains { (event) -> Bool in
             
             if (checkIDs(ogEvent: event, id: id))  {
@@ -163,23 +198,4 @@ struct CalendarWriter {
             return false
         }
     }
-    
-    func getCal (store: EKEventStore) -> EKCalendar {
-        
-        let calendars = store.calendars(for: .event)
-        
-        var calendarFound = false;
-        for calendar in calendars {
-            if calendar.title == "Personal" {
-                calendarFound = true;
-                return calendar
-            }
-        }
-        if (calendarFound == false) {
-            return calendars[0]
-        }
-    }
-    
-    // calendar chooser
-    // from https://nemecek.be/blog/16/how-to-use-ekcalendarchooser-in-swift-to-let-user-select-calendar-in-ios
 }

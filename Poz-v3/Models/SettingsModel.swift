@@ -1,5 +1,6 @@
 import SwiftUI
 import Foundation
+import EventKit
 
 // code adapted from https://www.youtube.com/watch?v=_1uZ4-5dEUI
 

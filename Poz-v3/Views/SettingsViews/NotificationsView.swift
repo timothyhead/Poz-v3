@@ -280,7 +280,8 @@ struct ReminderSectionView: View {
 //                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                     let content = UNMutableNotificationContent()
                     content.title = "Hit Poz"
-                    content.subtitle = "Complete your daily goal. Take a moment to reflect"
+                    content.badge = 0
+                    content.body = "Take a moment to reflect and complete your daily goal."
                     content.sound = UNNotificationSound.default
                     
                     let date = reminder.reminderTime
