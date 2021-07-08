@@ -1,9 +1,4 @@
-//
-//  CalendarWriter.swift
-//  Poz
-//
-//  Created by Kish Parikh on 7/3/21.
-//
+//  from Filip Němeček https://github.com/nemecek-filip/EKEventKit.Example/blob/master/SwiftUI/EventKit.Example/EventKit.Example/EventsRepository.swift
 
 import SwiftUI
 import EventKit
@@ -74,9 +69,12 @@ struct CalendarChooser: UIViewControllerRepresentable {
             self.parent = parent
         }
         
+        func calendarChooserSelectionDidChange(_ calendarChooser: EKCalendarChooser) {
+            parent.calendars = calendarChooser.selectedCalendars
+        }
+        
         func calendarChooserDidFinish(_ calendarChooser: EKCalendarChooser) {
             parent.calendars = calendarChooser.selectedCalendars
-            
             parent.presentationMode.wrappedValue.dismiss()
         }
         

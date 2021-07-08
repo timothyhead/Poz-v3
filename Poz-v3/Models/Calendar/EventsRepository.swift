@@ -7,12 +7,17 @@ import Combine
 
 typealias Action = () -> ()
 
+
 class EventsRepository: ObservableObject {
     static let shared = EventsRepository()
+    
+    private var subscribers: Set<AnyCancellable> = []
     
     let eventStore = EKEventStore()
     
     @Published var selectedCalendars: Set<EKCalendar>?
+    
+    @Published var events: [EKEvent]?
     
     private init() {
         selectedCalendars = loadSelectedCalendars()
@@ -22,6 +27,23 @@ class EventsRepository: ObservableObject {
                 selectedCalendars = Set([eventStore.defaultCalendarForNewEvents].compactMap({ $0 }))
             }
         }
+        
+        $selectedCalendars.sink { [weak self] (calendars) in
+            self?.saveSelectedCalendars(calendars)
+            self?.loadAndUpdateEvents()
+        }.store(in: &subscribers)
+        
+        NotificationCenter.default.publisher(for: .EKEventStoreChanged)
+            .sink { [weak self] (notification) in
+                self?.loadAndUpdateEvents()
+                
+            }.store(in: &subscribers)
+        
+        NotificationCenter.default.publisher(for: .EKEventStoreChanged)
+            .sink { [weak self] (notification) in
+                self?.loadAndUpdateEvents()
+            }
+            .store(in: &subscribers)
     }
     
     private func loadSelectedCalendars() -> Set<EKCalendar>? {
@@ -37,6 +59,45 @@ class EventsRepository: ObservableObject {
     private func saveSelectedCalendars(_ calendars: Set<EKCalendar>?) {
         if let identifiers = calendars?.compactMap({ $0.calendarIdentifier }) {
             UserDefaults.standard.set(identifiers, forKey: "CalendarIdentifiers")
+        }
+    }
+    
+    private func loadAndUpdateEvents() {
+        loadEvents(completion: { (events) in
+            DispatchQueue.main.async {
+                self.events = events
+                print(events ?? [])
+            }
+        })
+    }
+    
+    func requestAccess(onGranted: @escaping Action, onDenied: @escaping Action) {
+        eventStore.requestAccess(to: .event) { (granted, error) in
+            if granted {
+                onGranted()
+            } else {
+                onDenied()
+            }
+        }
+    }
+    
+    func loadEvents(completion: @escaping (([EKEvent]?) -> Void)) {
+        requestAccess(onGranted: {
+            let weekFromNow = Date().advanced(by: 10000)
+            
+            let predicate = self.eventStore.predicateForEvents(withStart: Date(), end: weekFromNow, calendars: Array(self.selectedCalendars ?? []))
+            
+            let events = self.eventStore.events(matching: predicate)
+            
+            completion(events)
+        }) {
+            completion(nil)
+        }
+    }
+    
+    deinit {
+        subscribers.forEach { (sub) in
+            sub.cancel()
         }
     }
 }

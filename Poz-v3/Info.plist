@@ -74,6 +74,8 @@
 	</array>
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app wants to save notes to your calendar</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app wants to save notes to your calendar</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
