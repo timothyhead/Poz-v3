@@ -1,16 +1,42 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Lottie",
-        "repositoryURL": "https://github.com/airbnb/lottie-ios",
-        "state": {
-          "branch": null,
-          "revision": "b3c60ba1716baab6faeeb217d8ce1da336f92718",
-          "version": "3.2.1"
-        }
+  "originHash" : "84d8f7831fc9851585e6980ae1c5724d1d72f0df6b83251c6d05d97507f485fc",
+  "pins" : [
+    {
+      "identity" : "chartview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AppPear/ChartView",
+      "state" : {
+        "revision" : "9115a992c91fa19cbb4f2241084240d38654a1fc",
+        "version" : "1.5.5"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "b3c60ba1716baab6faeeb217d8ce1da336f92718",
+        "version" : "3.2.1"
+      }
+    },
+    {
+      "identity" : "pages",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nachonavarro/Pages",
+      "state" : {
+        "revision" : "4cdbe4ff2f9ddbfda8cf0376a2acb678a1a0a0a2",
+        "version" : "0.1.5"
+      }
+    },
+    {
+      "identity" : "swiftspeech",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Cay-Zhang/SwiftSpeech",
+      "state" : {
+        "revision" : "6e41f289f5ccc1751ef5674972d46b48b326c4c6",
+        "version" : "0.9.3"
+      }
+    }
+  ],
+  "version" : 3
 }
