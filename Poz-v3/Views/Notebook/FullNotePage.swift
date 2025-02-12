@@ -290,7 +290,9 @@ struct NotePage: View {
                 // speech to text button
                 SwiftSpeechButtonView(input: $swiftSpeechTempText, output: $swiftSpeechTempText)
                     .onChange (of: swiftSpeechTempText) { value in
-                        message = swiftSpeechTempText
+                        if let _ = message {
+                            message! += " " + swiftSpeechTempText + " "
+                        }
                     }
                     .onAppear() {
                         swiftSpeechTempText = message ?? ""
