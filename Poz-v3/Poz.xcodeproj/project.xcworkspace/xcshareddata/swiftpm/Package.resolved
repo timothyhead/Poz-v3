@@ -1,0 +1,33 @@
+{
+  "originHash" : "c8ee3b2a4b640f70332a2ad30ccb0d3214a372b80fb46e4ebc2ff50c622b5eab",
+  "pins" : [
+    {
+      "identity" : "chartview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AppPear/ChartView",
+      "state" : {
+        "revision" : "9115a992c91fa19cbb4f2241084240d38654a1fc",
+        "version" : "1.5.5"
+      }
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "b3c60ba1716baab6faeeb217d8ce1da336f92718",
+        "version" : "3.2.1"
+      }
+    },
+    {
+      "identity" : "swiftspeech",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Cay-Zhang/SwiftSpeech",
+      "state" : {
+        "revision" : "6e41f289f5ccc1751ef5674972d46b48b326c4c6",
+        "version" : "0.9.3"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "6C5FB72B-CEC7-43C2-98D7-7A5DA8164281"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/SettingsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5"
+            endingLineNumber = "5"
+            landmarkName = "SettingsView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - ebd2facd300d9101"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Poz_v3.SettingsView.settings : Poz_v3.SettingsModel"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - f911d786d5d507f7"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.settings.getter : Poz_v3.SettingsModel"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - a0ec8d2ca60c77cb"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.settings.setter : Poz_v3.SettingsModel"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "74">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - 663d1292d168db55"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.settings.modify : Poz_v3.SettingsModel"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "14">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - 6624a672bfd75cb"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.settings.modify : Poz_v3.SettingsModel with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "7CD9BCE4-4182-4797-90F7-1321B5759A4E - 93a1258447b0ebbf"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.SettingsView.$settings.getter : SwiftUI.ObservedObject&lt;Poz_v3.SettingsModel&gt;.Wrapper"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Poz-v3/Poz-v3/Views/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "98">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "53963EB0-6FA4-4024-A6AF-0052C39795F7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/NoteButtonsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "964EF2D8-A8A3-4C29-832B-8569D476F238"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/PopOverView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "PopOverView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "964EF2D8-A8A3-4C29-832B-8569D476F238 - 64dab13731ed0243"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.PopOverView.menuOpen.getter : Swift.Bool"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/School/Spring2021/Poz/Poz-v3/Poz-v3/Views/PopOverView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "964EF2D8-A8A3-4C29-832B-8569D476F238 - 6369dc2062ba2a4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.PopOverView.menuOpen.setter : Swift.Bool"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/School/Spring2021/Poz/Poz-v3/Poz-v3/Views/PopOverView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "153">
+               </Location>
+               <Location
+                  uuid = "964EF2D8-A8A3-4C29-832B-8569D476F238 - 44d3da38c48ea4ef"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.PopOverView.menuOpen.modify : Swift.Bool"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/School/Spring2021/Poz/Poz-v3/Poz-v3/Views/PopOverView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "57">
+               </Location>
+               <Location
+                  uuid = "964EF2D8-A8A3-4C29-832B-8569D476F238 - c86763e65c1ffe4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.PopOverView.menuOpen.modify : Swift.Bool with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/School/Spring2021/Poz/Poz-v3/Poz-v3/Views/PopOverView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "17">
+               </Location>
+               <Location
+                  uuid = "964EF2D8-A8A3-4C29-832B-8569D476F238 - c36ac2f5cf398415"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Poz_v3.PopOverView.$menuOpen.getter : SwiftUI.Binding&lt;Swift.Bool&gt;"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/School/Spring2021/Poz/Poz-v3/Poz-v3/Views/PopOverView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "166">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B5C5427-6DBC-47ED-A87A-D618740EF422"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/Notebook/AddNoteView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58E7EE27-61B9-459A-AA0E-8AE41DAC524D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/Notebook/NotesList/NotesListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B10D99F-1930-4A8D-AC24-89E49C69B022"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/Notebook/NotebookView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ED29B351-38EA-4BE3-967B-FC8A5A0C8014"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/Notebook/FullNotePage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "631DF6B6-AB9A-4CAC-9499-F4FAC409B7BD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/Notebook/FullNotePage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "631DF6B6-AB9A-4CAC-9499-F4FAC409B7BD - a9717d822b01397b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(Poz_v3.NoteTopMenuView, &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onReceive&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Combine.Publisher, &#x3c4;_1_0.Failure == Swift.Never&gt;(_: &#x3c4;_1_0, perform: (&#x3c4;_1_0.Output) -&gt; ()) -&gt; some&gt;&gt;.0, Swift.Optional&lt;Poz_v3.EmojiPicker&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in Poz_v3.NotePage.body.getter : some"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Projects/Poz/Poz-v3/Poz-v3/Views/Notebook/FullNotePage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "2091">
+               </Location>
+               <Location
+                  uuid = "631DF6B6-AB9A-4CAC-9499-F4FAC409B7BD - d0b563ad9971dfb9"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(Poz_v3.NoteTopMenuView, &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onReceive&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Combine.Publisher, &#x3c4;_1_0.Failure == Swift.Never&gt;(_: &#x3c4;_1_0, perform: (&#x3c4;_1_0.Output) -&gt; ()) -&gt; some&gt;&gt;.0, Swift.Optional&lt;Poz_v3.EmojiPicker&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in Poz_v3.NotePage.body.getter : some"
+                  moduleName = "Poz-v3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kishparikh/Desktop/Projects/Poz/Poz-v3/Poz-v3/Views/Notebook/FullNotePage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "242">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A75548CA-50BE-4A25-B8BE-E9F553F071EB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/Notebook/FullNotePage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "139F1755-7104-4AC1-94FC-82E49F1175F1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/Notebook/FullNotePage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE585F90-39A2-4749-9751-8F3C0F95A07B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "46D02D8E-4BB9-4DFC-AD94-9C6F417208DC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Poz-v3/Views/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
