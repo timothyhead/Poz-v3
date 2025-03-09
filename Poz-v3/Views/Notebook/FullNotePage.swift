@@ -75,9 +75,9 @@ struct NotePage: View {
         
         VStack {
 //            VStack {
-            
+            // now using toolbar
             // top menu, back button, search button
-                NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
+            //    NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
                 
                 HStack {
                     Text("\(dateString)")

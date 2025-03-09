@@ -3,14 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2C73B16C2D7DE56800176ED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73B1612D7DE3B100176ED4 /* Constants.swift */; };
 		2C73B16D2D7DE56800176ED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73B1612D7DE3B100176ED4 /* Constants.swift */; };
 		2C73B16E2D7DE56800176ED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73B1612D7DE3B100176ED4 /* Constants.swift */; };
-		2C73B1702D7DE57A00176ED4 /* PagesLocal in Frameworks */ = {isa = PBXBuildFile; productRef = 2C73B16F2D7DE57A00176ED4 /* PagesLocal */; };
+		2C86A4092D7DFF1C00D65106 /* LocalPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C86A4082D7DFF1C00D65106 /* LocalPackage */; };
 		DE1EC4A2269592FB00B8301A /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1EC4A1269592FB00B8301A /* EventsRepository.swift */; };
 		DE1EC4A3269592FB00B8301A /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1EC4A1269592FB00B8301A /* EventsRepository.swift */; };
 		DE1EC4A4269592FB00B8301A /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1EC4A1269592FB00B8301A /* EventsRepository.swift */; };
@@ -197,7 +197,6 @@
 
 /* Begin PBXFileReference section */
 		2C73B1612D7DE3B100176ED4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		2C73B1632D7DE3B100176ED4 /* PagesLocal */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PagesLocal; path = "Poz-v3/PagesLocal/PagesLocal/PagesLocal"; sourceTree = SOURCE_ROOT; };
 		DE1EC4A1269592FB00B8301A /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
 		DE33591A261CEEB100FF2D3B /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		DE33594A261CF57200FF2D3B /* swipe-simple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "swipe-simple.json"; sourceTree = "<group>"; };
@@ -270,6 +269,10 @@
 		DEF838DD261E6C3C00556E5E /* HomeViewTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTutorial.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2C86A4062D7DFDFA00D65106 /* Sources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Sources; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		DE392C28260A8CBD00715173 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -278,9 +281,9 @@
 				DE5A94862620FE8E0005DE02 /* CloudKit.framework in Frameworks */,
 				DE392D35260AE78500715173 /* Pages in Frameworks */,
 				DE392D47260B0E0F00715173 /* SwiftSpeech in Frameworks */,
-				2C73B1702D7DE57A00176ED4 /* PagesLocal in Frameworks */,
 				DE392D3B260AE79600715173 /* SwiftUICharts in Frameworks */,
 				DE335929261CF04A00FF2D3B /* Lottie in Frameworks */,
+				2C86A4092D7DFF1C00D65106 /* LocalPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +315,7 @@
 		2C73B16A2D7DE3B100176ED4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2C73B1632D7DE3B100176ED4 /* PagesLocal */,
+				2C86A4062D7DFDFA00D65106 /* Sources */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -609,7 +612,7 @@
 				DE392D3A260AE79600715173 /* SwiftUICharts */,
 				DE392D46260B0E0F00715173 /* SwiftSpeech */,
 				DE335928261CF04A00FF2D3B /* Lottie */,
-				2C73B16F2D7DE57A00176ED4 /* PagesLocal */,
+				2C86A4082D7DFF1C00D65106 /* LocalPackage */,
 			);
 			productName = "Poz-v3";
 			productReference = DE392C2B260A8CBD00715173 /* Poz-v3.app */;
@@ -1251,9 +1254,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2C73B16F2D7DE57A00176ED4 /* PagesLocal */ = {
+		2C86A4082D7DFF1C00D65106 /* LocalPackage */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = PagesLocal;
+			productName = LocalPackage;
 		};
 		DE335928261CF04A00FF2D3B /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
