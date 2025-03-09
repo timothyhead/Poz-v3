@@ -15,6 +15,7 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt,ascending: true)]
     
     ) var notes: FetchedResults<Note>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TempNoteData.messageId,ascending: true)]) var tempData: FetchedResults<TempNoteData>
     
     // primary navigational index
     @State var tabIndex = 0
@@ -31,6 +32,9 @@ struct ContentView: View {
     @State var firstTimeNotebookIndex = 0
     @State var firstTimeLaunched = true
     @State private var onboardingDone: Bool = UserDefaults.standard.bool(forKey: "onboardingDone")
+    // for passing data to noteBook view from chilview in the ModelPages. Setting initial values
+    @State private var defaults = UserDefaults.standard
+    @State private var k: Constants = Constants.shared
     
     var body: some View {
             
@@ -119,6 +123,10 @@ struct ContentView: View {
                         blankNote.createdAt = Date() //actual date to sort
                         blankNote.date = "-"
 
+                        // for passing data between modelpages 'inside view' and notepageView
+                        defaults.set(true, forKey: k.pageTurned)
+                        let currentMessage = TempNoteData(context: moc)
+                        currentMessage.messageId = k.messageId
                         try? self.moc.save()
                     }
             }

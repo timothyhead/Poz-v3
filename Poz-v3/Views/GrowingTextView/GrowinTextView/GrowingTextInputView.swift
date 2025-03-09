@@ -1,13 +1,10 @@
 import SwiftUI
 
 struct GrowingTextInputView: View {
-  init(text: Binding<String?>, placeholder: String?) {
-    self._text = text
-    self.placeholder = placeholder
-  }
+ 
 
   @Binding var text: String?
-  @State var focused: Bool = false
+    @Binding var focused: Bool
   @State var contentHeight: CGFloat = 0
 
   let placeholder: String?
@@ -17,6 +14,11 @@ struct GrowingTextInputView: View {
   var countedHeight: CGFloat {
     min(max(minHeight, contentHeight), maxHeight)
   }
+    init(text: Binding<String?>, placeholder: String?, focused: Binding<Bool>) {
+      self._text = text
+        _focused = focused
+      self.placeholder = placeholder
+    }
 
   var body: some View {
     ZStack(alignment: .topLeading) {
@@ -53,7 +55,7 @@ struct GrowingTextInputView_Previews: PreviewProvider {
   static var previews: some View {
     GrowingTextInputView(
       text: $text,
-      placeholder: "Placeholder"
+      placeholder: "Placeholder", focused: .constant(false)
     )
   }
 }

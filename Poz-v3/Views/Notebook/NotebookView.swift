@@ -1,5 +1,5 @@
 import SwiftUI
-import Pages
+import PagesLocal
 
 // notebook that displays all journal entries in page turn style
 // using pages library by https://github.com/nachonavarro/Pages
@@ -19,6 +19,7 @@ struct NotebookView: View {
         entity: Note.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt,ascending: true)] // notes sorted from first created to last
     ) var notes: FetchedResults<Note>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TempNoteData.messageId,ascending: true)]) var tempData: FetchedResults<TempNoteData>
 
     // for prompts, not in use
     @Binding var promptSelectedIndex: Int
@@ -34,6 +35,11 @@ struct NotebookView: View {
     
     // for last page detection, not in use
     @State var isLastPage = false
+    // for updating notes
+    @State private var k: Constants = Constants.shared
+    @State private var defaults = UserDefaults.standard
+    //sheet in toolbar for search bar
+    @State var prevPostsShowing = false
     
     var body: some View {
         
@@ -59,6 +65,40 @@ struct NotebookView: View {
                     }
             }
             .padding(.top, -6)
+            // MARK: - make new note on the page that has been turned away from when the page is turned. ie. not the new page but the last one.
+            .onChange(of: defaults.bool(forKey: k.pageTurned) ) { _ in
+                
+              
+                // The message and data from within the ModelPages struct in the tempData core data object
+                let message = tempData.first(where:  { $0.messageId == k.messageId } )?.tempMessage ?? "no message"
+                let emoji = tempData.first(where:  { $0.messageId == k.messageId } )?.emoji ?? "no message"
+                let noteId =  tempData.first(where:  { $0.messageId == k.messageId} )?.noteId
+                let lastUpdated = tempData.first(where:  { $0.messageId == k.messageId } )?.lastUpdated
+                let prompt = tempData.first(where:  { $0.messageId == k.messageId } )?.prompt
+                let date = tempData.first(where:  { $0.messageId == k.messageId } )?.date
+                
+                // update the note that was added to or add the new message and data on the new note  which was created in the block below in this onchange f: defaults.bool(forKey: k.pageTurned
+                notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.note = message
+                notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.emoji = emoji
+                notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.prompt = prompt
+                notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.lastUpdated = lastUpdated
+                notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.date = date
+                try? moc.save()
+                
+                // make a new note so the Modelpages has a page to turn to. This will be updated in the above code if the page this on is turned to with a new page turn
+                // only create a new note if there isn't one created. So with a back turn there will one always. With a forward turn if the note updated in  the block above  is the last to be created it will equal 'notes.last' . Notes are filtered by createdAt. So a  new note is created then.
+                if indexNotes > defaults.integer(forKey: k.lastIndex) && notes.first(where: { $0.id?.uuidString == noteId ?? "No id" }) == notes.last {
+                    let note = Note(context: moc)
+                    note.id = UUID()
+                    note.note = ""
+                    note.createdAt = Date()
+                    try? moc.save()
+                }
+                
+                // sets the page of the current index so with a new page turn the if statement above can use it
+                    defaults.set(indexNotes, forKey: k.lastIndex)
+            
+            }
             
             // page turn slider
             if showPageSlider {

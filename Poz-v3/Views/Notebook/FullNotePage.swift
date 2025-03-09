@@ -8,6 +8,7 @@ struct NotePage: View {
     // gets all notes from core data
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \TempNoteData.messageId,ascending: true)]) var tempData: FetchedResults<TempNoteData>
     @ObservedObject var settings: SettingsModel
     
     // color scheme
@@ -64,6 +65,10 @@ struct NotePage: View {
     
     @State var saveNotesToCal = UserDefaults.standard.bool(forKey: "saveToCal")
     
+    @State private var k: Constants = Constants.shared
+    // the value of the textView in the text input view
+    @State private var focused: Bool = false
+    
     let eventStore = EKEventStore()
     
     var body: some View {
@@ -87,6 +92,7 @@ struct NotePage: View {
                     }
                 }
             
+           
             
             VStack {
                 ScrollView {
@@ -171,20 +177,50 @@ struct NotePage: View {
                                 .padding(.top, 8)
 //                            }
                         }
-                        
+                        //MARK: - TEXT INPUT
                         //text input
-                        GrowingTextInputView(text: $message, placeholder:
-                            """
-                            Tap to begin typing
-
-                            Shake for a prompt ⚡️
-                            """)
-                            .font(Font.custom("Poppins-Regular", size: 16))
-                            .padding(.leading, -4)
-                            .padding(.top, -5)
+                        GrowingTextInputView(text: $message,placeholder:
+                        """
+                        Tap to begin typing
+                        
+                        Shake for a prompt ⚡️
+                        """, focused: $focused)
+                        .font(Font.custom("Poppins-Regular", size: 16))
+                        .padding(.leading, -4)
+                        .padding(.top, -5)
                         
                     }
                     .padding(.horizontal, 20)
+                    //MARK: - onchange focused
+                    .onChange(of: focused) { _ in
+                        if focused == false
+                            && (((message != "" || selected != "") && message !=
+                                 settings.welcomeText && (message != initialText || selected != initialEmoji))) {
+                            hideKeyboard()
+                            moc.perform {
+                                
+                                //                        newMessage = text
+                                if let currentMessage = tempData.first(where:   { $0.messageId == k.messageId }) {
+                                    currentMessage.tempMessage = message ?? ""
+                                    currentMessage.noteId = note.id?.uuidString
+                                    dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+                                    currentMessage.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+                                    currentMessage.emoji = selected
+                                    currentMessage.prompt = dynamicPrompt
+                                   
+                                    
+                                    
+                                    try? moc.save()
+                                 
+                                    print("tempMessage saved")
+                                }
+                               
+                            }
+                            
+                        }
+                        
+                        
+                    }
                     
                     Spacer(minLength: 50)
                 }
@@ -423,7 +459,7 @@ struct NotePage: View {
         }
 //        promptSelectedFromHome = false
     }
-    
+        // not now used - note saved in parentview except for saving note to calender
     // saves note
     func saveNoteB () {
         
@@ -433,16 +469,16 @@ struct NotePage: View {
 //            note.emoji = ""
 //        } else {
 //
-            note.id = UUID() //create id
-            note.note = message ?? "" //input message
-            note.lastUpdated = Date()
-            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-            note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
-            note.emoji = selected
-            note.prompt = dynamicPrompt
-//        }
-        
-        try? self.moc.save()
+//            note.id = UUID() //create id
+//            note.note = message ?? "" //input message
+//            note.lastUpdated = Date()
+//            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+//            note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+//            note.emoji = selected
+//            note.prompt = dynamicPrompt
+////        }
+//        
+//        try? self.moc.save()
         
         promptSelectedIndex = 0
 //        promptSelectedFromHome = false

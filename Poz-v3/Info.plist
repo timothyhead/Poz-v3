@@ -22,6 +22,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app wants to save notes to your calendar</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app wants to save notes to your calendar</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>This app uses FaceID to protect your data</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -72,10 +76,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSCalendarsUsageDescription</key>
-	<string>This app wants to save notes to your calendar</string>
-	<key>NSContactsUsageDescription</key>
-	<string>This app wants to save notes to your calendar</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -10,7 +10,8 @@ struct ChatView: View {
         .edgesIgnoringSafeArea(.all)
       VStack(spacing: 0) {
         HStack(alignment: .center) {
-          GrowingTextInputView(text: $text, placeholder: "Message")
+            // focused param only used in NotePageView
+            GrowingTextInputView(text: $text, placeholder: "Message", focused: .constant(false))
             .cornerRadius(10)
           Button(action: sendAction) {
             Text("Send")
