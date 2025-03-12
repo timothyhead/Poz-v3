@@ -35,6 +35,8 @@ struct ContentView: View {
     // for passing data to noteBook view from chilview in the ModelPages. Setting initial values
     @State private var defaults = UserDefaults.standard
     @State private var k: Constants = Constants.shared
+    // for the search bar functionality that reads the date
+    @State var dateFormatter = DateFormatter()
     
     var body: some View {
             

@@ -41,10 +41,12 @@ struct NotebookView: View {
     @State private var defaults = UserDefaults.standard
     //sheet in toolbar for search bar
     @State var prevPostsShowing = false
+    // for putting the date value in notes into a string format
+    @State var dateFormatter = DateFormatter()
     
     var body: some View {
         NavigationView {
-            ZStack {
+            VStack {
                 
                 //            NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
                 
@@ -65,75 +67,13 @@ struct NotebookView: View {
                             UserDefaults.standard.set(indexNotes, forKey: "LastPageOpen")
                         }
                 }
-                .toolbar {
-                 
-                    ToolbarItem(placement: .topBarLeading) {
-                         
-                            if notes.count > 2 {
-                                Button (action:{ prevPostsShowing.toggle() }) {
-                                  
-                                        Text("🔍")
-                                        //                        Image(systemName: "clock.arrow.circlepath")
-                                            .font(Font.custom("Poppins-Light", size: 20))
-                                            .foregroundColor(colorScheme == .dark ? Color(#colorLiteral(red: 0.9254901961, green: 0.9294117647, blue: 0.9333333333, alpha: 1)) : Color(#colorLiteral(red: 0.1514667571, green: 0.158391118, blue: 0.1616251171, alpha: 1)))
-                                    }.frame(width: 40, height: 40)
-                                }
-                           
-                           
-                        }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        
-                            // home button
-                            Button (action: {
-                                
-                                withAnimation(.spring()) {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.15) {
-                                        //                    isAnimating = true
-                                    }
-                                    
-                                    withAnimation () {
-                                        tabIndex = 0
-                                    }
-                                }
-                                
-                            }) {
-                                ZStack {
-                                    
-                                    if colorScheme == .dark {
-                                        Text("✖️")
-                                            .font(Font.custom("Poppins-Light", size: 26))
-                                            .colorInvert()
-                                    } else {
-                                        Text("✖️")
-                                            .font(Font.custom("Poppins-Light", size: 26))
-                                    }
-                                    
-                                }
-                                .frame(width: 40, height: 40)
-                            }
-                        }
-                  
-                }
+
                 .padding(.top, -6)
                 // MARK: - make new note on the page that has been turned away from when the page is turned. ie. not the new page but the last one.
                 .onChange(of: defaults.bool(forKey: k.pageTurned) ) { _ in
                     
                     
-                    // The message and data from within the ModelPages struct in the tempData core data object
-                    let message = tempData.first(where:  { $0.messageId == k.messageId } )?.tempMessage ?? "no message"
-                    let emoji = tempData.first(where:  { $0.messageId == k.messageId } )?.emoji ?? "no message"
-                    let noteId =  tempData.first(where:  { $0.messageId == k.messageId} )?.noteId
-                    let lastUpdated = tempData.first(where:  { $0.messageId == k.messageId } )?.lastUpdated
-                    let prompt = tempData.first(where:  { $0.messageId == k.messageId } )?.prompt
-                    let date = tempData.first(where:  { $0.messageId == k.messageId } )?.date
-                    
-                    // update the note that was added to or add the new message and data on the new note  which was created in the block below in this onchange f: defaults.bool(forKey: k.pageTurned
-                    notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.note = message
-                    notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.emoji = emoji
-                    notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.prompt = prompt
-                    notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.lastUpdated = lastUpdated
-                    notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.date = date
-                    try? moc.save()
+                   let noteId = saveNote()
                     
                     // make a new note so the Modelpages has a page to turn to. This will be updated in the above code if the page this on is turned to with a new page turn
                     // only create a new note if there isn't one created. So with a back turn there will one always. With a forward turn if the note updated in  the block above  is the last to be created it will equal 'notes.last' . Notes are filtered by createdAt. So a  new note is created then.
@@ -142,6 +82,7 @@ struct NotebookView: View {
                         note.id = UUID()
                         note.note = ""
                         note.createdAt = Date()
+                        note.lastUpdated = Date()
                         try? moc.save()
                     }
                     
@@ -211,6 +152,55 @@ struct NotebookView: View {
                 // close onboarding on click
                 firstTimeShowing = false
             }
+                            .toolbar {
+            
+                                ToolbarItem(placement: .topBarLeading) {
+            
+                                        if notes.count > 2 {
+                                            Button (action:{ prevPostsShowing.toggle() }) {
+            
+                                                    Text("🔍")
+                                                    //                        Image(systemName: "clock.arrow.circlepath")
+                                                        .font(Font.custom("Poppins-Light", size: 20))
+                                                        .foregroundColor(colorScheme == .dark ? Color(#colorLiteral(red: 0.9254901961, green: 0.9294117647, blue: 0.9333333333, alpha: 1)) : Color(#colorLiteral(red: 0.1514667571, green: 0.158391118, blue: 0.1616251171, alpha: 1)))
+                                                }.frame(width: 40, height: 40)
+                                            }
+            
+            
+                                    }
+                                ToolbarItem(placement: .topBarTrailing) {
+            
+                                        // home button
+                                        Button (action: {
+            
+                                            withAnimation(.spring()) {
+                                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                                    // id the return value of  save note not need for new page
+                                                  _ = saveNote()
+                                                    tabIndex = 0
+                                                }
+                                            }
+            
+                                        }) {
+                                            ZStack {
+            
+                                                if colorScheme == .dark {
+                                                    Text("✖️")
+                                                        .font(Font.custom("Poppins-Light", size: 26))
+                                                        .colorInvert()
+                                                } else {
+                                                    Text("✖️")
+                                                        .font(Font.custom("Poppins-Light", size: 26))
+                                                }
+            
+                                            }
+                                            .frame(width: 40, height: 40)
+                                        }
+                                    }
+            
+                            }
+            
+            // MARK: - sheet prevPostsShowing
             .sheet(isPresented: $prevPostsShowing, content: {
                 NotesListView(settings: settings).environment(\.managedObjectContext, self.moc)
             })
@@ -271,5 +261,26 @@ struct NotebookView: View {
             }
         }
         return noteIndex
+    }
+    
+    /// /// Saves the updated or new created note using the tempData
+    /// - Returns: the note id from the currnent note being updated or created
+    func saveNote() -> String {
+        // The message and data from within the ModelPages struct in the tempData core data object
+        let message = tempData.first(where:  { $0.messageId == k.messageId } )?.tempMessage ?? "no message"
+        let emoji = tempData.first(where:  { $0.messageId == k.messageId } )?.emoji ?? "no message"
+        let noteId =  tempData.first(where:  { $0.messageId == k.messageId} )?.noteId
+        let prompt = tempData.first(where:  { $0.messageId == k.messageId } )?.prompt
+        
+        // update the note that was added to or add the new message and data on the new note  which was created in the block below in this onchange f: defaults.bool(forKey: k.pageTurned
+        notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.note = message
+        notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.emoji = emoji
+        notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.prompt = prompt
+        notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.lastUpdated = Date()
+        dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+        notes.first(where: { $0.id?.uuidString == noteId ?? "No id" })?.date = dateFormatter.string(from: (Date()))
+      
+        try? moc.save()
+        return noteId ?? ""
     }
 }

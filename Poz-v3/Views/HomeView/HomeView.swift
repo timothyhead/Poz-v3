@@ -89,7 +89,7 @@ struct HomeView: View {
                     
                     // daily goal view
                     Button (action: { dailyGoalSheetShowing = true }) {
-                        barGoalView(settings: settings)
+                        BarGoalView(settings: settings)
                     }
                     .sheet(isPresented: $dailyGoalSheetShowing) {
                         NotificationsViewPopup(settings: settings)

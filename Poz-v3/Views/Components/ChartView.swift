@@ -3,7 +3,7 @@ import SwiftUICharts
 
 //  all the actual daily goal charts, bar, small, big, as well as compontents for the swift ui charts
 
-struct barGoalView : View {
+struct BarGoalView : View {
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>
@@ -144,7 +144,7 @@ struct smallGoalView : View {
 }
 
 
-struct bigGoalView : View {
+struct BigGoalView : View {
     
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Note.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Note.createdAt, ascending: true)]) var notes: FetchedResults<Note>

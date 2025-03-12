@@ -1054,7 +1054,7 @@
 				DEVELOPMENT_TEAM = 4A7MNXWJ5T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Poz-v3/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1080,7 +1080,7 @@
 				DEVELOPMENT_TEAM = 4A7MNXWJ5T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Poz-v3/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

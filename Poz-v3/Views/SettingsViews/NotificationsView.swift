@@ -34,7 +34,7 @@ struct NotificationsView: View {
             // display goal view up top
             HStack (alignment: .center) {
                 Spacer()
-                bigGoalView(settings: settings)
+                BigGoalView(settings: settings)
                 Spacer()
            }
             .padding(.top, 60)
@@ -102,7 +102,7 @@ struct NotificationsViewPopup: View {
             
                 HStack (alignment: .center) {
                     Spacer()
-                    bigGoalView(settings: settings)
+                    BigGoalView(settings: settings)
                     Spacer()
                }
                 .padding(.top, 60)
@@ -177,7 +177,7 @@ struct NotificationsViewOnboard: View {
             
             HStack (alignment: .center) {
                 Spacer()
-                bigGoalView(settings: settings)
+                BigGoalView(settings: settings)
                     .onAppear() {
                         settings.goalNumber = 2
                         UserDefaults.standard.set(Int(2), forKey: "goalNumber")

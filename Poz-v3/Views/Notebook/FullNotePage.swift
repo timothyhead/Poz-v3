@@ -28,7 +28,7 @@ struct NotePage: View {
     
     // for date
     @State var date = Date()
-    @State var dateFormatter = DateFormatter();
+    @State var dateFormatter = DateFormatter()
     @State var dateString: String = ""
     
     // for complex prompts, not in use
@@ -69,6 +69,9 @@ struct NotePage: View {
     // the value of the textView in the text input view
     @State private var focused: Bool = false
     
+    //sheet in toolbar for search bar
+    @State var prevPostsShowing = false
+    
     let eventStore = EKEventStore()
     
     var body: some View {
@@ -85,6 +88,8 @@ struct NotePage: View {
                         .foregroundColor(colorScheme == .dark ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3037465077)))
                     
                 }
+        }
+    
                 .padding(.bottom, 20)
                 .onChange(of: message) { value in
                     if (message != "" && message != initialText && dateString != dateFormatter.string(from: Date() as Date)) {
@@ -207,9 +212,7 @@ struct NotePage: View {
                                     currentMessage.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
                                     currentMessage.emoji = selected
                                     currentMessage.prompt = dynamicPrompt
-                                   
-                                    
-                                    
+                            
                                     try? moc.save()
                                  
                                     print("tempMessage saved")
@@ -399,7 +402,7 @@ struct NotePage: View {
             .padding(.bottom, 40)
             .padding(.horizontal, 20)
                 
-            }
+
 //        }
         .padding(.top, 10)
         .background(Color(UIColor(named: "NoteBG")!))
