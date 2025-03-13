@@ -74,30 +74,77 @@ struct NotePage: View {
     
     let eventStore = EKEventStore()
     
+    init(message: String? = nil, emoji: String, noteSelfTempText: String, swiftSpeechTempText: String, selected: String = "", selectedIndex: Int, date: Date = Date(), dateFormatter: DateFormatter = DateFormatter(), dateString: String, noteToSelfNotification: Date = Date(), noteToSelfRandomTime: Bool = false, emojiPickerShowing: Bool, addPromptShowing: Bool, initialText: String = "", initialEmoji: String = "", note: Note, promptSelectedIndex: Int, promptSelectedFromHome: Bool, tabIndex: Int, showPageSlider: Bool, dynamicPrompt: String = "", confirmDelete: Bool = false, pageIndex: Int, saveNotesToCal: Bool = UserDefaults.standard.bool(forKey: "saveToCal"), k: Constants, focused: Bool, prevPostsShowing: Bool = false) {
+        self.moc = moc
+        self.notes = notes
+        self.tempData = tempData
+        self.settings = settings
+        self.colorScheme = colorScheme
+        self.message = message
+        self.emoji = emoji
+        self.noteSelfTempText = noteSelfTempText
+        self.swiftSpeechTempText = swiftSpeechTempText
+        self.selected = selected
+        self.selectedIndex = selectedIndex
+        self.date = date
+        self.dateFormatter = dateFormatter
+        self.dateString = dateString
+        self.noteToSelfNotification = noteToSelfNotification
+        self.noteToSelfRandomTime = noteToSelfRandomTime
+        self.emojiPickerShowing = emojiPickerShowing
+        self.addPromptShowing = addPromptShowing
+        self.initialText = initialText
+        self.initialEmoji = initialEmoji
+        self.note = note
+        self.promptSelectedIndex = promptSelectedIndex
+        self.promptSelectedFromHome = promptSelectedFromHome
+        self.tabIndex = tabIndex
+        self.showPageSlider = showPageSlider
+        self.dynamicPrompt = dynamicPrompt
+        self.confirmDelete = confirmDelete
+        self.pageIndex = pageIndex
+        self.saveNotesToCal = saveNotesToCal
+        self.k = k
+        self.focused = focused
+        self.prevPostsShowing = prevPostsShowing
+        
+        print("init note page")
+    }
+    deinit {
+        print("deinit note page")
+    }
+    
     var body: some View {
         
         VStack {
-//            VStack {
+            //            VStack {
             // now using toolbar
             // top menu, back button, search button
             //    NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
+            
+            HStack {
+                Text("\(dateString)")
+                    .font(Font.custom("Poppins-Regular", size: 14))
+                    .foregroundColor(colorScheme == .dark ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3037465077)))
                 
-                HStack {
-                    Text("\(dateString)")
-                        .font(Font.custom("Poppins-Regular", size: 14))
-                        .foregroundColor(colorScheme == .dark ? Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)) : Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3037465077)))
+            }
+            
+            
+            .padding(.bottom, 20)
+            .onChange(of: message) { value in
+                if (message != "" && message != initialText && dateString != dateFormatter.string(from: Date() as Date)) {
+                    dateString = dateFormatter.string(from: Date() as Date)
+                }
+            }
+            // MARK:- ondisappear
+            .onDisappear {
+                if focused == true {
                     
                 }
-        }
-    
-                .padding(.bottom, 20)
-                .onChange(of: message) { value in
-                    if (message != "" && message != initialText && dateString != dateFormatter.string(from: Date() as Date)) {
-                        dateString = dateFormatter.string(from: Date() as Date)
-                    }
-                }
+            }
             
-           
+            
+            
             
             VStack {
                 ScrollView {
@@ -123,64 +170,64 @@ struct NotePage: View {
                             if message != initialText {
                                 HStack {
                                     Image(systemName: "paperplane")
-
+                                    
                                     Text("This will be sent back to you")
-
+                                    
                                 }
                                 .foregroundColor(Color.blue)
                                 .font(Font.custom("Poppins-Regular", size: 16))
                                 .padding(.vertical,5)
-                            
+                                
                                 VStack {
-
-                                Picker(selection: $noteToSelfRandomTime, label: Text("Random or manual time?")) {
-                                    Text("Random Time").tag(false)
-                                    Text("Manual Time").tag(true)
-                                }
-                                .font(Font.custom("Poppins-Regular", size: 16))
-                                .pickerStyle(SegmentedPickerStyle())
-
-                                if noteToSelfRandomTime {
-                                    DatePicker(
-                                        "",
-                                        selection: $noteToSelfNotification,
-                                        displayedComponents: [.date, .hourAndMinute]
-                                    )
-                                    .font(Font.custom("Poppins-Regular", size: 16))
-                                    .onChange (of: noteToSelfNotification) { value in
-                                        if message != "" {
-                                            createNotification(message: message ?? "", dateIn: noteToSelfNotification)
-                                        }
+                                    
+                                    Picker(selection: $noteToSelfRandomTime, label: Text("Random or manual time?")) {
+                                        Text("Random Time").tag(false)
+                                        Text("Manual Time").tag(true)
                                     }
-                                } else {
-                                    Text("This note will return to you sometime in the next week")
-                                        .font(Font.custom("Poppins-Regular", size: 0)).opacity(0)
-                                        .padding(.bottom, -22)
-                                        .onAppear() {
+                                    .font(Font.custom("Poppins-Regular", size: 16))
+                                    .pickerStyle(SegmentedPickerStyle())
+                                    
+                                    if noteToSelfRandomTime {
+                                        DatePicker(
+                                            "",
+                                            selection: $noteToSelfNotification,
+                                            displayedComponents: [.date, .hourAndMinute]
+                                        )
+                                        .font(Font.custom("Poppins-Regular", size: 16))
+                                        .onChange (of: noteToSelfNotification) { value in
                                             if message != "" {
-                                                createNotification(message: message ?? "", dateIn: generateRandomDate(daysForward: 7)!)
+                                                createNotification(message: message ?? "", dateIn: noteToSelfNotification)
                                             }
                                         }
-                                        .onChange (of: message) { value in
-                                            if message != "" {
-                                                createNotification(message: message ?? "", dateIn: generateRandomDate(daysForward: 7)!)
+                                    } else {
+                                        Text("This note will return to you sometime in the next week")
+                                            .font(Font.custom("Poppins-Regular", size: 0)).opacity(0)
+                                            .padding(.bottom, -22)
+                                            .onAppear() {
+                                                if message != "" {
+                                                    createNotification(message: message ?? "", dateIn: generateRandomDate(daysForward: 7)!)
+                                                }
                                             }
-                                        }
+                                            .onChange (of: message) { value in
+                                                if message != "" {
+                                                    createNotification(message: message ?? "", dateIn: generateRandomDate(daysForward: 7)!)
+                                                }
+                                            }
+                                    }
                                 }
-                            }
                             }
                         }
                         if selected == "💢" {
-//                            if message != initialText {
-                                HStack {
-                                    Image(systemName: "trash")
-                                    Text("This will be autodeleted")
-
-                                }
-                                .foregroundColor(Color.red)
-                                .font(Font.custom("Poppins-Regular", size: 16))
-                                .padding(.top, 8)
-//                            }
+                            //                            if message != initialText {
+                            HStack {
+                                Image(systemName: "trash")
+                                Text("This will be autodeleted")
+                                
+                            }
+                            .foregroundColor(Color.red)
+                            .font(Font.custom("Poppins-Regular", size: 16))
+                            .padding(.top, 8)
+                            //                            }
                         }
                         //MARK: - TEXT INPUT
                         //text input
@@ -212,12 +259,12 @@ struct NotePage: View {
                                     currentMessage.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
                                     currentMessage.emoji = selected
                                     currentMessage.prompt = dynamicPrompt
-                            
+                                    
                                     try? moc.save()
-                                 
+                                    
                                     print("tempMessage saved")
                                 }
-                               
+                                
                             }
                             
                         }
@@ -230,28 +277,28 @@ struct NotePage: View {
                 
                 .padding(.top, -11)
             }
-//            .onChange(of: promptSelectedIndex) { value in
-//                if promptSelectedIndex == 0 {
-//                    dynamicPrompt = ""
-//                    selected = ""
-//                }
-//                if promptSelectedIndex == 1 {
-//                    dynamicPrompt = "Leave a note or reminder for your future self."
-//                    selected = "📪"
-//                }
-//                if promptSelectedIndex == 2 {
-//                    dynamicPrompt = settings.introspectPrompts.randomElement()!
-//                    selected = "🔮"
-//                }
-//                if promptSelectedIndex == 3 {
-//                    dynamicPrompt = "Let it all out, don't hold back."
-//                    selected = "💢"
-//                }
-//                if promptSelectedIndex == 4 {
-//                    dynamicPrompt = settings.gratitudePrompts.randomElement()!
-//                    selected = "🙏🏾"
-//                }
-//            }
+            //            .onChange(of: promptSelectedIndex) { value in
+            //                if promptSelectedIndex == 0 {
+            //                    dynamicPrompt = ""
+            //                    selected = ""
+            //                }
+            //                if promptSelectedIndex == 1 {
+            //                    dynamicPrompt = "Leave a note or reminder for your future self."
+            //                    selected = "📪"
+            //                }
+            //                if promptSelectedIndex == 2 {
+            //                    dynamicPrompt = settings.introspectPrompts.randomElement()!
+            //                    selected = "🔮"
+            //                }
+            //                if promptSelectedIndex == 3 {
+            //                    dynamicPrompt = "Let it all out, don't hold back."
+            //                    selected = "💢"
+            //                }
+            //                if promptSelectedIndex == 4 {
+            //                    dynamicPrompt = settings.gratitudePrompts.randomElement()!
+            //                    selected = "🙏🏾"
+            //                }
+            //            }
             .onTapGesture {
                 hideKeyboard() //hide keyboard when user taps outside text field
             }
@@ -263,9 +310,9 @@ struct NotePage: View {
                 initialEmoji = note.emoji ?? ""
                 message = note.note
                 selected = note.emoji ?? ""
-
+                
                 dynamicPrompt = note.prompt ?? ""
-
+                
                 dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
                 
                 // initializes date
@@ -289,14 +336,14 @@ struct NotePage: View {
                 
                 // saves note
                 if ((message != "" || selected != "") && message !=
-                        settings.welcomeText && (message != initialText || selected != initialEmoji)) {
-//                    print (message)
-//                    print (updatedText)
-//                    print(selected)
-//                    print(initialText)
-//                    print(initialEmoji)
-//                    print ("something's changed")
-                    saveNoteB()
+                    settings.welcomeText && (message != initialText || selected != initialEmoji)) {
+                    //                    print (message)
+                    //                    print (updatedText)
+                    //                    print(selected)
+                    //                    print(initialText)
+                    //                    print(initialEmoji)
+                    //                    print ("something's changed")
+                   // saveNoteB()
                 }
                 
             }
@@ -305,18 +352,18 @@ struct NotePage: View {
                 // change prompt
                 dynamicPrompt = settings.allPrompts.randomElement()!
             }
-
+            
             // emoji pickers
             if emojiPickerShowing {
                 EmojiPicker(selectedIndex: $selectedIndex, selected: $selected)
-//                    .padding(.bottom, 20)
+                //                    .padding(.bottom, 20)
             }
-                
+            
             // prompt picker
-//            if addPromptShowing {
-//                PromptsViewC(promptIndex: $promptSelectedIndex)
-//                    .padding(.bottom, 50)
-//            }
+            //            if addPromptShowing {
+            //                PromptsViewC(promptIndex: $promptSelectedIndex)
+            //                    .padding(.bottom, 50)
+            //            }
             
             // bottom menu
             HStack (spacing: 0) {
@@ -336,12 +383,12 @@ struct NotePage: View {
                     .onAppear() {
                         swiftSpeechTempText = message ?? ""
                     }
-//                    .animation(.easeOut)
-
+                //                    .animation(.easeOut)
+                
                 
                 // basic prompt button
                 Button (action: {
-//                    dynamicPrompt = settings.allPrompts.randomElement()!
+                    //                    dynamicPrompt = settings.allPrompts.randomElement()!
                 }) {
                     Text("⚡️")
                         .font(.system(size: 25))
@@ -356,7 +403,7 @@ struct NotePage: View {
                 
                 
                 //advanced prompt button
-//                PromptsButton(addPromptShowing: $addPromptShowing)
+                //                PromptsButton(addPromptShowing: $addPromptShowing)
                 
                 // delete button
                 Button (action: {
@@ -377,8 +424,8 @@ struct NotePage: View {
                         secondaryButton: .cancel()
                     )
                 }
-//                .animation(.easeOut)
-//                .padding(.horizontal, 20)
+                //                .animation(.easeOut)
+                //                .padding(.horizontal, 20)
                 
                 Spacer()
                 
@@ -401,202 +448,232 @@ struct NotePage: View {
             }
             .padding(.bottom, 40)
             .padding(.horizontal, 20)
-                
-
-//        }
-        .padding(.top, 10)
-        .background(Color(UIColor(named: "NoteBG")!))
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-        
-    }
-    
-    // get page number of current note
-    func getPageNumber() -> Int {
-        
-        var noteCount = 0
-        
-        for noteObj in notes {
-            noteCount += 1
-            if note.id == noteObj.id {
-                break
-            }
-        }
-        return (noteCount)
-    }
-    
-    // checks if curr note is the last page, not in use
-    func isCurrNoteLastPage () -> Bool {
-           
-        if (pageIndex == (notes.count-2)) {
-            print("true")
-            return true
             
-        } else {
-            print(pageIndex)
-            print(notes.count)
-            return false
-        }
-    }
-    
-    // for prompts, not in use
-    func activatePrompt() {
-        if promptSelectedIndex == 0 {
-            dynamicPrompt = ""
-            selected = ""
-        }
-        if promptSelectedIndex == 1 {
-            dynamicPrompt = "Leave a note or reminder for your future self."
-            selected = "📪"
-        }
-        if promptSelectedIndex == 2 {
-            dynamicPrompt = settings.introspectPrompts.randomElement()!
-            selected = "🔮"
-        }
-        if promptSelectedIndex == 3 {
-            dynamicPrompt = "Let it all out, don't hold back."
-            selected = "💢"
-        }
-        if promptSelectedIndex == 4 {
-            dynamicPrompt = settings.gratitudePrompts.randomElement()!
-            selected = "🙏🏾"
-        }
-//        promptSelectedFromHome = false
-    }
-        // not now used - note saved in parentview except for saving note to calender
-    // saves note
-    func saveNoteB () {
-        
-//        if (promptSelectedIndex == 3) {
-//            note.note = ""
-//            note.prompt = ""
-//            note.emoji = ""
-//        } else {
-//
-//            note.id = UUID() //create id
-//            note.note = message ?? "" //input message
-//            note.lastUpdated = Date()
-//            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-//            note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
-//            note.emoji = selected
-//            note.prompt = dynamicPrompt
-////        }
-//        
-//        try? self.moc.save()
-        
-        promptSelectedIndex = 0
-//        promptSelectedFromHome = false
-        
-        
-        if (saveNotesToCal) {
-            //write note to calendar
-            let calDateFormatter = DateFormatter()
-            calDateFormatter.dateFormat = "yyyyddHHmmSSS"
             
-            var titleForCal = ""
-            if (selected == "") {
-                titleForCal = "📔 Poz Entry"
-            } else {
-                titleForCal = selected + " Poz Entry";
-            }
+            //        }
+            .padding(.top, 10)
+            .background(Color(UIColor(named: "NoteBG")!))
+            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
-            var messageForCal = message ?? "\n"
-            messageForCal += "\n\nLast Updated on "
-            messageForCal += dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
-            messageForCal += "\n\nPoz Entry ID: " + calDateFormatter.string(from: (note.createdAt ?? Date()) as Date)
+        }
+        // MARK: - ondisappear
+        defer {
+       
+                    // save note if view disappears when exiting journal
+                    print("focused in ondisappear: \(focused)")
+                    if focused == true
+                        && (((message != "" || selected != "") && message !=
+                             settings.welcomeText && (message != initialText || selected != initialEmoji))) {
+                        hideKeyboard()
+                        moc.perform {
+                            
+                            //                        newMessage = text
+                            if let note = notes.first(where: { $0.id == note.id }) {
+                                         note.note = message ?? "" //input message
+                                         note.lastUpdated = Date()
+                                         dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+                                         note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+                                         note.emoji = selected
+                                         note.prompt = dynamicPrompt
+                                try? moc.save()
+                             
+                                print("Notepage ondisappear, note saved")
+                            }
+                           
+                        }
+                        
+                    }
+                }
+    }
+        
+        // get page number of current note
+        func getPageNumber() -> Int {
             
-            CalendarController().askToAddToCal(start: note.lastUpdated ?? Date(), end: note.lastUpdated ?? Date(), id: calDateFormatter.string(from: (note.createdAt ?? Date()) as Date), title: titleForCal, notes: messageForCal)
-        }
-        
-    }
-    
-    // clears note and moves it to end
-    func clearNote() {
-        message = ""
-        note.note = ""
-        selected = ""
-        note.emoji = ""
-        note.prompt = ""
-        dateString = "-"
-        note.date = "-"
-        note.createdAt = Date()
-    }
-    
-    // clears all notifications with certain string
-    func clearNotifications (message: String) {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
-           var identifiers: [String] = []
-           for notification:UNNotificationRequest in notificationRequests {
-            if notification.identifier == "Note to Self \(message)" {
-                  identifiers.append(notification.identifier)
-               }
-           }
-           UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
-        }
-    }
-    
-    // creates notification
-    func createNotification (message: String, dateIn: Date) {
-        
-        UNUserNotificationCenter.current()
-            .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                if success {
-                    print("Note to self configured")
-                } else if let error = error {
-                    print(error.localizedDescription)
+            var noteCount = 0
+            
+            for noteObj in notes {
+                noteCount += 1
+                if note.id == noteObj.id {
+                    break
                 }
             }
-        
-        //remove all notifications with the same message
-        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
-           var identifiers: [String] = []
-           for notification:UNNotificationRequest in notificationRequests {
-            if notification.identifier == "Note to Self \(message )" {
-                  identifiers.append(notification.identifier)
-               }
-           }
-           UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+            return (noteCount)
         }
         
-        let content = UNMutableNotificationContent()
+        // checks if curr note is the last page, not in use
+        func isCurrNoteLastPage () -> Bool {
+            
+            if (pageIndex == (notes.count-2)) {
+                print("true")
+                return true
+                
+            } else {
+                print(pageIndex)
+                print(notes.count)
+                return false
+            }
+        }
         
-        content.title = "Note to Self"
-        content.subtitle = message
-        content.sound = UNNotificationSound.default
+        // for prompts, not in use
+        func activatePrompt() {
+            if promptSelectedIndex == 0 {
+                dynamicPrompt = ""
+                selected = ""
+            }
+            if promptSelectedIndex == 1 {
+                dynamicPrompt = "Leave a note or reminder for your future self."
+                selected = "📪"
+            }
+            if promptSelectedIndex == 2 {
+                dynamicPrompt = settings.introspectPrompts.randomElement()!
+                selected = "🔮"
+            }
+            if promptSelectedIndex == 3 {
+                dynamicPrompt = "Let it all out, don't hold back."
+                selected = "💢"
+            }
+            if promptSelectedIndex == 4 {
+                dynamicPrompt = settings.gratitudePrompts.randomElement()!
+                selected = "🙏🏾"
+            }
+            //        promptSelectedFromHome = false
+        }
+        // not now used - note saved in parentview except for saving note to calender
+        // saves note
+        func saveNoteB () {
+            
+            //        if (promptSelectedIndex == 3) {
+            //            note.note = ""
+            //            note.prompt = ""
+            //            note.emoji = ""
+            //        } else {
+            //
+            //            note.id = UUID() //create id
+            //            note.note = message ?? "" //input message
+            //            note.lastUpdated = Date()
+            //            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+            //            note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+            //            note.emoji = selected
+            //            note.prompt = dynamicPrompt
+            ////        }
+            //
+            //        try? self.moc.save()
+            
+            promptSelectedIndex = 0
+            //        promptSelectedFromHome = false
+            
+            
+            if (saveNotesToCal) {
+                //write note to calendar
+                let calDateFormatter = DateFormatter()
+                calDateFormatter.dateFormat = "yyyyddHHmmSSS"
+                
+                var titleForCal = ""
+                if (selected == "") {
+                    titleForCal = "📔 Poz Entry"
+                } else {
+                    titleForCal = selected + " Poz Entry";
+                }
+                
+                var messageForCal = message ?? "\n"
+                messageForCal += "\n\nLast Updated on "
+                messageForCal += dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+                messageForCal += "\n\nPoz Entry ID: " + calDateFormatter.string(from: (note.createdAt ?? Date()) as Date)
+                
+                CalendarController().askToAddToCal(start: note.lastUpdated ?? Date(), end: note.lastUpdated ?? Date(), id: calDateFormatter.string(from: (note.createdAt ?? Date()) as Date), title: titleForCal, notes: messageForCal)
+            }
+            
+        }
         
-        let date = dateIn
-        let calendar = Calendar.current
+        // clears note and moves it to end
+        func clearNote() {
+            message = ""
+            note.note = ""
+            selected = ""
+            note.emoji = ""
+            note.prompt = ""
+            dateString = "-"
+            note.date = "-"
+            note.createdAt = Date()
+        }
         
+        // clears all notifications with certain string
+        func clearNotifications (message: String) {
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
+                var identifiers: [String] = []
+                for notification:UNNotificationRequest in notificationRequests {
+                    if notification.identifier == "Note to Self \(message)" {
+                        identifiers.append(notification.identifier)
+                    }
+                }
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+            }
+        }
         
-        var dateComponents = DateComponents()
+        // creates notification
+        func createNotification (message: String, dateIn: Date) {
+            
+            UNUserNotificationCenter.current()
+                .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                    if success {
+                        print("Note to self configured")
+                    } else if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }
+            
+            //remove all notifications with the same message
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
+                var identifiers: [String] = []
+                for notification:UNNotificationRequest in notificationRequests {
+                    if notification.identifier == "Note to Self \(message )" {
+                        identifiers.append(notification.identifier)
+                    }
+                }
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+            }
+            
+            let content = UNMutableNotificationContent()
+            
+            content.title = "Note to Self"
+            content.subtitle = message
+            content.sound = UNNotificationSound.default
+            
+            let date = dateIn
+            let calendar = Calendar.current
+            
+            
+            var dateComponents = DateComponents()
+            
+            dateComponents.hour = calendar.component(.hour, from: date)
+            dateComponents.minute = calendar.component(.minute, from: date)
+            
+            //daily notification
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            
+            let request = UNNotificationRequest(identifier: String("Note to Self \(message)"), content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
+            
+            
+            print("Notification created to print \(message) at \(dateIn)")
+        }
         
-        dateComponents.hour = calendar.component(.hour, from: date)
-        dateComponents.minute = calendar.component(.minute, from: date)
-        
-        //daily notification
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        
-        let request = UNNotificationRequest(identifier: String("Note to Self \(message)"), content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request)
-        
-        
-        print("Notification created to print \(message) at \(dateIn)")
-    }
-    
-    // for one of the prompts, not in use
-    func generateRandomDate(daysForward: Int)-> Date? {
-        let day = arc4random_uniform(UInt32(daysForward))+1
-        let hour = arc4random_uniform(23)
-        let minute = arc4random_uniform(59)
-        
-        let today = Date(timeIntervalSinceNow: 0)
-        let gregorian  = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
-        var offsetComponents = DateComponents()
-        offsetComponents.day = Int(day - 1)
-        offsetComponents.hour = Int(hour)
-        offsetComponents.minute = Int(minute)
-        
-        let randomDate = gregorian?.date(byAdding: offsetComponents, to: today, options: .init(rawValue: 0) )
-        return randomDate
+        // for one of the prompts, not in use
+        func generateRandomDate(daysForward: Int)-> Date? {
+            let day = arc4random_uniform(UInt32(daysForward))+1
+            let hour = arc4random_uniform(23)
+            let minute = arc4random_uniform(59)
+            
+            let today = Date(timeIntervalSinceNow: 0)
+            let gregorian  = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
+            var offsetComponents = DateComponents()
+            offsetComponents.day = Int(day - 1)
+            offsetComponents.hour = Int(hour)
+            offsetComponents.minute = Int(minute)
+            
+            let randomDate = gregorian?.date(byAdding: offsetComponents, to: today, options: .init(rawValue: 0) )
+            return randomDate
+        }
     }
    
 }
@@ -639,37 +716,39 @@ struct EmojiButton : View {
 }
 
 // not in use
-struct PromptsButton : View {
-    
-    @Binding var addPromptShowing: Bool
-    
-    var body: some View {
-        ZStack{
-            if addPromptShowing {
-                Text("Add prompt/action")
-                    .font(Font.custom("Poppins-Light", size: 12))
-                    .zIndex(-1)
-                    .offset(x: 0, y: -35)
+    struct PromptsButton : View {
+        
+        @Binding var addPromptShowing: Bool
+        
+        var body: some View {
+            ZStack{
+                if addPromptShowing {
+                    Text("Add prompt/action")
+                        .font(Font.custom("Poppins-Light", size: 12))
+                        .zIndex(-1)
+                        .offset(x: 0, y: -35)
                     
+                }
+                Button(action: {
+                    //                addPromptShowing.toggle()
+                }) {
+                    Text("⚡️")
+                        .font(.system(size: 30))
+                        .onTapGesture {
+                            addPromptShowing.toggle()
+                            print("short press")
+                        }
+                        .onLongPressGesture(minimumDuration: 0.1) {
+                            addPromptShowing.toggle()
+                            print("long press")
+                        }
+                }
             }
-            Button(action: {
-//                addPromptShowing.toggle()
-            }) {
-                Text("⚡️")
-                    .font(.system(size: 30))
-                    .onTapGesture {
-                        addPromptShowing.toggle()
-                        print("short press")
-                    }
-                    .onLongPressGesture(minimumDuration: 0.1) {
-                        addPromptShowing.toggle()
-                        print("long press")
-                    }
-            }
+            .scaleEffect((addPromptShowing ? 1.76 : 1))
+            //        .animation(.easeOut)
         }
-        .scaleEffect((addPromptShowing ? 1.76 : 1))
-//        .animation(.easeOut)
-    }
+    
+
 }
 
 
@@ -684,3 +763,4 @@ extension UIWindow {
         NotificationCenter.default.post(name: .deviceDidShakeNotification, object: event)
     }
 }
+
