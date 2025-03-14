@@ -74,45 +74,7 @@ struct NotePage: View {
     
     let eventStore = EKEventStore()
     
-    init(message: String? = nil, emoji: String, noteSelfTempText: String, swiftSpeechTempText: String, selected: String = "", selectedIndex: Int, date: Date = Date(), dateFormatter: DateFormatter = DateFormatter(), dateString: String, noteToSelfNotification: Date = Date(), noteToSelfRandomTime: Bool = false, emojiPickerShowing: Bool, addPromptShowing: Bool, initialText: String = "", initialEmoji: String = "", note: Note, promptSelectedIndex: Int, promptSelectedFromHome: Bool, tabIndex: Int, showPageSlider: Bool, dynamicPrompt: String = "", confirmDelete: Bool = false, pageIndex: Int, saveNotesToCal: Bool = UserDefaults.standard.bool(forKey: "saveToCal"), k: Constants, focused: Bool, prevPostsShowing: Bool = false) {
-        self.moc = moc
-        self.notes = notes
-        self.tempData = tempData
-        self.settings = settings
-        self.colorScheme = colorScheme
-        self.message = message
-        self.emoji = emoji
-        self.noteSelfTempText = noteSelfTempText
-        self.swiftSpeechTempText = swiftSpeechTempText
-        self.selected = selected
-        self.selectedIndex = selectedIndex
-        self.date = date
-        self.dateFormatter = dateFormatter
-        self.dateString = dateString
-        self.noteToSelfNotification = noteToSelfNotification
-        self.noteToSelfRandomTime = noteToSelfRandomTime
-        self.emojiPickerShowing = emojiPickerShowing
-        self.addPromptShowing = addPromptShowing
-        self.initialText = initialText
-        self.initialEmoji = initialEmoji
-        self.note = note
-        self.promptSelectedIndex = promptSelectedIndex
-        self.promptSelectedFromHome = promptSelectedFromHome
-        self.tabIndex = tabIndex
-        self.showPageSlider = showPageSlider
-        self.dynamicPrompt = dynamicPrompt
-        self.confirmDelete = confirmDelete
-        self.pageIndex = pageIndex
-        self.saveNotesToCal = saveNotesToCal
-        self.k = k
-        self.focused = focused
-        self.prevPostsShowing = prevPostsShowing
-        
-        print("init note page")
-    }
-    deinit {
-        print("deinit note page")
-    }
+   
     
     var body: some View {
         
@@ -136,10 +98,21 @@ struct NotePage: View {
                     dateString = dateFormatter.string(from: Date() as Date)
                 }
             }
-            // MARK:- ondisappear
+            // MARK: - onDisappear
+            // saves note on exit from journal
+            // assign meesage to "" to prevent more than one save
             .onDisappear {
-                if focused == true {
-                    
+                if (((message != "" || selected != "") && message !=
+                     settings.welcomeText && (message != initialText || selected != initialEmoji))) {
+                 
+                                note.note = message ?? "" //input message
+                                note.lastUpdated = Date()
+                                dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+                                note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+                                note.emoji = selected
+                                note.prompt = dynamicPrompt
+                    try? moc.save()
+               message = ""
                 }
             }
             
@@ -244,6 +217,8 @@ struct NotePage: View {
                     }
                     .padding(.horizontal, 20)
                     //MARK: - onchange focused
+                    
+                    // assign meesage to "" to prevent more than one save
                     .onChange(of: focused) { _ in
                         if focused == false
                             && (((message != "" || selected != "") && message !=
@@ -261,7 +236,7 @@ struct NotePage: View {
                                     currentMessage.prompt = dynamicPrompt
                                     
                                     try? moc.save()
-                                    
+                                    message = ""
                                     print("tempMessage saved")
                                 }
                                 
@@ -343,7 +318,7 @@ struct NotePage: View {
                     //                    print(initialText)
                     //                    print(initialEmoji)
                     //                    print ("something's changed")
-                   // saveNoteB()
+                    // saveNoteB()
                 }
                 
             }
@@ -456,34 +431,7 @@ struct NotePage: View {
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
         }
-        // MARK: - ondisappear
-        defer {
-       
-                    // save note if view disappears when exiting journal
-                    print("focused in ondisappear: \(focused)")
-                    if focused == true
-                        && (((message != "" || selected != "") && message !=
-                             settings.welcomeText && (message != initialText || selected != initialEmoji))) {
-                        hideKeyboard()
-                        moc.perform {
-                            
-                            //                        newMessage = text
-                            if let note = notes.first(where: { $0.id == note.id }) {
-                                         note.note = message ?? "" //input message
-                                         note.lastUpdated = Date()
-                                         dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-                                         note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
-                                         note.emoji = selected
-                                         note.prompt = dynamicPrompt
-                                try? moc.save()
-                             
-                                print("Notepage ondisappear, note saved")
-                            }
-                           
-                        }
-                        
-                    }
-                }
+        
     }
         
         // get page number of current note
@@ -674,7 +622,7 @@ struct NotePage: View {
             let randomDate = gregorian?.date(byAdding: offsetComponents, to: today, options: .init(rawValue: 0) )
             return randomDate
         }
-    }
+    
    
 }
 

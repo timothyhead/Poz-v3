@@ -46,7 +46,7 @@ struct NotebookView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
                 
                 //            NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
                 
