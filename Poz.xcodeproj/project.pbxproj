@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C5BABD22D8D7FE7005B4CDD /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BABD12D8D7FE7005B4CDD /* Binding+Extension.swift */; };
+		2C5BABD32D8D7FE7005B4CDD /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BABD12D8D7FE7005B4CDD /* Binding+Extension.swift */; };
+		2C5BABD42D8D7FE7005B4CDD /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BABD12D8D7FE7005B4CDD /* Binding+Extension.swift */; };
 		2C73B16C2D7DE56800176ED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73B1612D7DE3B100176ED4 /* Constants.swift */; };
 		2C73B16D2D7DE56800176ED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73B1612D7DE3B100176ED4 /* Constants.swift */; };
 		2C73B16E2D7DE56800176ED4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73B1612D7DE3B100176ED4 /* Constants.swift */; };
@@ -183,19 +186,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		DEB1696526123DD40007505C /* Embed App Extensions */ = {
+		DEB1696526123DD40007505C /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C5BABD12D8D7FE7005B4CDD /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
 		2C73B1612D7DE3B100176ED4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DE1EC4A1269592FB00B8301A /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
 		DE33591A261CEEB100FF2D3B /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -304,6 +308,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C5BABD02D8D7FC9005B4CDD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2C5BABD12D8D7FE7005B4CDD /* Binding+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2C73B1622D7DE3B100176ED4 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +376,7 @@
 		DE392C2D260A8CBD00715173 /* Poz-v3 */ = {
 			isa = PBXGroup;
 			children = (
+				2C5BABD02D8D7FC9005B4CDD /* Extensions */,
 				2C73B1622D7DE3B100176ED4 /* Constants */,
 				2C73B16B2D7DE3B100176ED4 /* PagesLocal */,
 				DE5A94812620FE8A0005DE02 /* Poz-v3.entitlements */,
@@ -600,7 +613,7 @@
 				DE392C27260A8CBD00715173 /* Sources */,
 				DE392C28260A8CBD00715173 /* Frameworks */,
 				DE392C29260A8CBD00715173 /* Resources */,
-				DEB1696526123DD40007505C /* Embed App Extensions */,
+				DEB1696526123DD40007505C /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -660,8 +673,9 @@
 		DE392C23260A8CBD00715173 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					DE392C2A260A8CBD00715173 = {
 						CreatedOnToolsVersion = 12.4;
@@ -791,6 +805,7 @@
 				DE3D2ED22615981900C209CB /* FullNotePage.swift in Sources */,
 				DE392D0E260ACE9900715173 /* SearchView.swift in Sources */,
 				DEB16A6E2614090B0007505C /* PrivacyPolicyView.swift in Sources */,
+				2C5BABD22D8D7FE7005B4CDD /* Binding+Extension.swift in Sources */,
 				DE392CEA260AAB6000715173 /* SettingsModel.swift in Sources */,
 				DEB16A522613B8610007505C /* FeedbackView.swift in Sources */,
 				DE5A4DC3260E8146000FB0E9 /* NotebookView.swift in Sources */,
@@ -837,6 +852,7 @@
 				DEB16A492613B7E60007505C /* WebView.swift in Sources */,
 				DE392D7C260B154D00715173 /* PromptsView.swift in Sources */,
 				DE392D9E260C512A00715173 /* HomeButtonView.swift in Sources */,
+				2C5BABD32D8D7FE7005B4CDD /* Binding+Extension.swift in Sources */,
 				DEB16A68261409000007505C /* TermsOfServiceView.swift in Sources */,
 				DE392CAD260A9F2600715173 /* HomeView.swift in Sources */,
 				DE33591C261CEEB200FF2D3B /* LottieView.swift in Sources */,
@@ -867,6 +883,7 @@
 				DEF838E0261E6C3C00556E5E /* HomeViewTutorial.swift in Sources */,
 				DE392D5C260B0FDA00715173 /* NoteButtonsView.swift in Sources */,
 				DE392C54260A8CC000715173 /* Poz_v3UITests.swift in Sources */,
+				2C5BABD42D8D7FE7005B4CDD /* Binding+Extension.swift in Sources */,
 				DE392CFC260AC64300715173 /* RingView.swift in Sources */,
 				DE392CD3260AA2A800715173 /* DashboardView.swift in Sources */,
 				DE335974261D705400FF2D3B /* SwipeTutorialView.swift in Sources */,
@@ -962,6 +979,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1023,6 +1041,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1044,7 +1063,6 @@
 		DE392C59260A8CC000715173 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Poz-v3/Poz-v3.entitlements";
@@ -1070,7 +1088,6 @@
 		DE392C5A260A8CC000715173 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Poz-v3/Poz-v3.entitlements";
@@ -1096,7 +1113,6 @@
 		DE392C5C260A8CC000715173 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GN3TH9WD6W;
@@ -1118,7 +1134,6 @@
 		DE392C5D260A8CC000715173 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GN3TH9WD6W;
@@ -1140,7 +1155,6 @@
 		DE392C5F260A8CC000715173 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GN3TH9WD6W;
 				INFOPLIST_FILE = "Poz-v3UITests/Info.plist";
@@ -1160,7 +1174,6 @@
 		DE392C60260A8CC000715173 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GN3TH9WD6W;
 				INFOPLIST_FILE = "Poz-v3UITests/Info.plist";

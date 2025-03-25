@@ -37,15 +37,15 @@ struct NoteTopMenuView: View {
 
             // home button
             Button (action: {
-                
+                print("tapped")
                 withAnimation(.spring()) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.15) {
-//                    isAnimating = true
-                    }
-                    
-                    withAnimation () {
                         tabIndex = 0
                     }
+                    
+//                    withAnimation () {
+//                        tabIndex = 0
+//                    }
                 }
                 
             }) {
@@ -65,9 +65,11 @@ struct NoteTopMenuView: View {
             }
             
         }
+        .contentShape(Rectangle())
         .padding(.top, 45)
         .padding(.bottom, -35)
         .padding(.horizontal, 20)
+        
 //        .background(Color(#colorLiteral(red: 0.279927969, green: 0.1855148077, blue: 0.0344821997, alpha: 1)))
     }
 }

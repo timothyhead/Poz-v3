@@ -14,6 +14,23 @@ struct NotePage: View {
     // color scheme
     @Environment(\.colorScheme) var colorScheme
     
+    // passes in note object from notebook view - *important*
+    let note: Note  // = Note(context: self.moc)
+
+    // for controlling prompt and updating note page
+    @Binding var promptSelectedIndex: Int
+    @Binding var promptSelectedFromHome: Bool
+    
+    // for navigation
+    @Binding var tabIndex: Int
+    @Binding var showPageSlider: Bool
+    // prompt that changes when user shakes or selects
+    @Binding var dynamicPrompt: String
+    
+//    // page in notebook
+//    @Binding var pageIndex: Int
+//    
+    
     // temp vars to hold note data
     @State private var message: String?
     @State private var emoji: String = ""
@@ -42,27 +59,11 @@ struct NotePage: View {
     // for checking whether use has modifies previously entered note
     @State var initialText =  ""
     @State var initialEmoji = ""
-
-    // passes in note object from notebook view - *important*
-    let note: Note  // = Note(context: self.moc)
-
-    // for controlling prompt and updating note page
-    @Binding var promptSelectedIndex: Int
-    @Binding var promptSelectedFromHome: Bool
-    
-    // for navigation
-    @Binding var tabIndex: Int
-    @Binding var showPageSlider: Bool
-    
-    // prompt that changes when user shakes or selects
-    @State var dynamicPrompt = ""
+  
     
     // for deleting
     @State var confirmDelete = false
-    
-    // page in notebook
-    @Binding var pageIndex: Int
-    
+
     @State var saveNotesToCal = UserDefaults.standard.bool(forKey: "saveToCal")
     
     @State private var k: Constants = Constants.shared
@@ -74,6 +75,7 @@ struct NotePage: View {
     
     let eventStore = EKEventStore()
     
+    
    
     
     var body: some View {
@@ -82,7 +84,7 @@ struct NotePage: View {
             //            VStack {
             // now using toolbar
             // top menu, back button, search button
-            //    NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
+          //  NoteTopMenuView(settings: settings, tabIndex: $tabIndex)
             
             HStack {
                 Text("\(dateString)")
@@ -98,23 +100,7 @@ struct NotePage: View {
                     dateString = dateFormatter.string(from: Date() as Date)
                 }
             }
-            // MARK: - onDisappear
-            // saves note on exit from journal
-            // assign meesage to "" to prevent more than one save
-            .onDisappear {
-                if (((message != "" || selected != "") && message !=
-                     settings.welcomeText && (message != initialText || selected != initialEmoji))) {
-                 
-                                note.note = message ?? "" //input message
-                                note.lastUpdated = Date()
-                                dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-                                note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
-                                note.emoji = selected
-                                note.prompt = dynamicPrompt
-                    try? moc.save()
-               message = ""
-                }
-            }
+            
             
             
             
@@ -217,9 +203,10 @@ struct NotePage: View {
                     }
                     .padding(.horizontal, 20)
                     //MARK: - onchange focused
-                    
-                    // assign meesage to "" to prevent more than one save
+                 
+                    // assign message to "" to prevent more than one save
                     .onChange(of: focused) { _ in
+                        print("focused changed ", message, " <- message")
                         if focused == false
                             && (((message != "" || selected != "") && message !=
                                  settings.welcomeText && (message != initialText || selected != initialEmoji))) {
@@ -277,8 +264,9 @@ struct NotePage: View {
             .onTapGesture {
                 hideKeyboard() //hide keyboard when user taps outside text field
             }
+            // MARK: - onAppear
             .onAppear() {
-                
+                print("onAppear in NotePage")
                 // initialize note
                 
                 initialText = note.note ?? ""
@@ -300,28 +288,30 @@ struct NotePage: View {
                 if note.note == "" && message == "" && note.emoji == "" && note.prompt == "" {
                     dateString = dateFormatter.string(from: Date() as Date)
                 }
+
+             
             }
-            .onDisappear() {
-                
-                // remove notifications for specific prompts, noto in use
-                if promptSelectedIndex != 1 {
-                    //remove all notifications with the same message if note to self
-                    clearNotifications(message: message ?? "")
-                }
-                
-                // saves note
-                if ((message != "" || selected != "") && message !=
-                    settings.welcomeText && (message != initialText || selected != initialEmoji)) {
-                    //                    print (message)
-                    //                    print (updatedText)
-                    //                    print(selected)
-                    //                    print(initialText)
-                    //                    print(initialEmoji)
-                    //                    print ("something's changed")
-                    // saveNoteB()
-                }
-                
-            }
+//            .onDisappear() {
+//                
+//                // remove notifications for specific prompts, not  in use
+//                if promptSelectedIndex != 1 {
+//                    //remove all notifications with the same message if note to self
+//                    clearNotifications(message: message ?? "")
+//                }
+//                
+//                // saves note
+//                if ((message != "" || selected != "") && message !=
+//                    settings.welcomeText && (message != initialText || selected != initialEmoji)) {
+//                    //                    print (message)
+//                    //                    print (updatedText)
+//                    //                    print(selected)
+//                    //                    print(initialText)
+//                    //                    print(initialEmoji)
+//                    //                    print ("something's changed")
+//                    // saveNoteB()
+//                }
+//                
+//            }
             // check if user shakes device
             .onReceive(NotificationCenter.default.publisher(for: .deviceDidShakeNotification)) { _ in
                 // change prompt
@@ -340,103 +330,131 @@ struct NotePage: View {
             //                    .padding(.bottom, 50)
             //            }
             
-            // bottom menu
-            HStack (spacing: 0) {
-                
-                //emoji button
-                if (promptSelectedIndex == 0) {
-                    EmojiButton(emojiPickerShowing: $emojiPickerShowing)
-                }
-                
-                // speech to text button
-                SwiftSpeechButtonView(input: $swiftSpeechTempText, output: $swiftSpeechTempText)
-                    .onChange (of: swiftSpeechTempText) { value in
-                        if let _ = message {
-                            message! += " " + swiftSpeechTempText + " "
-                        }
-                    }
-                    .onAppear() {
-                        swiftSpeechTempText = message ?? ""
-                    }
-                //                    .animation(.easeOut)
-                
-                
-                // basic prompt button
-                Button (action: {
-                    //                    dynamicPrompt = settings.allPrompts.randomElement()!
-                }) {
-                    Text("⚡️")
-                        .font(.system(size: 25))
-                        .onTapGesture {
-                            dynamicPrompt = settings.allPrompts.randomElement()!
-                        }
-                        .onLongPressGesture(minimumDuration: 0.1) {
-                            dynamicPrompt = ""
-                        }
-                }
-                .padding(.trailing, 20)
-                
-                
-                //advanced prompt button
-                //                PromptsButton(addPromptShowing: $addPromptShowing)
-                
-                // delete button
-                Button (action: {
-                    //clearNote()
-                    confirmDelete = true
-                }) {
-                    Text("🗑️")
-                        .font(.system(size: 25))
-                }
-                .alert(isPresented: $confirmDelete) {
-                    Alert(
-                        title: Text("Are you sure you want to delete this note?"),
-                        message: Text("This will remove this page from the notebook. You cannot undo this"),
-                        primaryButton: .destructive(Text("Delete note")) {
-                            print("Deleting...")
-                            clearNote()
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
-                //                .animation(.easeOut)
-                //                .padding(.horizontal, 20)
-                
-                Spacer()
-                
-                if (!showPageSlider) {
-                    Text("\(getPageNumber())")
-                        .font(Font.custom("Poppins-Regular", size: 16))
-                        .foregroundColor(Color(UIColor(named: "PozGray")!))
-                }
-                
-                Spacer()
-                
-                Button (action: {
-                    withAnimation(.easeOut) {
-                        showPageSlider.toggle()
-                    }
-                }) {
-                    Text(showPageSlider ? "📖" : "📔")
-                        .font(.system(size: 30))
-                }
-            }
-            .padding(.bottom, 40)
-            .padding(.horizontal, 20)
             
-            
-            //        }
-            .padding(.top, 10)
-            .background(Color(UIColor(named: "NoteBG")!))
-            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            // moved to tool bar in parent viewie. NoteBookview. Doesn't work here
+////            // bottom menu
+//            HStack (spacing: 0) {
+//                
+//                //emoji button
+//                if (promptSelectedIndex == 0) {
+//                    EmojiButton(emojiPickerShowing: $emojiPickerShowing)
+//                }
+//                
+////                // speech to text button
+////                SwiftSpeechButtonView(input: $swiftSpeechTempText, output: $swiftSpeechTempText)
+////                    .onChange (of: swiftSpeechTempText) { value in
+////                        if let _ = message {
+////                            message! += " " + swiftSpeechTempText + " "
+////                        }
+////                    }
+////                    .onAppear() {
+////                        swiftSpeechTempText = message ?? ""
+////                    }
+//                //                    .animation(.easeOut)
+//                
+//                
+//                // basic prompt button
+//                Button (action: {
+//                    //                    dynamicPrompt = settings.allPrompts.randomElement()!
+//                }) {
+//                    Text("⚡️")
+//                        .font(.system(size: 25))
+//                        .onTapGesture {
+//                            dynamicPrompt = settings.allPrompts.randomElement()!
+//                        }
+//                        .onLongPressGesture(minimumDuration: 0.1) {
+//                            dynamicPrompt = ""
+//                        }
+//                }
+//                .padding(.trailing, 20)
+//                
+//                
+//                //advanced prompt button
+//                //                PromptsButton(addPromptShowing: $addPromptShowing)
+//                
+//                // delete button
+//                Button (action: {
+//                    //clearNote()
+//                    confirmDelete = true
+//                }) {
+//                    Text("🗑️")
+//                        .font(.system(size: 25))
+//                }
+//                .alert(isPresented: $confirmDelete) {
+//                    Alert(
+//                        title: Text("Are you sure you want to delete this note?"),
+//                        message: Text("This will remove this page from the notebook. You cannot undo this"),
+//                        primaryButton: .destructive(Text("Delete note")) {
+//                            print("Deleting...")
+//                            clearNote()
+//                        },
+//                        secondaryButton: .cancel()
+//                    )
+//                }
+//                //                .animation(.easeOut)
+//                //                .padding(.horizontal, 20)
+//                
+//                Spacer()
+//                
+//                if (!showPageSlider) {
+//                    Text("\(getPageNumber())")
+//                        .font(Font.custom("Poppins-Regular", size: 16))
+//                        .foregroundColor(Color(UIColor(named: "PozGray")!))
+//                }
+//                
+//                Spacer()
+//                
+//                Button (action: {
+//                    withAnimation(.easeOut) {
+//                        showPageSlider.toggle()
+//                    }
+//                }) {
+//                    Text(showPageSlider ? "📖" : "📔")
+//                        .font(.system(size: 30))
+//                }
+//            }
+//            .padding(.bottom, 40)
+//            .padding(.horizontal, 20)
+//            
+//            
+//                 //   }
+//            .padding(.top, 10)
+//            .background(Color(UIColor(named: "NoteBG")!))
+//            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
         }
+        //MARK: - .task
+       
+        // MARK: - onDisappear
+        // saves note on exit from journal
+        // assign message to "" to prevent more than one save
+        .onDisappear {
+            print("ondisappear in note page")
+            if (((message != "" || selected != "") && message !=
+                 settings.welcomeText && (message != initialText || selected != initialEmoji))) {
+             
+                            note.note = message ?? "" //input message
+                            note.lastUpdated = Date()
+                            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+                            note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+                            note.emoji = selected
+                            note.prompt = dynamicPrompt
+             
+                try? moc.save()
+           message = ""
+            }
+            // save the note id before it's replaced with the next note id so it can be used to save the outgoing note in Notebook view
+           // tempData.first(where:  { $0.messageId == k.messageId })?.noteId = note.id?.uuidString
+            print("temp data id saved in note page: \(tempData.first(where:  { $0.messageId == k.messageId })?.noteId ?? "")")
+            try? moc.save()
+        }
+        .background(Color("NoteBG"))
         
     }
-        
+        // now in parent view ie. NoteBookview
         // get page number of current note
         func getPageNumber() -> Int {
-            
+           // print(notes.count, "notes count")
             var noteCount = 0
             
             for noteObj in notes {
@@ -447,20 +465,20 @@ struct NotePage: View {
             }
             return (noteCount)
         }
-        
-        // checks if curr note is the last page, not in use
-        func isCurrNoteLastPage () -> Bool {
-            
-            if (pageIndex == (notes.count-2)) {
-                print("true")
-                return true
-                
-            } else {
-                print(pageIndex)
-                print(notes.count)
-                return false
-            }
-        }
+//        
+//        // checks if curr note is the last page, not in use
+//        func isCurrNoteLastPage () -> Bool {
+//            
+//            if (pageIndex == (notes.count-2)) {
+//                print("true")
+//                return true
+//                
+//            } else {
+//                print(pageIndex)
+//                print(notes.count)
+//                return false
+//            }
+//        }
         
         // for prompts, not in use
         func activatePrompt() {
@@ -488,52 +506,52 @@ struct NotePage: View {
         }
         // not now used - note saved in parentview except for saving note to calender
         // saves note
-        func saveNoteB () {
-            
-            //        if (promptSelectedIndex == 3) {
-            //            note.note = ""
-            //            note.prompt = ""
-            //            note.emoji = ""
-            //        } else {
-            //
-            //            note.id = UUID() //create id
-            //            note.note = message ?? "" //input message
-            //            note.lastUpdated = Date()
-            //            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
-            //            note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
-            //            note.emoji = selected
-            //            note.prompt = dynamicPrompt
-            ////        }
-            //
-            //        try? self.moc.save()
-            
-            promptSelectedIndex = 0
-            //        promptSelectedFromHome = false
-            
-            
-            if (saveNotesToCal) {
-                //write note to calendar
-                let calDateFormatter = DateFormatter()
-                calDateFormatter.dateFormat = "yyyyddHHmmSSS"
-                
-                var titleForCal = ""
-                if (selected == "") {
-                    titleForCal = "📔 Poz Entry"
-                } else {
-                    titleForCal = selected + " Poz Entry";
-                }
-                
-                var messageForCal = message ?? "\n"
-                messageForCal += "\n\nLast Updated on "
-                messageForCal += dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
-                messageForCal += "\n\nPoz Entry ID: " + calDateFormatter.string(from: (note.createdAt ?? Date()) as Date)
-                
-                CalendarController().askToAddToCal(start: note.lastUpdated ?? Date(), end: note.lastUpdated ?? Date(), id: calDateFormatter.string(from: (note.createdAt ?? Date()) as Date), title: titleForCal, notes: messageForCal)
-            }
-            
-        }
-        
-        // clears note and moves it to end
+//        func saveNoteB () {
+//            
+//            //        if (promptSelectedIndex == 3) {
+//            //            note.note = ""
+//            //            note.prompt = ""
+//            //            note.emoji = ""
+//            //        } else {
+//            //
+//            //            note.id = UUID() //create id
+//            //            note.note = message ?? "" //input message
+//            //            note.lastUpdated = Date()
+//            //            dateFormatter.dateFormat = "MMM dd, yyyy | h:mm a"
+//            //            note.date = dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+//            //            note.emoji = selected
+//            //            note.prompt = dynamicPrompt
+//            ////        }
+//            //
+//            //        try? self.moc.save()
+//            
+//            promptSelectedIndex = 0
+//            //        promptSelectedFromHome = false
+//            
+//            
+//            if (saveNotesToCal) {
+//                //write note to calendar
+//                let calDateFormatter = DateFormatter()
+//                calDateFormatter.dateFormat = "yyyyddHHmmSSS"
+//                
+//                var titleForCal = ""
+//                if (selected == "") {
+//                    titleForCal = "📔 Poz Entry"
+//                } else {
+//                    titleForCal = selected + " Poz Entry";
+//                }
+//                
+//                var messageForCal = message ?? "\n"
+//                messageForCal += "\n\nLast Updated on "
+//                messageForCal += dateFormatter.string(from: (note.lastUpdated ?? Date()) as Date)
+//                messageForCal += "\n\nPoz Entry ID: " + calDateFormatter.string(from: (note.createdAt ?? Date()) as Date)
+//                
+//                CalendarController().askToAddToCal(start: note.lastUpdated ?? Date(), end: note.lastUpdated ?? Date(), id: calDateFormatter.string(from: (note.createdAt ?? Date()) as Date), title: titleForCal, notes: messageForCal)
+//            }
+//            
+//        }
+        // now in parent view. ie NoteBookView
+//        // clears note and moves it to end
         func clearNote() {
             message = ""
             note.note = ""

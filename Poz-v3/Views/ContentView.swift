@@ -66,7 +66,7 @@ struct ContentView: View {
                     } else if tabIndex == 1 {
                         
                         // notebook
-                        NotebookView(tabIndex: $tabIndex, settings: settings, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome).environment(\.managedObjectContext, self.moc)
+                        NotebookView(settings: settings, tabIndex: $tabIndex, promptSelectedIndex: $promptSelectedIndex, promptSelectedFromHome: $promptSelectedFromHome).environment(\.managedObjectContext, self.moc)
                     }
                     
                 } else {
