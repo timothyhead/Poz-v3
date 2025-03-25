@@ -206,7 +206,7 @@ struct NotePage: View {
                  
                     // assign message to "" to prevent more than one save
                     .onChange(of: focused) { _ in
-                        print("focused changed ", message, " <- message")
+                       // print("focused changed ", message, " <- message")
                         if focused == false
                             && (((message != "" || selected != "") && message !=
                                  settings.welcomeText && (message != initialText || selected != initialEmoji))) {
@@ -266,7 +266,7 @@ struct NotePage: View {
             }
             // MARK: - onAppear
             .onAppear() {
-                print("onAppear in NotePage")
+            
                 // initialize note
                 
                 initialText = note.note ?? ""
@@ -429,7 +429,7 @@ struct NotePage: View {
         // saves note on exit from journal
         // assign message to "" to prevent more than one save
         .onDisappear {
-            print("ondisappear in note page")
+       
             if (((message != "" || selected != "") && message !=
                  settings.welcomeText && (message != initialText || selected != initialEmoji))) {
              
@@ -443,10 +443,7 @@ struct NotePage: View {
                 try? moc.save()
            message = ""
             }
-            // save the note id before it's replaced with the next note id so it can be used to save the outgoing note in Notebook view
-           // tempData.first(where:  { $0.messageId == k.messageId })?.noteId = note.id?.uuidString
-            print("temp data id saved in note page: \(tempData.first(where:  { $0.messageId == k.messageId })?.noteId ?? "")")
-            try? moc.save()
+      
         }
         .background(Color("NoteBG"))
         

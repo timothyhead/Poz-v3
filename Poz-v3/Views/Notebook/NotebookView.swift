@@ -158,7 +158,7 @@ struct NotebookView: View {
      
             // MARK: - onAppear
             .onAppear() {
-                print("onappear in notebook")
+    
                 // initialize notebook page to last opened page
                 if promptSelectedIndex != 0 {
                     defaults.set(findFirstEmptyPage(), forKey: "LastPageOpen")
@@ -190,8 +190,7 @@ struct NotebookView: View {
                         .onChange (of: swiftSpeechTempText) { value in
                             if let data = tempData.first(where:  { $0.messageId == k.messageId }) {
                                 var message = data.tempMessage ?? ""
-                                print("onchange \(message)")
-                                print(swiftSpeechTempText, " swiftSpeechTempText")
+
                                 message += " " + value + " "
                                 notes.first(where:  { $0.id?.uuidString == data.noteId } )?.note! += message
                                 try? moc.save()
@@ -377,7 +376,6 @@ struct NotebookView: View {
         let emoji = tempData.first(where:  { $0.messageId == k.messageId } )?.emoji ?? "no message"
         let noteId =  tempData.first(where:  { $0.messageId == k.messageId} )?.noteId
         let prompt = tempData.first(where:  { $0.messageId == k.messageId } )?.prompt
-        print(message, " message in saveNote")
         guard ((message != "" || emoji != "") && message !=
                settings.welcomeText) else {
             print("returning from guard in saveNote(): message or emoji is empty")
